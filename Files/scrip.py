@@ -663,7 +663,7 @@ def save_to_file(directory, category_name, items_set):
         logging.error(f"Failed to write file {file_path}: {e}")
         return False, 0
 
-def generate_simple_readme(protocol_counts, country_counts, all_keywords_data, github_repo_path="Argh94/V2RayAutoConfig", github_branch="main"):
+def generate_simple_readme(protocol_counts, country_counts, all_keywords_data, github_repo_path="Argh94/V2RayAutoConfig", github_branch="main", raw_links_all=None, healthy_links_all=None):
     tz = pytz.timezone('Asia/Tehran')
     now = datetime.now(tz)
     jalali_date = jdatetime.datetime.fromgregorian(datetime=now)
@@ -691,7 +691,7 @@ def generate_simple_readme(protocol_counts, country_counts, all_keywords_data, g
   <img src="https://img.shields.io/badge/language-فارسی%20%26%20English-007EC6?style=flat-square" alt="Language" />
 </p>
 
-## {timestamp}
+    ## {timestamp}
 
 ---
 
@@ -718,6 +718,19 @@ def generate_simple_readme(protocol_counts, country_counts, all_keywords_data, g
         md_content += "| - | - | - |\n"
 
     md_content += "</div>\n\n---\n\n"
+
+    # Raw and Healthy link boxes
+    raw_links_all = list(sorted(raw_links_all)) if raw_links_all else []
+    healthy_links_all = list(sorted(healthy_links_all)) if healthy_links_all else []
+    if raw_links_all:
+        md_content += "## 🔗 لینک‌های خام (Raw)\n\n"
+        md_content += f"تعداد: {len(raw_links_all)}\n\n"
+        md_content += "```\n" + "\n".join(raw_links_all) + "\n```\n\n"
+    if healthy_links_all:
+        md_content += "## ✅ لینک‌های تست‌شده (Healthy)\n\n"
+        md_content += f"تعداد: {len(healthy_links_all)}\n\n"
+        md_content += "```\n" + "\n".join(healthy_links_all) + "\n```\n\n"
+    md_content += "---\n\n"
 
     md_content += f"""
 ## 🌍 کانفیگ‌های کشورها
@@ -953,9 +966,19 @@ async def main():
 
     repo_path_env = os.getenv('GITHUB_REPOSITORY') or os.getenv('GITHUB_REPO') or os.getenv('REPO_PATH') or "Amirchelios/V2RayAutoConfig"
     branch_name_env = os.getenv('GITHUB_REF_NAME') or os.getenv('GITHUB_BRANCH') or "main"
-    generate_simple_readme(protocol_counts, country_counts, categories_data,
-                          github_repo_path=repo_path_env,
-                          github_branch=branch_name_env)
+    # Build unions for README "boxes"
+    raw_union = set()
+    for _p, _items in final_all_protocols.items():
+        raw_union.update(_items)
+    generate_simple_readme(
+        protocol_counts,
+        country_counts,
+        categories_data,
+        github_repo_path=repo_path_env,
+        github_branch=branch_name_env,
+        raw_links_all=raw_union,
+        healthy_links_all=healthy_union if ENABLE_HEALTH_CHECK else set()
+    )
 
     logging.info("--- Script Finished ---")
 
