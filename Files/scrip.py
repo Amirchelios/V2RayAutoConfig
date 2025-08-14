@@ -36,6 +36,16 @@ MAX_HEALTH_CHECKS_TOTAL = int(os.getenv('MAX_HEALTH_CHECKS_TOTAL', '120'))
 XRAY_TEST_TIMEOUT = int(os.getenv('XRAY_TEST_TIMEOUT', '6'))
 HEALTH_CHECK_DEADLINE_SECONDS = int(os.getenv('HEALTH_CHECK_DEADLINE_SECONDS', '360'))
 MAX_HEALTHY_PER_PROTOCOL = int(os.getenv('MAX_HEALTHY_PER_PROTOCOL', '1000000'))
+GLOBAL_TEST_URLS = [
+    u.strip() for u in os.getenv(
+        'GLOBAL_TEST_URLS',
+        'https://cloudflare.com/cdn-cgi/trace,https://example.com'
+    ).split(',') if u.strip()
+]
+FIRST_PHASE_HEALTH_CHECK_CONCURRENCY = int(os.getenv('FIRST_PHASE_HEALTH_CHECK_CONCURRENCY', str(HEALTH_CHECK_CONCURRENCY)))
+FIRST_PHASE_MAX_HEALTH_CHECKS_PER_PROTOCOL = int(os.getenv('FIRST_PHASE_MAX_HEALTH_CHECKS_PER_PROTOCOL', '15'))
+FIRST_PHASE_MAX_HEALTH_CHECKS_TOTAL = int(os.getenv('FIRST_PHASE_MAX_HEALTH_CHECKS_TOTAL', '60'))
+FIRST_PHASE_DEADLINE_SECONDS = int(os.getenv('FIRST_PHASE_DEADLINE_SECONDS', '180'))
 HEALTHY_OUTPUT_FILE = os.getenv('HEALTHY_OUTPUT_FILE', os.path.join('configs', 'Healthy.txt'))
 IRAN_TEST_URLS = [
     u.strip() for u in os.getenv(
@@ -431,7 +441,7 @@ def build_xray_config(link, local_http_port):
         ]
     }
 
-async def test_proxy_via_xray(link, iran_test_urls, overall_timeout=None):
+async def test_proxy_via_xray(link, test_urls, overall_timeout=None):
     if overall_timeout is None:
         overall_timeout = XRAY_TEST_TIMEOUT
     try:
@@ -454,7 +464,7 @@ async def test_proxy_via_xray(link, iran_test_urls, overall_timeout=None):
     connector = aiohttp.TCPConnector(ssl=False)
     try:
         async with aiohttp.ClientSession(timeout=timeout, connector=connector) as session:
-            for url in iran_test_urls:
+            for url in test_urls:
                 try:
                     t0 = time.perf_counter()
                     async with session.get(url, proxy=f'http://127.0.0.1:{port}') as resp:
@@ -524,6 +534,52 @@ async def health_filter_configs(protocol_to_configs_map):
         except asyncio.TimeoutError:
             logging.warning("Health check deadline reached; continuing with results so far.")
     return healthy_all, healthy_by_proto
+
+async def two_phase_health_filter(protocol_to_configs_map):
+    if not ENABLE_HEALTH_CHECK:
+        all_configs = set()
+        for items in protocol_to_configs_map.values():
+            all_configs.update(items)
+        return all_configs, {k: set(v) for k, v in protocol_to_configs_map.items()}
+
+    # Phase 1: connectivity to global endpoints (quick liveness)
+    protos = [p for p in PROTOCOL_CATEGORIES if p in protocol_to_configs_map and p in SUPPORTED_FOR_HEALTH]
+    limited_phase1 = {}
+    total_budget1 = FIRST_PHASE_MAX_HEALTH_CHECKS_TOTAL
+    per_proto_budget1 = max(1, min(FIRST_PHASE_MAX_HEALTH_CHECKS_PER_PROTOCOL, total_budget1 // max(1, len(protos))))
+    for proto in protos:
+        items = list(protocol_to_configs_map.get(proto, []))
+        limited_phase1[proto] = items[:per_proto_budget1]
+    selected1 = sum(len(v) for v in limited_phase1.values())
+    remaining1 = max(0, total_budget1 - selected1)
+    if remaining1 > 0 and protos:
+        extra = list(protocol_to_configs_map.get(protos[0], []))
+        limited_phase1[protos[0]] = list(limited_phase1[protos[0]]) + extra[per_proto_budget1:per_proto_budget1+remaining1]
+
+    sem1 = asyncio.Semaphore(FIRST_PHASE_HEALTH_CHECK_CONCURRENCY)
+    phase1_ok_all = set()
+    phase1_ok_by_proto = {p: set() for p in protos}
+
+    async def run_check_phase1(p, link):
+        async with sem1:
+            ok, latency_ms, ok_url = await test_proxy_via_xray(link, GLOBAL_TEST_URLS)
+            if ok:
+                phase1_ok_all.add(link)
+                phase1_ok_by_proto[p].add(link)
+
+    tasks1 = []
+    for p in protos:
+        for link in limited_phase1.get(p, []):
+            tasks1.append(asyncio.create_task(run_check_phase1(p, link)))
+    if tasks1:
+        try:
+            await asyncio.wait_for(asyncio.gather(*tasks1), timeout=FIRST_PHASE_DEADLINE_SECONDS)
+        except asyncio.TimeoutError:
+            logging.warning("Phase 1 health check deadline reached; moving on.")
+
+    # Phase 2: only those that passed phase 1 → test Iranian endpoints
+    phase2_input = {p: [l for l in phase1_ok_by_proto.get(p, set())] for p in protos}
+    return await health_filter_configs(phase2_input)
 
 def save_to_file(directory, category_name, items_set):
     if not items_set:
@@ -781,11 +837,11 @@ async def main():
                 if match_found:
                     break
 
-    # Optional health-check & filtering
-    logging.info("Starting health checks via Xray (may take several minutes)..." if ENABLE_HEALTH_CHECK else "Health checks disabled.")
+    # Optional two-phase health-check & filtering
+    logging.info("Starting health checks via Xray (two-phase)..." if ENABLE_HEALTH_CHECK else "Health checks disabled.")
     # Keep only parsable/supported links for health checks to avoid wasting time
     filtered_for_health = {p: {l for l in items if is_supported_link(l)} for p, items in final_all_protocols.items()}
-    healthy_union, healthy_by_protocol = await health_filter_configs(filtered_for_health)
+    healthy_union, healthy_by_protocol = await two_phase_health_filter(filtered_for_health)
 
     if os.path.exists(OUTPUT_DIR):
         shutil.rmtree(OUTPUT_DIR)
