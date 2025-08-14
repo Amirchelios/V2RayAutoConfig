@@ -11,6 +11,13 @@ import pytz
 import base64
 from urllib.parse import parse_qs, unquote
 import jdatetime  
+import platform
+import zipfile
+import tempfile
+import socket
+import time
+from urllib.parse import urlparse
+from asyncio.subprocess import PIPE, STDOUT
 
 URLS_FILE = 'Files/urls.txt'
 KEYWORDS_FILE = 'Files/key.json'
@@ -21,6 +28,21 @@ CONCURRENT_REQUESTS = 10
 MAX_CONFIG_LENGTH = 1500
 MIN_PERCENT25_COUNT = 15
 
+# Health-check settings (tuned for CI/GitHub Actions)
+ENABLE_HEALTH_CHECK = os.getenv('ENABLE_HEALTH_CHECK', '1') == '1'
+HEALTH_CHECK_CONCURRENCY = int(os.getenv('HEALTH_CHECK_CONCURRENCY', '4'))
+MAX_HEALTH_CHECKS_PER_PROTOCOL = int(os.getenv('MAX_HEALTH_CHECKS_PER_PROTOCOL', '50'))
+MAX_HEALTH_CHECKS_TOTAL = int(os.getenv('MAX_HEALTH_CHECKS_TOTAL', '300'))
+HEALTHY_OUTPUT_FILE = os.getenv('HEALTHY_OUTPUT_FILE', os.path.join('configs', 'Healthy.txt'))
+IRAN_TEST_URLS = [
+    u.strip() for u in os.getenv(
+        'IRAN_TEST_URLS',
+        'https://www.aparat.com,https://divar.ir,https://www.cafebazaar.ir,https://www.digikala.com'
+    ).split(',') if u.strip()
+]
+XRAY_DIR = os.path.join('Files', 'xray-bin')
+XRAY_BIN = None  # will be resolved by ensure_xray_binary()
+
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -28,6 +50,13 @@ PROTOCOL_CATEGORIES = [
     "Vmess", "Vless", "Trojan", "ShadowSocks", "ShadowSocksR",
     "Tuic", "Hysteria2", "WireGuard"
 ]
+SUPPORTED_FOR_HEALTH = {"Vmess", "Vless", "Trojan", "ShadowSocks"}
+SUPPORTED_PREFIXES = ('vmess://', 'vless://', 'trojan://', 'ss://')
+UNSUPPORTED_PREFIXES = ('ssr://', 'hy2://', 'hysteria2://', 'tuic://', 'tuic5://', 'wireguard://')
+
+def is_supported_link(link):
+    l = (link or '').strip().lower()
+    return l.startswith(SUPPORTED_PREFIXES)
 
 def is_persian_like(text):
     if not isinstance(text, str) or not text.strip():
@@ -130,6 +159,352 @@ def find_matches(text, categories_data):
             except re.error as e:
                 logging.error(f"Regex error for '{pattern_str}' in category '{category}': {e}")
     return {k: v for k, v in matches.items() if v}
+
+def choose_free_port():
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.bind(('127.0.0.1', 0))
+        return s.getsockname()[1]
+
+def ensure_xray_binary():
+    global XRAY_BIN
+    if XRAY_BIN and os.path.exists(XRAY_BIN):
+        return XRAY_BIN
+    os.makedirs(XRAY_DIR, exist_ok=True)
+    system = platform.system().lower()
+    if system.startswith('linux'):
+        asset = 'Xray-linux-64.zip'
+        bin_name = 'xray'
+    elif system.startswith('win'):
+        asset = 'Xray-windows-64.zip'
+        bin_name = 'xray.exe'
+    elif system.startswith('darwin'):
+        asset = 'Xray-macos-64.zip'
+        bin_name = 'xray'
+    else:
+        raise RuntimeError(f"Unsupported OS for Xray: {platform.system()}")
+    candidate = os.path.join(XRAY_DIR, bin_name)
+    if os.path.exists(candidate):
+        XRAY_BIN = candidate
+        return XRAY_BIN
+    download_url = f"https://github.com/XTLS/Xray-core/releases/latest/download/{asset}"
+    zip_path = os.path.join(XRAY_DIR, asset)
+    try:
+        import urllib.request
+        logging.info(f"Downloading Xray core from {download_url}")
+        urllib.request.urlretrieve(download_url, zip_path)
+    except Exception as e:
+        logging.error(f"Failed to download Xray core: {e}")
+        raise
+    try:
+        with zipfile.ZipFile(zip_path, 'r') as zf:
+            zf.extractall(XRAY_DIR)
+        os.remove(zip_path)
+    except Exception as e:
+        logging.error(f"Failed to extract Xray: {e}")
+        raise
+    # locate binary (some archives include subfolder)
+    found = None
+    for root, dirs, files in os.walk(XRAY_DIR):
+        if bin_name in files:
+            found = os.path.join(root, bin_name)
+            break
+    if not found:
+        raise RuntimeError('Xray binary not found after extraction')
+    try:
+        if not system.startswith('win'):
+            os.chmod(found, 0o755)
+    except Exception:
+        pass
+    XRAY_BIN = found
+    return XRAY_BIN
+
+def parse_ss_uri(uri):
+    try:
+        parsed = urlparse(uri)
+        if parsed.netloc:
+            auth_host = parsed.netloc
+            if '@' in auth_host:
+                auth, hostport = auth_host.split('@', 1)
+                if ':' in auth:
+                    method, password = auth.split(':', 1)
+                else:
+                    decoded = decode_base64(auth)
+                    method, password = decoded.split(':', 1)
+            else:
+                decoded = decode_base64(auth_host)
+                auth, hostport = decoded.rsplit('@', 1)
+                method, password = auth.split(':', 1)
+            host, port = hostport.split(':', 1)
+            return {'address': host, 'port': int(port), 'method': method, 'password': password}
+        else:
+            b64 = uri.split('://', 1)[1].split('#')[0]
+            decoded = decode_base64(b64)
+            auth, hostport = decoded.rsplit('@', 1)
+            method, password = auth.split(':', 1)
+            host, port = hostport.split(':', 1)
+            return {'address': host, 'port': int(port), 'method': method, 'password': password}
+    except Exception as e:
+        logging.debug(f"Failed to parse ss uri: {e}")
+        return None
+
+def parse_vmess_uri(uri):
+    try:
+        b64 = uri.split('://', 1)[1]
+        decoded = decode_base64(b64)
+        if not decoded:
+            return None
+        return json.loads(decoded)
+    except Exception as e:
+        logging.debug(f"Failed to parse vmess uri: {e}")
+        return None
+
+def parse_url_userinfo(uri):
+    parsed = urlparse(uri)
+    host = parsed.hostname
+    port = parsed.port
+    username = parsed.username
+    password = parsed.password
+    query = parse_qs(parsed.query)
+    fragment = parsed.fragment
+    return parsed, host, port, username, password, query, fragment
+
+def build_outbound_from_link(link):
+    l = link.strip()
+    if l.startswith('ss://'):
+        ss = parse_ss_uri(l)
+        if not ss:
+            return None
+        return {
+            'protocol': 'shadowsocks',
+            'settings': {
+                'servers': [{
+                    'address': ss['address'],
+                    'port': ss['port'],
+                    'method': ss['method'],
+                    'password': ss['password'],
+                    'udp': True
+                }]
+            }
+        }
+    if l.startswith('trojan://'):
+        parsed, host, port, username, password, query, fragment = parse_url_userinfo(l)
+        sni = query.get('sni', [query.get('host', [''])[0]])[0] if query else ''
+        network = query.get('type', ['tcp'])[0] if query else 'tcp'
+        outbound = {
+            'protocol': 'trojan',
+            'settings': {
+                'servers': [{
+                    'address': host,
+                    'port': int(port),
+                    'password': username or password or ''
+                }]
+            },
+            'streamSettings': {
+                'network': network
+            }
+        }
+        security = query.get('security', [''])[0] if query else ''
+        if security == 'tls':
+            outbound['streamSettings']['security'] = 'tls'
+            if sni:
+                outbound['streamSettings']['tlsSettings'] = {'serverName': sni}
+        if network == 'ws':
+            path = query.get('path', ['/'])[0]
+            host_header = query.get('host', [''])[0]
+            outbound['streamSettings']['wsSettings'] = {
+                'path': path,
+                'headers': {'Host': host_header} if host_header else {}
+            }
+        return outbound
+    if l.startswith('vless://'):
+        parsed, host, port, username, password, query, fragment = parse_url_userinfo(l)
+        user_id = username or ''
+        security = query.get('security', [''])[0] if query else ''
+        network = query.get('type', ['tcp'])[0] if query else 'tcp'
+        sni = query.get('sni', [''])[0] if query else ''
+        flow = query.get('flow', [''])[0] if query else ''
+        host_header = query.get('host', [''])[0] if query else ''
+        path = query.get('path', ['/'])[0] if query else '/'
+        outbound = {
+            'protocol': 'vless',
+            'settings': {
+                'vnext': [{
+                    'address': host,
+                    'port': int(port),
+                    'users': [{
+                        'id': user_id,
+                        'encryption': 'none',
+                        **({'flow': flow} if flow else {})
+                    }]
+                }]
+            },
+            'streamSettings': {
+                'network': network
+            }
+        }
+        if security == 'tls':
+            outbound['streamSettings']['security'] = 'tls'
+            if sni:
+                outbound['streamSettings']['tlsSettings'] = {'serverName': sni}
+        if network == 'ws':
+            outbound['streamSettings']['wsSettings'] = {
+                'path': path,
+                'headers': {'Host': host_header} if host_header else {}
+            }
+        if network == 'grpc':
+            outbound['streamSettings']['grpcSettings'] = {'serviceName': path.lstrip('/')} if path else {}
+        return outbound
+    if l.startswith('vmess://'):
+        data = parse_vmess_uri(l)
+        if not data:
+            return None
+        address = data.get('add') or data.get('address')
+        port = int(data.get('port') or 0)
+        user_id = data.get('id') or data.get('uuid')
+        security = (data.get('tls') or '').lower()
+        sni = data.get('sni') or data.get('host') or ''
+        net = data.get('net') or 'tcp'
+        path = data.get('path') or '/'
+        host_header = data.get('host') or ''
+        scy = data.get('scy') or 'auto'
+        outbound = {
+            'protocol': 'vmess',
+            'settings': {
+                'vnext': [{
+                    'address': address,
+                    'port': port,
+                    'users': [{
+                        'id': user_id,
+                        'alterId': 0,
+                        'security': scy
+                    }]
+                }]
+            },
+            'streamSettings': {
+                'network': net
+            }
+        }
+        if security == 'tls':
+            outbound['streamSettings']['security'] = 'tls'
+            if sni:
+                outbound['streamSettings']['tlsSettings'] = {'serverName': sni}
+        if net == 'ws':
+            outbound['streamSettings']['wsSettings'] = {
+                'path': path,
+                'headers': {'Host': host_header} if host_header else {}
+            }
+        if net == 'grpc':
+            outbound['streamSettings']['grpcSettings'] = {'serviceName': path.lstrip('/')} if path else {}
+        return outbound
+    # Unsupported for health-check: ssr, hy2, tuic, wireguard
+    return None
+
+def build_xray_config(link, local_http_port):
+    outbound = build_outbound_from_link(link)
+    if not outbound:
+        return None
+    return {
+        'log': {'loglevel': 'warning'},
+        'inbounds': [{
+            'listen': '127.0.0.1',
+            'port': local_http_port,
+            'protocol': 'http',
+            'settings': {}
+        }],
+        'outbounds': [
+            outbound,
+            {'protocol': 'freedom', 'tag': 'direct'},
+            {'protocol': 'blackhole', 'tag': 'blocked'}
+        ]
+    }
+
+async def test_proxy_via_xray(link, iran_test_urls, overall_timeout=12):
+    try:
+        xray_path = ensure_xray_binary()
+    except Exception:
+        return False, None, None
+    port = choose_free_port()
+    cfg = build_xray_config(link, port)
+    if not cfg:
+        return False, None, None
+    tmp_dir = tempfile.mkdtemp(prefix='xraycfg_')
+    cfg_path = os.path.join(tmp_dir, 'config.json')
+    with open(cfg_path, 'w', encoding='utf-8') as f:
+        json.dump(cfg, f, ensure_ascii=False)
+    proc = await asyncio.create_subprocess_exec(
+        ensure_xray_binary(), '-config', cfg_path, stdout=PIPE, stderr=STDOUT
+    )
+    await asyncio.sleep(0.4)
+    timeout = aiohttp.ClientTimeout(total=min(10, overall_timeout))
+    connector = aiohttp.TCPConnector(ssl=False)
+    try:
+        async with aiohttp.ClientSession(timeout=timeout, connector=connector) as session:
+            for url in iran_test_urls:
+                try:
+                    t0 = time.perf_counter()
+                    async with session.get(url, proxy=f'http://127.0.0.1:{port}') as resp:
+                        if resp.status < 400:
+                            latency = (time.perf_counter() - t0) * 1000.0
+                            return True, latency, url
+                except Exception:
+                    continue
+    finally:
+        try:
+            proc.terminate()
+        except Exception:
+            pass
+        try:
+            await asyncio.wait_for(proc.wait(), timeout=2)
+        except Exception:
+            try:
+                proc.kill()
+            except Exception:
+                pass
+        try:
+            shutil.rmtree(tmp_dir, ignore_errors=True)
+        except Exception:
+            pass
+    return False, None, None
+
+async def health_filter_configs(protocol_to_configs_map):
+    if not ENABLE_HEALTH_CHECK:
+        all_configs = set()
+        for items in protocol_to_configs_map.values():
+            all_configs.update(items)
+        return all_configs, {k: set(v) for k, v in protocol_to_configs_map.items()}
+
+    # Budget per protocol and total to keep runtime bounded in CI
+    limited = {}
+    total_budget = MAX_HEALTH_CHECKS_TOTAL
+    protos = [p for p in PROTOCOL_CATEGORIES if p in protocol_to_configs_map and p in SUPPORTED_FOR_HEALTH]
+    per_proto_budget = max(1, min(MAX_HEALTH_CHECKS_PER_PROTOCOL, total_budget // max(1, len(protos))))
+    for proto in protos:
+        items = list(protocol_to_configs_map.get(proto, []))
+        limited[proto] = items[:per_proto_budget]
+    selected = sum(len(v) for v in limited.values())
+    remaining = max(0, total_budget - selected)
+    if remaining > 0 and protos:
+        extra = list(protocol_to_configs_map.get(protos[0], []))
+        limited[protos[0]] = list(limited[protos[0]]) + extra[per_proto_budget:per_proto_budget+remaining]
+
+    semaphore = asyncio.Semaphore(HEALTH_CHECK_CONCURRENCY)
+    healthy_all = set()
+    healthy_by_proto = {p: set() for p in protos}
+
+    async def run_check(p, link):
+        async with semaphore:
+            ok, latency_ms, ok_url = await test_proxy_via_xray(link, IRAN_TEST_URLS)
+            if ok:
+                healthy_all.add(link)
+                healthy_by_proto[p].add(link)
+
+    tasks = []
+    for p in protos:
+        for link in limited.get(p, []):
+            tasks.append(asyncio.create_task(run_check(p, link)))
+    if tasks:
+        await asyncio.gather(*tasks)
+    return healthy_all, healthy_by_proto
 
 def save_to_file(directory, category_name, items_set):
     if not items_set:
@@ -387,6 +762,12 @@ async def main():
                 if match_found:
                     break
 
+    # Optional health-check & filtering
+    logging.info("Starting health checks via Xray (may take several minutes)..." if ENABLE_HEALTH_CHECK else "Health checks disabled.")
+    # Keep only parsable/supported links for health checks to avoid wasting time
+    filtered_for_health = {p: {l for l in items if is_supported_link(l)} for p, items in final_all_protocols.items()}
+    healthy_union, healthy_by_protocol = await health_filter_configs(filtered_for_health)
+
     if os.path.exists(OUTPUT_DIR):
         shutil.rmtree(OUTPUT_DIR)
     os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -395,14 +776,29 @@ async def main():
     protocol_counts = {}
     country_counts = {}
 
+    # Save protocol files (filtered to healthy if health-check enabled)
     for category, items in final_all_protocols.items():
-        saved, count = save_to_file(OUTPUT_DIR, category, items)
+        items_to_save = items if not ENABLE_HEALTH_CHECK else healthy_by_protocol.get(category, set())
+        saved, count = save_to_file(OUTPUT_DIR, category, items_to_save)
         if saved:
             protocol_counts[category] = count
+    # Save country files (filtered to healthy if health-check enabled)
     for category, items in final_configs_by_country.items():
+        if ENABLE_HEALTH_CHECK:
+            items = {x for x in items if x in healthy_union}
         saved, count = save_to_file(OUTPUT_DIR, category, items)
         if saved:
             country_counts[category] = count
+
+    # Save global healthy file
+    if ENABLE_HEALTH_CHECK:
+        saved, count = save_to_file(
+            OUTPUT_DIR,
+            os.path.splitext(os.path.basename(HEALTHY_OUTPUT_FILE))[0],
+            healthy_union
+        )
+        if saved:
+            protocol_counts['Healthy'] = count
 
     generate_simple_readme(protocol_counts, country_counts, categories_data,
                           github_repo_path="Argh94/V2RayAutoConfig",
