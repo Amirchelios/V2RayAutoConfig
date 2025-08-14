@@ -284,6 +284,48 @@ def parse_vmess_uri(uri):
         logging.debug(f"Failed to parse vmess uri: {e}")
         return None
 
+def extract_remote_port_from_link(link):
+    try:
+        l = (link or '').strip()
+        if l.startswith('ss://'):
+            ss = parse_ss_uri(l)
+            return ss.get('port') if ss else None
+        if l.startswith('trojan://') or l.startswith('vless://'):
+            parsed = urlparse(l)
+            return int(parsed.port) if parsed and parsed.port else None
+        if l.startswith('vmess://'):
+            data = parse_vmess_uri(l)
+            if data and (data.get('port') or data.get('port') == 0):
+                try:
+                    return int(data.get('port'))
+                except Exception:
+                    return None
+            return None
+    except Exception:
+        return None
+    return None
+
+def apply_explicit_port_to_url(url, port):
+    try:
+        if not port:
+            return url
+        parsed = urlparse(url)
+        if not parsed.scheme or not parsed.hostname:
+            return url
+        hostname = parsed.hostname
+        new_netloc = f"{hostname}:{int(port)}"
+        if parsed.username or parsed.password:
+            userinfo = ''
+            if parsed.username:
+                userinfo += parsed.username
+            if parsed.password:
+                userinfo += f":{parsed.password}"
+            new_netloc = f"{userinfo}@{new_netloc}"
+        rebuilt = parsed._replace(netloc=new_netloc)
+        return rebuilt.geturl()
+    except Exception:
+        return url
+
 def parse_url_userinfo(uri):
     parsed = urlparse(uri)
     host = parsed.hostname
@@ -467,7 +509,21 @@ async def test_proxy_via_xray(link, test_urls, overall_timeout=None):
     connector = aiohttp.TCPConnector(ssl=False)
     try:
         async with aiohttp.ClientSession(timeout=timeout, connector=connector) as session:
-            for url in test_urls:
+            remote_port = extract_remote_port_from_link(link)
+            candidate_urls = []
+            for base_url in test_urls:
+                # Try the default URL first, then the explicit remote port variant
+                candidate_urls.append(base_url)
+                if remote_port:
+                    candidate_urls.append(apply_explicit_port_to_url(base_url, remote_port))
+            # Preserve order while removing duplicates
+            seen = set()
+            ordered_candidates = []
+            for u in candidate_urls:
+                if u not in seen:
+                    seen.add(u)
+                    ordered_candidates.append(u)
+            for url in ordered_candidates:
                 try:
                     t0 = time.perf_counter()
                     async with session.get(url, proxy=f'http://127.0.0.1:{port}') as resp:
