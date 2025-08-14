@@ -6,7 +6,7 @@ import logging
 from bs4 import BeautifulSoup
 import os
 import shutil
-from datetime import datetime
+from datetime import datetime, timedelta
 import pytz
 import base64
 from urllib.parse import parse_qs, unquote
@@ -61,6 +61,11 @@ XRAY_DIR = os.path.join('Files', 'xray-bin')
 XRAY_BIN = None  # will be resolved by ensure_xray_binary()
 XRAY_VERSION = os.getenv('XRAY_VERSION', 'latest')
 
+# Persistent healthy configs management
+PERSISTENT_HEALTHY_FILE = os.path.join('configs', 'PersistentHealthy.txt')
+PERSISTENT_HEALTHY_METADATA_FILE = os.path.join('configs', '.persistent_healthy_metadata.json')
+CLEANUP_INTERVAL_DAYS = 10
+
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -97,6 +102,144 @@ def decode_base64(data):
         return base64.b64decode(data).decode('utf-8')
     except Exception:
         return None
+
+def should_cleanup_persistent_healthy():
+    """Check if it's time to cleanup the persistent healthy configs file"""
+    if not os.path.exists(PERSISTENT_HEALTHY_METADATA_FILE):
+        return True
+    
+    try:
+        with open(PERSISTENT_HEALTHY_METADATA_FILE, 'r', encoding='utf-8') as f:
+            metadata = json.load(f)
+            last_cleanup = datetime.fromisoformat(metadata.get('last_cleanup', '1970-01-01T00:00:00'))
+            days_since_cleanup = (datetime.now() - last_cleanup).days
+            return days_since_cleanup >= CLEANUP_INTERVAL_DAYS
+    except Exception as e:
+        logging.warning(f"Error reading persistent healthy metadata: {e}")
+        return True
+
+def cleanup_persistent_healthy():
+    """Clean up the persistent healthy configs file and reset metadata"""
+    try:
+        if os.path.exists(PERSISTENT_HEALTHY_FILE):
+            os.remove(PERSISTENT_HEALTHY_FILE)
+            logging.info(f"Cleaned up persistent healthy configs file: {PERSISTENT_HEALTHY_FILE}")
+        
+        # Reset metadata
+        metadata = {
+            'last_cleanup': datetime.now().isoformat(),
+            'total_cleanups': 0
+        }
+        
+        if os.path.exists(PERSISTENT_HEALTHY_METADATA_FILE):
+            with open(PERSISTENT_HEALTHY_METADATA_FILE, 'r', encoding='utf-8') as f:
+                existing_metadata = json.load(f)
+                metadata['total_cleanups'] = existing_metadata.get('total_cleanups', 0) + 1
+        
+        os.makedirs(os.path.dirname(PERSISTENT_HEALTHY_METADATA_FILE), exist_ok=True)
+        with open(PERSISTENT_HEALTHY_METADATA_FILE, 'w', encoding='utf-8') as f:
+            json.dump(metadata, f, ensure_ascii=False, indent=2)
+        
+        logging.info(f"Persistent healthy configs cleanup completed. Total cleanups: {metadata['total_cleanups']}")
+        return True
+    except Exception as e:
+        logging.error(f"Error during persistent healthy cleanup: {e}")
+        return False
+
+def load_existing_persistent_healthy():
+    """Load existing persistent healthy configs from file"""
+    if not os.path.exists(PERSISTENT_HEALTHY_FILE):
+        return set()
+    
+    try:
+        with open(PERSISTENT_HEALTHY_FILE, 'r', encoding='utf-8') as f:
+            configs = {line.strip() for line in f if line.strip()}
+        logging.info(f"Loaded {len(configs)} existing persistent healthy configs")
+        return configs
+    except Exception as e:
+        logging.error(f"Error loading persistent healthy configs: {e}")
+        return set()
+
+def save_persistent_healthy_configs(configs_set):
+    """Save persistent healthy configs to file"""
+    try:
+        os.makedirs(os.path.dirname(PERSISTENT_HEALTHY_FILE), exist_ok=True)
+        
+        # Filter out any invalid configs before saving
+        valid_configs = set()
+        for config in configs_set:
+            if config and isinstance(config, str) and config.strip():
+                valid_configs.add(config.strip())
+        
+        with open(PERSISTENT_HEALTHY_FILE, 'w', encoding='utf-8') as f:
+            for config in sorted(list(valid_configs)):
+                f.write(f"{config}\n")
+        
+        logging.info(f"Saved {len(valid_configs)} persistent healthy configs to {PERSISTENT_HEALTHY_FILE}")
+        return True
+    except Exception as e:
+        logging.error(f"Error saving persistent healthy configs: {e}")
+        return False
+
+def validate_persistent_healthy_file():
+    """Validate the persistent healthy configs file and return count of valid configs"""
+    if not os.path.exists(PERSISTENT_HEALTHY_FILE):
+        return 0
+    
+    try:
+        valid_configs = []
+        with open(PERSISTENT_HEALTHY_FILE, 'r', encoding='utf-8') as f:
+            for line_num, line in enumerate(f, 1):
+                config = line.strip()
+                if config and len(config) > 10:  # Basic validation
+                    valid_configs.append(config)
+                elif config:  # Log invalid configs
+                    logging.warning(f"Invalid config at line {line_num}: {config[:50]}...")
+        
+        # If there are invalid configs, rewrite the file with only valid ones
+        if len(valid_configs) != len([line.strip() for line in open(PERSISTENT_HEALTHY_FILE, 'r', encoding='utf-8') if line.strip()]):
+            logging.info("Rewriting persistent healthy file to remove invalid configs")
+            save_persistent_healthy_configs(set(valid_configs))
+        
+        return len(valid_configs)
+    except Exception as e:
+        logging.error(f"Error validating persistent healthy configs file: {e}")
+        return 0
+
+def merge_and_update_persistent_healthy(new_healthy_configs):
+    """Merge new healthy configs with existing persistent ones and save"""
+    # Check if cleanup is needed
+    if should_cleanup_persistent_healthy():
+        logging.info("Performing scheduled cleanup of persistent healthy configs (every 10 days)")
+        cleanup_persistent_healthy()
+        existing_configs = set()
+    else:
+        existing_configs = load_existing_persistent_healthy()
+    
+    # Merge new configs with existing ones
+    all_configs = existing_configs.union(new_healthy_configs)
+    
+    # Save the merged configs
+    if save_persistent_healthy_configs(all_configs):
+        logging.info(f"Successfully merged configs. Total persistent healthy: {len(all_configs)} (existing: {len(existing_configs)}, new: {len(new_healthy_configs)})")
+        return True
+    else:
+        logging.error("Failed to save merged persistent healthy configs")
+        return False
+
+def get_next_cleanup_date():
+    """Get the next scheduled cleanup date for persistent healthy configs"""
+    if not os.path.exists(PERSISTENT_HEALTHY_METADATA_FILE):
+        return datetime.now() + timedelta(days=CLEANUP_INTERVAL_DAYS)
+    
+    try:
+        with open(PERSISTENT_HEALTHY_METADATA_FILE, 'r', encoding='utf-8') as f:
+            metadata = json.load(f)
+            last_cleanup = datetime.fromisoformat(metadata.get('last_cleanup', '1970-01-01T00:00:00'))
+            next_cleanup = last_cleanup + timedelta(days=CLEANUP_INTERVAL_DAYS)
+            return next_cleanup
+    except Exception:
+        return datetime.now() + timedelta(days=CLEANUP_INTERVAL_DAYS)
 
 def get_vmess_name(vmess_link):
     if not vmess_link.startswith("vmess://"):
@@ -702,6 +845,8 @@ def generate_simple_readme(protocol_counts, country_counts, all_keywords_data, g
 
 > **نکته:** کانفیگ‌هایی که بیش از حد طولانی یا حاوی کاراکترهای غیرضروری (مانند تعداد زیاد `%25`) باشند، برای اطمینان از کیفیت، فیلتر می‌شوند.
 
+> **سیستم کانفیگ‌های سالم پایدار:** کانفیگ‌هایی که تست شده و سالم تشخیص داده می‌شوند، در فایل جداگانه‌ای ذخیره می‌شوند که هر 10 روز پاک‌سازی می‌شود تا کیفیت حفظ شود و تعداد زیادی کانفیگ سالم در طول زمان جمع‌آوری شود.
+
 ---
 
 ## 📁 کانفیگ‌های پروتکل‌ها
@@ -720,6 +865,42 @@ def generate_simple_readme(protocol_counts, country_counts, all_keywords_data, g
         md_content += "| - | - | - |\n"
 
     md_content += "</div>\n\n---\n\n"
+
+    # Add persistent healthy configs information
+    persistent_healthy_count = validate_persistent_healthy_file()
+    
+    if persistent_healthy_count > 0:
+        # Get next cleanup date
+        next_cleanup = get_next_cleanup_date()
+        days_until_cleanup = (next_cleanup - datetime.now()).days
+        
+        md_content += f"""
+## 🗂️ کانفیگ‌های سالم پایدار
+کانفیگ‌هایی که در طول زمان تست شده‌اند و سالم تشخیص داده شده‌اند. این فایل هر 10 روز پاک‌سازی می‌شود تا کیفیت حفظ شود.
+
+<div align="center">
+
+| نوع | تعداد | لینک دانلود | پاک‌سازی بعدی |
+|:----:|:-----:|:------------:|:-------------:|
+| کانفیگ‌های سالم پایدار | {persistent_healthy_count} | [`PersistentHealthy.txt`]({raw_github_base_url}/PersistentHealthy.txt) | {days_until_cleanup} روز دیگر |
+
+</div>
+
+> **📅 برنامه پاک‌سازی:** پاک‌سازی بعدی در {days_until_cleanup} روز دیگر انجام خواهد شد.
+
+---
+
+"""
+    else:
+        md_content += """
+## 🗂️ کانفیگ‌های سالم پایدار
+کانفیگ‌هایی که در طول زمان تست شده‌اند و سالم تشخیص داده شده‌اند. این فایل هر 10 روز پاک‌سازی می‌شود تا کیفیت حفظ شود.
+
+> **توجه:** هنوز کانفیگ سالم پایداری جمع‌آوری نشده است. پس از اولین اجرای اسکریپت، این بخش به‌روزرسانی خواهد شد.
+
+---
+
+"""
 
     # Raw categorized boxes (protocols and countries)
     if raw_protocol_counts or raw_country_counts:
@@ -844,6 +1025,12 @@ def generate_simple_readme(protocol_counts, country_counts, all_keywords_data, g
 
 > **توصیه**: برای بهترین عملکرد، کانفیگ‌ها را به‌صورت دوره‌ای بررسی و به‌روزرسانی کنید.
 
+### 🗂️ کانفیگ‌های سالم پایدار
+- **فایل `PersistentHealthy.txt`**: شامل تمام کانفیگ‌هایی است که در طول زمان تست شده و سالم تشخیص داده شده‌اند
+- **پاک‌سازی خودکار**: هر 10 روز این فایل پاک‌سازی می‌شود تا کیفیت حفظ شود
+- **تجمع تدریجی**: با هر اجرای اسکریپت، کانفیگ‌های سالم جدید به این فایل اضافه می‌شوند
+- **مزایا**: تعداد زیادی کانفیگ سالم در طول زمان جمع‌آوری می‌شود که می‌تواند به عنوان منبع قابل اعتماد استفاده شود
+
 ---
 
 ## 🤝 مشارکت
@@ -887,6 +1074,20 @@ async def main():
 
     logging.info(f"Loaded {len(urls)} URLs and "
                  f"{len(categories_data)} total categories from key.json.")
+    
+    # Log persistent healthy system status
+    if os.path.exists(PERSISTENT_HEALTHY_FILE):
+        persistent_count = validate_persistent_healthy_file()
+        logging.info(f"Found existing persistent healthy configs file with {persistent_count} configurations")
+        
+        if should_cleanup_persistent_healthy():
+            next_cleanup = get_next_cleanup_date()
+            days_until_cleanup = (next_cleanup - datetime.now()).days
+            logging.info(f"Persistent healthy configs cleanup scheduled in {days_until_cleanup} days")
+        else:
+            logging.info("Persistent healthy configs cleanup not due yet")
+    else:
+        logging.info("No existing persistent healthy configs file found - will create new one")
 
     tasks = []
     sem = asyncio.Semaphore(CONCURRENT_REQUESTS)
@@ -972,6 +1173,17 @@ async def main():
     # Keep only parsable/supported links for health checks to avoid wasting time
     filtered_for_health = {p: {l for l in items if is_supported_link(l)} for p, items in final_all_protocols.items()}
     healthy_union, healthy_by_protocol = await two_phase_health_filter(filtered_for_health)
+
+    # Update persistent healthy configs with new healthy configurations
+    if ENABLE_HEALTH_CHECK and healthy_union:
+        logging.info("Updating persistent healthy configs with new healthy configurations...")
+        merge_and_update_persistent_healthy(healthy_union)
+        
+        # Log persistent healthy status
+        persistent_count = validate_persistent_healthy_file()
+        logging.info(f"Persistent healthy configs file now contains {persistent_count} configurations")
+    else:
+        logging.info("No new healthy configs to add to persistent storage")
 
     if os.path.exists(OUTPUT_DIR):
         shutil.rmtree(OUTPUT_DIR)
