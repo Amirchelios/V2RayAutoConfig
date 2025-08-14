@@ -1,6 +1,14 @@
 hy2://10193f1d-9a4d-457a-b668-bdeb240e092c@netcupus.alisaku.com:34444/?insecure=1&sni=apps.apple.com#%F0%9F%8F%B5%EF%B8%8F38%40oneclickvpnkeys`
+hy2://1JA6CF8JMUDvoz6zfm5qHwlN3Wo@43.207.119.98:4410/?insecure=1#%E2%8F%B061%40oneclickvpnkeys
+hy2://1abdc446-f90e-466f-95ce-e006edd89628@hshl.huasuan666.top:22157/?insecure=1&sni=hshl.huasuan666.top#%E2%8F%B047%40oneclickvpnkeys
+hy2://2574ef1a-1ff9-4db0-9df3-5940de07235b@hsyg.huasuan666.top:22156/?insecure=1&sni=hsyg.huasuan666.top#%E2%8F%B043%40oneclickvpnkeys`
+hy2://3C8h8X6kimbOX68joVe3kTERw@206.189.20.193:7197/?insecure=1&sni=bing.com#%E2%8F%B044%40oneclickvpnkeys
+hy2://79c4fe11-9787-406b-bf94-c1c1dbf59e28@77.223.214.193:31468/?insecure=1&sni=www.bing.com#%E2%8F%B046%40oneclickvpnkeys
+hy2://Y5kSCRNcOSz5YQUkjehzVXeT2mk@175.41.154.215:19298/?insecure=1&sni=bing.com#%E2%8F%B054%40oneclickvpnkeys
 hy2://Yet-Another-Public-Config-1@yapc-1.adamhayward.co.uk:36300/?insecure=1&sni=YAPC-1.afshin.ir&obfs=salamander&obfs-password=Yet-Another-Public-Config-1#%F0%9F%9B%B0%EF%B8%8F15%40oneclickvpnkeys
+hy2://Yet-Another-Public-Config-1@yapc-1.adamhayward.co.uk:36600/?insecure=1&sni=YAPC-1.afshin.ir&obfs=salamander&obfs-password=Yet-Another-Public-Config-1#%E2%8F%B045%40oneclickvpnkeys
 hy2://dongtaiwang.com@51.158.218.2:50066/?insecure=1&sni=www.bing.com#%F0%9F%8D%8057%40oneclickvpnkeys
+hy2://ok6aX0A7QX9SkYo6R0GBBJDUsK4@143.244.140.87:8460/?insecure=1&sni=bing.com#%E2%8F%B052%40oneclickvpnkeys
 hysteria2://%40JavidnamanIran-Javid-SHAH-KingRezaPahlavi@206.71.158.40:35000?security=tls&obfs=salamander&obfs-password=%40JavidnamanIran-Javid-SHAH-KingRezaPahlavi&insecure=0&sni=pichondan.com#TelegramID%20%E2%8C%B2Express_freevpn%20%E2%9B%AA%DA%A9%D8%A7%D8%B1%D8%AE%D9%88%D9%86%D9%87%20%DA%A9%D8%A7%D9%86%D9%81%DB%8C%DA%AF%20%D8%B3%D8%A7%D8%B2%DB%8C▦
 hysteria2://%40JavidnamanIran-Javid-SHAH-KingRezaPahlavi@206.71.158.40:35000?security=tls&obfs=salamander&obfs-password=%40JavidnamanIran-Javid-SHAH-KingRezaPahlavi&insecure=0&sni=pichondan.com#🆔express_freevpn%20🔒%20HY2-UDP-N/A%20🇳🇱%20NL%20down
 hysteria2://%40JavidnamanIran-Javid-SHAH-KingRezaPahlavi@77.90.52.69:35000?sni=pichondan.com&insecure=0&obfs=salamander#DE

@@ -1233,6 +1233,7 @@ trojan://IY4gWQIsHV@172.67.202.155:2087/?type=httpupgrade&host=Freedomisnear.one
 trojan://KLF0qOU0ZZGw5Tnu@121.78.213.3:443?security=tls&sni=swift.protocolbuffer.com#%F0%9F%87%B0%F0%9F%87%B7KR-121.78.213.3-6874
 trojan://KsMF5kLudbU3@104.21.44.185:2087/?type=ws&host=econews.onetwothree123.ir&path=%2F%F0%9F%86%94%40M3HDIO1&security=tls&sni=econews.onetwothree123.ir#%E2%9B%B3%EF%B8%8F46%40oneclickvpnkeys
 trojan://LG7HKcZFIJ@sws.ftpcomand.com:110?security=tls&sni=sws.ftpcomand.com#%F0%9F%87%A8%F0%9F%87%ADCH-45.155.54.117-0280
+trojan://LG7HKcZFIJ@sws.ftpcomand.com:110?security=tls&sni=sws.ftpcomand.com&type=tcp&headerType=none#%F0%9F%87%A8%F0%9F%87%AD%5Bopenproxylist.com%5D%20trojan-CH
 trojan://LG7HKcZFIJ@sws.ftpcomand.com:110?sni=sws.ftpcomand.com#🇨🇭[openproxylist.com]
 trojan://Lar3HXz16D@104.21.48.1:443/?type=grpc&security=tls&sni=tabnak.twn24.ir#%40Hope_Net-join-us-on-Telegram
 trojan://McCPa4vups6yAdDbGokjPA@104.21.22.66:2096/?type=tcp&security=tls
