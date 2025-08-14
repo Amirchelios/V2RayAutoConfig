@@ -66,6 +66,11 @@ PERSISTENT_HEALTHY_FILE = os.path.join('configs', 'PersistentHealthy.txt')
 PERSISTENT_HEALTHY_METADATA_FILE = os.path.join('configs', '.persistent_healthy_metadata.json')
 CLEANUP_INTERVAL_DAYS = 10
 
+# GitHub Actions specific settings
+GITHUB_ACTIONS = os.getenv('GITHUB_ACTIONS', 'false').lower() == 'true'
+GITHUB_SHA = os.getenv('GITHUB_SHA', '')
+GITHUB_RUN_ID = os.getenv('GITHUB_RUN_ID', '')
+
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -105,6 +110,23 @@ def decode_base64(data):
 
 def should_cleanup_persistent_healthy():
     """Check if it's time to cleanup the persistent healthy configs file"""
+    # In GitHub Actions, we need to be more aggressive with cleanup since files don't persist between runs
+    if GITHUB_ACTIONS:
+        # Check if we have a different commit SHA (new deployment)
+        if os.path.exists(PERSISTENT_HEALTHY_METADATA_FILE):
+            try:
+                with open(PERSISTENT_HEALTHY_METADATA_FILE, 'r', encoding='utf-8') as f:
+                    metadata = json.load(f)
+                    last_sha = metadata.get('last_commit_sha', '')
+                    if last_sha != GITHUB_SHA:
+                        logging.info(f"New commit detected (SHA: {GITHUB_SHA[:8]}), triggering cleanup")
+                        return True
+            except Exception as e:
+                logging.warning(f"Error reading persistent healthy metadata: {e}")
+                return True
+        return True  # Always cleanup in GitHub Actions for now
+    
+    # Local development: use time-based cleanup
     if not os.path.exists(PERSISTENT_HEALTHY_METADATA_FILE):
         return True
     
@@ -125,10 +147,13 @@ def cleanup_persistent_healthy():
             os.remove(PERSISTENT_HEALTHY_FILE)
             logging.info(f"Cleaned up persistent healthy configs file: {PERSISTENT_HEALTHY_FILE}")
         
-        # Reset metadata
+        # Reset metadata with GitHub Actions specific info
         metadata = {
             'last_cleanup': datetime.now().isoformat(),
-            'total_cleanups': 0
+            'total_cleanups': 0,
+            'github_actions': GITHUB_ACTIONS,
+            'last_commit_sha': GITHUB_SHA,
+            'last_run_id': GITHUB_RUN_ID
         }
         
         if os.path.exists(PERSISTENT_HEALTHY_METADATA_FILE):
@@ -140,7 +165,11 @@ def cleanup_persistent_healthy():
         with open(PERSISTENT_HEALTHY_METADATA_FILE, 'w', encoding='utf-8') as f:
             json.dump(metadata, f, ensure_ascii=False, indent=2)
         
-        logging.info(f"Persistent healthy configs cleanup completed. Total cleanups: {metadata['total_cleanups']}")
+        if GITHUB_ACTIONS:
+            logging.info(f"GitHub Actions cleanup completed. Commit SHA: {GITHUB_SHA[:8]}, Run ID: {GITHUB_RUN_ID}")
+        else:
+            logging.info(f"Local cleanup completed. Total cleanups: {metadata['total_cleanups']}")
+        
         return True
     except Exception as e:
         logging.error(f"Error during persistent healthy cleanup: {e}")
@@ -229,6 +258,20 @@ def merge_and_update_persistent_healthy(new_healthy_configs):
 
 def get_next_cleanup_date():
     """Get the next scheduled cleanup date for persistent healthy configs"""
+    if GITHUB_ACTIONS:
+        # In GitHub Actions, cleanup happens on each new commit
+        if os.path.exists(PERSISTENT_HEALTHY_METADATA_FILE):
+            try:
+                with open(PERSISTENT_HEALTHY_METADATA_FILE, 'r', encoding='utf-8') as f:
+                    metadata = json.load(f)
+                    last_sha = metadata.get('last_commit_sha', '')
+                    if last_sha != GITHUB_SHA:
+                        return datetime.now()  # Cleanup needed now
+            except Exception:
+                pass
+        return datetime.now() + timedelta(days=1)  # Next day for display purposes
+    
+    # Local development: use time-based cleanup
     if not os.path.exists(PERSISTENT_HEALTHY_METADATA_FILE):
         return datetime.now() + timedelta(days=CLEANUP_INTERVAL_DAYS)
     
@@ -240,6 +283,28 @@ def get_next_cleanup_date():
             return next_cleanup
     except Exception:
         return datetime.now() + timedelta(days=CLEANUP_INTERVAL_DAYS)
+
+def get_github_actions_status():
+    """Get GitHub Actions specific status information"""
+    if not GITHUB_ACTIONS:
+        return None
+    
+    status = {
+        'commit_sha': GITHUB_SHA[:8] if GITHUB_SHA else 'Unknown',
+        'run_id': GITHUB_RUN_ID if GITHUB_RUN_ID else 'Unknown',
+        'is_new_commit': False
+    }
+    
+    if os.path.exists(PERSISTENT_HEALTHY_METADATA_FILE):
+        try:
+            with open(PERSISTENT_HEALTHY_METADATA_FILE, 'r', encoding='utf-8') as f:
+                metadata = json.load(f)
+                last_sha = metadata.get('last_commit_sha', '')
+                status['is_new_commit'] = (last_sha != GITHUB_SHA)
+        except Exception:
+            pass
+    
+    return status
 
 def get_vmess_name(vmess_link):
     if not vmess_link.startswith("vmess://"):
@@ -845,7 +910,7 @@ def generate_simple_readme(protocol_counts, country_counts, all_keywords_data, g
 
 > **نکته:** کانفیگ‌هایی که بیش از حد طولانی یا حاوی کاراکترهای غیرضروری (مانند تعداد زیاد `%25`) باشند، برای اطمینان از کیفیت، فیلتر می‌شوند.
 
-> **سیستم کانفیگ‌های سالم پایدار:** کانفیگ‌هایی که تست شده و سالم تشخیص داده می‌شوند، در فایل جداگانه‌ای ذخیره می‌شوند که هر 10 روز پاک‌سازی می‌شود تا کیفیت حفظ شود و تعداد زیادی کانفیگ سالم در طول زمان جمع‌آوری شود.
+> **سیستم کانفیگ‌های سالم پایدار:** کانفیگ‌هایی که تست شده و سالم تشخیص داده می‌شوند، در فایل جداگانه‌ای ذخیره می‌شوند که {f'در هر commit جدید پاک‌سازی می‌شود (GitHub Actions)' if GITHUB_ACTIONS else 'هر 10 روز پاک‌سازی می‌شود'} تا کیفیت حفظ شود و تعداد زیادی کانفیگ سالم در طول زمان جمع‌آوری شود.
 
 ---
 
@@ -874,27 +939,38 @@ def generate_simple_readme(protocol_counts, country_counts, all_keywords_data, g
         next_cleanup = get_next_cleanup_date()
         days_until_cleanup = (next_cleanup - datetime.now()).days
         
+        if GITHUB_ACTIONS:
+            cleanup_info = "پاک‌سازی در هر commit جدید"
+            cleanup_schedule = f"پاک‌سازی بعدی: در commit بعدی"
+        else:
+            cleanup_info = f"{days_until_cleanup} روز دیگر"
+            cleanup_schedule = f"پاک‌سازی بعدی در {days_until_cleanup} روز دیگر"
+        
         md_content += f"""
 ## 🗂️ کانفیگ‌های سالم پایدار
-کانفیگ‌هایی که در طول زمان تست شده‌اند و سالم تشخیص داده شده‌اند. این فایل هر 10 روز پاک‌سازی می‌شود تا کیفیت حفظ شود.
+کانفیگ‌هایی که در طول زمان تست شده‌اند و سالم تشخیص داده شده‌اند. {f'در GitHub Actions، این فایل در هر commit جدید پاک‌سازی می‌شود.' if GITHUB_ACTIONS else f'این فایل هر 10 روز پاک‌سازی می‌شود تا کیفیت حفظ شود.'}
 
 <div align="center">
 
 | نوع | تعداد | لینک دانلود | پاک‌سازی بعدی |
 |:----:|:-----:|:------------:|:-------------:|
-| کانفیگ‌های سالم پایدار | {persistent_healthy_count} | [`PersistentHealthy.txt`]({raw_github_base_url}/PersistentHealthy.txt) | {days_until_cleanup} روز دیگر |
+| کانفیگ‌های سالم پایدار | {persistent_healthy_count} | [`PersistentHealthy.txt`]({raw_github_base_url}/PersistentHealthy.txt) | {cleanup_info} |
 
 </div>
 
-> **📅 برنامه پاک‌سازی:** پاک‌سازی بعدی در {days_until_cleanup} روز دیگر انجام خواهد شد.
+> **📅 برنامه پاک‌سازی:** {cleanup_schedule}
 
 ---
-
 """
     else:
-        md_content += """
+        if GITHUB_ACTIONS:
+            cleanup_note = "در GitHub Actions، این فایل در هر commit جدید پاک‌سازی می‌شود."
+        else:
+            cleanup_note = "این فایل هر 10 روز پاک‌سازی می‌شود تا کیفیت حفظ شود."
+        
+        md_content += f"""
 ## 🗂️ کانفیگ‌های سالم پایدار
-کانفیگ‌هایی که در طول زمان تست شده‌اند و سالم تشخیص داده شده‌اند. این فایل هر 10 روز پاک‌سازی می‌شود تا کیفیت حفظ شود.
+کانفیگ‌هایی که در طول زمان تست شده‌اند و سالم تشخیص داده شده‌اند. {cleanup_note}
 
 > **توجه:** هنوز کانفیگ سالم پایداری جمع‌آوری نشده است. پس از اولین اجرای اسکریپت، این بخش به‌روزرسانی خواهد شد.
 
@@ -1027,7 +1103,7 @@ def generate_simple_readme(protocol_counts, country_counts, all_keywords_data, g
 
 ### 🗂️ کانفیگ‌های سالم پایدار
 - **فایل `PersistentHealthy.txt`**: شامل تمام کانفیگ‌هایی است که در طول زمان تست شده و سالم تشخیص داده شده‌اند
-- **پاک‌سازی خودکار**: هر 10 روز این فایل پاک‌سازی می‌شود تا کیفیت حفظ شود
+- **پاک‌سازی خودکار**: {f'در هر commit جدید (GitHub Actions)' if GITHUB_ACTIONS else 'هر 10 روز'} این فایل پاک‌سازی می‌شود تا کیفیت حفظ شود
 - **تجمع تدریجی**: با هر اجرای اسکریپت، کانفیگ‌های سالم جدید به این فایل اضافه می‌شوند
 - **مزایا**: تعداد زیادی کانفیگ سالم در طول زمان جمع‌آوری می‌شود که می‌تواند به عنوان منبع قابل اعتماد استفاده شود
 
@@ -1076,16 +1152,30 @@ async def main():
                  f"{len(categories_data)} total categories from key.json.")
     
     # Log persistent healthy system status
+    if GITHUB_ACTIONS:
+        github_status = get_github_actions_status()
+        logging.info(f"Running in GitHub Actions environment (Commit: {github_status['commit_sha']}, Run: {github_status['run_id']})")
+        if github_status['is_new_commit']:
+            logging.info("New commit detected - will cleanup persistent healthy configs")
+        else:
+            logging.info("Same commit - no cleanup needed")
+    
     if os.path.exists(PERSISTENT_HEALTHY_FILE):
         persistent_count = validate_persistent_healthy_file()
         logging.info(f"Found existing persistent healthy configs file with {persistent_count} configurations")
         
         if should_cleanup_persistent_healthy():
-            next_cleanup = get_next_cleanup_date()
-            days_until_cleanup = (next_cleanup - datetime.now()).days
-            logging.info(f"Persistent healthy configs cleanup scheduled in {days_until_cleanup} days")
+            if GITHUB_ACTIONS:
+                logging.info("New commit detected - will cleanup persistent healthy configs")
+            else:
+                next_cleanup = get_next_cleanup_date()
+                days_until_cleanup = (next_cleanup - datetime.now()).days
+                logging.info(f"Persistent healthy configs cleanup scheduled in {days_until_cleanup} days")
         else:
-            logging.info("Persistent healthy configs cleanup not due yet")
+            if GITHUB_ACTIONS:
+                logging.info("Same commit - no cleanup needed")
+            else:
+                logging.info("Persistent healthy configs cleanup not due yet")
     else:
         logging.info("No existing persistent healthy configs file found - will create new one")
 
@@ -1181,9 +1271,15 @@ async def main():
         
         # Log persistent healthy status
         persistent_count = validate_persistent_healthy_file()
-        logging.info(f"Persistent healthy configs file now contains {persistent_count} configurations")
+        if GITHUB_ACTIONS:
+            logging.info(f"GitHub Actions: Persistent healthy configs file now contains {persistent_count} configurations")
+        else:
+            logging.info(f"Persistent healthy configs file now contains {persistent_count} configurations")
     else:
-        logging.info("No new healthy configs to add to persistent storage")
+        if GITHUB_ACTIONS:
+            logging.info("GitHub Actions: No new healthy configs to add to persistent storage")
+        else:
+            logging.info("No new healthy configs to add to persistent storage")
 
     if os.path.exists(OUTPUT_DIR):
         shutil.rmtree(OUTPUT_DIR)
