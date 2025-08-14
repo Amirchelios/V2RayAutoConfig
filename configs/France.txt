@@ -1,4 +1,3 @@
-hysteria2://942b9cb8-92fa-46ac-ae91-f69c8234434b@172.252.236.213:46502?sni=real.getafreenode.sbs&insecure=0#FR
 hysteria2://dongtaiwang.com@51.158.54.46:44550?sni=bing.com&insecure=1#FR
-hysteria2://dongtaiwang.com@51.159.111.32:5355?sni=www.bing.com&insecure=1#FR
-ssr://ejAxMTEuc2VjdXJpdHktY2xvdWRmcm9udC1jZG4uY29tOjQyODMzOm9yaWdpbjphZXMtMjU2LWNmYjpodHRwX3NpbXBsZTpXWEJZTW05d1FtSnlabkZLZW5wTmN3PT0vP29iZnNwYXJhbT0mcmVtYXJrcz04SiUyQkhxJTJGQ2ZoN2RHVWkwMU1TNDBOQzR4T1RBdU1UQTNMVEV6TXpZJTNEJnByb3RvcGFyYW09
+hysteria2://dongtaiwang.com@51.159.111.32:31180?sni=apple.com&insecure=1#FR
+ssr://ejAxMTEuc2VjdXJpdHktY2xvdWRmcm9udC1jZG4uY29tOjQyODMzOm9yaWdpbjphZXMtMjU2LWNmYjpodHRwX3NpbXBsZTpXWEJZTW05d1FtSnlabkZLZW5wTmN3PT0vP29iZnNwYXJhbT0mcmVtYXJrcz04SiUyQkhxJTJGQ2ZoN2RHVWkwek5TNHhPREF1TVRVdU1UZzRMVEV6TXpVJTNEJnByb3RvcGFyYW09
