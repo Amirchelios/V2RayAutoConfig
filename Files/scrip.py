@@ -606,7 +606,8 @@ def generate_simple_readme(protocol_counts, country_counts, all_keywords_data, g
 
     raw_github_base_url = f"https://raw.githubusercontent.com/{github_repo_path}/refs/heads/{github_branch}/{OUTPUT_DIR}"
 
-    total_configs = sum(protocol_counts.values())
+    # Exclude synthetic 'Healthy' bucket from total count
+    total_configs = sum(count for name, count in protocol_counts.items() if name != 'Healthy')
 
     md_content = f"""# 🚀 V2Ray AutoConfig
 
