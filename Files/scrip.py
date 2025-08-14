@@ -22,6 +22,7 @@ from asyncio.subprocess import PIPE, STDOUT
 URLS_FILE = 'Files/urls.txt'
 KEYWORDS_FILE = 'Files/key.json'
 OUTPUT_DIR = 'configs'
+RAW_OUTPUT_SUBDIR = 'raw'
 README_FILE = 'README.md'
 REQUEST_TIMEOUT = 15
 CONCURRENT_REQUESTS = 10
@@ -663,7 +664,7 @@ def save_to_file(directory, category_name, items_set):
         logging.error(f"Failed to write file {file_path}: {e}")
         return False, 0
 
-def generate_simple_readme(protocol_counts, country_counts, all_keywords_data, github_repo_path="Argh94/V2RayAutoConfig", github_branch="main", raw_links_all=None, healthy_links_all=None):
+def generate_simple_readme(protocol_counts, country_counts, all_keywords_data, github_repo_path="Argh94/V2RayAutoConfig", github_branch="main", raw_protocol_counts=None, raw_country_counts=None):
     tz = pytz.timezone('Asia/Tehran')
     now = datetime.now(tz)
     jalali_date = jdatetime.datetime.fromgregorian(datetime=now)
@@ -672,6 +673,7 @@ def generate_simple_readme(protocol_counts, country_counts, all_keywords_data, g
     timestamp = f"آخرین به‌روزرسانی: {time_str} {date_str}"
 
     raw_github_base_url = f"https://raw.githubusercontent.com/{github_repo_path}/refs/heads/{github_branch}/{OUTPUT_DIR}"
+    raw_box_base_url = f"{raw_github_base_url}/{RAW_OUTPUT_SUBDIR}"
 
     # Exclude synthetic 'Healthy' bucket from total count
     total_configs = sum(count for name, count in protocol_counts.items() if name != 'Healthy')
@@ -719,18 +721,65 @@ def generate_simple_readme(protocol_counts, country_counts, all_keywords_data, g
 
     md_content += "</div>\n\n---\n\n"
 
-    # Raw and Healthy link boxes
-    raw_links_all = list(sorted(raw_links_all)) if raw_links_all else []
-    healthy_links_all = list(sorted(healthy_links_all)) if healthy_links_all else []
-    if raw_links_all:
-        md_content += "## 🔗 لینک‌های خام (Raw)\n\n"
-        md_content += f"تعداد: {len(raw_links_all)}\n\n"
-        md_content += "```\n" + "\n".join(raw_links_all) + "\n```\n\n"
-    if healthy_links_all:
-        md_content += "## ✅ لینک‌های تست‌شده (Healthy)\n\n"
-        md_content += f"تعداد: {len(healthy_links_all)}\n\n"
-        md_content += "```\n" + "\n".join(healthy_links_all) + "\n```\n\n"
-    md_content += "---\n\n"
+    # Raw categorized boxes (protocols and countries)
+    if raw_protocol_counts or raw_country_counts:
+        md_content += "## کانفیگ‌های خام\n\n"
+        # Raw protocols table
+        md_content += "<div align=\"center\">\n\n"
+        md_content += "| پروتکل | تعداد | لینک دانلود |\n"
+        md_content += "|:-------:|:-----:|:------------:|\n"
+        if raw_protocol_counts:
+            for category_name, count in sorted(raw_protocol_counts.items()):
+                file_link = f"{raw_box_base_url}/{category_name}.txt"
+                md_content += f"| {category_name} | {count} | [`{category_name}.txt`]({file_link}) |\n"
+        else:
+            md_content += "| - | - | - |\n"
+        md_content += "</div>\n\n"
+        # Raw countries table
+        md_content += "<div align=\"center\">\n\n"
+        md_content += "| کشور | تعداد | لینک دانلود |\n"
+        md_content += "|:----:|:-----:|:------------:|\n"
+        if raw_country_counts:
+            for country_category_name, count in sorted(raw_country_counts.items()):
+                flag_image_markdown = ""
+                persian_name_str = ""
+                iso_code_original_case = ""
+
+                if country_category_name in all_keywords_data:
+                    keywords_list = all_keywords_data[country_category_name]
+                    if keywords_list and isinstance(keywords_list, list):
+                        iso_code_lowercase_for_url = ""
+                        for item in keywords_list:
+                            if isinstance(item, str) and len(item) == 2 and item.isupper() and item.isalpha():
+                                iso_code_lowercase_for_url = item.lower()
+                                iso_code_original_case = item
+                                break
+                        if iso_code_lowercase_for_url:
+                            flag_image_url = f"https://flagcdn.com/w20/{iso_code_lowercase_for_url}.png"
+                            flag_image_markdown = f'<img src="{flag_image_url}" width="20" alt="{country_category_name} flag"> '
+                        for item in keywords_list:
+                            if isinstance(item, str):
+                                if iso_code_original_case and item == iso_code_original_case:
+                                    continue
+                                if item.lower() == country_category_name.lower() and not is_persian_like(item):
+                                    continue
+                                if len(item) in [2, 3] and item.isupper() and item.isalpha() and item != iso_code_original_case:
+                                    continue
+                                if is_persian_like(item):
+                                    persian_name_str = item
+                                    break
+                display_parts = []
+                if flag_image_markdown:
+                    display_parts.append(flag_image_markdown)
+                display_parts.append(country_category_name)
+                if persian_name_str:
+                    display_parts.append(f"({persian_name_str})")
+                country_display_text = " ".join(display_parts)
+                file_link = f"{raw_box_base_url}/{country_category_name}.txt"
+                md_content += f"| {country_display_text} | {count} | [`{country_category_name}.txt`]({file_link}) |\n"
+        else:
+            md_content += "| - | - | - |\n"
+        md_content += "</div>\n\n---\n\n"
 
     md_content += f"""
 ## 🌍 کانفیگ‌های کشورها
@@ -927,10 +976,26 @@ async def main():
     if os.path.exists(OUTPUT_DIR):
         shutil.rmtree(OUTPUT_DIR)
     os.makedirs(OUTPUT_DIR, exist_ok=True)
+    raw_output_dir = os.path.join(OUTPUT_DIR, RAW_OUTPUT_SUBDIR)
+    if os.path.exists(raw_output_dir):
+        shutil.rmtree(raw_output_dir)
+    os.makedirs(raw_output_dir, exist_ok=True)
     logging.info(f"Saving files to directory: {OUTPUT_DIR}")
 
     protocol_counts = {}
     country_counts = {}
+    raw_protocol_counts = {}
+    raw_country_counts = {}
+
+    # Save raw protocol and country files (unfiltered)
+    for category, items in final_all_protocols.items():
+        saved, count = save_to_file(raw_output_dir, category, items)
+        if saved:
+            raw_protocol_counts[category] = count
+    for category, items in final_configs_by_country.items():
+        saved, count = save_to_file(raw_output_dir, category, items)
+        if saved:
+            raw_country_counts[category] = count
 
     # Save protocol files (filtered to healthy if health-check enabled). Keep untestable protocols if configured.
     for category, items in final_all_protocols.items():
@@ -976,8 +1041,8 @@ async def main():
         categories_data,
         github_repo_path=repo_path_env,
         github_branch=branch_name_env,
-        raw_links_all=raw_union,
-        healthy_links_all=healthy_union if ENABLE_HEALTH_CHECK else set()
+        raw_protocol_counts=raw_protocol_counts,
+        raw_country_counts=raw_country_counts
     )
 
     logging.info("--- Script Finished ---")
