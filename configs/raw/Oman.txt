@@ -1,2 +1,4 @@
-trojan://tunnel-tele-id-ibahad@188.208.110.58:8441?security=tls&alpn=http%2F1.1&host=188.208.110.58&headerType=none&type=tcp&sni=Join.telegram.ibahad.ir#👉🆔@v2ray_configs_pool📡🇷🇴®️Romania©️Lisaura🅿️ping:125.23ms
-trojan://tunnel-tele-id-ibahad@188.208.110.58:8441?security=tls&alpn=http%2F1.1&host=188.208.110.58&headerType=none&type=tcp&sni=Join.telegram.ibahad.ir#👉🆔@v2ray_configs_pool📡🇷🇴®️Romania©️Lisaura🅿️ping:126.26ms
+ss://abe03c09-5209-4a32-b9d2-c84b9be6303e@t101.tesotinko.com:443?type=ws&path=%2F&host=&security=tls&fp=chrome&alpn=#👉🆔@v2ray_configs_pool📡🇷🇴®️Romania©️Ploieşti🅿️ping:76.5ms
+trojan://tunnel-tele-id-ibahad@188.208.110.58:8441?security=tls&alpn=http%2F1.1&host=188.208.110.58&headerType=none&type=tcp&sni=Join.telegram.ibahad.ir#👉🆔@v2ray_configs_pool📡🇷🇴®️Romania©️Lisaura🅿️ping:122.77ms
+trojan://tunnel-tele-id-ibahad@188.208.110.58:8441?security=tls&alpn=http%2F1.1&host=188.208.110.58&headerType=none&type=tcp&sni=Join.telegram.ibahad.ir#👉🆔@v2ray_configs_pool📡🇷🇴®️Romania©️Lisaura🅿️ping:125.27ms
+vless://abe03c09-5209-4a32-b9d2-c84b9be6303e@t101.tesotinko.com:443?type=ws&path=%2F&host=&security=tls&fp=chrome&alpn=#👉🆔@v2ray_configs_pool📡🇷🇴®️Romania©️Ploieşti🅿️ping:76.5ms
