@@ -1,6 +1,5 @@
 hysteria2://%40JavidnamanIran-Javid-SHAH-KingRezaPahlavi@77.90.52.69:35000?sni=pichondan.com&insecure=0&obfs=salamander#DE
 hysteria2://0f78d86d-c753-4b0d-8a1d-945160a41043@dehub.xg-hub.icu:25784?security=tls&obfs=salamander&obfs-password=ZDQxZDhjZDk4ZjAwYjIwNA%3D%3D&insecure=1&sni=dehub.xg-hub.icu#🆔express_freevpn%20🔒%20HY2-UDP-N/A%20🇩🇪%20DE%20down
-hysteria2://3QlSMKyqLp@android.yas-nowin.ir:443?sni=android.yas-nowin.ir&insecure=0#DE
 ss://04a68e50-8c5c-447d-8416-9cc075e78a85@91.99.117.223:443?security=none&encryption=none&host=zula.ir&headerType=http&type=tcp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Falkenstein🅿️ping:10.84ms
 ss://063f79bf-b690-43bd-99d7-18fd0d0f03de@asia5.novahomedesigntips.com:54546/?type=ws&encryption=none#%F0%9F%87%A9%F0%9F%87%AA%20DE%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40configtrapi%20%5B27%5D
 ss://06b65471-a091-4eaa-98cc-7ffa4e1a7c2f@91.99.210.158:443?security=reality&encryption=none&pbk=aO2tx4kfUpQWIvT5bO7lH6G1GDfnrThtSFigLJXDens&headerType=none&fp=firefox&type=tcp&sni=tgju.org&sid=370dd394052f2386#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Nuremberg🅿️ping:11.11ms
