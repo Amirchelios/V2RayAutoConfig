@@ -39,9 +39,12 @@ jobs:
           key: xray-${{ env.XRAY_VERSION }}-${{ runner.os }}
 
       - name: Ensure Xray binary permissions
+        shell: bash
         run: |
+          set -e
           if [ -d Files/xray-bin ]; then
-            chmod -R +x Files/xray-bin || true
+            find Files/xray-bin -type f -name "xray" -exec chmod +x {} + || true
+            find Files/xray-bin -type f -name "xray.exe" -exec chmod +x {} + || true
           fi
 
       - name: Run scraper

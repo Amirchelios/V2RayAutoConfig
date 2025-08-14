@@ -185,6 +185,12 @@ def ensure_xray_binary():
         raise RuntimeError(f"Unsupported OS for Xray: {platform.system()}")
     candidate = os.path.join(XRAY_DIR, bin_name)
     if os.path.exists(candidate):
+        # Ensure executable bit when using an existing binary (e.g., from cache)
+        try:
+            if not system.startswith('win'):
+                os.chmod(candidate, 0o755)
+        except Exception:
+            pass
         XRAY_BIN = candidate
         return XRAY_BIN
     if XRAY_VERSION and XRAY_VERSION != 'latest':
