@@ -1,4 +1,0 @@
-ss://73277246-a0fc-4f2c-86df-f904c225ac4b@185.239.48.109:8443?security=reality&fp=chrome&type=tcp&flow=xtls-rprx-vision&pbk=wPXyRAB1bVkaTGgO5cHEylVAV8SscUQUPn_ggzx6Vxk&sni=google.com#VPNKEY-Israel
-ss://b9489a24-71b2-46af-8151-8ae37a96e43f@185.239.48.109:8443?security=reality&fp=chrome&type=tcp&flow=xtls-rprx-vision&pbk=wPXyRAB1bVkaTGgO5cHEylVAV8SscUQUPn_ggzx6Vxk&sni=google.com#VPNKEY-Israel
-vless://73277246-a0fc-4f2c-86df-f904c225ac4b@185.239.48.109:8443?security=reality&fp=chrome&type=tcp&flow=xtls-rprx-vision&pbk=wPXyRAB1bVkaTGgO5cHEylVAV8SscUQUPn_ggzx6Vxk&sni=google.com#VPNKEY-Israel
-vless://b9489a24-71b2-46af-8151-8ae37a96e43f@185.239.48.109:8443?security=reality&fp=chrome&type=tcp&flow=xtls-rprx-vision&pbk=wPXyRAB1bVkaTGgO5cHEylVAV8SscUQUPn_ggzx6Vxk&sni=google.com#VPNKEY-Israel
