@@ -69,29 +69,18 @@ jobs:
       - name: Commit and push changes
         shell: bash
         run: |
+          set -e
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Always base our commit on the latest remote main to avoid rebase/pull issues
+          git fetch origin
+          git checkout -B main origin/main
           git add -A
           if git diff --cached --quiet; then
             echo "No changes detected. Skipping commit."
           else
-            echo "Changes detected. Committing..."
+            echo "Changes detected. Committing and pushing..."
             git commit -m "docs: Update README and config files 🤖 [skip ci]"
-            echo "Pulling remote changes with rebase..."
-            git fetch origin
-            # If there are any unstaged changes (e.g., from line endings), stash them
-            if ! git diff --quiet; then
-              git stash push -u -m "pre-pull-stash" || true
-              STASHED=1
-            else
-              STASHED=0
-            fi
-            git rebase origin/main || { echo "Rebase failed, aborting..."; git rebase --abort; exit 1; }
-            if [ "$STASHED" -eq 1 ]; then
-              echo "Applying stash..."
-              git stash pop || true
-            fi
-            echo "Pushing changes..."
-            git push origin main || { echo "Push failed"; exit 1; }
+            git push origin main
           fi
 
