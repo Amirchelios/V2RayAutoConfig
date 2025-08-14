@@ -26,3 +26,9 @@ https://raw.githubusercontent.com/10ium/V2ray-Config/refs/heads/main/Splitted-By
 https://raw.githubusercontent.com/10ium/V2ray-Config/refs/heads/main/Splitted-By-Protocol/tuic.txt
 https://raw.githubusercontent.com/dream4network/telegram-configs-collector/refs/heads/main/protocols/hysteria
 https://raw.githubusercontent.com/MahsaNetConfigTopic/config/refs/heads/main/xray_final.txt
+https://raw.githubusercontent.com/Kwinshadow/TelegramV2rayCollector/main/sublinks/mix.txt
+https://raw.githubusercontent.com/V2RayRoot/V2RayConfig/refs/heads/main/Config/vless.txt
+https://raw.githubusercontent.com/V2RayRoot/V2RayConfig/refs/heads/main/Config/vmess.txt
+https://raw.githubusercontent.com/V2RayRoot/V2RayConfig/refs/heads/main/Config/shadowsocks.txt
+https://raw.githubusercontent.com/youfoundamin/V2rayCollector/main/mixed_iran.txt
+https://raw.githubusercontent.com/MhdiTaheri/V2rayCollector_Py/main/sub/United%20States/config.txt

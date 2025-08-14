@@ -27,6 +27,7 @@ REQUEST_TIMEOUT = 15
 CONCURRENT_REQUESTS = 10
 MAX_CONFIG_LENGTH = 1500
 MIN_PERCENT25_COUNT = 15
+DISABLE_CONFIG_FILTERS = os.getenv('DISABLE_CONFIG_FILTERS', '1') == '1'
 
 # Health-check settings (tuned for CI/GitHub Actions)
 ENABLE_HEALTH_CHECK = os.getenv('ENABLE_HEALTH_CHECK', '1') == '1'
@@ -36,6 +37,8 @@ MAX_HEALTH_CHECKS_TOTAL = int(os.getenv('MAX_HEALTH_CHECKS_TOTAL', '120'))
 XRAY_TEST_TIMEOUT = int(os.getenv('XRAY_TEST_TIMEOUT', '6'))
 HEALTH_CHECK_DEADLINE_SECONDS = int(os.getenv('HEALTH_CHECK_DEADLINE_SECONDS', '360'))
 MAX_HEALTHY_PER_PROTOCOL = int(os.getenv('MAX_HEALTHY_PER_PROTOCOL', '1000000'))
+HEALTH_CHECK_ALL = os.getenv('HEALTH_CHECK_ALL', '1') == '1'
+KEEP_UNTESTED_ON_HEALTH = os.getenv('KEEP_UNTESTED_ON_HEALTH', '1') == '1'
 GLOBAL_TEST_URLS = [
     u.strip() for u in os.getenv(
         'GLOBAL_TEST_URLS',
@@ -500,17 +503,21 @@ async def health_filter_configs(protocol_to_configs_map):
 
     # Budget per protocol and total to keep runtime bounded in CI
     limited = {}
-    total_budget = MAX_HEALTH_CHECKS_TOTAL
     protos = [p for p in PROTOCOL_CATEGORIES if p in protocol_to_configs_map and p in SUPPORTED_FOR_HEALTH]
-    per_proto_budget = max(1, min(MAX_HEALTH_CHECKS_PER_PROTOCOL, total_budget // max(1, len(protos))))
-    for proto in protos:
-        items = list(protocol_to_configs_map.get(proto, []))
-        limited[proto] = items[:per_proto_budget]
-    selected = sum(len(v) for v in limited.values())
-    remaining = max(0, total_budget - selected)
-    if remaining > 0 and protos:
-        extra = list(protocol_to_configs_map.get(protos[0], []))
-        limited[protos[0]] = list(limited[protos[0]]) + extra[per_proto_budget:per_proto_budget+remaining]
+    if HEALTH_CHECK_ALL:
+        for proto in protos:
+            limited[proto] = list(protocol_to_configs_map.get(proto, []))
+    else:
+        total_budget = MAX_HEALTH_CHECKS_TOTAL
+        per_proto_budget = max(1, min(MAX_HEALTH_CHECKS_PER_PROTOCOL, total_budget // max(1, len(protos))))
+        for proto in protos:
+            items = list(protocol_to_configs_map.get(proto, []))
+            limited[proto] = items[:per_proto_budget]
+        selected = sum(len(v) for v in limited.values())
+        remaining = max(0, total_budget - selected)
+        if remaining > 0 and protos:
+            extra = list(protocol_to_configs_map.get(protos[0], []))
+            limited[protos[0]] = list(limited[protos[0]]) + extra[per_proto_budget:per_proto_budget+remaining]
 
     semaphore = asyncio.Semaphore(HEALTH_CHECK_CONCURRENCY)
     healthy_all = set()
@@ -545,16 +552,20 @@ async def two_phase_health_filter(protocol_to_configs_map):
     # Phase 1: connectivity to global endpoints (quick liveness)
     protos = [p for p in PROTOCOL_CATEGORIES if p in protocol_to_configs_map and p in SUPPORTED_FOR_HEALTH]
     limited_phase1 = {}
-    total_budget1 = FIRST_PHASE_MAX_HEALTH_CHECKS_TOTAL
-    per_proto_budget1 = max(1, min(FIRST_PHASE_MAX_HEALTH_CHECKS_PER_PROTOCOL, total_budget1 // max(1, len(protos))))
-    for proto in protos:
-        items = list(protocol_to_configs_map.get(proto, []))
-        limited_phase1[proto] = items[:per_proto_budget1]
-    selected1 = sum(len(v) for v in limited_phase1.values())
-    remaining1 = max(0, total_budget1 - selected1)
-    if remaining1 > 0 and protos:
-        extra = list(protocol_to_configs_map.get(protos[0], []))
-        limited_phase1[protos[0]] = list(limited_phase1[protos[0]]) + extra[per_proto_budget1:per_proto_budget1+remaining1]
+    if HEALTH_CHECK_ALL:
+        for proto in protos:
+            limited_phase1[proto] = list(protocol_to_configs_map.get(proto, []))
+    else:
+        total_budget1 = FIRST_PHASE_MAX_HEALTH_CHECKS_TOTAL
+        per_proto_budget1 = max(1, min(FIRST_PHASE_MAX_HEALTH_CHECKS_PER_PROTOCOL, total_budget1 // max(1, len(protos))))
+        for proto in protos:
+            items = list(protocol_to_configs_map.get(proto, []))
+            limited_phase1[proto] = items[:per_proto_budget1]
+        selected1 = sum(len(v) for v in limited_phase1.values())
+        remaining1 = max(0, total_budget1 - selected1)
+        if remaining1 > 0 and protos:
+            extra = list(protocol_to_configs_map.get(protos[0], []))
+            limited_phase1[protos[0]] = list(limited_phase1[protos[0]]) + extra[per_proto_budget1:per_proto_budget1+remaining1]
 
     sem1 = asyncio.Semaphore(FIRST_PHASE_HEALTH_CHECK_CONCURRENCY)
     phase1_ok_all = set()
@@ -721,14 +732,14 @@ def generate_simple_readme(protocol_counts, country_counts, all_keywords_data, g
 اگر مایل به مشارکت در پروژه هستید، می‌توانید:
 - منابع جدید برای جمع‌آوری کانفیگ‌ها پیشنهاد دهید (فایل `urls.txt`).
 - الگوهای جدید برای پروتکل‌ها یا کشورها اضافه کنید (فایل `key.json`).
-- با ارسال Pull Request یا Issue در [گیت‌هاب](https://github.com/Argh94/V2RayAutoConfig) به بهبود پروژه کمک کنید.
+- با ارسال Pull Request یا Issue در [گیت‌هاب](https://github.com/{github_repo_path}) به بهبود پروژه کمک کنید.
 
 ---
 
 ## 📢 توجه
 - این پروژه صرفاً برای اهداف آموزشی و تحقیقاتی ارائه شده است.
 - لطفاً از کانفیگ‌ها به‌صورت مسئولانه و مطابق با قوانین کشور خود استفاده کنید.
-- برای گزارش مشکلات یا پیشنهادات، از بخش [Issues](https://github.com/Argh94/V2RayAutoConfig/issues) استفاده کنید.
+- برای گزارش مشکلات یا پیشنهادات، از بخش [Issues](https://github.com/{github_repo_path}/issues) استفاده کنید.
 """
 
     try:
@@ -780,7 +791,7 @@ async def main():
         for protocol_cat_name, configs_found in page_protocol_matches.items():
             if protocol_cat_name in PROTOCOL_CATEGORIES:
                 for config in configs_found:
-                    if should_filter_config(config):
+                    if not DISABLE_CONFIG_FILTERS and should_filter_config(config):
                         continue
                     all_page_configs_after_filter.add(config)
                     final_all_protocols[protocol_cat_name].add(config)
@@ -852,9 +863,15 @@ async def main():
     protocol_counts = {}
     country_counts = {}
 
-    # Save protocol files (filtered to healthy if health-check enabled)
+    # Save protocol files (filtered to healthy if health-check enabled). Keep untestable protocols if configured.
     for category, items in final_all_protocols.items():
-        items_to_save = items if not ENABLE_HEALTH_CHECK else healthy_by_protocol.get(category, set())
+        if not ENABLE_HEALTH_CHECK:
+            items_to_save = items
+        else:
+            if category in healthy_by_protocol:
+                items_to_save = healthy_by_protocol.get(category, set())
+            else:
+                items_to_save = items if KEEP_UNTESTED_ON_HEALTH else set()
         if ENABLE_HEALTH_CHECK and MAX_HEALTHY_PER_PROTOCOL:
             items_to_save = set(list(items_to_save)[:MAX_HEALTHY_PER_PROTOCOL])
         saved, count = save_to_file(OUTPUT_DIR, category, items_to_save)
@@ -863,7 +880,7 @@ async def main():
     # Save country files (filtered to healthy if health-check enabled)
     for category, items in final_configs_by_country.items():
         if ENABLE_HEALTH_CHECK:
-            items = {x for x in items if x in healthy_union}
+            items = {x for x in items if (x in healthy_union) or (KEEP_UNTESTED_ON_HEALTH and not is_supported_link(x))}
         saved, count = save_to_file(OUTPUT_DIR, category, items)
         if saved:
             country_counts[category] = count
@@ -878,9 +895,11 @@ async def main():
         if saved:
             protocol_counts['Healthy'] = count
 
+    repo_path_env = os.getenv('GITHUB_REPOSITORY') or os.getenv('GITHUB_REPO') or os.getenv('REPO_PATH') or "Amirchelios/V2RayAutoConfig"
+    branch_name_env = os.getenv('GITHUB_REF_NAME') or os.getenv('GITHUB_BRANCH') or "main"
     generate_simple_readme(protocol_counts, country_counts, categories_data,
-                          github_repo_path="Argh94/V2RayAutoConfig",
-                          github_branch="main")
+                          github_repo_path=repo_path_env,
+                          github_branch=branch_name_env)
 
     logging.info("--- Script Finished ---")
 
