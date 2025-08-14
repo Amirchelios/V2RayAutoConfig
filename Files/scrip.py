@@ -30,9 +30,12 @@ MIN_PERCENT25_COUNT = 15
 
 # Health-check settings (tuned for CI/GitHub Actions)
 ENABLE_HEALTH_CHECK = os.getenv('ENABLE_HEALTH_CHECK', '1') == '1'
-HEALTH_CHECK_CONCURRENCY = int(os.getenv('HEALTH_CHECK_CONCURRENCY', '4'))
-MAX_HEALTH_CHECKS_PER_PROTOCOL = int(os.getenv('MAX_HEALTH_CHECKS_PER_PROTOCOL', '50'))
-MAX_HEALTH_CHECKS_TOTAL = int(os.getenv('MAX_HEALTH_CHECKS_TOTAL', '300'))
+HEALTH_CHECK_CONCURRENCY = int(os.getenv('HEALTH_CHECK_CONCURRENCY', '6'))
+MAX_HEALTH_CHECKS_PER_PROTOCOL = int(os.getenv('MAX_HEALTH_CHECKS_PER_PROTOCOL', '25'))
+MAX_HEALTH_CHECKS_TOTAL = int(os.getenv('MAX_HEALTH_CHECKS_TOTAL', '120'))
+XRAY_TEST_TIMEOUT = int(os.getenv('XRAY_TEST_TIMEOUT', '6'))
+HEALTH_CHECK_DEADLINE_SECONDS = int(os.getenv('HEALTH_CHECK_DEADLINE_SECONDS', '360'))
+MAX_HEALTHY_PER_PROTOCOL = int(os.getenv('MAX_HEALTHY_PER_PROTOCOL', '1000000'))
 HEALTHY_OUTPUT_FILE = os.getenv('HEALTHY_OUTPUT_FILE', os.path.join('configs', 'Healthy.txt'))
 IRAN_TEST_URLS = [
     u.strip() for u in os.getenv(
@@ -428,7 +431,9 @@ def build_xray_config(link, local_http_port):
         ]
     }
 
-async def test_proxy_via_xray(link, iran_test_urls, overall_timeout=12):
+async def test_proxy_via_xray(link, iran_test_urls, overall_timeout=None):
+    if overall_timeout is None:
+        overall_timeout = XRAY_TEST_TIMEOUT
     try:
         xray_path = ensure_xray_binary()
     except Exception:
@@ -445,7 +450,7 @@ async def test_proxy_via_xray(link, iran_test_urls, overall_timeout=12):
         ensure_xray_binary(), '-config', cfg_path, stdout=PIPE, stderr=STDOUT
     )
     await asyncio.sleep(0.4)
-    timeout = aiohttp.ClientTimeout(total=min(10, overall_timeout))
+    timeout = aiohttp.ClientTimeout(total=min(8, overall_timeout))
     connector = aiohttp.TCPConnector(ssl=False)
     try:
         async with aiohttp.ClientSession(timeout=timeout, connector=connector) as session:
@@ -513,7 +518,11 @@ async def health_filter_configs(protocol_to_configs_map):
         for link in limited.get(p, []):
             tasks.append(asyncio.create_task(run_check(p, link)))
     if tasks:
-        await asyncio.gather(*tasks)
+        # bounded wait with deadline so workflow doesn't hang
+        try:
+            await asyncio.wait_for(asyncio.gather(*tasks), timeout=HEALTH_CHECK_DEADLINE_SECONDS)
+        except asyncio.TimeoutError:
+            logging.warning("Health check deadline reached; continuing with results so far.")
     return healthy_all, healthy_by_proto
 
 def save_to_file(directory, category_name, items_set):
@@ -789,6 +798,8 @@ async def main():
     # Save protocol files (filtered to healthy if health-check enabled)
     for category, items in final_all_protocols.items():
         items_to_save = items if not ENABLE_HEALTH_CHECK else healthy_by_protocol.get(category, set())
+        if ENABLE_HEALTH_CHECK and MAX_HEALTHY_PER_PROTOCOL:
+            items_to_save = set(list(items_to_save)[:MAX_HEALTHY_PER_PROTOCOL])
         saved, count = save_to_file(OUTPUT_DIR, category, items_to_save)
         if saved:
             protocol_counts[category] = count
