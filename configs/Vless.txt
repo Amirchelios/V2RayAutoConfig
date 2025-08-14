@@ -1,2 +1,0 @@
-vless://aaaaaaa1-bbbb-4ccc-accc-eeeeeeeeeee1@web.xhamster.biz.id:443?path=%2FFree-CF-Proxy-AT4&security=tls&encryption=none&host=web.xhamster.biz.id&type=ws&sni=web.xhamster.biz.id#@Vip_Security
-vless://e4824193-4f54-453b-d037-88368e85ef0e@45.82.251.58:8880?security=none&type=grpc&packetEncoding=xudp&encryption=none#@Filter_breaker

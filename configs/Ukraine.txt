@@ -1,0 +1,1 @@
+hysteria2://942b9cb8-92fa-46ac-ae91-f69c8234434b@185.126.255.78:59494?sni=real.getafreenode.sbs&insecure=0#UA
