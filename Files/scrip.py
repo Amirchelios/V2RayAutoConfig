@@ -42,6 +42,7 @@ IRAN_TEST_URLS = [
 ]
 XRAY_DIR = os.path.join('Files', 'xray-bin')
 XRAY_BIN = None  # will be resolved by ensure_xray_binary()
+XRAY_VERSION = os.getenv('XRAY_VERSION', 'latest')
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
@@ -186,7 +187,10 @@ def ensure_xray_binary():
     if os.path.exists(candidate):
         XRAY_BIN = candidate
         return XRAY_BIN
-    download_url = f"https://github.com/XTLS/Xray-core/releases/latest/download/{asset}"
+    if XRAY_VERSION and XRAY_VERSION != 'latest':
+        download_url = f"https://github.com/XTLS/Xray-core/releases/download/{XRAY_VERSION}/{asset}"
+    else:
+        download_url = f"https://github.com/XTLS/Xray-core/releases/latest/download/{asset}"
     zip_path = os.path.join(XRAY_DIR, asset)
     try:
         import urllib.request

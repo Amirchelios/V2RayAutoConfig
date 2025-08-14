@@ -17,6 +17,7 @@ jobs:
       HEALTH_CHECK_CONCURRENCY: '4'
       MAX_HEALTH_CHECKS_PER_PROTOCOL: '40'
       MAX_HEALTH_CHECKS_TOTAL: '200'
+      XRAY_VERSION: 'v25.1.20'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,6 +31,18 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r Files/requirements.txt
+
+      - name: Restore Xray cache
+        uses: actions/cache@v4
+        with:
+          path: Files/xray-bin
+          key: xray-${{ env.XRAY_VERSION }}-${{ runner.os }}
+
+      - name: Ensure Xray binary permissions
+        run: |
+          if [ -d Files/xray-bin ]; then
+            chmod -R +x Files/xray-bin || true
+          fi
 
       - name: Run scraper
         run: |
