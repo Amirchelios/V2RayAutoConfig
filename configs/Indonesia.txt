@@ -12,4 +12,3 @@ hysteria2://dongtaiwang.com@108.181.5.130:63015/?insecure=1&sni=apple.com#Channe
 hysteria2://dongtaiwang.com@208.87.243.187:22222/?insecure=1&sni=www.bing.com#Channel%20id%3A%20%40@proxy_kafee%F0%9F%87%BA%F0%9F%87%B8
 hysteria2://eb75320e-a6d0-4b34-a6b6-2bcfc96a9099@203.174.82.145:43057/?insecure=1&sni=www.bing.com#Channel%20id%3A%20%40@proxy_kafee%F0%9F%87%B8%F0%9F%87%AC
 hysteria2://nfsn666@45.207.222.138:8888/?insecure=1&sni=hk.nfsn666.gq#Channel%20id%3A%20%40@proxy_kafee%F0%9F%87%AD%F0%9F%87%B0
-vmess://eyJhZGQiOiIxMDMuNjEuMTM5LjEzNyIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoiIiwiaWQiOiJmOGQ5M2NmYi0zZDVkLTQ0N2MtYTY5Ny0xNjQ5NmRkNzQ2OTciLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwicG9ydCI6IjIwNTIxIiwicHMiOiJDaGFubmVsIGlkOiBAU2hhZG93UHJveHk2NiDwn4e58J+HvCIsInNjeSI6ImF1dG8iLCJzbmkiOiIiLCJ0bHMiOiIiLCJ0eXBlIjoiIiwidiI6IjIifQ
