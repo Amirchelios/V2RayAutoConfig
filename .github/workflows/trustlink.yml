@@ -1,0 +1,139 @@
+name: 🔗 TrustLink Auto Update
+
+on:
+  schedule:
+    # هر ساعت
+    - cron: "0 * * * *"
+    # هر نیم ساعت (برای تست)
+    - cron: "*/30 * * * *"
+  workflow_dispatch: {}  # اجرای دستی
+  push:
+    paths:
+      - 'Files/trustlink.py'
+      - '.github/workflows/trustlink.yml'
+
+concurrency:
+  group: trustlink-update
+  cancel-in-progress: true
+
+jobs:
+  update-trustlink:
+    runs-on: ubuntu-latest
+    name: "به‌روزرسانی خودکار TrustLink"
+    
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: 'pip'
+
+      - name: 📦 Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install aiohttp
+
+      - name: 🔍 Check TrustLink Script
+        run: |
+          if [ ! -f "Files/trustlink.py" ]; then
+            echo "❌ فایل trustlink.py پیدا نشد!"
+            exit 1
+          fi
+          echo "✅ فایل trustlink.py موجود است"
+          python -c "import asyncio, aiohttp; print('✅ وابستگی‌ها OK')"
+
+      - name: 🚀 Run TrustLink Update
+        run: |
+          echo "🕐 زمان شروع: $(date)"
+          echo "📁 دایرکتوری فعلی: $(pwd)"
+          
+          # اجرای TrustLink
+          python Files/trustlink.py
+          
+          echo "🕐 زمان پایان: $(date)"
+
+      - name: 📊 Check Results
+        run: |
+          echo "📋 بررسی نتایج:"
+          
+          if [ -f "configs/trustlink.txt" ]; then
+            echo "✅ فایل trustlink.txt ایجاد شد"
+            echo "📏 اندازه فایل: $(ls -lh configs/trustlink.txt | awk '{print $5}')"
+            echo "📊 تعداد خطوط: $(wc -l < configs/trustlink.txt)"
+          else
+            echo "❌ فایل trustlink.txt ایجاد نشد!"
+            exit 1
+          fi
+          
+          if [ -f "configs/.trustlink_metadata.json" ]; then
+            echo "✅ فایل متادیتا ایجاد شد"
+            echo "📄 محتوای متادیتا:"
+            cat configs/.trustlink_metadata.json | python -m json.tool
+          else
+            echo "⚠️ فایل متادیتا ایجاد نشد"
+          fi
+
+      - name: 🔄 Commit & Push Changes
+        env:
+          GIT_AUTHOR_NAME: github-actions[bot]
+          GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+          GIT_COMMITTER_NAME: github-actions[bot]
+          GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: |
+          echo "🔄 شروع commit و push..."
+          
+          # تنظیم git
+          git config --global user.name "$GIT_AUTHOR_NAME"
+          git config --global user.email "$GIT_AUTHOR_EMAIL"
+          
+          # بررسی تغییرات
+          git status
+          git diff
+          
+          # اضافه کردن فایل‌های تغییر یافته
+          git add configs/trustlink.txt configs/.trustlink_metadata.json configs/trustlink_backup.txt logs/trustlink.log
+          
+          # بررسی تغییرات staged
+          if git diff --cached --quiet; then
+            echo "ℹ️ هیچ تغییری برای commit وجود ندارد"
+            exit 0
+          fi
+          
+          # pull --rebase برای جلوگیری از کانفلیکت
+          echo "📥 انجام pull --rebase..."
+          git pull --rebase origin "$BRANCH_NAME" || {
+            echo "⚠️ pull --rebase ناموفق بود، ادامه با merge"
+            git pull origin "$BRANCH_NAME" || true
+          }
+          
+          # commit
+          echo "💾 انجام commit..."
+          git commit -m "🔗 chore: به‌روزرسانی خودکار TrustLink - $(date '+%Y-%m-%d %H:%M:%S')"
+          
+          # push
+          echo "🚀 انجام push..."
+          git push origin HEAD:"$BRANCH_NAME"
+          
+          echo "✅ commit و push با موفقیت انجام شد"
+
+      - name: 📈 Final Status
+        run: |
+          echo "🎉 TrustLink Update Completed Successfully!"
+          echo "📅 زمان: $(date)"
+          echo "🏷️ Run ID: ${{ github.run_id }}"
+          echo "🔗 Commit: ${{ github.sha }}"
+          
+          if [ -f "configs/trustlink.txt" ]; then
+            echo "📊 آمار نهایی:"
+            echo "  📁 فایل: configs/trustlink.txt"
+            echo "  📏 اندازه: $(ls -lh configs/trustlink.txt | awk '{print $5}')"
+            echo "  📊 خطوط: $(wc -l < configs/trustlink.txt)"
+            echo "  🕐 آخرین تغییر: $(stat -c %y configs/trustlink.txt)"
+          fi
