@@ -273,6 +273,7 @@ ss://bb7b030f-fd37-488a-be1f-1a26d874cb26@91.99.181.47:8443?mode=stream-one&path
 ss://c39a101c-0a7b-4940-8e6a-f8346d70b24b@91.99.177.240:443?security=&encryption=none&host=zula.ir&headerType=http&type=tcp#Germany%20PO
 ss://c43b7819-008e-4863-aa20-9d3fc2935df8@rezidental.az9x99.ir:2053?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
 ss://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-star.dsadsadads.ir:2070?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
+ss://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-star.fastsoft98.ir:2010?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
 ss://c5fe2244-df45-4efe-8abe-9699e7802697@172.105.29.78:443?mode=stream-one&path=%2F&security=&encryption=none&type=xhttp#Germany%20L115
 ss://c80463ca-2231-4f44-ba98-c9518395be38@139.162.188.193:21866/?type=tcp&encryption=none#%F0%9F%87%A9%F0%9F%87%AA%20DE%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40v2rayngn%20%5B13%5D
 ss://c80463ca-2231-4f44-ba98-c9518395be38@139.162.188.193:21866?security=none&encryption=none&headerType=none&type=tcp#DE🇩🇪
@@ -538,6 +539,7 @@ vless://bb7b030f-fd37-488a-be1f-1a26d874cb26@91.99.181.47:8443?mode=stream-one&p
 vless://c39a101c-0a7b-4940-8e6a-f8346d70b24b@91.99.177.240:443?security=&encryption=none&host=zula.ir&headerType=http&type=tcp#Germany%20PO
 vless://c43b7819-008e-4863-aa20-9d3fc2935df8@rezidental.az9x99.ir:2053?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
 vless://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-star.dsadsadads.ir:2070?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
+vless://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-star.fastsoft98.ir:2010?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
 vless://c5fe2244-df45-4efe-8abe-9699e7802697@172.105.29.78:443?mode=stream-one&path=%2F&security=&encryption=none&type=xhttp#Germany%20L115
 vless://c80463ca-2231-4f44-ba98-c9518395be38@139.162.188.193:21866/?type=tcp&encryption=none#%F0%9F%87%A9%F0%9F%87%AA%20DE%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40v2rayngn%20%5B13%5D
 vless://c80463ca-2231-4f44-ba98-c9518395be38@139.162.188.193:21866?security=none&encryption=none&headerType=none&type=tcp#DE🇩🇪

@@ -4632,7 +4632,7 @@ vless://c43b7819-008e-4863-aa20-9d3fc2935df8@star-dc.az9x99.ir:2083?encryption=n
 vless://c43b7819-008e-4863-aa20-9d3fc2935df8@star.fastsoft98.ir:80?encryption=none&security=none&type=xhttp&host=b26cdn3foramindedicated.com&path=/scer&mode=auto#US🇺🇸
 vless://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-rezidentali.fastsoft98.ir:2080?encryption=none&security=none&type=tcp&headerType=http&host=http://SpaceNetwork.divarcdn.com#IR🇮🇷
 vless://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-star.dsadsadads.ir:2070?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
-vless://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-star.fastsoft98.ir:2010?encryption=none&security=none&type=tcp&headerType=none#IR🇮🇷
+vless://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-star.fastsoft98.ir:2010?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
 vless://c43cf30c-18f1-4e20-bd88-73b1288c5202@172.67.216.94:443/?type=ws&encryption=none&host=worker-dry-breeze-60a0.chngyznwy.workers.dev&path=%2F%3Fed%3D2048&security=tls&sni=worker-dry-breeze-60a0.chngyznwy.workers.dev#%40Hope_Net-join-us-on-Telegram
 vless://c43d7798-af65-477d-9bd4-317d60bec393@45.94.215.252:1001/?encryption=none&host=zula.ir&type=tcp&headerType=http#%40Gp_Config%20%F0%9F%8D%8B%20%D8%B1%D8%A7%DB%8C%DA%AF%D8%A7%D9%86%20vpn%20%D9%85%D9%86%D8%A8%D8%B9
 vless://c453a5af-bb5d-40c4-b8ab-9b0747ad06c9@uk-001.xiaoxiaobujidao.xyz:443/?type=tcp&encryption=none&flow=xtls-rprx-vision&sni=dash.cloudflare.com&fp=firefox&security=reality&pbk=vMHW4_fx7bd_4bFZN9ecx58xSjv6SLg0wRYrdI62yUo&sid=#%F0%9F%8C%9D12%40oneclickvpnkeys
