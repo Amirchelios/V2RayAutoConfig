@@ -393,6 +393,71 @@ def load_persistent_healthy_from_repository():
     
     return set()
 
+def load_existing_healthy_from_repository():
+    """Load existing healthy configs from the Healthy.txt file in repository"""
+    if os.path.exists(HEALTHY_OUTPUT_FILE):
+        try:
+            with open(HEALTHY_OUTPUT_FILE, 'r', encoding='utf-8') as f:
+                configs = {line.strip() for line in f if line.strip()}
+            logging.info(f"Found {len(configs)} existing healthy configs in repository")
+            return configs
+        except Exception as e:
+            logging.warning(f"Could not read existing healthy configs from repository: {e}")
+    
+    return set()
+
+def merge_healthy_configs(existing_configs, new_configs):
+    """Merge existing and new healthy configs, removing duplicates"""
+    # Remove duplicates
+    all_configs = existing_configs.union(new_configs)
+    
+    # Log merge statistics
+    duplicates_removed = len(existing_configs) + len(new_configs) - len(all_configs)
+    if duplicates_removed > 0:
+        logging.info(f"Removed {duplicates_removed} duplicate configs during merge")
+    
+    # Validate configs before returning
+    valid_configs = set()
+    for config in all_configs:
+        if config and isinstance(config, str) and len(config.strip()) > 10:
+            valid_configs.add(config.strip())
+    
+    if len(valid_configs) != len(all_configs):
+        logging.info(f"Filtered out {len(all_configs) - len(valid_configs)} invalid configs")
+    
+    logging.info(f"Merge result: {len(existing_configs)} existing + {len(new_configs)} new = {len(valid_configs)} valid unique total")
+    return valid_configs
+
+def get_healthy_file_stats():
+    """Get statistics about the Healthy.txt file"""
+    if not os.path.exists(HEALTHY_OUTPUT_FILE):
+        return {
+            'exists': False,
+            'total_configs': 0,
+            'last_modified': None
+        }
+    
+    try:
+        with open(HEALTHY_OUTPUT_FILE, 'r', encoding='utf-8') as f:
+            configs = [line.strip() for line in f if line.strip()]
+        
+        stats = os.stat(HEALTHY_OUTPUT_FILE)
+        last_modified = datetime.fromtimestamp(stats.st_mtime)
+        
+        return {
+            'exists': True,
+            'total_configs': len(configs),
+            'last_modified': last_modified,
+            'file_size_kb': stats.st_size / 1024
+        }
+    except Exception as e:
+        logging.warning(f"Error getting Healthy.txt stats: {e}")
+        return {
+            'exists': False,
+            'total_configs': 0,
+            'last_modified': None
+        }
+
 def get_vmess_name(vmess_link):
     if not vmess_link.startswith("vmess://"):
         return None
@@ -999,6 +1064,8 @@ def generate_simple_readme(protocol_counts, country_counts, all_keywords_data, g
 
 > **سیستم کانفیگ‌های سالم پایدار:** کانفیگ‌هایی که تست شده و سالم تشخیص داده می‌شوند، در فایل جداگانه‌ای ذخیره می‌شوند که {f'فقط در تغییرات عمده پاک‌سازی می‌شود (GitHub Actions)' if GITHUB_ACTIONS else 'هر 10 روز پاک‌سازی می‌شود'} تا کیفیت حفظ شود و تعداد زیادی کانفیگ سالم در طول زمان جمع‌آوری شود. **کانفیگ‌های قبلی حفظ می‌شوند و کانفیگ‌های جدید به آن‌ها اضافه می‌شوند.**
 
+> **فایل Healthy.txt:** این فایل نیز کانفیگ‌های قبلی را حفظ کرده و کانفیگ‌های جدید تست شده را به آن‌ها اضافه می‌کند. هیچ کانفیگی حذف نمی‌شود.
+
 ---
 
 ## 📁 کانفیگ‌های پروتکل‌ها
@@ -1194,6 +1261,12 @@ def generate_simple_readme(protocol_counts, country_counts, all_keywords_data, g
 - **تجمع تدریجی**: با هر اجرای اسکریپت، کانفیگ‌های سالم جدید به این فایل اضافه می‌شوند
 - **حفظ کانفیگ‌های قبلی**: کانفیگ‌های قبلی حفظ می‌شوند و کانفیگ‌های جدید به آن‌ها اضافه می‌شوند
 - **مزایا**: تعداد زیادی کانفیگ سالم در طول زمان جمع‌آوری می‌شود که می‌تواند به عنوان منبع قابل اعتماد استفاده شود
+
+### 📁 فایل Healthy.txt
+- **محتوای فایل**: شامل تمام کانفیگ‌های سالم (قبلی + جدید) بدون حذف هیچ کانفیگی
+- **ادغام خودکار**: کانفیگ‌های جدید تست شده به کانفیگ‌های قبلی اضافه می‌شوند
+- **حذف تکراری**: کانفیگ‌های تکراری به صورت خودکار حذف می‌شوند
+- **حفظ تاریخچه**: تمام کانفیگ‌های سالم قبلی حفظ می‌شوند
 
 ---
 
@@ -1415,15 +1488,32 @@ async def main():
         if saved:
             country_counts[category] = count
 
-    # Save global healthy file
+    # Save global healthy file - merge with existing configs from repository
     if ENABLE_HEALTH_CHECK:
+        # Get current Healthy.txt stats
+        current_stats = get_healthy_file_stats()
+        if current_stats['exists']:
+            logging.info(f"Current Healthy.txt: {current_stats['total_configs']} configs, last modified: {current_stats['last_modified']}")
+        
+        # Load existing healthy configs from repository
+        existing_healthy_configs = load_existing_healthy_from_repository()
+        
+        # Merge new healthy configs with existing ones
+        all_healthy_configs = merge_healthy_configs(existing_healthy_configs, healthy_union)
+        
         saved, count = save_to_file(
             OUTPUT_DIR,
             os.path.splitext(os.path.basename(HEALTHY_OUTPUT_FILE))[0],
-            healthy_union
+            all_healthy_configs
         )
         if saved:
             protocol_counts['Healthy'] = count
+            logging.info(f"Successfully saved merged healthy configs: {len(existing_healthy_configs)} existing + {len(healthy_union)} new = {count} total")
+            
+            # Log final stats
+            final_stats = get_healthy_file_stats()
+            if final_stats['exists']:
+                logging.info(f"Final Healthy.txt: {final_stats['total_configs']} configs, size: {final_stats['file_size_kb']:.1f} KB")
 
     repo_path_env = os.getenv('GITHUB_REPOSITORY') or os.getenv('GITHUB_REPO') or os.getenv('REPO_PATH') or "Amirchelios/V2RayAutoConfig"
     branch_name_env = os.getenv('GITHUB_REF_NAME') or os.getenv('GITHUB_BRANCH') or "main"
