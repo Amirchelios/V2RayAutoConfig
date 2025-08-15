@@ -1,14 +1,0 @@
-# 🔗 TrustLink - کانفیگ‌های قابل اعتماد
-# آخرین به‌روزرسانی: 2025-08-15 04:36:43
-# تعداد کل: 9
-# منبع: https://raw.githubusercontent.com/Amirchelios/V2RayAutoConfig/refs/heads/main/configs/Healthy.txt
-#
-#
-# آخرین به‌روزرسانی: 2025-08-15 08:04:31
-# تعداد کل: 4
-# منبع: https://raw.githubusercontent.com/Amirchelios/V2RayAutoConfig/refs/heads/main/configs/Healthy.txt
-# 🔗 TrustLink - کانفیگ‌های قابل اعتماد
-vmess://ewogICAgImFkZCI6ICJkZGRmZmZ2dmJuaGp1LjkzMS5wcC51YSIsCiAgICAiYWlkIjogMCwKICAgICJob3N0IjogImRkZGZmZnZ2Ym5oanUuOTMxLnBwLnVhIiwKICAgICJpZCI6ICJhNGU4ZWMwYS03NWQwLTRmYzUtODM3YS00OTczZWQzYTlkM2UiLAogICAgIm5ldCI6ICJ3cyIsCiAgICAicGF0aCI6ICIvMTRGemlxdzFoWWdDWE51dGtTNUgiLAogICAgInBvcnQiOiA0NDMsCiAgICAicHMiOiAi8J+PgVJFTEFZLTE3Mi42Ny4xNjMuMTAyLTA1OTkiLAogICAgInRscyI6ICJ0bHMiLAogICAgInR5cGUiOiAiYXV0byIsCiAgICAic2VjdXJpdHkiOiAiYXV0byIsCiAgICAic2tpcC1jZXJ0LXZlcmlmeSI6IHRydWUsCiAgICAic25pIjogIiIKfQ==
-vmess://eyJhZGQiOiIxMTkuMjM1LjI0OS4xNTQiLCJhaWQiOiIwIiwiYWxwbiI6IiIsImZwIjoiIiwiaG9zdCI6IiIsImlkIjoiYTA2NzI4M2ItM2QwMC00YjBhLTlmZmItM2MxODRjODNjMDg5IiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsInBvcnQiOiIyMDA4NiIsInBzIjoiQ2hhbm5lbCBpZDogQFNoYWRvd1Byb3h5NjYg8J+HrvCfh6kiLCJzY3kiOiJhdXRvIiwic25pIjoiIiwidGxzIjoiIiwidHlwZSI6IiIsInYiOiIyIn0
-vmess://eyJhZGQiOiIxNS4yMDQuMjM0LjIwMCIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoiIiwiaWQiOiJjN2YxNjlhMy0yZTlhLTQ4OTQtYmE1My03YjJmYTZmZDA4YjQiLCJuZXQiOiJ0Y3AiLCJwYXRoIjoiIiwicG9ydCI6IjQxMTAwIiwicHMiOiJVU1x1ZDgzY1x1ZGRmYVx1ZDgzY1x1ZGRmOCB8IDE1LjIwNC4yMzQuMjAwLTQxMTAwIHwgMi40MW1zIiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6IiIsInR5cGUiOiJub25lIiwidiI6IjIifQ==
-vmess://eyJhZGQiOiJMb3N2NmNkbi5iTTA0LnhZeiIsImFpZCI6IjAiLCJhbHBuIjoiaDMsaDIsaHR0cFwvMS4xIiwiZnAiOiJjaHJvbWUiLCJob3N0IjoibG9zdjZjZG4uYm0wNC54eXoiLCJpZCI6Ijk0Y2YyODhkLWY3NjQtNGNlOS1hNTQ3LWE3MjI4MTQ0ZjA1NiIsIm5ldCI6IndzIiwicGF0aCI6IlwvZGFzaGJvYXJkXC9yZWFsdGltZVwvIiwicG9ydCI6IjIwNTMiLCJwcyI6IlJFTEFZXHVkODNkXHVkZWE5IHwgbG9zdjZjZG4uYm0wNC54eXotMjA1MyB8IDE2LjEybXMiLCJzY3kiOiJhdXRvIiwic25pIjoibG9zdjZjZG4uYm0wNC54eXoiLCJ0bHMiOiJ0bHMiLCJ0eXBlIjoiLS0tIiwidiI6IjIifQ==
