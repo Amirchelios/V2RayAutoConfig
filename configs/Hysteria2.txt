@@ -80,6 +80,7 @@ hysteria2://Yet-Another-Public-Config-1@YAPC-1.adamhayward.co.uk:36300?security=
 hysteria2://Yet-Another-Public-Config-1@YAPC-1.adamhayward.co.uk:36400?security=tls&obfs=salamander&obfs-password=Yet-Another-Public-Config-1&insecure=0&sni=YAPC-1.afshin.ir#%D9%81%DB%8C%D9%84%D8%AA%D8%B1%D8%B4%DA%A9%D9%86%20%D8%B1%D8%A7%DB%8C%DA%AF%D8%A7%D9%86%F0%9F%91%88vpnowl%40
 hysteria2://Yet-Another-Public-Config-1@[2a14:3f87:f001:13::a]:36400/?insecure=1&sni=YAPC-1.afshin.ir&obfs=salamander&obfs-password=Yet-Another-Public-Config-1#Channel%20id%3A%20%40@proxy_kafee%F0%9F%87%B3%F0%9F%87%B1
 hysteria2://Yet-Another-Public-Config-1@[2a14:3f87:f001:13::a]:36400/?insecure=1&sni=YAPC-1.afshin.ir&obfs=salamander&obfs-password=Yet-Another-Public-Config-1#Channel%20id%3A%20%40ShadowProxy66%F0%9F%87%B3%F0%9F%87%B1
+hysteria2://Yet-Another-Public-Config-1@yapc-1.adamhayward.co.uk:36600?security=tls&obfs=salamander&obfs-password=Yet-Another-Public-Config-1&insecure=1&sni=YAPC-1.afshin.ir#@v2Source🇳🇱🌍
 hysteria2://Yet-Another-Public-Config-1@yapc-1.adamhayward.co.uk:36600?sni=YAPC-1.afshin.ir&insecure=0&obfs=salamander#NL
 hysteria2://be81e21d-02d8-4a60-a07e-c2202a50a549@yjjdhl.yunjijd.xyz:26923?sni=yjjdhl.yunjijd.xyz&insecure=1#NL
 hysteria2://c6e02cd8-ce11-40f0-afeb-e2c412b6cc3a@185.126.255.78:37058?sni=dxobg4azmk.gafnode.sbs&insecure=0#UA
