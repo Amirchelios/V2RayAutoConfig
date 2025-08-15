@@ -1,6 +1,5 @@
 hysteria2://ce26fc79-0a57-46ed-a67a-149fcf523cb1@shy40.zqjc.cloud:55215?sni=shy40.zqjc.cloud&insecure=1#IT
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTopMU4xRTZ2MFNVX3JHVHBn@92.223.93.233:1035#%F0%9F%87%AE%F0%9F%87%B9IT-92.223.93.233-0015
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpKVHpqd05hOEE4YWppcXRENnNkeXRQ@147.45.51.30:443#👉🆔@v2ray_configs_pool📡🇮🇹®️Italy©️Milan🅿️ping:18.44ms
 ss://YWVzLTI1Ni1nY206OG42cHdBY3JydjJwajZ0RlkycDNUYlE2@82.102.26.117:33992#%F0%9F%87%AE%F0%9F%87%B9IT-82.102.26.117-1109
 ss://YWVzLTI1Ni1nY206RldyWGN4UFpqSnhBTjg5eExncVkzQWNw@82.102.26.117:44236#%F0%9F%87%AE%F0%9F%87%B9IT-82.102.26.117-1115
 ss://a0a3e34d-87e4-4ff3-b04a-875c85325d62@it.panelmarzban.com:3037?security=reality&encryption=none&pbk=21V_VkMUD2XRbyRDg7hjpblUAwxHvlLmbarATdhhJQI&headerType=none&fp=firefox&type=tcp&sni=refersion.com#REALITY|IT🇮🇹

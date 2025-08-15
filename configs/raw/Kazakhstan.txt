@@ -1,11 +1,9 @@
 ss://401374e6-df77-41fb-f638-dad8184f175b@31.43.179.38:443?security=tls&sni=pqh23v4.hiddendom.shop&alpn=h2&type=grpc&encryption=none#%F0%9F%87%B0%F0%9F%87%BFKZ%20%7C%20@V2ray_Collector
 ss://401374e6df7741fbf638dad8184f175bOg==@31.43.179.38:443#KZ%F0%9F%87%B0%F0%9F%87%BF+%7C+31.43.179.38-443+%7C+1.71ms
 ss://4b9063e0-3288-44e9-9aac-80fbfce323a0@83.222.23.81:38065?security=reality&encryption=none&pbk=dSSDPTK6AHfAdRAXD9i4rzqcNIY65RxlF25UyCKdiyo&headerType=none&fp=chrome&type=tcp&sni=yahoo.com&sid=fa#REALITY|KZ🇰🇿
-ss://4b9063e0-3288-44e9-9aac-80fbfce323a0@83.222.23.81:38065?security=reality&encryption=none&pbk=dSSDPTK6AHfAdRAXD9i4rzqcNIY65RxlF25UyCKdiyo&headerType=none&fp=chrome&type=tcp&sni=yahoo.com&sid=fa#👉🆔@v2ray_configs_pool📡🇰🇿®️Kazakhstan©️Almaty🅿️ping:121.4ms
 ss://4b9063e0-3288-44e9-9aac-80fbfce323a0@83.222.23.81:38065?security=reality&encryption=none&pbk=dSSDPTK6AHfAdRAXD9i4rzqcNIY65RxlF25UyCKdiyo&headerType=none&fp=chrome&type=tcp&sni=yahoo.com&sid=fa#👉🆔@v2ray_configs_pool📡🇰🇿®️Kazakhstan©️Almaty🅿️ping:97.99ms
 ss://89b3cbbae6ac485a9481976a0415eab9Og==@31.43.179.51:80#KZ%F0%9F%87%B0%F0%9F%87%BF+%7C+31.43.179.51-80+%7C+1.28ms
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTphNThmYTYyYjQ5NDRkZGJm@38.107.234.38:57456#KZ%F0%9F%87%B0%F0%9F%87%BF+%7C+38.107.234.38-57456+%7C+178.58ms
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTphNThmYTYyYjQ5NDRkZGJm@38.107.234.38:57456#👉🆔@v2ray_configs_pool📡🇰🇿®️Kazakhstan©️Almaty🅿️ping:104.08ms
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTphNThmYTYyYjQ5NDRkZGJm@38.107.234.38:57456?prefix=%16%03%01%00%C2%A8%01%01#%F0%9F%87%B0%F0%9F%87%BFKZ%20%7C%20@OutlineReleasedKey
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTphNThmYTYyYjQ5NDRkZGJm@38.107.234.38:57456?prefix=%16%03%01%00%C2%A8%01%01#%F0%9F%87%B0%F0%9F%87%BFKZ%20%7C%20@OutlineReleasedKey🔸Outline
 ss://a13df940-020c-465f-bc89-ee5279b5cd6a@194.76.18.243:443/?type=ws&encryption=none&path=%2Fblue&security=tls&sni=lk.kpcloud.eu.org#%F0%9F%91%89%F0%9F%86%94%20%40v2ray_configs_pool%F0%9F%93%A1%F0%9F%87%B0%F0%9F%87%BFKazakhstan
@@ -20,7 +18,6 @@ ss://fab7bf9cddb945638a04fb01ce6c0fbfOg==@185.176.26.29:8880#KZ%F0%9F%87%B0%F0%9
 trojan://6884d714-d3c4-4b49-aa20-767ea92837d6@194.76.18.122:443/?type=ws&path=%2Fproxyip%3D194.76.18.122%3A443&security=tls&sni=icecream.955850.xyz#%F0%9F%87%B0%F0%9F%87%BFKZ-194.76.18.122-0624
 vless://401374e6-df77-41fb-f638-dad8184f175b@31.43.179.38:443?security=tls&sni=pqh23v4.hiddendom.shop&alpn=h2&type=grpc&encryption=none#%F0%9F%87%B0%F0%9F%87%BFKZ%20%7C%20@V2ray_Collector
 vless://4b9063e0-3288-44e9-9aac-80fbfce323a0@83.222.23.81:38065?security=reality&encryption=none&pbk=dSSDPTK6AHfAdRAXD9i4rzqcNIY65RxlF25UyCKdiyo&headerType=none&fp=chrome&type=tcp&sni=yahoo.com&sid=fa#REALITY|KZ🇰🇿
-vless://4b9063e0-3288-44e9-9aac-80fbfce323a0@83.222.23.81:38065?security=reality&encryption=none&pbk=dSSDPTK6AHfAdRAXD9i4rzqcNIY65RxlF25UyCKdiyo&headerType=none&fp=chrome&type=tcp&sni=yahoo.com&sid=fa#👉🆔@v2ray_configs_pool📡🇰🇿®️Kazakhstan©️Almaty🅿️ping:121.4ms
 vless://4b9063e0-3288-44e9-9aac-80fbfce323a0@83.222.23.81:38065?security=reality&encryption=none&pbk=dSSDPTK6AHfAdRAXD9i4rzqcNIY65RxlF25UyCKdiyo&headerType=none&fp=chrome&type=tcp&sni=yahoo.com&sid=fa#👉🆔@v2ray_configs_pool📡🇰🇿®️Kazakhstan©️Almaty🅿️ping:97.99ms
 vless://a13df940-020c-465f-bc89-ee5279b5cd6a@194.76.18.243:443/?type=ws&encryption=none&path=%2Fblue&security=tls&sni=lk.kpcloud.eu.org#%F0%9F%91%89%F0%9F%86%94%20%40v2ray_configs_pool%F0%9F%93%A1%F0%9F%87%B0%F0%9F%87%BFKazakhstan
 vless://ee2bb495-2632-445b-b1f8-3c476a50b78b@185.176.26.134:2053?path=%2F&security=tls&encryption=none&host=dl1-tr-cdn.easy-upload.org&type=ws&sni=dl1-tr-cdn.easy-upload.org#👉🆔@v2ray_configs_pool📡🇰🇿®️Kazakhstan©️Almaty🅿️ping:6.46ms
