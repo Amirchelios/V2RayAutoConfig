@@ -1,1 +1,8 @@
-# فایل backup خالی - فایل اصلی وجود نداشت
+# 🔗 TrustLink - کانفیگ‌های قابل اعتماد
+# آخرین به‌روزرسانی: 2025-08-15 18:28:02
+# تعداد کل: 3
+# منبع: https://raw.githubusercontent.com/Amirchelios/V2RayAutoConfig/refs/heads/main/configs/Healthy.txt
+#
+vmess://eyJhZGQiOiIxMTIuMTMyLjIxNS4xMiIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoiIiwiaWQiOiI0MTgwNDhhZi1hMjkzLTRiOTktOWIwYy05OGNhMzU4MGRkMjQiLCJuZXQiOiJ0Y3AiLCJwYXRoIjoiIiwicG9ydCI6IjUwMDAyIiwicHMiOiJDTlx1ZDgzY1x1ZGRlOFx1ZDgzY1x1ZGRmMyB8IDExMi4xMzIuMjE1LjEyLTUwMDAyIHwgMTgxLjY4bXMiLCJzY3kiOiJhdXRvIiwic25pIjoiIiwidGxzIjoiIiwidHlwZSI6Im5vbmUiLCJ2IjoiMiJ9
+vmess://eyJhZGQiOiIxNTQuNjIuMTg1LjExMyIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoiIiwiaWQiOiJmZTU5ODczZi00NjJkLTRkOTktYTQ2Mi0yOTc5Y2U5Njg5OTMiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwicG9ydCI6IjIwMDg2IiwicHMiOiLwn4es8J+Hp0dCLTE1NC42Mi4xODUuMTEzLTAyNzkiLCJzY3kiOiJhdXRvIiwic25pIjoiIiwidGxzIjoiIiwidHlwZSI6IiIsInYiOiIyIn0
+vmess://eyJhZGQiOiJhaW8udW5saW1pdGVkLmJpei5pZCIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoiYWlvLnVubGltaXRlZC5iaXouaWQiLCJpZCI6ImYyODJiODc4LTg3MTEtNDVhMS04YzY5LTU1NjQxNzIxMjNjMSIsIm5ldCI6IndzIiwicGF0aCI6IlwvYWlvcHJveHlib3RcLzEyOS4xNTAuNDkuNTgtMTg2NTA/LS1URUxFR1JBTS1WSVRVUkVZLS0tLVRFTEVHUkFNLVZJVFVSRVktLS0tVEVMRUdSQU0tVklUVVJFWS0tLS1URUxFR1JBTS1WSVRVUkVZIiwicG9ydCI6IjQ0MyIsInBzIjoiUkVMQVlcdWQ4M2RcdWRlYTkgfCBhaW8udW5saW1pdGVkLmJpei5pZC00NDMgfCAyMzUuOTJtcyIsInNjeSI6Inplcm8iLCJzbmkiOiJhaW8udW5saW1pdGVkLmJpei5pZCIsInRscyI6InRscyIsInR5cGUiOiItLS0iLCJ2IjoiMiJ9
