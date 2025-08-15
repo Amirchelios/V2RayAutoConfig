@@ -29,7 +29,6 @@ hysteria2://1045aedf-053c-4585-875d-e2fc3f3ea6dd@23.132.228.217:45860/?sni=dxobg
 hysteria2://23125f6e-ec56-4c26-9714-0bbacdb53d01@172.252.236.213:56704/?sni=dxobg4azmk.gafnode.sbs#Marseille-GetAFreeNode
 hysteria2://23125f6e-ec56-4c26-9714-0bbacdb53d01@185.126.255.78:49720/?sni=dxobg4azmk.gafnode.sbs#Kyiv-GetAFreeNode
 hysteria2://23125f6e-ec56-4c26-9714-0bbacdb53d01@23.132.228.217:45860/?sni=dxobg4azmk.gafnode.sbs#Como-GetAFreeNode
-hysteria2://23c15759-0c36-4158-a54a-c6ef49025a53@hsxg.huasuan666.top:22153?sni=hsxg.huasuan666.top&insecure=1#HK
 hysteria2://2429bee3-e0c1-47dd-b420-75e6512b184b@129.153.52.235:30300/?insecure=1&sni=www.bing.com#Channel%20id%3A%20%40@proxy_kafee%F0%9F%87%A8%F0%9F%87%A6
 hysteria2://2429bee3-e0c1-47dd-b420-75e6512b184b@129.153.52.235:30300/?insecure=1&sni=www.bing.com#Channel%20id%3A%20%40ShadowProxy66%F0%9F%87%A8%F0%9F%87%A6
 hysteria2://2429bee3-e0c1-47dd-b420-75e6512b184b@129.153.52.235:30300?sni=www.bing.com&insecure=1#CA
