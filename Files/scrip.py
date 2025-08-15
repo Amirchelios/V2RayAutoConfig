@@ -395,19 +395,26 @@ def load_persistent_healthy_from_repository():
 
 def load_existing_healthy_from_repository():
     """Load existing healthy configs from the Healthy.txt file in repository"""
-    if os.path.exists(HEALTHY_OUTPUT_FILE):
+    file_path = find_existing_healthy_file()
+    
+    if file_path:
         try:
-            with open(HEALTHY_OUTPUT_FILE, 'r', encoding='utf-8') as f:
+            with open(file_path, 'r', encoding='utf-8') as f:
                 configs = {line.strip() for line in f if line.strip()}
-            logging.info(f"Found {len(configs)} existing healthy configs in repository")
+            logging.info(f"Successfully loaded {len(configs)} existing healthy configs from: {file_path}")
             return configs
         except Exception as e:
-            logging.warning(f"Could not read existing healthy configs from repository: {e}")
-    
-    return set()
+            logging.error(f"Error reading existing healthy configs from {file_path}: {e}")
+            return set()
+    else:
+        logging.info("No existing Healthy.txt file found in repository")
+        return set()
 
 def merge_healthy_configs(existing_configs, new_configs):
     """Merge existing and new healthy configs, removing duplicates"""
+    # Log initial counts
+    logging.info(f"Starting merge: {len(existing_configs)} existing + {len(new_configs)} new configs")
+    
     # Remove duplicates
     all_configs = existing_configs.union(new_configs)
     
@@ -418,45 +425,86 @@ def merge_healthy_configs(existing_configs, new_configs):
     
     # Validate configs before returning
     valid_configs = set()
+    invalid_count = 0
     for config in all_configs:
         if config and isinstance(config, str) and len(config.strip()) > 10:
             valid_configs.add(config.strip())
+        else:
+            invalid_count += 1
     
-    if len(valid_configs) != len(all_configs):
-        logging.info(f"Filtered out {len(all_configs) - len(valid_configs)} invalid configs")
+    if invalid_count > 0:
+        logging.info(f"Filtered out {invalid_count} invalid configs")
     
-    logging.info(f"Merge result: {len(existing_configs)} existing + {len(new_configs)} new = {len(valid_configs)} valid unique total")
-    return valid_configs
+    logging.info(f"Final merge result: {len(existing_configs)} existing + {len(new_configs)} new = {len(valid_configs)} valid unique total")
+    
+    # Additional validation: check for empty or malformed configs
+    final_valid_configs = set()
+    for config in valid_configs:
+        if config and config.strip() and not config.isspace():
+            final_valid_configs.add(config.strip())
+    
+    if len(final_valid_configs) != len(valid_configs):
+        logging.info(f"Additional filtering: removed {len(valid_configs) - len(final_valid_configs)} whitespace-only configs")
+    
+    return final_valid_configs
 
 def get_healthy_file_stats():
     """Get statistics about the Healthy.txt file"""
-    if not os.path.exists(HEALTHY_OUTPUT_FILE):
-        return {
-            'exists': False,
-            'total_configs': 0,
-            'last_modified': None
-        }
+    # Try multiple possible paths for the existing Healthy.txt file
+    possible_paths = [
+        HEALTHY_OUTPUT_FILE,  # configs/Healthy.txt
+        os.path.join('configs', 'Healthy.txt'),  # configs/Healthy.txt
+        'Healthy.txt',  # Healthy.txt in current directory
+        os.path.join(OUTPUT_DIR, 'Healthy.txt'),  # configs/Healthy.txt (if OUTPUT_DIR is 'configs')
+        os.path.join(os.getcwd(), 'configs', 'Healthy.txt'),  # Absolute path
+        os.path.join(os.getcwd(), 'Healthy.txt')  # Absolute path in current directory
+    ]
     
-    try:
-        with open(HEALTHY_OUTPUT_FILE, 'r', encoding='utf-8') as f:
-            configs = [line.strip() for line in f if line.strip()]
-        
-        stats = os.stat(HEALTHY_OUTPUT_FILE)
-        last_modified = datetime.fromtimestamp(stats.st_mtime)
-        
-        return {
-            'exists': True,
-            'total_configs': len(configs),
-            'last_modified': last_modified,
-            'file_size_kb': stats.st_size / 1024
-        }
-    except Exception as e:
-        logging.warning(f"Error getting Healthy.txt stats: {e}")
-        return {
-            'exists': False,
-            'total_configs': 0,
-            'last_modified': None
-        }
+    for file_path in possible_paths:
+        if os.path.exists(file_path):
+            try:
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    configs = [line.strip() for line in f if line.strip()]
+                
+                stats = os.stat(file_path)
+                last_modified = datetime.fromtimestamp(stats.st_mtime)
+                
+                return {
+                    'exists': True,
+                    'total_configs': len(configs),
+                    'last_modified': last_modified,
+                    'file_size_kb': stats.st_size / 1024,
+                    'file_path': file_path
+                }
+            except Exception as e:
+                logging.warning(f"Error getting Healthy.txt stats from {file_path}: {e}")
+                continue
+    
+    return {
+        'exists': False,
+        'total_configs': 0,
+        'last_modified': None,
+        'file_path': None
+    }
+
+def find_existing_healthy_file():
+    """Find the existing Healthy.txt file in the repository"""
+    possible_paths = [
+        HEALTHY_OUTPUT_FILE,  # configs/Healthy.txt
+        os.path.join('configs', 'Healthy.txt'),  # configs/Healthy.txt
+        'Healthy.txt',  # Healthy.txt in current directory
+        os.path.join(OUTPUT_DIR, 'Healthy.txt'),  # configs/Healthy.txt (if OUTPUT_DIR is 'configs')
+        os.path.join(os.getcwd(), 'configs', 'Healthy.txt'),  # Absolute path
+        os.path.join(os.getcwd(), 'Healthy.txt')  # Absolute path in current directory
+    ]
+    
+    for file_path in possible_paths:
+        if os.path.exists(file_path):
+            logging.info(f"Found existing Healthy.txt at: {file_path}")
+            return file_path
+    
+    logging.warning("No existing Healthy.txt file found in any of the expected paths")
+    return None
 
 def get_vmess_name(vmess_link):
     if not vmess_link.startswith("vmess://"):
@@ -1321,6 +1369,18 @@ async def main():
         else:
             logging.info("No major changes - preserving existing configs")
     
+    # Check for existing Healthy.txt file
+    existing_healthy_file = find_existing_healthy_file()
+    if existing_healthy_file:
+        try:
+            with open(existing_healthy_file, 'r', encoding='utf-8') as f:
+                existing_count = len([line.strip() for line in f if line.strip()])
+            logging.info(f"Found existing Healthy.txt with {existing_count} configs at: {existing_healthy_file}")
+        except Exception as e:
+            logging.warning(f"Could not read existing Healthy.txt: {e}")
+    else:
+        logging.info("No existing Healthy.txt file found in repository")
+    
     if os.path.exists(PERSISTENT_HEALTHY_FILE):
         persistent_count = validate_persistent_healthy_file()
         logging.info(f"Found existing persistent healthy configs file with {persistent_count} configurations")
@@ -1493,13 +1553,17 @@ async def main():
         # Get current Healthy.txt stats
         current_stats = get_healthy_file_stats()
         if current_stats['exists']:
-            logging.info(f"Current Healthy.txt: {current_stats['total_configs']} configs, last modified: {current_stats['last_modified']}")
+            logging.info(f"Current Healthy.txt: {current_stats['total_configs']} configs, last modified: {current_stats['last_modified']}, path: {current_stats['file_path']}")
+        else:
+            logging.info("No existing Healthy.txt file found in repository")
         
         # Load existing healthy configs from repository
         existing_healthy_configs = load_existing_healthy_from_repository()
+        logging.info(f"Loaded {len(existing_healthy_configs)} existing configs from repository")
         
         # Merge new healthy configs with existing ones
         all_healthy_configs = merge_healthy_configs(existing_healthy_configs, healthy_union)
+        logging.info(f"Merge completed: {len(existing_healthy_configs)} existing + {len(healthy_union)} new = {len(all_healthy_configs)} total")
         
         saved, count = save_to_file(
             OUTPUT_DIR,
@@ -1513,7 +1577,13 @@ async def main():
             # Log final stats
             final_stats = get_healthy_file_stats()
             if final_stats['exists']:
-                logging.info(f"Final Healthy.txt: {final_stats['total_configs']} configs, size: {final_stats['file_size_kb']:.1f} KB")
+                logging.info(f"Final Healthy.txt: {final_stats['total_configs']} configs, size: {final_stats['file_size_kb']:.1f} KB, path: {final_stats['file_path']}")
+            
+            # Verify the merge was successful
+            if len(existing_healthy_configs) > 0:
+                logging.info(f"✅ SUCCESS: Preserved {len(existing_healthy_configs)} existing configs and added {len(healthy_union)} new configs")
+            else:
+                logging.info(f"ℹ️ INFO: No existing configs to preserve, created new file with {len(healthy_union)} configs")
 
     repo_path_env = os.getenv('GITHUB_REPOSITORY') or os.getenv('GITHUB_REPO') or os.getenv('REPO_PATH') or "Amirchelios/V2RayAutoConfig"
     branch_name_env = os.getenv('GITHUB_REF_NAME') or os.getenv('GITHUB_BRANCH') or "main"
