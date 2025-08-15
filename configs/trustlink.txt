@@ -1,14 +1,0 @@
-# 🔗 TrustLink - کانفیگ‌های قابل اعتماد
-# آخرین به‌روزرسانی: 2025-08-15 19:17:54
-# تعداد کل: 9
-# منبع: https://raw.githubusercontent.com/Amirchelios/V2RayAutoConfig/refs/heads/main/configs/Healthy.txt
-#
-#
-# آخرین به‌روزرسانی: 2025-08-15 19:15:26
-# تعداد کل: 4
-# منبع: https://raw.githubusercontent.com/Amirchelios/V2RayAutoConfig/refs/heads/main/configs/Healthy.txt
-# 🔗 TrustLink - کانفیگ‌های قابل اعتماد
-vmess://ewogICAgImFkZCI6ICIxODMuMTA5LjEzMS43NSIsCiAgICAiYWlkIjogMCwKICAgICJob3N0IjogIiIsCiAgICAiaWQiOiAiYjI2YzQ4MDMtMGJjYS00NjdjLWEyNDUtYzlhODBiZGQ3MmVjIiwKICAgICJuZXQiOiAid3MiLAogICAgInBhdGgiOiAiLyIsCiAgICAicG9ydCI6IDIwMDg2LAogICAgInBzIjogIvCfh7Dwn4e3S1ItMTgzLjEwOS4xMzEuNzUtMDM0NiIsCiAgICAidGxzIjogIiIsCiAgICAidHlwZSI6ICJhdXRvIiwKICAgICJzZWN1cml0eSI6ICJhdXRvIiwKICAgICJza2lwLWNlcnQtdmVyaWZ5IjogdHJ1ZSwKICAgICJzbmkiOiAiIgp9
-vmess://ewogICAgImFkZCI6ICJyYWsxZGluZy44OTA2MDAwNC54eXoiLAogICAgImFpZCI6IDAsCiAgICAiaG9zdCI6ICJyYWsxZDMuOTg4OTg4LnNob3AiLAogICAgImlkIjogIjc1ZDk2MzY1LTEyMjktNGZjNC1kYmRhLTg1NTcxN2Y4NzZjZiIsCiAgICAibmV0IjogIndzIiwKICAgICJwYXRoIjogIi8iLAogICAgInBvcnQiOiAyMDgzLAogICAgInBzIjogIvCfj4FSRUxBWS0xNzIuNjQuODAuMS0wMjc3IiwKICAgICJ0bHMiOiAidGxzIiwKICAgICJ0eXBlIjogImF1dG8iLAogICAgInNlY3VyaXR5IjogImF1dG8iLAogICAgInNraXAtY2VydC12ZXJpZnkiOiB0cnVlLAogICAgInNuaSI6ICIiCn0=
-vmess://eyJhZGQiOiI2NC4yMjcuNDUuOTIiLCJhaWQiOiIwIiwiYWxwbiI6IiIsImZwIjoiIiwiaG9zdCI6IiIsImlkIjoiNWUwMmJjMDEtNDJhNy00NjA5LWIyMGEtNGQ5M2ZlZWE2NWM2IiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsInBvcnQiOiIyMDA4NiIsInBzIjoiNPCfppZAb25lY2xpY2t2cG5rZXlzIiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6IiIsInR5cGUiOiIiLCJ2IjoiMiJ9
-vmess://eyJhZGQiOiIxMDQuMjEuMzguOTAiLCJhaWQiOiIwIiwiYWxwbiI6IiIsImZwIjoiIiwiaG9zdCI6ImRkZGNjY2R2ZmcuMjIyODU2Lnh5eiIsImlkIjoiMmQwNjgwODMtMmNiMC00YWUzLWE0NGEtNmZjODJmMzAzOWNjIiwibmV0Ijoid3MiLCJwYXRoIjoiLzg3RXgySmlZWVdyN0ZSYTA2Yjg4SlNvIiwicG9ydCI6IjgwIiwicHMiOiLwn4+BUkVMQVktMTA0LjIxLjM4LjkwLTExMTYiLCJzY3kiOiJhdXRvIiwic25pIjoiIiwidGxzIjoiIiwidHlwZSI6IiIsInYiOiIyIn0
