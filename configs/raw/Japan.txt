@@ -20,10 +20,10 @@ ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpsanFkYWx1MTMuLg3D3A==@54.238.207.188:8319#JP
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpsanFkYWx1MTMuLg==@54.238.207.188:8319#JP%F0%9F%87%AF%F0%9F%87%B5+%7C+54.238.207.188-8319+%7C+164.86ms
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpsanFkYWx1MTMuLg==@54.238.207.188:8319?prefix=%16%03%01%00%C2%A8%01%01#%F0%9F%87%AF%F0%9F%87%B5JP%20%7C%20@OutlineReleasedKey
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpsanFkYWx1MTMuLg==@54.238.207.188:8319?prefix=%16%03%01%00%C2%A8%01%01#%F0%9F%87%AF%F0%9F%87%B5JP%20%7C%20@OutlineReleasedKey🔸Outline
-ss://YWVzLTEyOC1nY206MTAwODY%3D@160.16.123.124:10087#👉🆔@v2ray_configs_pool📡🇯🇵®️Japan©️Osaka🅿️ping:254.82ms
 ss://YWVzLTEyOC1nY206MTAwODY3@153.121.43.183:10087#JP%F0%9F%87%AF%F0%9F%87%B5+%7C+153.121.43.183-10087+%7C+164.32ms
 ss://YWVzLTEyOC1nY206MTAwODY3@153.121.51.214:10087#JP%F0%9F%87%AF%F0%9F%87%B5+%7C+153.121.51.214-10087+%7C+164.71ms
 ss://YWVzLTEyOC1nY206MTAwODY3@160.16.123.124:10087#JP%F0%9F%87%AF%F0%9F%87%B5+%7C+160.16.123.124-10087+%7C+178.26ms
+ss://YWVzLTEyOC1nY206MTAwODY=@153.121.51.214:10087#👉🆔@v2ray_configs_pool📡🇯🇵®️Japan©️Osaka🅿️ping:256.99ms
 ss://YWVzLTEyOC1nY206MTAwODY@153.121.51.214:10087#%F0%9F%87%AF%F0%9F%87%B5%20JP%20%7C%20%F0%9F%94%92%20SS%20%7C%20%40argo_vpn1%20%5B6%5D
 ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M%3D@149.22.87.204:443#Japan%20Datacamp
 ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M%3D@149.22.87.241:443#Japan%20Datacamp
@@ -33,7 +33,6 @@ ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@149.22.87.241:443#JP%F0%9F%87%AF%F0%9F%87%
 ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@149.22.87.241:443?prefix=%16%03%01%00%C2%A8%01%01#%F0%9F%87%AF%F0%9F%87%B5JP%20%7C%20@OutlineReleasedKey
 ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M@149.22.87.204:443#%F0%9F%87%AF%F0%9F%87%B5JP-149.22.87.204-0246
 ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M@149.22.87.204:443#%F0%9F%87%AF%F0%9F%87%B5JP-149.22.87.204-0271
-ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M@149.22.87.241:443#%F0%9F%87%AF%F0%9F%87%B5JP-149.22.87.241-0245
 ss://YWVzLTI1Ni1jZmI6YW1hem9uc2tyMDU=@175.41.205.247:443#%F0%9F%87%AF%F0%9F%87%B5JP-175.41.205.247-1681
 ss://YWVzLTI1Ni1jZmI6YW1hem9uc2tyMDU=@3.112.193.151:443#%F0%9F%87%AF%F0%9F%87%B5JP-3.112.193.151-3729
 ss://YWVzLTI1Ni1jZmI6YW1hem9uc2tyMDU=@43.206.219.140:443#%F0%9F%87%AF%F0%9F%87%B5JP-43.206.219.140-2597
@@ -55,7 +54,6 @@ ss://YWVzLTI1Ni1nY206MjMzYmxvZy5jb20=@20.210.122.21:443#%F0%9F%87%AF%F0%9F%87%B5
 ss://YWVzLTI1Ni1nY206ODIzZTEzNWVkMTAz@137.220.191.40:636#%F0%9F%87%AF%F0%9F%87%B5JP-137.220.191.40-0623
 ss://YWVzLTI1Ni1nY206ODIzZTEzNWVkMTAz@137.220.191.40:636#%F0%9F%87%AF%F0%9F%87%B5JP-137.220.191.40-0676
 ss://YWVzLTI1Ni1nY206OVg2SE04M0dOMDJLOEdEUg@156.231.104.15:18005#%F0%9F%87%AF%F0%9F%87%B5JP-156.231.104.15-0840
-ss://e12c0506-d8c8-4bda-9835-42d62e9f242c@163.61.206.202:443?security=reality&encryption=none&pbk=SY-P9NtPOaZtY_o6B39pM5kS5vqudzSdVipke6oeUik&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=lovelive-anime.jp&sid=0c50bd58#👉🆔@v2ray_configs_pool📡🇯🇵®️Japan©️Bunkyō-ku🅿️ping:253.92ms
 ss://fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf@156.238.18.149:8880?security=&sni=yd.laoyoutiao.link&allowInsecure=1&type=ws&path=/TelegramU0001F1E8U0001F1F3%20@MxlShare%20@WangCai2%20/?ed%3D2560&host=yd.laoyoutiao.link&encryption=none#%F0%9F%87%AF%F0%9F%87%B5JP%20%7C%20@V2ray_Collector
 ss://fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf@156.238.18.166:8880?path=Telegram%40WangCai2%2F%3Fed%3D2048&security=none&encryption=none&host=sg.laoyoutiao.link&type=ws#Japan%20Relay
 ss://fab7bf9cddb945638a04fb01ce6c0fbfOg==@156.238.18.106:8880#JP%F0%9F%87%AF%F0%9F%87%B5+%7C+156.238.18.106-8880+%7C+1.36ms
@@ -172,7 +170,6 @@ trojan://d06a3f01-1ff0-4792-9b8e-a5a604bc74a2@168.138.43.89:443?security=tls#%F0
 trojan://da777aae-defb-41d0-a183-2c27da2b4677@150.230.96.103:443?security=tls#%F0%9F%87%AF%F0%9F%87%B5JP-150.230.96.103-2866
 trojan://f42e1a2e-e650-44f4-8d17-bcb68663da18@150.230.201.192:443/?type=tcp&security=tls&sni=www.seetheworldjp.ga#%F0%9F%87%AF%F0%9F%87%B5JP-150.230.201.192-5608
 trojan://f42e1a2e-e650-44f4-8d17-bcb68663da18@150.230.201.192:443?security=tls&sni=www.seetheworldjp.ga#%F0%9F%87%AF%F0%9F%87%B5JP-150.230.201.192-4502
-vless://e12c0506-d8c8-4bda-9835-42d62e9f242c@163.61.206.202:443?security=reality&encryption=none&pbk=SY-P9NtPOaZtY_o6B39pM5kS5vqudzSdVipke6oeUik&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=lovelive-anime.jp&sid=0c50bd58#👉🆔@v2ray_configs_pool📡🇯🇵®️Japan©️Bunkyō-ku🅿️ping:253.92ms
 vless://fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf@156.238.18.149:8880?security=&sni=yd.laoyoutiao.link&allowInsecure=1&type=ws&path=/TelegramU0001F1E8U0001F1F3%20@MxlShare%20@WangCai2%20/?ed%3D2560&host=yd.laoyoutiao.link&encryption=none#%F0%9F%87%AF%F0%9F%87%B5JP%20%7C%20@V2ray_Collector
 vless://fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf@156.238.18.166:8880?path=Telegram%40WangCai2%2F%3Fed%3D2048&security=none&encryption=none&host=sg.laoyoutiao.link&type=ws#Japan%20Relay
 vmess://ewogICAgImFkZCI6ICI0My4xMjguMjI1LjIyMCIsCiAgICAiYWlkIjogMCwKICAgICJob3N0IjogIiIsCiAgICAiaWQiOiAiMDNmYThlNTQtNDFiZS00ZTNiLWI3MGMtNTBiMzc1MGI1ZmRjIiwKICAgICJuZXQiOiAid3MiLAogICAgInBhdGgiOiAiLyIsCiAgICAicG9ydCI6IDgwLAogICAgInBzIjogIvCfh6/wn4e1SlAtNDMuMTI4LjIyNS4yMjAtMTc2NCIsCiAgICAidGxzIjogIiIsCiAgICAidHlwZSI6ICJhdXRvIiwKICAgICJzZWN1cml0eSI6ICJhdXRvIiwKICAgICJza2lwLWNlcnQtdmVyaWZ5IjogdHJ1ZSwKICAgICJzbmkiOiAiIgp9
