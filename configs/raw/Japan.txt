@@ -51,7 +51,6 @@ ss://YWVzLTI1Ni1nY206MUg1S1g1UVpCVU9XUDJQNA@156.231.104.17:18007#%F0%9F%87%AF%F0
 ss://YWVzLTI1Ni1nY206MjMzYmxvZy5jb20=@20.210.122.21:443#%F0%9F%87%AF%F0%9F%87%B5JP-20.210.122.21-0514
 ss://YWVzLTI1Ni1nY206ODIzZTEzNWVkMTAz@137.220.191.40:636#%F0%9F%87%AF%F0%9F%87%B5JP-137.220.191.40-0623
 ss://YWVzLTI1Ni1nY206ODIzZTEzNWVkMTAz@137.220.191.40:636#%F0%9F%87%AF%F0%9F%87%B5JP-137.220.191.40-0676
-ss://YWVzLTI1Ni1nY206ODIzZTEzNWVkMTAz@137.220.191.40:636/?plugin=v2ray-plugin%3Bmode%3Dwebsocket%3Btls%3Bmux%3D4%3Bhost%3Djp7v1.lingjfjkm002.com%3Bpath%3D%2Fdchlbvrbbotc%3Bmux%3Dmux%3D4%3B%3B#👉🆔@v2ray_configs_pool📡🇯🇵®️Japan©️Toyohashi🅿️ping:251.87ms
 ss://YWVzLTI1Ni1nY206OVg2SE04M0dOMDJLOEdEUg@156.231.104.15:18005#%F0%9F%87%AF%F0%9F%87%B5JP-156.231.104.15-0840
 ss://fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf@156.238.18.149:8880?security=&sni=yd.laoyoutiao.link&allowInsecure=1&type=ws&path=/TelegramU0001F1E8U0001F1F3%20@MxlShare%20@WangCai2%20/?ed%3D2560&host=yd.laoyoutiao.link&encryption=none#%F0%9F%87%AF%F0%9F%87%B5JP%20%7C%20@V2ray_Collector
 ss://fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf@156.238.18.166:8880?path=Telegram%40WangCai2%2F%3Fed%3D2048&security=none&encryption=none&host=sg.laoyoutiao.link&type=ws#Japan%20Relay
