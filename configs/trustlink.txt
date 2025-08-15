@@ -1,0 +1,7 @@
+# 🔗 TrustLink - کانفیگ‌های قابل اعتماد
+# آخرین به‌روزرسانی: 2025-08-15 16:49:04
+# تعداد کل: 2
+# منبع: https://raw.githubusercontent.com/Amirchelios/V2RayAutoConfig/refs/heads/main/configs/Healthy.txt
+#
+vmess://ewogICAgImFkZCI6ICIxNTIuNjcuOC4yMDUiLAogICAgImFpZCI6IDAsCiAgICAiaG9zdCI6ICIiLAogICAgImlkIjogIjlkYjRjNzA4LWFlZjgtNDM1OS04MjFiLTM4ZTQ3OTkwYmUwZCIsCiAgICAibmV0IjogIndzIiwKICAgICJwYXRoIjogIi8iLAogICAgInBvcnQiOiA4MCwKICAgICJwcyI6ICLwn4eu8J+Hs0lOLTE1Mi42Ny44LjIwNS0wMjc0IiwKICAgICJ0bHMiOiAiIiwKICAgICJ0eXBlIjogImF1dG8iLAogICAgInNlY3VyaXR5IjogImF1dG8iLAogICAgInNraXAtY2VydC12ZXJpZnkiOiB0cnVlLAogICAgInNuaSI6ICIiCn0=
+vmess://eyJhZGQiOiIxNzIuNjcuMTg4LjE4OCIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoidnZ2Y2NkcnQ1LjQ0NDY1Mi54eXoiLCJpZCI6IjEzZTI2ZjY0LTJlMGMtNDQ2MS05MmNkLWQ4MzI5NGNjMThmMCIsIm5ldCI6IndzIiwicGF0aCI6Ii9jRzVkdFZLT1NySHdQaXQyT2RXazBLd2lyZFkiLCJwb3J0IjoiNDQzIiwicHMiOiLwn4+BUkVMQVktMTcyLjY3LjE4OC4xODgtMDk5MCIsInNjeSI6ImF1dG8iLCJzbmkiOiJ2dnZjY2RydDUuNDQ0NjUyLnh5eiIsInRscyI6InRscyIsInR5cGUiOiIiLCJ2IjoiMiJ9
