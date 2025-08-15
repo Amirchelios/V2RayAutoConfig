@@ -1,1 +1,6 @@
-# فایل backup خالی - فایل اصلی وجود نداشت
+# 🔗 TrustLink - کانفیگ‌های قابل اعتماد
+# آخرین به‌روزرسانی: 2025-08-15 20:21:07
+# تعداد کل: 1
+# منبع: https://raw.githubusercontent.com/Amirchelios/V2RayAutoConfig/refs/heads/main/configs/Healthy.txt
+#
+vmess://eyJhZGQiOiI5MS45OS4xODUuMjE2IiwiYWlkIjoiMCIsImFscG4iOiIiLCJmcCI6IiIsImhvc3QiOiIiLCJpZCI6IjdiZDZhMWVhLWEyMjAtNGYxYy1hZmVkLTZjZmI4YWI5NmFkOSIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJwb3J0IjoiMjAwODYiLCJwcyI6IvCfh6nwn4eqREUtOTEuOTkuMTg1LjIxNi0wMzAwIiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6IiIsInR5cGUiOiIiLCJ2IjoiMiJ9
