@@ -115,6 +115,7 @@ ss://95a55566-b9a4-49e5-b32c-718d50a46ba1@xpanel.panelfreedom.com:2090?security=
 ss://95eb2944-456e-408c-8d88-359608f58e51@91.99.83.156:3040?security=reality&encryption=none&pbk=NVjEaDFrdzaFQHvMt8BPORsLFR3iD8NA31Dpn-1HRFk&host=%2FJKVPN_BIA_CHANEL%40JKVPN&headerType=none&fp=chrome&spx=%2FJKVPN_BIA_CHANEL%40JKVPN&type=tcp&sni=www.refersion.com&sid=ecd8d10c1518fb7b#REALITY|DE🇩🇪
 ss://96f391f6-0762-4895-a57c-433360967ca8@alman.netblocksir.ir:8001/?type=xhttp&encryption=none#%F0%9F%87%A9%F0%9F%87%AA%20DE%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40fastvpnorummobile%20%5B4%5D
 ss://9935dbc4-dbbb-40b3-a6b8-884ee158a3ad@172.105.15.70:443?mode=stream-one&path=%2F&security=&encryption=none&type=xhttp#Germany%20L258
+ss://9bc48566-76f9-44d7-8ad0-af41336b4004@87.120.165.214:443?security=reality&encryption=none&pbk=7tgf5o3AfrE-TWqB3CpBuuZyt7S9tJq6TZ26gPWNyzY&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=google.com&sid=3549df188940fe#DE🇩🇪
 ss://9cbd3913-d0a8-4f11-be9d-4e5102d8f689@direct2.androiland.ir:181?security=reality&encryption=none&pbk=1sDMgyhL5HPRAaRYJcAf21sWbSlq0kgitPVL2HQwB2M&headerType=none&fp=firefox&type=tcp&sni=docker.com#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Nuremberg🅿️ping:11.1ms
 ss://9f457d41-0704-49f7-bddd-4cb73fbb8ce6@172.105.27.63:443?mode=stream-one&path=%2F&security=&encryption=none&type=xhttp#Germany%20L555
 ss://9f457d41-0704-49f7-bddd-4cb73fbb8ce6@172.105.97.4:443?mode=stream-one&path=%2F&security=&encryption=none&type=xhttp#Germany%20L960
@@ -263,7 +264,6 @@ ss://bf1b5b3a-cac2-4e2a-bb8e-01d7c62bcd62@it.arvanabr.xyz:10233?security=reality
 ss://c39a101c-0a7b-4940-8e6a-f8346d70b24b@91.99.177.240:443?security=&encryption=none&host=zula.ir&headerType=http&type=tcp#Germany%20PO
 ss://c43b7819-008e-4863-aa20-9d3fc2935df8@rezidental.az9x99.ir:2053?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
 ss://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-star.dsadsadads.ir:2070?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
-ss://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-star.fastsoft98.ir:2010?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
 ss://c5fe2244-df45-4efe-8abe-9699e7802697@172.105.29.78:443?mode=stream-one&path=%2F&security=&encryption=none&type=xhttp#Germany%20L115
 ss://c69af2a6-adbc-49e6-bb54-281b1ea18812@91.107.158.231:80?mode=auto&path=%2Ftelegram.migmigping&security=reality&encryption=none&pbk=onJ1zaTDbXbMMSfmp-wCt2ZwGDOK-VxvPQi3TPwPoTk&fp=chrome&spx=%2F&type=xhttp&sni=canva.com&sid=5517d782302df4#REALITY|DE🇩🇪
 ss://c80463ca-2231-4f44-ba98-c9518395be38@139.162.188.193:21866/?type=tcp&encryption=none#%F0%9F%87%A9%F0%9F%87%AA%20DE%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40v2rayngn%20%5B13%5D
@@ -475,6 +475,7 @@ vless://95a55566-b9a4-49e5-b32c-718d50a46ba1@xpanel.panelfreedom.com:2090?securi
 vless://95eb2944-456e-408c-8d88-359608f58e51@91.99.83.156:3040?security=reality&encryption=none&pbk=NVjEaDFrdzaFQHvMt8BPORsLFR3iD8NA31Dpn-1HRFk&host=%2FJKVPN_BIA_CHANEL%40JKVPN&headerType=none&fp=chrome&spx=%2FJKVPN_BIA_CHANEL%40JKVPN&type=tcp&sni=www.refersion.com&sid=ecd8d10c1518fb7b#REALITY|DE🇩🇪
 vless://96f391f6-0762-4895-a57c-433360967ca8@alman.netblocksir.ir:8001/?type=xhttp&encryption=none#%F0%9F%87%A9%F0%9F%87%AA%20DE%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40fastvpnorummobile%20%5B4%5D
 vless://9935dbc4-dbbb-40b3-a6b8-884ee158a3ad@172.105.15.70:443?mode=stream-one&path=%2F&security=&encryption=none&type=xhttp#Germany%20L258
+vless://9bc48566-76f9-44d7-8ad0-af41336b4004@87.120.165.214:443?security=reality&encryption=none&pbk=7tgf5o3AfrE-TWqB3CpBuuZyt7S9tJq6TZ26gPWNyzY&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=google.com&sid=3549df188940fe#DE🇩🇪
 vless://9cbd3913-d0a8-4f11-be9d-4e5102d8f689@direct2.androiland.ir:181?security=reality&encryption=none&pbk=1sDMgyhL5HPRAaRYJcAf21sWbSlq0kgitPVL2HQwB2M&headerType=none&fp=firefox&type=tcp&sni=docker.com#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Nuremberg🅿️ping:11.1ms
 vless://9f457d41-0704-49f7-bddd-4cb73fbb8ce6@172.105.27.63:443?mode=stream-one&path=%2F&security=&encryption=none&type=xhttp#Germany%20L555
 vless://9f457d41-0704-49f7-bddd-4cb73fbb8ce6@172.105.97.4:443?mode=stream-one&path=%2F&security=&encryption=none&type=xhttp#Germany%20L960
@@ -523,7 +524,6 @@ vless://bf1b5b3a-cac2-4e2a-bb8e-01d7c62bcd62@it.arvanabr.xyz:10233?security=real
 vless://c39a101c-0a7b-4940-8e6a-f8346d70b24b@91.99.177.240:443?security=&encryption=none&host=zula.ir&headerType=http&type=tcp#Germany%20PO
 vless://c43b7819-008e-4863-aa20-9d3fc2935df8@rezidental.az9x99.ir:2053?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
 vless://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-star.dsadsadads.ir:2070?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
-vless://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-star.fastsoft98.ir:2010?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
 vless://c5fe2244-df45-4efe-8abe-9699e7802697@172.105.29.78:443?mode=stream-one&path=%2F&security=&encryption=none&type=xhttp#Germany%20L115
 vless://c69af2a6-adbc-49e6-bb54-281b1ea18812@91.107.158.231:80?mode=auto&path=%2Ftelegram.migmigping&security=reality&encryption=none&pbk=onJ1zaTDbXbMMSfmp-wCt2ZwGDOK-VxvPQi3TPwPoTk&fp=chrome&spx=%2F&type=xhttp&sni=canva.com&sid=5517d782302df4#REALITY|DE🇩🇪
 vless://c80463ca-2231-4f44-ba98-c9518395be38@139.162.188.193:21866/?type=tcp&encryption=none#%F0%9F%87%A9%F0%9F%87%AA%20DE%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40v2rayngn%20%5B13%5D
