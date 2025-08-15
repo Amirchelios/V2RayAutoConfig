@@ -26,3 +26,4 @@ hysteria2://eb75320e-a6d0-4b34-a6b6-2bcfc96a9099@203.174.82.145:43057/?insecure=
 hysteria2://eb75320e-a6d0-4b34-a6b6-2bcfc96a9099@203.174.82.145:43057/?insecure=1&sni=www.bing.com#Channel%20id%3A%20%40ShadowProxy66%F0%9F%87%B8%F0%9F%87%AC
 hysteria2://nfsn666@45.207.222.138:8888/?insecure=1&sni=hk.nfsn666.gq#Channel%20id%3A%20%40@proxy_kafee%F0%9F%87%AD%F0%9F%87%B0
 hysteria2://nfsn666@45.207.222.138:8888/?insecure=1&sni=hk.nfsn666.gq#Channel%20id%3A%20%40ShadowProxy66%F0%9F%87%AD%F0%9F%87%B0
+vmess://eyJhZGQiOiIxMzUuMTI1LjE4Mi43NCIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoiIiwiaWQiOiI4MTg1Mjc3MS03NmZiLTRlOTQtZTRmMS00ZTM3YTY5OGE0OWEiLCJuZXQiOiJ0Y3AiLCJwYXRoIjoiIiwicG9ydCI6IjI4MjEzIiwicHMiOiJDaGFubmVsIGlkOiBAU2hhZG93UHJveHk2NvCfh6nwn4eqIiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6IiIsInR5cGUiOiJub25lIiwidiI6IjIifQ

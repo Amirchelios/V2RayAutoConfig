@@ -110,6 +110,7 @@ ss://95a55566-b9a4-49e5-b32c-718d50a46ba1@xpanel.panelfreedom.com:2090?security=
 ss://95eb2944-456e-408c-8d88-359608f58e51@91.99.83.156:3040?security=reality&encryption=none&pbk=NVjEaDFrdzaFQHvMt8BPORsLFR3iD8NA31Dpn-1HRFk&host=%2FJKVPN_BIA_CHANEL%40JKVPN&headerType=none&fp=chrome&spx=%2FJKVPN_BIA_CHANEL%40JKVPN&type=tcp&sni=www.refersion.com&sid=ecd8d10c1518fb7b#REALITY|DE🇩🇪
 ss://96f391f6-0762-4895-a57c-433360967ca8@alman.netblocksir.ir:8001/?type=xhttp&encryption=none#%F0%9F%87%A9%F0%9F%87%AA%20DE%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40fastvpnorummobile%20%5B4%5D
 ss://9935dbc4-dbbb-40b3-a6b8-884ee158a3ad@172.105.15.70:443?mode=stream-one&path=%2F&security=&encryption=none&type=xhttp#Germany%20L258
+ss://9bc48566-76f9-44d7-8ad0-af41336b4004@87.120.165.214:443?security=reality&encryption=none&pbk=7tgf5o3AfrE-TWqB3CpBuuZyt7S9tJq6TZ26gPWNyzY&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=google.com&sid=3549df188940fe#DE🇩🇪
 ss://9f457d41-0704-49f7-bddd-4cb73fbb8ce6@172.105.27.63:443?mode=stream-one&path=%2F&security=&encryption=none&type=xhttp#Germany%20L555
 ss://9f457d41-0704-49f7-bddd-4cb73fbb8ce6@172.105.97.4:443?mode=stream-one&path=%2F&security=&encryption=none&type=xhttp#Germany%20L960
 ss://9f69c514-7aba-4cb2-88d2-1be504c97061@89.58.1.98:44807?security=reality&encryption=none&pbk=CKRx3TijRUQqqRcEOVF07CfvekiUlPbr0twB3wrpfiQ&headerType=none&fp=chrome&type=tcp&sni=yahoo.com&sid=6d78523a82d71956#REALITY|DE🇩🇪
@@ -471,6 +472,7 @@ vless://95a55566-b9a4-49e5-b32c-718d50a46ba1@xpanel.panelfreedom.com:2090?securi
 vless://95eb2944-456e-408c-8d88-359608f58e51@91.99.83.156:3040?security=reality&encryption=none&pbk=NVjEaDFrdzaFQHvMt8BPORsLFR3iD8NA31Dpn-1HRFk&host=%2FJKVPN_BIA_CHANEL%40JKVPN&headerType=none&fp=chrome&spx=%2FJKVPN_BIA_CHANEL%40JKVPN&type=tcp&sni=www.refersion.com&sid=ecd8d10c1518fb7b#REALITY|DE🇩🇪
 vless://96f391f6-0762-4895-a57c-433360967ca8@alman.netblocksir.ir:8001/?type=xhttp&encryption=none#%F0%9F%87%A9%F0%9F%87%AA%20DE%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40fastvpnorummobile%20%5B4%5D
 vless://9935dbc4-dbbb-40b3-a6b8-884ee158a3ad@172.105.15.70:443?mode=stream-one&path=%2F&security=&encryption=none&type=xhttp#Germany%20L258
+vless://9bc48566-76f9-44d7-8ad0-af41336b4004@87.120.165.214:443?security=reality&encryption=none&pbk=7tgf5o3AfrE-TWqB3CpBuuZyt7S9tJq6TZ26gPWNyzY&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=google.com&sid=3549df188940fe#DE🇩🇪
 vless://9f457d41-0704-49f7-bddd-4cb73fbb8ce6@172.105.27.63:443?mode=stream-one&path=%2F&security=&encryption=none&type=xhttp#Germany%20L555
 vless://9f457d41-0704-49f7-bddd-4cb73fbb8ce6@172.105.97.4:443?mode=stream-one&path=%2F&security=&encryption=none&type=xhttp#Germany%20L960
 vless://9f69c514-7aba-4cb2-88d2-1be504c97061@89.58.1.98:44807?security=reality&encryption=none&pbk=CKRx3TijRUQqqRcEOVF07CfvekiUlPbr0twB3wrpfiQ&headerType=none&fp=chrome&type=tcp&sni=yahoo.com&sid=6d78523a82d71956#REALITY|DE🇩🇪
