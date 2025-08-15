@@ -1,16 +1,17 @@
-name: 🔗 TrustLink Auto Update
+name: 🔗 TrustLink Auto Update (DEPRECATED - Now integrated in main workflow)
 
 on:
-  schedule:
-    # هر ساعت
-    - cron: "0 * * * *"
-    # هر نیم ساعت (برای تست)
-    - cron: "*/30 * * * *"
-  workflow_dispatch: {}  # اجرای دستی
-  push:
-    paths:
-      - 'Files/trustlink.py'
-      - '.github/workflows/trustlink.yml'
+  # این workflow غیرفعال شده چون حالا در workflow اصلی V2Ray AutoConfig ادغام شده
+  workflow_dispatch:  # فقط برای اجرای دستی (برای تست)
+  # schedule:
+  #   # هر ساعت
+  #   - cron: "0 * * * *"
+  #   # هر نیم ساعت (برای تست)
+  #   - cron: "*/30 * * * *"
+  # push:
+  #   paths:
+  #     - 'Files/trustlink.py'
+  #     - '.github/workflows/trustlink.yml'
 
 concurrency:
   group: trustlink-update
@@ -19,171 +20,13 @@ concurrency:
 jobs:
   update-trustlink:
     runs-on: ubuntu-latest
-    name: "به‌روزرسانی خودکار TrustLink"
+    name: "به‌روزرسانی خودکار TrustLink (غیرفعال)"
     
     steps:
-      - name: 📥 Checkout Repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: 🐍 Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-          cache: 'pip'
-
-      - name: 📦 Install Dependencies
+      - name: ℹ️ Workflow Deprecated
         run: |
-          python -m pip install --upgrade pip
-          pip install aiohttp
-
-      - name: 🔍 Check TrustLink Script
-        run: |
-          if [ ! -f "Files/trustlink.py" ]; then
-            echo "❌ فایل trustlink.py پیدا نشد!"
-            exit 1
-          fi
-          echo "✅ فایل trustlink.py موجود است"
-          python -c "import asyncio, aiohttp; print('✅ وابستگی‌ها OK')"
-
-      - name: 🚀 Run TrustLink Update
-        run: |
-          echo "🕐 زمان شروع: $(date)"
-          echo "📁 دایرکتوری فعلی: $(pwd)"
-          
-          # اطمینان از وجود دایرکتوری‌های مورد نیاز
-          mkdir -p trustlink logs
-          echo "✅ دایرکتوری‌های trustlink و logs آماده شدند"
-          
-          # اجرای TrustLink
-          python Files/trustlink.py
-          
-          echo "🕐 زمان پایان: $(date)"
-
-      - name: 📊 Check Results
-        run: |
-          echo "📋 بررسی نتایج:"
-          
-          if [ -f "trustlink/trustlink.txt" ]; then
-            echo "✅ فایل trustlink.txt ایجاد شد"
-            echo "📏 اندازه فایل: $(ls -lh trustlink/trustlink.txt | awk '{print $5}')"
-            echo "📊 تعداد خطوط: $(wc -l < trustlink/trustlink.txt)"
-          else
-            echo "❌ فایل trustlink.txt ایجاد نشد!"
-            exit 1
-          fi
-          
-          if [ -f "trustlink/.trustlink_metadata.json" ]; then
-            echo "✅ فایل متادیتا ایجاد شد"
-            echo "📄 محتوای متادیتا:"
-            cat trustlink/.trustlink_metadata.json | python -m json.tool
-          else
-            echo "⚠️ فایل متادیتا ایجاد نشد"
-          fi
-
-      - name: 🔄 Commit & Push Changes
-        env:
-          GIT_AUTHOR_NAME: github-actions[bot]
-          GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
-          GIT_COMMITTER_NAME: github-actions[bot]
-          GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
-          BRANCH_NAME: ${{ github.ref_name }}
-        run: |
-          echo "🔄 شروع commit و push..."
-          
-          # تنظیم git
-          git config --global user.name "$GIT_AUTHOR_NAME"
-          git config --global user.email "$GIT_AUTHOR_EMAIL"
-          
-          # بررسی تغییرات
-          git status
-          git diff
-          
-          # اضافه کردن فایل‌های تغییر یافته (فقط فایل‌های موجود)
-          if [ -f "trustlink/trustlink.txt" ]; then
-            git add trustlink/trustlink.txt
-            echo "✅ فایل trustlink.txt اضافه شد"
-          else
-            echo "❌ فایل trustlink.txt وجود ندارد!"
-            exit 1
-          fi
-          
-          # اضافه کردن فایل متادیتا فقط اگر وجود داشته باشد
-          if [ -f "trustlink/.trustlink_metadata.json" ]; then
-            git add trustlink/.trustlink_metadata.json
-            echo "✅ فایل متادیتا اضافه شد"
-          else
-            echo "ℹ️ فایل متادیتا وجود ندارد - نادیده گرفته شد"
-          fi
-          
-          # اضافه کردن فایل log فقط اگر وجود داشته باشد
-          if [ -f "logs/trustlink.log" ]; then
-            git add logs/trustlink.log
-            echo "✅ فایل log اضافه شد"
-          else
-            echo "ℹ️ فایل log وجود ندارد - نادیده گرفته شد"
-          fi
-          
-          # اضافه کردن فایل backup فقط اگر وجود داشته باشد
-          if [ -f "trustlink/trustlink_backup.txt" ]; then
-            git add trustlink/trustlink_backup.txt
-            echo "✅ فایل backup اضافه شد"
-          else
-            echo "⚠️ فایل backup وجود ندارد - ایجاد فایل خالی"
-            mkdir -p trustlink
-            echo "# فایل backup خالی - ایجاد شده توسط workflow" > trustlink/trustlink_backup.txt
-            git add trustlink/trustlink_backup.txt
-            echo "✅ فایل backup خالی ایجاد و اضافه شد"
-          fi
-          
-          # بررسی تغییرات staged
-          if git diff --cached --quiet; then
-            echo "ℹ️ هیچ تغییری برای commit وجود ندارد"
-            exit 0
-          fi
-          
-          # بررسی وجود فایل‌های ضروری
-          if [ ! -f "trustlink/trustlink.txt" ]; then
-            echo "❌ فایل trustlink.txt ایجاد نشد!"
-            exit 1
-          fi
-          
-          # pull --rebase برای جلوگیری از کانفلیکت
-          echo "📥 انجام pull --rebase..."
-          git pull --rebase origin "$BRANCH_NAME" || {
-            echo "⚠️ pull --rebase ناموفق بود، ادامه با merge"
-            git pull origin "$BRANCH_NAME" || true
-          }
-          
-          # commit
-          echo "💾 انجام commit..."
-          if ! git commit -m "🔗 chore: به‌روزرسانی خودکار TrustLink - $(date '+%Y-%m-%d %H:%M:%S')"; then
-            echo "❌ خطا در commit"
-            exit 1
-          fi
-          
-          # push
-          echo "🚀 انجام push..."
-          if ! git push origin HEAD:"$BRANCH_NAME"; then
-            echo "❌ خطا در push"
-            exit 1
-          fi
-          
-          echo "✅ commit و push با موفقیت انجام شد"
-
-      - name: 📈 Final Status
-        run: |
-          echo "🎉 TrustLink Update Completed Successfully!"
-          echo "📅 زمان: $(date)"
-          echo "🏷️ Run ID: ${{ github.run_id }}"
-          echo "🔗 Commit: ${{ github.sha }}"
-          
-          if [ -f "trustlink/trustlink.txt" ]; then
-            echo "📊 آمار نهایی:"
-            echo "  📁 فایل: trustlink/trustlink.txt"
-            echo "  📏 اندازه: $(ls -lh trustlink/trustlink.txt | awk '{print $5}')"
-            echo "  📊 خطوط: $(wc -l < trustlink/trustlink.txt)"
-            echo "  🕐 آخرین تغییر: $(stat -c %y trustlink/trustlink.txt)"
-          fi
+          echo "⚠️ این workflow غیرفعال شده است!"
+          echo "🔗 TrustLink حالا در workflow اصلی V2Ray AutoConfig ادغام شده"
+          echo "📅 اجرا: هر 2 ساعت بعد از اتمام V2Ray AutoConfig"
+          echo "✅ نیازی به اجرای جداگانه نیست"
+          exit 0
