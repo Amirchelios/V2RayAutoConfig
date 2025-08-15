@@ -54,8 +54,8 @@ jobs:
           echo "📁 دایرکتوری فعلی: $(pwd)"
           
           # اطمینان از وجود دایرکتوری‌های مورد نیاز
-          mkdir -p configs logs
-          echo "✅ دایرکتوری‌های configs و logs آماده شدند"
+          mkdir -p trustlink logs
+          echo "✅ دایرکتوری‌های trustlink و logs آماده شدند"
           
           # اجرای TrustLink
           python Files/trustlink.py
@@ -66,19 +66,19 @@ jobs:
         run: |
           echo "📋 بررسی نتایج:"
           
-          if [ -f "configs/trustlink.txt" ]; then
+          if [ -f "trustlink/trustlink.txt" ]; then
             echo "✅ فایل trustlink.txt ایجاد شد"
-            echo "📏 اندازه فایل: $(ls -lh configs/trustlink.txt | awk '{print $5}')"
-            echo "📊 تعداد خطوط: $(wc -l < configs/trustlink.txt)"
+            echo "📏 اندازه فایل: $(ls -lh trustlink/trustlink.txt | awk '{print $5}')"
+            echo "📊 تعداد خطوط: $(wc -l < trustlink/trustlink.txt)"
           else
             echo "❌ فایل trustlink.txt ایجاد نشد!"
             exit 1
           fi
           
-          if [ -f "configs/.trustlink_metadata.json" ]; then
+          if [ -f "trustlink/.trustlink_metadata.json" ]; then
             echo "✅ فایل متادیتا ایجاد شد"
             echo "📄 محتوای متادیتا:"
-            cat configs/.trustlink_metadata.json | python -m json.tool
+            cat trustlink/.trustlink_metadata.json | python -m json.tool
           else
             echo "⚠️ فایل متادیتا ایجاد نشد"
           fi
@@ -102,8 +102,8 @@ jobs:
           git diff
           
           # اضافه کردن فایل‌های تغییر یافته (فقط فایل‌های موجود)
-          if [ -f "configs/trustlink.txt" ]; then
-            git add configs/trustlink.txt
+          if [ -f "trustlink/trustlink.txt" ]; then
+            git add trustlink/trustlink.txt
             echo "✅ فایل trustlink.txt اضافه شد"
           else
             echo "❌ فایل trustlink.txt وجود ندارد!"
@@ -111,8 +111,8 @@ jobs:
           fi
           
           # اضافه کردن فایل متادیتا فقط اگر وجود داشته باشد
-          if [ -f "configs/.trustlink_metadata.json" ]; then
-            git add configs/.trustlink_metadata.json
+          if [ -f "trustlink/.trustlink_metadata.json" ]; then
+            git add trustlink/.trustlink_metadata.json
             echo "✅ فایل متادیتا اضافه شد"
           else
             echo "ℹ️ فایل متادیتا وجود ندارد - نادیده گرفته شد"
@@ -127,14 +127,14 @@ jobs:
           fi
           
           # اضافه کردن فایل backup فقط اگر وجود داشته باشد
-          if [ -f "configs/trustlink_backup.txt" ]; then
-            git add configs/trustlink_backup.txt
+          if [ -f "trustlink/trustlink_backup.txt" ]; then
+            git add trustlink/trustlink_backup.txt
             echo "✅ فایل backup اضافه شد"
           else
             echo "⚠️ فایل backup وجود ندارد - ایجاد فایل خالی"
-            mkdir -p configs
-            echo "# فایل backup خالی - ایجاد شده توسط workflow" > configs/trustlink_backup.txt
-            git add configs/trustlink_backup.txt
+            mkdir -p trustlink
+            echo "# فایل backup خالی - ایجاد شده توسط workflow" > trustlink/trustlink_backup.txt
+            git add trustlink/trustlink_backup.txt
             echo "✅ فایل backup خالی ایجاد و اضافه شد"
           fi
           
@@ -145,7 +145,7 @@ jobs:
           fi
           
           # بررسی وجود فایل‌های ضروری
-          if [ ! -f "configs/trustlink.txt" ]; then
+          if [ ! -f "trustlink/trustlink.txt" ]; then
             echo "❌ فایل trustlink.txt ایجاد نشد!"
             exit 1
           fi
@@ -180,10 +180,10 @@ jobs:
           echo "🏷️ Run ID: ${{ github.run_id }}"
           echo "🔗 Commit: ${{ github.sha }}"
           
-          if [ -f "configs/trustlink.txt" ]; then
+          if [ -f "trustlink/trustlink.txt" ]; then
             echo "📊 آمار نهایی:"
-            echo "  📁 فایل: configs/trustlink.txt"
-            echo "  📏 اندازه: $(ls -lh configs/trustlink.txt | awk '{print $5}')"
-            echo "  📊 خطوط: $(wc -l < configs/trustlink.txt)"
-            echo "  🕐 آخرین تغییر: $(stat -c %y configs/trustlink.txt)"
+            echo "  📁 فایل: trustlink/trustlink.txt"
+            echo "  📏 اندازه: $(ls -lh trustlink/trustlink.txt | awk '{print $5}')"
+            echo "  📊 خطوط: $(wc -l < trustlink/trustlink.txt)"
+            echo "  🕐 آخرین تغییر: $(stat -c %y trustlink/trustlink.txt)"
           fi

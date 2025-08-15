@@ -19,9 +19,9 @@ import re
 
 # تنظیمات
 HEALTHY_URL = "https://raw.githubusercontent.com/Amirchelios/V2RayAutoConfig/refs/heads/main/configs/Healthy.txt"
-TRUSTLINK_FILE = "configs/trustlink.txt"
-TRUSTLINK_METADATA = "configs/.trustlink_metadata.json"
-BACKUP_FILE = "configs/trustlink_backup.txt"
+TRUSTLINK_FILE = "trustlink/trustlink.txt"
+TRUSTLINK_METADATA = "trustlink/.trustlink_metadata.json"
+BACKUP_FILE = "trustlink/trustlink_backup.txt"
 LOG_FILE = "logs/trustlink.log"
 
 # پروتکل‌های پشتیبانی شده

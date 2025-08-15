@@ -1502,8 +1502,18 @@ async def main():
         else:
             logging.info("No new healthy configs to add to persistent storage")
 
+    # حذف محتویات دایرکتوری configs اما حفظ دایرکتوری trustlink
     if os.path.exists(OUTPUT_DIR):
-        shutil.rmtree(OUTPUT_DIR)
+        # ابتدا فایل‌های موجود را حذف کن (به جز trustlink)
+        for item in os.listdir(OUTPUT_DIR):
+            item_path = os.path.join(OUTPUT_DIR, item)
+            if os.path.isfile(item_path) or os.path.isdir(item_path):
+                if item != 'trustlink':  # دایرکتوری trustlink را حفظ کن
+                    if os.path.isfile(item_path):
+                        os.remove(item_path)
+                    else:
+                        shutil.rmtree(item_path)
+    
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     raw_output_dir = os.path.join(OUTPUT_DIR, RAW_OUTPUT_SUBDIR)
     if os.path.exists(raw_output_dir):

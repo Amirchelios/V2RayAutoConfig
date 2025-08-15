@@ -535,6 +535,7 @@ trojan://7118b5f4-0ea4-4c11-be7f-11471cb91e4a@144.24.72.126:443?security=tls#%F0
 trojan://71409d3e488548e8bb076d229778f008@38.99.82.225:443/?type=tcp&security=tls&sni=jobsfortheworldtoday.com&allowInsecure=1#%40Hope_Net-join-us-on-Telegram
 trojan://71409d3e488548e8bb076d229778f008@jobsfortheworldtoday.com:443/?type=tcp&security=tls&allowInsecure=1#%40Hope_Net-join-us-on-Telegram
 trojan://71ed6628-5870-4d19-8a52-f2a3ba3d4898@162.159.153.7:443/?type=ws&host=vbbb.ylks2024.us.kg&path=%2Fyoulingkaishi&security=tls&sni=vbbb.ylks2024.us.kg#%40Hope_Net-join-us-on-Telegram
+trojan://7248e825-887c-48b9-83bc-c26bc6392bf8@172.67.214.21:443?allowInsecure=0&sni=xXcdvFgt.191268.XYz&type=ws&host=xXcdvFgt.191268.XYz&path=/ctdmgeIg3NII3ibrzzKXJGy3S1#🇺🇸[openproxylist.com]
 trojan://7248e825-887c-48b9-83bc-c26bc6392bf8@172.67.214.21:443?path=%2FctdmgeIg3NII3ibrzzKXJGy3S1&security=tls&host=xXcdvFgt.191268.XYz&type=ws&sni=xXcdvFgt.191268.XYz#Channel%20id%3A%20%40ShadowProxy66%20
 trojan://7248e825-887c-48b9-83bc-c26bc6392bf8@172.67.214.21:443?security=tls&sni=xXcdvFgt.191268.XYz&type=ws&path=%2FctdmgeIg3NII3ibrzzKXJGy3S1&Host=xXcdvFgt.191268.XYz#%F0%9F%8F%81RELAY-172.67.214.21-1012
 trojan://7248e825-887c-48b9-83bc-c26bc6392bf8@172.67.214.21:443?security=tls&sni=xXcdvFgt.191268.XYz&type=ws&path=/ctdmgeIg3NII3ibrzzKXJGy3S1&Host=xXcdvFgt.191268.XYz#%F0%9F%8F%81RELAY-172.67.214.21-0571
