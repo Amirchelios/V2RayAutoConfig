@@ -53,6 +53,10 @@ jobs:
           echo "🕐 زمان شروع: $(date)"
           echo "📁 دایرکتوری فعلی: $(pwd)"
           
+          # اطمینان از وجود دایرکتوری‌های مورد نیاز
+          mkdir -p configs logs
+          echo "✅ دایرکتوری‌های configs و logs آماده شدند"
+          
           # اجرای TrustLink
           python Files/trustlink.py
           
@@ -97,13 +101,53 @@ jobs:
           git status
           git diff
           
-          # اضافه کردن فایل‌های تغییر یافته
-          git add configs/trustlink.txt configs/.trustlink_metadata.json configs/trustlink_backup.txt logs/trustlink.log
+          # اضافه کردن فایل‌های تغییر یافته (فقط فایل‌های موجود)
+          if [ -f "configs/trustlink.txt" ]; then
+            git add configs/trustlink.txt
+            echo "✅ فایل trustlink.txt اضافه شد"
+          else
+            echo "❌ فایل trustlink.txt وجود ندارد!"
+            exit 1
+          fi
+          
+          # اضافه کردن فایل متادیتا فقط اگر وجود داشته باشد
+          if [ -f "configs/.trustlink_metadata.json" ]; then
+            git add configs/.trustlink_metadata.json
+            echo "✅ فایل متادیتا اضافه شد"
+          else
+            echo "ℹ️ فایل متادیتا وجود ندارد - نادیده گرفته شد"
+          fi
+          
+          # اضافه کردن فایل log فقط اگر وجود داشته باشد
+          if [ -f "logs/trustlink.log" ]; then
+            git add logs/trustlink.log
+            echo "✅ فایل log اضافه شد"
+          else
+            echo "ℹ️ فایل log وجود ندارد - نادیده گرفته شد"
+          fi
+          
+          # اضافه کردن فایل backup فقط اگر وجود داشته باشد
+          if [ -f "configs/trustlink_backup.txt" ]; then
+            git add configs/trustlink_backup.txt
+            echo "✅ فایل backup اضافه شد"
+          else
+            echo "⚠️ فایل backup وجود ندارد - ایجاد فایل خالی"
+            mkdir -p configs
+            echo "# فایل backup خالی - ایجاد شده توسط workflow" > configs/trustlink_backup.txt
+            git add configs/trustlink_backup.txt
+            echo "✅ فایل backup خالی ایجاد و اضافه شد"
+          fi
           
           # بررسی تغییرات staged
           if git diff --cached --quiet; then
             echo "ℹ️ هیچ تغییری برای commit وجود ندارد"
             exit 0
+          fi
+          
+          # بررسی وجود فایل‌های ضروری
+          if [ ! -f "configs/trustlink.txt" ]; then
+            echo "❌ فایل trustlink.txt ایجاد نشد!"
+            exit 1
           fi
           
           # pull --rebase برای جلوگیری از کانفلیکت
@@ -115,11 +159,17 @@ jobs:
           
           # commit
           echo "💾 انجام commit..."
-          git commit -m "🔗 chore: به‌روزرسانی خودکار TrustLink - $(date '+%Y-%m-%d %H:%M:%S')"
+          if ! git commit -m "🔗 chore: به‌روزرسانی خودکار TrustLink - $(date '+%Y-%m-%d %H:%M:%S')"; then
+            echo "❌ خطا در commit"
+            exit 1
+          fi
           
           # push
           echo "🚀 انجام push..."
-          git push origin HEAD:"$BRANCH_NAME"
+          if ! git push origin HEAD:"$BRANCH_NAME"; then
+            echo "❌ خطا در push"
+            exit 1
+          fi
           
           echo "✅ commit و push با موفقیت انجام شد"
 

@@ -33,16 +33,25 @@ SUPPORTED_PROTOCOLS = {
 # تنظیمات logging
 def setup_logging():
     """تنظیم سیستم logging"""
-    os.makedirs("logs", exist_ok=True)
-    
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s - %(levelname)s - %(message)s',
-        handlers=[
-            logging.FileHandler(LOG_FILE, encoding='utf-8'),
-            logging.StreamHandler(sys.stdout)
-        ]
-    )
+    try:
+        os.makedirs("logs", exist_ok=True)
+        
+        logging.basicConfig(
+            level=logging.INFO,
+            format='%(asctime)s - %(levelname)s - %(message)s',
+            handlers=[
+                logging.FileHandler(LOG_FILE, encoding='utf-8'),
+                logging.StreamHandler(sys.stdout)
+            ]
+        )
+    except Exception as e:
+        print(f"خطا در ایجاد دایرکتوری logs: {e}")
+        # اگر نتوانستیم دایرکتوری logs ایجاد کنیم، از stdout استفاده کن
+        logging.basicConfig(
+            level=logging.INFO,
+            format='%(asctime)s - %(levelname)s - %(message)s',
+            handlers=[logging.StreamHandler(sys.stdout)]
+        )
 
 class TrustLinkManager:
     """مدیریت اصلی برنامه TrustLink"""
@@ -100,6 +109,9 @@ class TrustLinkManager:
     def load_existing_configs(self):
         """بارگذاری کانفیگ‌های موجود از trustlink.txt"""
         try:
+            # اطمینان از وجود دایرکتوری configs
+            os.makedirs(os.path.dirname(TRUSTLINK_FILE), exist_ok=True)
+            
             if os.path.exists(TRUSTLINK_FILE):
                 with open(TRUSTLINK_FILE, 'r', encoding='utf-8') as f:
                     lines = f.readlines()
@@ -159,6 +171,9 @@ class TrustLinkManager:
             "invalid_skipped": 0
         }
         
+        # اطمینان از وجود دایرکتوری configs
+        os.makedirs(os.path.dirname(BACKUP_FILE), exist_ok=True)
+        
         # ایجاد backup از فایل موجود
         if os.path.exists(TRUSTLINK_FILE):
             try:
@@ -167,6 +182,21 @@ class TrustLinkManager:
                 logging.info("Backup از فایل موجود ایجاد شد")
             except Exception as e:
                 logging.warning(f"خطا در ایجاد backup: {e}")
+                # اگر backup ناموفق بود، یک فایل خالی ایجاد کن
+                try:
+                    with open(BACKUP_FILE, 'w', encoding='utf-8') as f:
+                        f.write("# فایل backup خالی - خطا در کپی فایل اصلی\n")
+                    logging.info("فایل backup خالی ایجاد شد")
+                except Exception as e2:
+                    logging.error(f"خطا در ایجاد فایل backup خالی: {e2}")
+        else:
+            # اگر فایل اصلی وجود ندارد، یک فایل backup خالی ایجاد کن
+            try:
+                with open(BACKUP_FILE, 'w', encoding='utf-8') as f:
+                    f.write("# فایل backup خالی - فایل اصلی وجود نداشت\n")
+                logging.info("فایل backup خالی ایجاد شد")
+            except Exception as e:
+                logging.warning(f"خطا در ایجاد فایل backup خالی: {e}")
         
         # بررسی و اضافه کردن کانفیگ‌های جدید
         for config in new_configs:
@@ -266,6 +296,9 @@ class TrustLinkManager:
             
             # ذخیره فایل
             if self.save_trustlink_file():
+                # اطمینان از وجود فایل backup
+                self.ensure_backup_file_exists()
+                
                 # به‌روزرسانی متادیتا
                 self.update_metadata(stats)
                 
@@ -292,6 +325,17 @@ class TrustLinkManager:
             "file_size_kb": os.path.getsize(TRUSTLINK_FILE) / 1024 if os.path.exists(TRUSTLINK_FILE) else 0,
             "backup_exists": os.path.exists(BACKUP_FILE)
         }
+    
+    def ensure_backup_file_exists(self):
+        """اطمینان از وجود فایل backup"""
+        try:
+            os.makedirs(os.path.dirname(BACKUP_FILE), exist_ok=True)
+            if not os.path.exists(BACKUP_FILE):
+                with open(BACKUP_FILE, 'w', encoding='utf-8') as f:
+                    f.write("# فایل backup خالی - ایجاد شده توسط ensure_backup_file_exists\n")
+                logging.info("فایل backup خالی ایجاد شد")
+        except Exception as e:
+            logging.warning(f"خطا در ایجاد فایل backup: {e}")
 
 async def main():
     """تابع اصلی برنامه"""
