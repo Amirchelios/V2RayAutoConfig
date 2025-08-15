@@ -1,10 +1,7 @@
 ss://34c9f621-0614-4b7f-aab3-c4400bb15a89@45.83.20.34:58164?security=reality&encryption=none&pbk=7cbcFHSx2vqz38zW9BmlSIHTTSdNtlgv_S5uZ0MSIAE&headerType=none&fp=chrome&type=tcp&sni=yahoo.com&sid=788456bc#REALITY|CY🇨🇾
-ss://401374e6-df77-41fb-f638-dad8184f175b@154.92.9.26:443?mode=gun&security=tls&alpn=h2&encryption=none&type=grpc&sni=pqh36v4.hiddendom.shop#👉🆔@v2ray_configs_pool📡🇨🇾®️Cyprus©️Nicosia🅿️ping:6.06ms
-ss://401374e6-df77-41fb-f638-dad8184f175b@154.92.9.26:443?mode=gun&security=tls&alpn=h2&encryption=none&type=grpc&sni=pqh36v4.hiddendom.shop#👉🆔@v2ray_configs_pool📡🇨🇾®️Cyprus©️Nicosia🅿️ping:6.13ms
 ss://401374e6-df77-41fb-f638-dad8184f175b@154.92.9.26:443?security=tls&sni=pqh36v4.hiddendom.shop&alpn=h2&type=grpc&encryption=none#%F0%9F%87%A8%F0%9F%87%BECY%20%7C%20@V2ray_Collector
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpmOGY3YUN6Y1BLYnNGOHAz@134.255.210.49:990#%F0%9F%87%A8%F0%9F%87%BECY-134.255.210.49-0356
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpmOGY3YUN6Y1BLYnNGOHAz@134.255.210.49:990#%F0%9F%87%A8%F0%9F%87%BECY-134.255.210.49-6460
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpmOGY3YUN6Y1BLYnNGOHAz@134.255.210.49:990#👉🆔@v2ray_configs_pool📡🇨🇾®️Cyprus©️Limassol🅿️ping:61.35ms
 ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@213.169.137.221:989#%F0%9F%87%A8%F0%9F%87%BECY-213.169.137.221-4309
 ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw@134.255.210.49:989#%F0%9F%87%A8%F0%9F%87%BECY-134.255.210.49-5321
 ss://a5e0c391-accd-45a7-8bb9-99ffb9b09b16@2.56.126.190:8443?path=%2F&security=tls&encryption=none&type=ws#CY🇨🇾
@@ -33,8 +30,6 @@ ss://ec8a65adaafc40959b8cea10890ca629Og==@154.92.9.151:443#CY%F0%9F%87%A8%F0%9F%
 trojan://750a29bf-0a40-437f-b120-38de74ae7eaf@45.82.253.234:28443?security=tls#%F0%9F%87%A8%F0%9F%87%BECY-45.82.253.234-2974
 trojan://a1b16d10-4f43-4dd9-8c4f-52065b2b0910@45.82.253.237:28443?security=tls#%F0%9F%87%A8%F0%9F%87%BECY-45.82.253.237-3015
 vless://34c9f621-0614-4b7f-aab3-c4400bb15a89@45.83.20.34:58164?security=reality&encryption=none&pbk=7cbcFHSx2vqz38zW9BmlSIHTTSdNtlgv_S5uZ0MSIAE&headerType=none&fp=chrome&type=tcp&sni=yahoo.com&sid=788456bc#REALITY|CY🇨🇾
-vless://401374e6-df77-41fb-f638-dad8184f175b@154.92.9.26:443?mode=gun&security=tls&alpn=h2&encryption=none&type=grpc&sni=pqh36v4.hiddendom.shop#👉🆔@v2ray_configs_pool📡🇨🇾®️Cyprus©️Nicosia🅿️ping:6.06ms
-vless://401374e6-df77-41fb-f638-dad8184f175b@154.92.9.26:443?mode=gun&security=tls&alpn=h2&encryption=none&type=grpc&sni=pqh36v4.hiddendom.shop#👉🆔@v2ray_configs_pool📡🇨🇾®️Cyprus©️Nicosia🅿️ping:6.13ms
 vless://401374e6-df77-41fb-f638-dad8184f175b@154.92.9.26:443?security=tls&sni=pqh36v4.hiddendom.shop&alpn=h2&type=grpc&encryption=none#%F0%9F%87%A8%F0%9F%87%BECY%20%7C%20@V2ray_Collector
 vless://a5e0c391-accd-45a7-8bb9-99ffb9b09b16@2.56.126.190:8443?path=%2F&security=tls&encryption=none&type=ws#CY🇨🇾
 vless://a5e0c391-accd-45a7-8bb9-99ffb9b09b16@2.56.126.45:8443?path=%2F&security=tls&encryption=none&type=ws#CY🇨🇾
