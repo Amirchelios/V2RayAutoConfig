@@ -1565,6 +1565,8 @@ async def main():
         all_healthy_configs = merge_healthy_configs(existing_healthy_configs, healthy_union)
         logging.info(f"Merge completed: {len(existing_healthy_configs)} existing + {len(healthy_union)} new = {len(all_healthy_configs)} total")
         
+        # Save to both locations:
+        # 1. Regular output directory (for immediate use)
         saved, count = save_to_file(
             OUTPUT_DIR,
             os.path.splitext(os.path.basename(HEALTHY_OUTPUT_FILE))[0],
@@ -1573,17 +1575,30 @@ async def main():
         if saved:
             protocol_counts['Healthy'] = count
             logging.info(f"Successfully saved merged healthy configs: {len(existing_healthy_configs)} existing + {len(healthy_union)} new = {count} total")
-            
-            # Log final stats
-            final_stats = get_healthy_file_stats()
-            if final_stats['exists']:
-                logging.info(f"Final Healthy.txt: {final_stats['total_configs']} configs, size: {final_stats['file_size_kb']:.1f} KB, path: {final_stats['file_path']}")
-            
-            # Verify the merge was successful
-            if len(existing_healthy_configs) > 0:
-                logging.info(f"✅ SUCCESS: Preserved {len(existing_healthy_configs)} existing configs and added {len(healthy_union)} new configs")
-            else:
-                logging.info(f"ℹ️ INFO: No existing configs to preserve, created new file with {len(healthy_union)} configs")
+        
+        # 2. Save new results to artifacts/healthy_new.txt for GitHub Actions workflow
+        artifacts_dir = 'artifacts'
+        if os.path.exists(artifacts_dir) or os.getenv('GITHUB_ACTIONS', 'false').lower() == 'true':
+            os.makedirs(artifacts_dir, exist_ok=True)
+            new_results_file = os.path.join(artifacts_dir, 'healthy_new.txt')
+            try:
+                with open(new_results_file, 'w', encoding='utf-8') as f:
+                    for config in sorted(list(healthy_union)):
+                        f.write(f"{config}\n")
+                logging.info(f"Saved {len(healthy_union)} new healthy configs to {new_results_file} for GitHub Actions workflow")
+            except Exception as e:
+                logging.warning(f"Could not save new results to artifacts: {e}")
+        
+        # Log final stats
+        final_stats = get_healthy_file_stats()
+        if final_stats['exists']:
+            logging.info(f"Final Healthy.txt: {final_stats['total_configs']} configs, size: {final_stats['file_size_kb']:.1f} KB, path: {final_stats['file_path']}")
+        
+        # Verify the merge was successful
+        if len(existing_healthy_configs) > 0:
+            logging.info(f"✅ SUCCESS: Preserved {len(existing_healthy_configs)} existing configs and added {len(healthy_union)} new configs")
+        else:
+            logging.info(f"ℹ️ INFO: No existing configs to preserve, created new file with {len(healthy_union)} configs")
 
     repo_path_env = os.getenv('GITHUB_REPOSITORY') or os.getenv('GITHUB_REPO') or os.getenv('REPO_PATH') or "Amirchelios/V2RayAutoConfig"
     branch_name_env = os.getenv('GITHUB_REF_NAME') or os.getenv('GITHUB_BRANCH') or "main"
