@@ -1663,7 +1663,7 @@ vless://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss76953.tas-bazi.com:443?mode=stre
 vless://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss76953.tas-bazi.com:443?mode=stream-one&path=/sc&security=none&encryption=none&type=xhttp#DE🇩🇪
 vless://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss86065.tas-bazi.com:443?mode=stream-one&path=%2Fsc%2F%3F%40MARAMBASHI_MARAMBASHI_MARAMBASHI%3Fed%3D2048&security=none&encryption=none&type=xhttp#%D8%A8%D8%B1%D8%A7%DB%8C%20%D8%A7%D8%AA%D8%B5%D8%A7%D9%84%20%D8%AF%D8%A7%D8%A6%D9%85%DB%8C%20%D8%AC%D9%88%DB%8C%D9%86%20%D8%B4%D9%88%F0%9F%8D%A6%40Outline_ir
 vless://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss86065.tas-bazi.com:443?mode=stream-one&path=%2Fsc%2F%3F%40MARAMBASHI_MARAMBASHI_MARAMBASHI%3Fed%3D2048&security=none&encryption=none&type=xhttp#@meli_proxyy
-vless://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss86065.tas-bazi.com:443?mode=stream-one&path=%2Fsc%2F%3F%40MARAMBASHI_MARAMBASHI_MARAMBASHI%3Fed%3D2048&security=none&encryption=none&type=xhttp#🌐
+vless://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss86065.tas-bazi.com:443?mode=stream-one&path=%2Fsc%2F%3F%40MARAMBASHI_MARAMBASHI_MARAMBASHI%3Fed%3D2048&security=none&encryption=none&type=xhttp#🌐سرور
 vless://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss86065.tas-bazi.com:443?mode=stream-one&path=%2Fsc&security=&encryption=none&type=xhttp#DE🇩🇪
 vless://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss86065.tas-bazi.com:443?mode=stream-one&path=%2Fsc&security=none&encryption=none&type=xhttp#%D9%81%DB%8C%D9%84%D8%AA%D8%B1%D8%B4%DA%A9%D9%86%20%D9%86%D8%A7%D9%85%D8%AD%D8%AF%D9%88%D8%AF%2099%D8%AA%20%3D%C2%BB%20SabznetVPN%40
 vless://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss93336.tas-bazi.com:443?mode=stream-one&path=%2Fsc&security=&encryption=none&type=xhttp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Nuremberg🅿️ping:11.28ms
@@ -6255,7 +6255,7 @@ vless://f020a6cf-0ce7-47f3-88b3-d840dd8a557b@104.21.94.125:80/?type=ws&encryptio
 vless://f0263bd6-570a-4bc0-bbb9-6fad124b18cf@62.133.62.166:2095/?type=tcp&encryption=none#%F0%9F%87%AB%F0%9F%87%B7%20FR%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40configv2rayforfree%20%5B3%5D
 vless://f0263bd6-570a-4bc0-bbb9-6fad124b18cf@62.133.62.166:2095?security=none&encryption=none&headerType=none&type=tcp#%E2%9C%94%EF%B8%8E%F0%9D%90%9C%F0%9D%90%A1%F0%9D%90%9A%F0%9D%90%A7%F0%9D%90%A7%F0%9D%90%9E%F0%9D%90%A5%E2%9E%AA%40ConfigV2rayForFree
 vless://f0263bd6-570a-4bc0-bbb9-6fad124b18cf@62.133.62.166:2095?security=none&encryption=none&headerType=none&type=tcp#FR🇫🇷
-vless://f0263bd6-570a-4bc0-bbb9-6fad124b18cf@62.133.62.166:2095?security=none&encryption=none&headerType=none&type=tcp#🌐سرور
+vless://f0263bd6-570a-4bc0-bbb9-6fad124b18cf@62.133.62.166:2095?security=none&encryption=none&headerType=none&type=tcp#🌐
 vless://f055d270-0e76-4a41-a53f-871bbb51b003@104.24.152.190:443/?type=ws&encryption=none&host=what.zhonghuoxing.top&path=%2F&security=tls&sni=what.zhonghuoxing.top&fp=chrome#%E2%9B%88%EF%B8%8F64%40oneclickvpnkeys
 vless://f055d270-0e76-4a41-a53f-871bbb51b003@190.93.247.172:443/?type=ws&encryption=none&host=what.zhonghuoxing.top&path=%2F%3Fed%3D2560security%3Dtls&security=tls&sni=what.zhonghuoxing.top#%E2%9B%B324%40oneclickvpnkeys
 vless://f07bf2eb-332a-4cc8-b8fa-cfb6b3b9d987@104.21.1.12:8880/?type=kcp&encryption=none#%40Hope_Net-join-us-on-Telegram
