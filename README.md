@@ -7,13 +7,13 @@
   <img src="https://img.shields.io/github/last-commit/Amirchelios/V2RayAutoConfig?style=flat-square" alt="Last Commit" />
   <br>
   <img src="https://img.shields.io/github/issues/Amirchelios/V2RayAutoConfig?style=flat-square" alt="GitHub Issues" />
-  <img src="https://img.shields.io/badge/Configs-141-blue?style=flat-square" alt="Total Configs" />
+  <img src="https://img.shields.io/badge/Configs-139-blue?style=flat-square" alt="Total Configs" />
   <img src="https://img.shields.io/github/stars/Amirchelios/V2RayAutoConfig?style=social" alt="GitHub Stars" />
   <img src="https://img.shields.io/badge/status-active-brightgreen?style=flat-square" alt="Project Status" />
   <img src="https://img.shields.io/badge/language-فارسی%20%26%20English-007EC6?style=flat-square" alt="Language" />
 </p>
 
-    ## آخرین به‌روزرسانی: 23:13 24-05-1404
+    ## آخرین به‌روزرسانی: 23:27 24-05-1404
 
 ---
 
@@ -29,17 +29,17 @@
 ---
 
 ## 📁 کانفیگ‌های پروتکل‌ها
-در حال حاضر 141 کانفیگ در دسترس است.
+در حال حاضر 139 کانفیگ در دسترس است.
 
 <div align="center">
 
 | پروتکل | تعداد | لینک دانلود |
 |:-------:|:-----:|:------------:|
-| Healthy | 3 | [`Healthy.txt`](https://raw.githubusercontent.com/Amirchelios/V2RayAutoConfig/refs/heads/main/configs/Healthy.txt) |
+| Healthy | 1 | [`Healthy.txt`](https://raw.githubusercontent.com/Amirchelios/V2RayAutoConfig/refs/heads/main/configs/Healthy.txt) |
 | Hysteria2 | 70 | [`Hysteria2.txt`](https://raw.githubusercontent.com/Amirchelios/V2RayAutoConfig/refs/heads/main/configs/Hysteria2.txt) |
 | ShadowSocksR | 26 | [`ShadowSocksR.txt`](https://raw.githubusercontent.com/Amirchelios/V2RayAutoConfig/refs/heads/main/configs/ShadowSocksR.txt) |
 | Tuic | 12 | [`Tuic.txt`](https://raw.githubusercontent.com/Amirchelios/V2RayAutoConfig/refs/heads/main/configs/Tuic.txt) |
-| Vmess | 3 | [`Vmess.txt`](https://raw.githubusercontent.com/Amirchelios/V2RayAutoConfig/refs/heads/main/configs/Vmess.txt) |
+| Vmess | 1 | [`Vmess.txt`](https://raw.githubusercontent.com/Amirchelios/V2RayAutoConfig/refs/heads/main/configs/Vmess.txt) |
 | WireGuard | 30 | [`WireGuard.txt`](https://raw.githubusercontent.com/Amirchelios/V2RayAutoConfig/refs/heads/main/configs/WireGuard.txt) |
 </div>
 
