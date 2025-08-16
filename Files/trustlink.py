@@ -96,7 +96,7 @@ class TrustLinkManager:
     async def create_session(self):
         """ایجاد session برای HTTP requests"""
         if self.session is None or self.session.closed:
-            timeout = aiohttp.ClientTimeout(total=30, connect=10)
+            timeout = aiohttp.ClientTimeout(total=15, connect=5, sock_read=10)  # کاهش timeout
             self.session = aiohttp.ClientSession(timeout=timeout)
             logging.info("Session جدید ایجاد شد")
     
@@ -346,8 +346,9 @@ async def main():
     manager = TrustLinkManager()
     
     try:
-        # اجرای یک دور به‌روزرسانی
-        success = await manager.run_update()
+        # اجرای یک دور به‌روزرسانی با timeout
+        async with asyncio.timeout(120):  # timeout 2 دقیقه
+            success = await manager.run_update()
         
         if success:
             status = manager.get_status()
@@ -357,6 +358,8 @@ async def main():
         else:
             logging.error("❌ به‌روزرسانی ناموفق بود")
             
+    except asyncio.TimeoutError:
+        logging.error("⏰ timeout: برنامه بیش از 2 دقیقه طول کشید")
     except KeyboardInterrupt:
         logging.info("برنامه توسط کاربر متوقف شد")
     except Exception as e:
