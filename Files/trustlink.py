@@ -115,7 +115,14 @@ class TrustLinkManager:
             if os.path.exists(TRUSTLINK_FILE):
                 with open(TRUSTLINK_FILE, 'r', encoding='utf-8') as f:
                     lines = f.readlines()
-                    self.existing_configs = {line.strip() for line in lines if line.strip()}
+                    # فیلتر کردن header ها و خطوط خالی
+                    valid_configs = []
+                    for line in lines:
+                        line = line.strip()
+                        if line and not line.startswith('#') and self.is_valid_config(line):
+                            valid_configs.append(line)
+                    
+                    self.existing_configs = set(valid_configs)
                 logging.info(f"{len(self.existing_configs)} کانفیگ موجود بارگذاری شد")
             else:
                 self.existing_configs = set()
@@ -225,14 +232,7 @@ class TrustLinkManager:
             
             try:
                 with os.fdopen(fd, 'w', encoding='utf-8') as f:
-                    # نوشتن header
-                    f.write(f"# 🔗 TrustLink - کانفیگ‌های قابل اعتماد\n")
-                    f.write(f"# آخرین به‌روزرسانی: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-                    f.write(f"# تعداد کل: {len(self.existing_configs)}\n")
-                    f.write(f"# منبع: {HEALTHY_URL}\n")
-                    f.write(f"#\n")
-                    
-                    # نوشتن کانفیگ‌ها
+                    # فقط نوشتن کانفیگ‌ها بدون header
                     for config in sorted(self.existing_configs):
                         f.write(f"{config}\n")
                 
