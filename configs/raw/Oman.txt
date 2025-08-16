@@ -1,1 +1,1 @@
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTp0dW5uZWwtdGVsZWVlLWlkLWliYWhhZA%3D%3D@188.208.110.58:8444#👉🆔@v2ray_configs_pool📡🇷🇴®️Romania©️Lisaura🅿️ping:135.12ms
+trojan://tunnel-tele-id-ibahad@188.208.110.58:8441?security=tls&alpn=http%2F1.1&host=188.208.110.58&headerType=none&type=tcp&sni=Join.telegram.ibahad.ir#👉🆔@v2ray_configs_pool📡🇷🇴®️Romania©️Lisaura🅿️ping:125.36ms
