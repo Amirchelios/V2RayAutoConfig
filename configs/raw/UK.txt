@@ -1,6 +1,5 @@
 hysteria2://0f78d86d-c753-4b0d-8a1d-945160a41043@ukhub.xg-hub.icu:25785?security=tls&obfs=salamander&obfs-password=ZDQxZDhjZDk4ZjAwYjIwNA%3D%3D&insecure=1&sni=ukhub.xg-hub.icu#🆔express_freevpn%20🔒%20HY2-UDP-N/A%20🇬🇧%20GB%20down
 ss://19199927-fb46-4203-8872-672fd1daca14@54.38.214.56:37171/?type=tcp&encryption=none#%F0%9F%87%AC%F0%9F%87%A7%20GB%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40vpnplusee_free%20%5B16%5D
-ss://19de5ba4-82b2-4a11-898e-ae460d6733fe@real-z3.sdcards1.ir:8585?security=reality&encryption=none&pbk=58yfyRJyku8oddKvCIBHz0K8LrTWKr3qTe-DMUcrWEg&headerType=none&fp=firefox&type=tcp&sni=tgju.org&sid=ea0e387f2b260e0d#GB🇬🇧
 ss://204a1b7c-cdef-4f12-ea2c-e52ddcbbaf2f@104.16.1.106:80?path=%2F&security=none&encryption=none&host=eng.vinamarketcenter.ir&type=ws#GB🇬🇧
 ss://401374e6-df77-41fb-f638-dad8184f175b@94.247.142.103:443?security=tls&sni=pqh23v5.hiddendom.shop&alpn=h2&type=grpc&encryption=none#%F0%9F%87%AC%F0%9F%87%A7GB%20%7C%20@V2ray_Collector
 ss://4d91916f-a7fd-419b-8b90-640bb8d4b3f2@45.85.119.41:443?security=tls&sni=mypHOtoGRAPICpIctUre.iR&alpn=http/1.1&type=ws&path=/fJBvsL0uR2MtzRig&host=myphotograpicpicture.ir&encryption=none#%F0%9F%87%AC%F0%9F%87%A7GB%20%7C%20@V2ray_Collector
@@ -246,7 +245,6 @@ trojan://xxoo@146.19.230.241:443?security=tls#%F0%9F%87%AC%F0%9F%87%A7GB-146.19.
 trojan://xxoo@146.19.230.241:443?security=tls&sni=bmi.ir#%F0%9F%87%AC%F0%9F%87%A7GB-146.19.230.241-8893
 trojan://xxoo@146.19.230.241:443?security=tls&sni=loader.tapsell.ir#%F0%9F%87%AC%F0%9F%87%A7GB-146.19.230.241-8889
 vless://19199927-fb46-4203-8872-672fd1daca14@54.38.214.56:37171/?type=tcp&encryption=none#%F0%9F%87%AC%F0%9F%87%A7%20GB%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40vpnplusee_free%20%5B16%5D
-vless://19de5ba4-82b2-4a11-898e-ae460d6733fe@real-z3.sdcards1.ir:8585?security=reality&encryption=none&pbk=58yfyRJyku8oddKvCIBHz0K8LrTWKr3qTe-DMUcrWEg&headerType=none&fp=firefox&type=tcp&sni=tgju.org&sid=ea0e387f2b260e0d#GB🇬🇧
 vless://204a1b7c-cdef-4f12-ea2c-e52ddcbbaf2f@104.16.1.106:80?path=%2F&security=none&encryption=none&host=eng.vinamarketcenter.ir&type=ws#GB🇬🇧
 vless://401374e6-df77-41fb-f638-dad8184f175b@94.247.142.103:443?security=tls&sni=pqh23v5.hiddendom.shop&alpn=h2&type=grpc&encryption=none#%F0%9F%87%AC%F0%9F%87%A7GB%20%7C%20@V2ray_Collector
 vless://4d91916f-a7fd-419b-8b90-640bb8d4b3f2@45.85.119.41:443?security=tls&sni=mypHOtoGRAPICpIctUre.iR&alpn=http/1.1&type=ws&path=/fJBvsL0uR2MtzRig&host=myphotograpicpicture.ir&encryption=none#%F0%9F%87%AC%F0%9F%87%A7GB%20%7C%20@V2ray_Collector
