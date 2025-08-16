@@ -1,5 +1,8 @@
+ss://352ade5a-e9fc-4cb1-9378-dff187253fe9@tunnyl.ru:443?type=tcp&security=reality&pbk=suqEZ-Y0ekSa7F_zGFeRhCLIJqZbnmBbnZJ-zYT7iQI&fp=chrome&sni=yahoo.com&sid=5c0333ed45b1&spx=%2F&flow=xtls-rprx-vision#👉🆔@v2ray_configs_pool📡🇸🇮®️Slovenia©️Ljubljana🅿️ping:17.31ms
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpmOGY3YUN6Y1BLYnNGOHAz@192.71.244.150:990#👉🆔@v2ray_configs_pool📡🇸🇮®️Slovenia©️Ljubljana🅿️ping:57.67ms
 ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@192.71.244.150:989#%F0%9F%87%B8%F0%9F%87%AESI-192.71.244.150-0357
 ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@91.132.94.200:989#%F0%9F%87%B8%F0%9F%87%AESI-91.132.94.200-1070
 ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw@192.71.244.150:989#%F0%9F%87%B8%F0%9F%87%AESI-192.71.244.150-0410
 ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw@192.71.244.150:989#%F0%9F%87%B8%F0%9F%87%AESI-192.71.244.150-4992
 ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw@91.132.94.200:989#%F0%9F%87%B8%F0%9F%87%AESI-91.132.94.200-0341
+vless://352ade5a-e9fc-4cb1-9378-dff187253fe9@tunnyl.ru:443?type=tcp&security=reality&pbk=suqEZ-Y0ekSa7F_zGFeRhCLIJqZbnmBbnZJ-zYT7iQI&fp=chrome&sni=yahoo.com&sid=5c0333ed45b1&spx=%2F&flow=xtls-rprx-vision#👉🆔@v2ray_configs_pool📡🇸🇮®️Slovenia©️Ljubljana🅿️ping:17.31ms
