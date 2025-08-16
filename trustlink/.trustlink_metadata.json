@@ -1,14 +1,14 @@
 {
-  "last_update": "2025-08-16T15:28:25.318714",
-  "total_downloads": 13,
-  "total_configs": 53,
-  "duplicates_skipped": 7,
+  "last_update": "2025-08-16T16:33:17.907316",
+  "total_downloads": 14,
+  "total_configs": 56,
+  "duplicates_skipped": 8,
   "last_healthy_url": "https://raw.githubusercontent.com/Amirchelios/V2RayAutoConfig/refs/heads/main/configs/Healthy.txt",
   "version": "1.0.0",
   "last_stats": {
-    "new_added": 7,
+    "new_added": 3,
     "duplicates_skipped": 1,
     "invalid_skipped": 0,
-    "timestamp": "2025-08-16T15:28:25.318714"
+    "timestamp": "2025-08-16T16:33:17.907316"
   }
 }
