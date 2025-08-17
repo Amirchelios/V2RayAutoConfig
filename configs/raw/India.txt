@@ -1,7 +1,7 @@
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTozNjBlMjFkMjE5NzdkYzEx@103.111.114.29:57456#%F0%9F%87%AE%F0%9F%87%B3IN-103.111.114.29-5225
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTozNjBlMjFkMjE5NzdkYzEx@103.111.114.29:57456#IN%F0%9F%87%AE%F0%9F%87%B3+%7C+103.111.114.29-57456+%7C+230.67ms
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTozNjBlMjFkMjE5NzdkYzEx@103.111.114.29:57456#IN%F0%9F%87%AE%F0%9F%87%B3+%7C+103.111.114.29-57456+%7C+233.96ms
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTozNjBlMjFkMjE5NzdkYzEx@103.111.114.29:57456#👉🆔@v2ray_configs_pool📡🇮🇳®️India©️Mumbai🅿️ping:289.37ms
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTozNjBlMjFkMjE5NzdkYzEx@103.111.114.29:57456#👉🆔@v2ray_configs_pool📡🇮🇳®️India©️Mumbai🅿️ping:247.44ms
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpHIXlCd1BXSDNWYW8=@43.204.29.0:805#%F0%9F%87%AE%F0%9F%87%B3IN-43.204.29.0-2020
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpQY1lDY0h5VFlNZHAzYmZBTUNGb0Z6@64.227.144.190:50690#%F0%9F%87%AE%F0%9F%87%B3IN-64.227.144.190-5087
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpRMDgxZ2F2SFdPUjdXT3ZPbzljWGNH@64.227.144.190:50690#👉🆔@v2ray_configs_pool📡🇮🇳®️India©️Bengaluru🅿️ping:153.42ms

@@ -18,9 +18,10 @@ ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo1VFpud1BiMjNwUVMzOWxJdWNzcEp3@fin.outlinebot
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo5ejRYb1MwVGZ6eE5zU3FCVkFXdDdO@83.147.216.70:64519#FI%F0%9F%87%AB%F0%9F%87%AE+%7C+83.147.216.70-64519+%7C+138.71ms
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTozNjBlMjFkMjE5NzdkYzEx@185.193.102.7:57456#FI%F0%9F%87%AB%F0%9F%87%AE+%7C+185.193.102.7-57456+%7C+134.55ms
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTozNjBlMjFkMjE5NzdkYzEx@185.193.102.7:57456#FI%F0%9F%87%AB%F0%9F%87%AE+%7C+185.193.102.7-57456+%7C+145.8ms
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTozNjBlMjFkMjE5NzdkYzEx@185.193.102.7:57456#👉🆔@v2ray_configs_pool📡🇫🇮®️Finland©️Helsinki🅿️ping:35.66ms
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTozNjBlMjFkMjE5NzdkYzEx@185.193.102.7:57456#👉🆔@v2ray_configs_pool📡🇫🇮®️Finland©️Helsinki🅿️ping:31.74ms
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpCSjVuRFpUdWxtWXpuSHZIWGhTNloz@83.147.216.70:64519#FI%F0%9F%87%AB%F0%9F%87%AE+%7C+83.147.216.70-64519+%7C+132.93ms
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpGM25ZNzNkaTVvbldWM2dvdGJwSTBR@83.147.216.70:64519#FI%F0%9F%87%AB%F0%9F%87%AE+%7C+83.147.216.70-64519+%7C+133.18ms
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpHOW8zcUNiMTJwZEpQa2lBdVVXRjU2OXJWT1d2cmx5UlFpWWREVEFGaW9NPQ%3D%3D@91.149.254.43:39615#👉🆔@v2ray_configs_pool📡🇫🇮®️Finland©️Helsinki🅿️ping:35.02ms
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpMTVNOaDIxVHJYalIyb2syNVEybkU4RU5UMnpvQm1QdmthM1JDQ1VBSFpFTENuV29la1ZqdmFmODlxd2NSa2RieEVmZXAyYmMyYVV0bW54cXZGMWF5UVJlejFKSGpVTGo=@141.98.4.67:52952?prefix=%16%03%01%00%C2%A8%01%01#%F0%9F%87%AB%F0%9F%87%AEFI%20%7C%20@OutlineReleasedKey
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpMTVNOaDIxVHJYalIyb2syNVEybkU4RU5UMnpvQm1QdmthM1JDQ1VBSFpFTENuV29la1ZqdmFmODlxd2NSa2RieEVmZXAyYmMyYVV0bW54cXZGMWF5UVJlejFKSGpVTGo=@141.98.4.67:52952?prefix=%16%03%01%00%C2%A8%01%01#%F0%9F%87%AB%F0%9F%87%AEFI%20%7C%20@OutlineReleasedKey🔸Outline
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpSTGZhN0lsem1tcnd5QnRJNEJPSnMz@83.147.216.70:64519#FI%F0%9F%87%AB%F0%9F%87%AE+%7C+83.147.216.70-64519+%7C+145.95ms
@@ -31,7 +32,6 @@ ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpXbURoVlNpRGlqN1IyWFJPcjNDbTU1@83.147.216.70:
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpXbURoVlNpRGlqN1IyWFJPcjNDbTU1@83.147.216.70:64519#👉🆔@v2ray_configs_pool📡🇫🇮®️Finland©️Helsinki🅿️ping:32.67ms
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpZWGdTOENvbVRhbTdxb2VzUGx6bE1v@83.147.216.70:64519#FI%F0%9F%87%AB%F0%9F%87%AE+%7C+83.147.216.70-64519+%7C+131.86ms
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpZWGdTOENvbVRhbTdxb2VzUGx6bE1v@83.147.216.70:64519#FI%F0%9F%87%AB%F0%9F%87%AE+%7C+83.147.216.70-64519+%7C+146.83ms
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpZWGdTOENvbVRhbTdxb2VzUGx6bE1v@83.147.216.70:64519#👉🆔@v2ray_configs_pool📡🇫🇮®️Finland©️Helsinki🅿️ping:35.74ms
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTphTllzaFJiM216cDc=@93.152.207.167:443#FI%F0%9F%87%AB%F0%9F%87%AE+%7C+93.152.207.167-443+%7C+133.75ms
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTphTllzaFJiM216cDc@93.152.207.167:443#%F0%9F%87%AB%F0%9F%87%AEFI-93.152.207.167-0239
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpnOG84bkVPTHpLdU1penViSzRBanRX@91.149.254.43:7190#👉🆔@v2ray_configs_pool📡🇫🇮®️Finland©️Helsinki🅿️ping:35.29ms
@@ -46,7 +46,7 @@ ss://d8dd94fd-540e-461d-b5d4-acebef02c22a@212.87.222.42:34045?security=reality&e
 ss://debf2a42-1ff4-4ea6-92a4-f6ac49595cc7@abzartun2.divartehran.online:23737?encryption=none&security=reality&sni=varzesh3.com&fp=chrome&pbk=i5nssGunCVG0W2CI3OM-wGXJwCn9W5Xvm0-tQw_SgEQ&sid=7c0b6c88fe5c&type=grpc#REALITY|FI🇫🇮
 ss://e39ea9ab-a0ee-4ca9-cc5d-32cda0258cbc@65.109.218.179:2083?mode=gun&security=reality&encryption=none&pbk=mDWXgatiJqUc4fmeDQqGusEBIhjFVrQ85y_ZUfNpFV8&fp=firefox&spx=%2F&type=grpc&serviceName=melov2ray&sni=khamenei.ir&sid=54602915a7#REALITY|FI🇫🇮
 ss://f48ce62c-85cb-422f-9478-7d049b781ac7@fn.momasvps.ir:8085?security=reality&encryption=none&pbk=cBiruUOymQvzSQnjAD7aaFXgZ45EDbVAEaxf3zxbg1o&headerType=none&fp=firefox&type=tcp&sni=journalofbigdata.springeropen.com&sid=fd7cbbe42ad29796#REALITY|FI🇫🇮
-ss://fdcbd64e-ec6c-4797-8be5-06f0dd504b95@46.62.131.51:12345?type=tcp&security=none#👉🆔@v2ray_configs_pool📡🇫🇮®️Finland©️Helsinki🅿️ping:26.38ms
+ss://fdcbd64e-ec6c-4797-8be5-06f0dd504b95@46.62.131.51:12345?type=tcp&security=noneتعداد#👉🆔@v2ray_configs_pool📡🇫🇮®️Finland©️Helsinki🅿️ping:25.98ms
 ss://fdcbd64e-ec6c-4797-8be5-06f0dd504b95@46.62.131.51:12345?type=tcp&security=noneتعداد#👉🆔@v2ray_configs_pool📡🇫🇮®️Finland©️Helsinki🅿️ping:26.44ms
 ss://id6856346113@s2.nodu11.ru:443/?type=tcp&encryption=none&flow=xtls-rprx-vision&sni=www.vk.com&fp=random&security=reality&pbk=yDwHL93MSZMTVyDy0OhZu-NIlgNA9amsi_t1P8Sla0Q&sid=122455#2%20%7C%20%D0%A4%D0%B8%D0%BD%D0%BB%D1%8F%D0%BD%D0%B4%D0%B8%D1%8F%20%F0%9F%87%AB%F0%9F%87%AE
 ss://id7871326936@45.12.151.40:443?security=reality&encryption=none&pbk=mlcZYm3lgUQDblGpXN-o6i4nugNNxZtPj0QO2Fhoxlw&headerType=none&fp=edge&spx=%2FSX2GVkJseyQLPhX&type=tcp&flow=xtls-rprx-vision&sni=www.yahoo.com&sid=41#👉🆔@v2ray_configs_pool📡🇫🇮®️Finland©️Helsinki🅿️ping:30.78ms
@@ -73,7 +73,6 @@ vless://d8dd94fd-540e-461d-b5d4-acebef02c22a@212.87.222.42:34045?security=realit
 vless://debf2a42-1ff4-4ea6-92a4-f6ac49595cc7@abzartun2.divartehran.online:23737?encryption=none&security=reality&sni=varzesh3.com&fp=chrome&pbk=i5nssGunCVG0W2CI3OM-wGXJwCn9W5Xvm0-tQw_SgEQ&sid=7c0b6c88fe5c&type=grpc#REALITY|FI🇫🇮
 vless://e39ea9ab-a0ee-4ca9-cc5d-32cda0258cbc@65.109.218.179:2083?mode=gun&security=reality&encryption=none&pbk=mDWXgatiJqUc4fmeDQqGusEBIhjFVrQ85y_ZUfNpFV8&fp=firefox&spx=%2F&type=grpc&serviceName=melov2ray&sni=khamenei.ir&sid=54602915a7#REALITY|FI🇫🇮
 vless://f48ce62c-85cb-422f-9478-7d049b781ac7@fn.momasvps.ir:8085?security=reality&encryption=none&pbk=cBiruUOymQvzSQnjAD7aaFXgZ45EDbVAEaxf3zxbg1o&headerType=none&fp=firefox&type=tcp&sni=journalofbigdata.springeropen.com&sid=fd7cbbe42ad29796#REALITY|FI🇫🇮
-vless://fdcbd64e-ec6c-4797-8be5-06f0dd504b95@46.62.131.51:12345?type=tcp&security=none#👉🆔@v2ray_configs_pool📡🇫🇮®️Finland©️Helsinki🅿️ping:26.38ms
 vless://fdcbd64e-ec6c-4797-8be5-06f0dd504b95@46.62.131.51:12345?type=tcp&security=noneتعداد#👉🆔@v2ray_configs_pool📡🇫🇮®️Finland©️Helsinki🅿️ping:26.44ms
 vless://id6856346113@s2.nodu11.ru:443/?type=tcp&encryption=none&flow=xtls-rprx-vision&sni=www.vk.com&fp=random&security=reality&pbk=yDwHL93MSZMTVyDy0OhZu-NIlgNA9amsi_t1P8Sla0Q&sid=122455#2%20%7C%20%D0%A4%D0%B8%D0%BD%D0%BB%D1%8F%D0%BD%D0%B4%D0%B8%D1%8F%20%F0%9F%87%AB%F0%9F%87%AE
 vless://id7871326936@45.12.151.40:443?security=reality&encryption=none&pbk=mlcZYm3lgUQDblGpXN-o6i4nugNNxZtPj0QO2Fhoxlw&headerType=none&fp=edge&spx=%2FSX2GVkJseyQLPhX&type=tcp&flow=xtls-rprx-vision&sni=www.yahoo.com&sid=41#👉🆔@v2ray_configs_pool📡🇫🇮®️Finland©️Helsinki🅿️ping:30.78ms

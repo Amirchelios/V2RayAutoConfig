@@ -53,6 +53,7 @@ trojan://NISHIKUITAN111@185.148.106.44:443?allowInsecure=1&ws=1&wspath=%2F#RU�
 trojan://a1b16d10-4f43-4dd9-8c4f-52065b2b0910@45.88.148.237:28443?security=tls&sni=sbank.ir#%F0%9F%87%B7%F0%9F%87%BARU-45.88.148.237-2707
 trojan://ba74833c-8c0f-4dcd-8cbc-13e3c32d3765@185.236.233.111:2053?sni=ftp.debian.org#%F0%9F%87%B7%F0%9F%87%BA_RU_%E4%BF%84%E7%BD%97%E6%96%AF%E8%81%94%E9%82%A6_3
 trojan://tg-fq521free@45.67.215.95:443?security=tls&sni=torjan.xn--xhq44j.eu.org&type=ws&path=/&Host=torjan.xn--xhq44j.eu.org#%F0%9F%87%B7%F0%9F%87%BARU-45.67.215.95-0653
+trojan://tg-fq521free@45.67.215.95:443?security=tls&type=ws&sni=torjan.xn--xhq44j.eu.org&path=/&host=torjan.xn--xhq44j.eu.org#👉🆔@v2ray_configs_pool📡🇷🇺®️Russia©️Novosibirsk🅿️ping:5.9ms
 trojan://ttfang@45.67.215.216:2096?security=tls&sni=ttfang.fange.me&type=ws&path=Telegram🇨🇳&Host=ttfang.fange.me#%F0%9F%87%B7%F0%9F%87%BARU-45.67.215.216-0720
 vless://04bd2301-8fea-462f-b74b-e244c514135d@a.ru.maviks.ru:443?security=reality&encryption=none&pbk=cGzNRbN_zruI3CVTDukB2nOqWWEj7kgkay24f2fdLmQ&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=maviks.ru&sid=0f917152a871e9c0#REALITY|RU🇷🇺
 vless://0a947205-01a0-4634-8e78-daf200d02def@ru.maviks.eu:443?security=reality&encryption=none&pbk=cGzNRbN_zruI3CVTDukB2nOqWWEj7kgkay24f2fdLmQ&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=maviks.eu&sid=0f917152a871e9c0#REALITY|RU🇷🇺
