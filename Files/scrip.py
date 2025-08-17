@@ -79,11 +79,15 @@ PROTOCOL_CATEGORIES = [
     "Tuic", "Hysteria2", "WireGuard"
 ]
 SUPPORTED_FOR_HEALTH = {"Vmess", "Vless", "Trojan", "ShadowSocks"}
-SUPPORTED_PREFIXES = ('vmess://', 'vless://', 'trojan://', 'ss://')
+SUPPORTED_PREFIXES = ('vmess://', 'vless://', 'trojan://', 'ss://', 'shadowsocks://')
 UNSUPPORTED_PREFIXES = ('ssr://', 'hy2://', 'hysteria2://', 'tuic://', 'tuic5://', 'wireguard://')
 
 def is_supported_link(link):
     l = (link or '').strip().lower()
+    # Skip SS links with unsupported plugin parameters
+    if l.startswith('ss://') or l.startswith('shadowsocks://'):
+        if 'plugin=' in l:
+            return False
     return l.startswith(SUPPORTED_PREFIXES)
 
 def is_persian_like(text):
@@ -655,7 +659,8 @@ def ensure_xray_binary():
 
 def parse_ss_uri(uri):
     try:
-        parsed = urlparse(uri)
+        u = uri.replace('shadowsocks://', 'ss://', 1)
+        parsed = urlparse(u)
         if parsed.netloc:
             auth_host = parsed.netloc
             if '@' in auth_host:
@@ -672,7 +677,8 @@ def parse_ss_uri(uri):
             host, port = hostport.split(':', 1)
             return {'address': host, 'port': int(port), 'method': method, 'password': password}
         else:
-            b64 = uri.split('://', 1)[1].split('#')[0]
+            b64 = u.split('://', 1)[1]
+            b64 = b64.split('#')[0].split('?')[0]
             decoded = decode_base64(b64)
             auth, hostport = decoded.rsplit('@', 1)
             method, password = auth.split(':', 1)
@@ -696,7 +702,7 @@ def parse_vmess_uri(uri):
 def extract_remote_port_from_link(link):
     try:
         l = (link or '').strip()
-        if l.startswith('ss://'):
+        if l.startswith('ss://') or l.startswith('shadowsocks://'):
             ss = parse_ss_uri(l)
             return ss.get('port') if ss else None
         if l.startswith('trojan://') or l.startswith('vless://'):
@@ -742,12 +748,14 @@ def parse_url_userinfo(uri):
     username = parsed.username
     password = parsed.password
     query = parse_qs(parsed.query)
+    # normalize keys to lower-case for convenience
+    query = {k.lower(): v for k, v in query.items()}
     fragment = parsed.fragment
     return parsed, host, port, username, password, query, fragment
 
 def build_outbound_from_link(link):
     l = link.strip()
-    if l.startswith('ss://'):
+    if l.startswith('ss://') or l.startswith('shadowsocks://'):
         ss = parse_ss_uri(l)
         if not ss:
             return None
@@ -767,6 +775,9 @@ def build_outbound_from_link(link):
         parsed, host, port, username, password, query, fragment = parse_url_userinfo(l)
         sni = query.get('sni', [query.get('host', [''])[0]])[0] if query else ''
         network = query.get('type', ['tcp'])[0] if query else 'tcp'
+        grpc_service = (query.get('serviceName', [''])[0] if query else '') or (query.get('service', [''])[0] if query else '')
+        path = query.get('path', ['/'])[0] if query else '/'
+        host_header = query.get('host', [''])[0] if query else ''
         outbound = {
             'protocol': 'trojan',
             'settings': {
@@ -786,12 +797,12 @@ def build_outbound_from_link(link):
             if sni:
                 outbound['streamSettings']['tlsSettings'] = {'serverName': sni}
         if network == 'ws':
-            path = query.get('path', ['/'])[0]
-            host_header = query.get('host', [''])[0]
             outbound['streamSettings']['wsSettings'] = {
                 'path': path,
                 'headers': {'Host': host_header} if host_header else {}
             }
+        if network == 'grpc':
+            outbound['streamSettings']['grpcSettings'] = {'serviceName': grpc_service or path.lstrip('/')}
         return outbound
     if l.startswith('vless://'):
         parsed, host, port, username, password, query, fragment = parse_url_userinfo(l)
@@ -802,6 +813,11 @@ def build_outbound_from_link(link):
         flow = query.get('flow', [''])[0] if query else ''
         host_header = query.get('host', [''])[0] if query else ''
         path = query.get('path', ['/'])[0] if query else '/'
+        reality = (security == 'reality') or ('reality' in [k.lower() for k in (query.keys() if query else [])])
+        pbk = query.get('pbk', [''])[0] if query else ''
+        sid = query.get('sid', [''])[0] if query else ''
+        fp = query.get('fp', [''])[0] if query else ''
+        alpn = query.get('alpn', [''])[0] if query else ''
         outbound = {
             'protocol': 'vless',
             'settings': {
@@ -823,6 +839,20 @@ def build_outbound_from_link(link):
             outbound['streamSettings']['security'] = 'tls'
             if sni:
                 outbound['streamSettings']['tlsSettings'] = {'serverName': sni}
+            if alpn:
+                outbound['streamSettings'].setdefault('tlsSettings', {})['alpn'] = alpn.split(',')
+        if reality:
+            outbound['streamSettings']['security'] = 'reality'
+            reality_settings = {'serverName': sni or host}
+            if pbk:
+                reality_settings['publicKey'] = pbk
+            if sid:
+                reality_settings['shortId'] = sid
+            if fp:
+                reality_settings['fingerprint'] = fp
+            if alpn:
+                reality_settings['alpn'] = alpn.split(',')
+            outbound['streamSettings']['realitySettings'] = reality_settings
         if network == 'ws':
             outbound['streamSettings']['wsSettings'] = {
                 'path': path,
@@ -913,8 +943,8 @@ async def test_proxy_via_xray(link, test_urls, overall_timeout=None):
     proc = await asyncio.create_subprocess_exec(
         ensure_xray_binary(), '-config', cfg_path, stdout=PIPE, stderr=STDOUT
     )
-    await asyncio.sleep(0.4)
-    timeout = aiohttp.ClientTimeout(total=min(8, overall_timeout))
+    await asyncio.sleep(0.6)
+    timeout = aiohttp.ClientTimeout(total=min(10, overall_timeout))
     connector = aiohttp.TCPConnector(ssl=False)
     try:
         async with aiohttp.ClientSession(timeout=timeout, connector=connector) as session:
