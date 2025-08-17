@@ -10,7 +10,10 @@ import time
 import json
 import logging
 import asyncio
-import aiohttp
+try:
+    import aiohttp  # optional in local env
+except Exception:
+    aiohttp = None
 import hashlib
 import subprocess
 import tempfile
@@ -21,6 +24,7 @@ from urllib.parse import urlparse
 import re
 import platform
 import zipfile
+import base64
 
 # تنظیمات
 TRUSTLINK_FILE = "../trustlink/trustlink.txt"
@@ -74,26 +78,37 @@ class DailyTrustLinkTester:
             )
     
     def ensure_xray_binary(self):
-        """اطمینان از وجود فایل اجرایی Xray"""
+        """اطمینان از وجود فایل اجرایی Xray در چند مسیر ممکن"""
         global XRAY_BIN
         
-        if platform.system() == "Windows":
-            xray_name = "xray.exe"
-        else:
-            xray_name = "xray"
-        
-        xray_path = os.path.join(XRAY_DIR, xray_name)
-        
-        if os.path.exists(xray_path):
-            XRAY_BIN = xray_path
-            logging.info(f"Xray binary found: {XRAY_BIN}")
-            return True
-        else:
-            logging.error(f"Xray binary not found at: {xray_path}")
+        try:
+            xray_name = "xray.exe" if platform.system() == "Windows" else "xray"
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            candidates = [
+                os.path.join(XRAY_DIR, xray_name),
+                os.path.join(script_dir, "xray-bin", xray_name),
+                os.path.join(os.getcwd(), "xray-bin", xray_name),
+                shutil.which(xray_name)
+            ]
+            
+            for path in candidates:
+                if path and os.path.exists(path):
+                    XRAY_BIN = path
+                    self.xray_bin = path
+                    logging.info(f"Xray binary found: {XRAY_BIN}")
+                    return True
+            
+            logging.warning("Xray binary not found in expected locations")
+            return False
+        except Exception as e:
+            logging.error(f"خطا در جستجوی Xray: {e}")
             return False
     
     async def create_session(self):
         """ایجاد session برای HTTP requests"""
+        if aiohttp is None:
+            logging.warning("aiohttp در دسترس نیست؛ از session عبور می‌کنیم")
+            return
         if self.session is None or self.session.closed:
             timeout = aiohttp.ClientTimeout(total=TEST_TIMEOUT, connect=5, sock_read=TEST_TIMEOUT)
             self.session = aiohttp.ClientSession(timeout=timeout)
@@ -101,6 +116,8 @@ class DailyTrustLinkTester:
     
     async def close_session(self):
         """بستن session"""
+        if aiohttp is None:
+            return
         if self.session and not self.session.closed:
             await self.session.close()
             logging.info("Session تست بسته شد")
@@ -154,26 +171,24 @@ class DailyTrustLinkTester:
         }
         
         try:
-            # تست ساده با ping به سرور
-            server_address = self.extract_server_address(config)
-            if server_address:
-                start_time = time.time()
-                success = await self.ping_server(server_address)
-                latency = (time.time() - start_time) * 1000  # میلی‌ثانیه
-                
-                if success:
-                    result["success"] = True
-                    result["latency"] = latency
-                    result["download_speed"] = 100.0  # سرعت ثابت برای تست
-                    
-                    logging.info(f"✅ تست موفق: {config_hash} - Latency: {latency:.1f}ms")
-                else:
-                    result["error"] = "Ping failed"
-                    logging.warning(f"❌ تست ناموفق: {config_hash}")
+            host, ports = self.extract_server_info(config)
+            if host and ports:
+                for port in ports:
+                    start_time = time.time()
+                    ok = await self.tcp_ping(host, port)
+                    if ok:
+                        latency = (time.time() - start_time) * 1000.0
+                        result["success"] = True
+                        result["latency"] = latency
+                        result["download_speed"] = await self.test_download_speed(config)
+                        logging.info(f"✅ تست موفق: {config_hash} - {host}:{port} - Latency: {latency:.1f}ms")
+                        break
+                if not result["success"]:
+                    result["error"] = "TCP connect failed"
+                    logging.warning(f"❌ تست ناموفق: {config_hash} - {host}")
             else:
-                result["error"] = "Invalid config format"
+                result["error"] = "Failed to extract host/port"
                 logging.warning(f"❌ کانفیگ نامعتبر: {config_hash}")
-                
         except Exception as e:
             result["error"] = str(e)
             logging.error(f"خطا در تست {config_hash}: {e}")
@@ -181,39 +196,96 @@ class DailyTrustLinkTester:
         return result
     
     def extract_server_address(self, config: str) -> Optional[str]:
-        """استخراج آدرس سرور از کانفیگ"""
+        """استخراج آدرس سرور از کانفیگ (قدیمی) - برای سازگاری باقی مانده"""
+        host, ports = self.extract_server_info(config)
+        return host
+    
+    def extract_server_info(self, config: str) -> Tuple[Optional[str], List[int]]:
+        """استخراج میزبان و پورت(ها) از کانفیگ‌های پشتیبانی شده"""
         try:
-            if config.startswith("vmess://"):
-                # حذف vmess:// و decode کردن
-                vmess_data = config.replace("vmess://", "")
-                import base64
-                decoded = base64.b64decode(vmess_data).decode('utf-8')
-                
-                # parse کردن JSON
-                vmess_config = json.loads(decoded)
-                return vmess_config.get("add", "")
-            else:
-                return None
+            cfg = config.strip()
+            lower = cfg.lower()
+            # اولویت: اگر پورت در کانفیگ مشخص بود همان را برگردان
+            def default_ports(protocol: str) -> List[int]:
+                if protocol in ("vless", "vmess", "trojan"):
+                    return [443, 80, 8443, 2053, 2083, 2096, 2087, 20086, 8080]
+                if protocol == "shadowsocks":
+                    return [8388, 443, 80, 8443, 8080]
+                return [443, 80]
+            
+            if lower.startswith("vmess://"):
+                data_b64 = cfg.split("vmess://", 1)[1]
+                try:
+                    padded = data_b64 + "=" * ((4 - len(data_b64) % 4) % 4)
+                    decoded = base64.b64decode(padded).decode("utf-8", errors="ignore")
+                    vm = json.loads(decoded)
+                    host = vm.get("add") or vm.get("address") or ""
+                    port_raw = vm.get("port")
+                    port = None
+                    if isinstance(port_raw, int):
+                        port = port_raw
+                    elif isinstance(port_raw, str) and port_raw.isdigit():
+                        port = int(port_raw)
+                    ports = [port] if port else default_ports("vmess")
+                    return (host, ports) if host else (None, [])
+                except Exception:
+                    return (None, [])
+            
+            if lower.startswith("vless://") or lower.startswith("trojan://"):
+                p = urlparse(cfg)
+                host = p.hostname
+                port = p.port
+                ports = [port] if port else default_ports("vless")
+                return (host, ports) if host else (None, [])
+            
+            if lower.startswith("ss://"):
+                # تلاش برای parse مستقیم
+                p = urlparse(cfg)
+                if p.hostname:
+                    host = p.hostname
+                    port = p.port
+                    ports = [port] if port else default_ports("shadowsocks")
+                    return (host, ports)
+                # حالت base64
+                raw = cfg.split("ss://", 1)[1]
+                raw = raw.split("#", 1)[0]
+                raw = raw.split("?", 1)[0]
+                try:
+                    padded = raw + "=" * ((4 - len(raw) % 4) % 4)
+                    decoded = base64.urlsafe_b64decode(padded).decode("utf-8", errors="ignore")
+                    # expected: method:password@host:port
+                    after_at = decoded.rsplit("@", 1)[-1]
+                    if ":" in after_at:
+                        host, port_str = after_at.rsplit(":", 1)
+                        port = int(port_str) if port_str.isdigit() else None
+                        ports = [port] if port else default_ports("shadowsocks")
+                        return (host, ports)
+                except Exception:
+                    return (None, [])
+            
+            return (None, [])
         except Exception:
-            return None
+            return (None, [])
     
     async def ping_server(self, server_address: str) -> bool:
-        """ping کردن سرور"""
+        """Deprecated: ping کردن سرور با HTTP - بجای آن از tcp_ping استفاده شود"""
         try:
-            # تست اتصال با timeout کوتاه
-            timeout = aiohttp.ClientTimeout(total=3)
-            async with aiohttp.ClientSession(timeout=timeout) as session:
-                # تست اتصال به پورت 80 یا 443
-                for port in [80, 443]:
-                    try:
-                        url = f"http://{server_address}:{port}" if port == 80 else f"https://{server_address}:{port}"
-                        async with session.get(url) as response:
-                            if response.status < 500:  # هر پاسخ غیر از خطای سرور
-                                return True
-                    except:
-                        continue
-                
-                return False
+            return False
+        except Exception:
+            return False
+    
+    async def tcp_ping(self, host: str, port: int, timeout_sec: int = 3) -> bool:
+        """تلاش برای اتصال TCP به میزبان/پورت با timeout"""
+        try:
+            conn = asyncio.open_connection(host, port)
+            reader, writer = await asyncio.wait_for(conn, timeout=timeout_sec)
+            try:
+                writer.close()
+                if hasattr(writer, "wait_closed"):
+                    await writer.wait_closed()
+            except Exception:
+                pass
+            return True
         except Exception:
             return False
     
@@ -350,6 +422,9 @@ class DailyTrustLinkTester:
             logging.info("=" * 60)
             logging.info("🚀 شروع تست روزانه TrustLink")
             logging.info("=" * 60)
+            
+            # بررسی حضور Xray برای لاگ (اختیاری)
+            self.ensure_xray_binary()
             
             # بارگذاری کانفیگ‌ها
             configs = self.load_trustlink_configs()
