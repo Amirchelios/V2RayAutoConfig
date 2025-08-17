@@ -1,2 +1,4 @@
 ss://3d1c38ee-64b9-4792-8752-a7fa128a1d0d@www.speedtest.net:8443?security=tls&sni=maHsA.allUNIVeRsiTY.onLine&alpn=http/1.1&fp=randomized&type=ws&path=/bjPG7HijNQbb27YI/c2hpcmVuLnlhZW1pa28uZ2dmZi5uZXQ%3D&host=mahsa.alluniversity.online&encryption=none#woman%20life%20freedom
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTp0dW5uZWwtdGVsZWVlLWlkLWliYWhhZA@188.208.110.58:8444?note=--Telegram--@NetifyVPN--#👉🆔@v2ray_configs_pool📡🇷🇴®️Romania©️Lisaura🅿️ping:124.18ms
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTp0dW5uZWwtdGVsZWVlLWlkLWliYWhhZA@188.208.110.58:8444?note=--Telegram--NetifyVPN--#👉🆔@v2ray_configs_pool📡🇷🇴®️Romania©️Lisaura🅿️ping:123.93ms
 vless://3d1c38ee-64b9-4792-8752-a7fa128a1d0d@www.speedtest.net:8443?security=tls&sni=maHsA.allUNIVeRsiTY.onLine&alpn=http/1.1&fp=randomized&type=ws&path=/bjPG7HijNQbb27YI/c2hpcmVuLnlhZW1pa28uZ2dmZi5uZXQ%3D&host=mahsa.alluniversity.online&encryption=none#woman%20life%20freedom

@@ -4,7 +4,6 @@ ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpETTAzOTVMVnF4eWw=@45.145.0.31:51348#%F0%9F%8
 ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@185.153.197.5:989#%F0%9F%87%B2%F0%9F%87%A9MD-185.153.197.5-0302
 ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@192.121.87.89:989#MD%F0%9F%87%B2%F0%9F%87%A9+%7C+192.121.87.89-989+%7C+126.63ms
 ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw@185.153.197.5:989#%F0%9F%87%B2%F0%9F%87%A9MD-185.153.197.5-0270
-ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw@185.153.197.5:989#👉🆔@v2ray_configs_pool📡🇲🇩®️Moldova©️Chisinau🅿️ping:42.91ms
 ss://b5e8bfe7-6cdb-402d-b243-1e0f53ebb582@185.234.66.82:443?path=%2Fjzmdpvws&security=tls&encryption=none&fp=chrome&type=ws#MD🇲🇩
 ss://e137be9d-ac3a-4d54-897d-6a706f34795f@195.42.233.149:443?path=%2Fcdfighws&security=tls&encryption=none&type=ws#MD🇲🇩
 ss://e7d08833-b87f-4e9f-9f48-38485e58155e@185.234.66.93:443?path=%2Fzqpahpws&security=tls&encryption=none&type=ws#MD🇲🇩
