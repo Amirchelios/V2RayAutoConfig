@@ -55,6 +55,7 @@ hysteria2://Cyi3TPih9FtQRwsZAh8aT6ynGJk@54.169.144.240:2166?insecure=1#SG
 hysteria2://J4MF5gYLAejSsZA1b0T3djeNGoI@44.243.233.105:16523?insecure=1#US
 hysteria2://KevinZakarian@kevin.serverv.net:8443?insecure=1&obfs=salamander#XX
 hysteria2://NjEkAYYNqFKUbrksyW1COBtdpU@47.239.220.214:2428?sni=bing.com&insecure=1#HK
+hysteria2://Telegram--%3E%40Ln2Ray@gavazn.lnmarketplace.net:45000?security=tls&obfs=salamander&obfs-password=Telegram--%3E%40Ln2Ray&insecure=1&sni=gavazn.55994421.xyz#%E2%98%9E%20%F0%9D%97%9D%F0%9D%97%BC%F0%9D%97%B6%F0%9D%97%BB%20%E2%9E%A0%20%40Viturey🔗
 hysteria2://Telegram--%3E%40Ln2Ray@gavazn.lnmarketplace.net:45000?security=tls&obfs=salamander&obfs-password=Telegram--%3E%40Ln2Ray&insecure=1&sni=gavazn.55994421.xyz#%F0%9F%87%AC%F0%9F%87%A7telegram%20%E2%9E%A0%20%40v2rayNG_Matsuri
 hysteria2://Y5kSCRNcOSz5YQUkjehzVXeT2mk@175.41.154.215:19298?sni=bing.com&insecure=1#SG
 hysteria2://Yet-Another-Public-Config-1@2a14:3f87:f001:13::a:36400?sni=YAPC-1.afshin.ir&insecure=1&obfs=salamander#NL
