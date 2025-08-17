@@ -1,22 +1,36 @@
 import asyncio
-import aiohttp
+try:
+    import aiohttp
+except Exception:
+    aiohttp = None
 import json
 import re
 import logging
-from bs4 import BeautifulSoup
+try:
+    from bs4 import BeautifulSoup
+except Exception:
+    BeautifulSoup = None
 import os
 import shutil
 from datetime import datetime, timedelta
-import pytz
+try:
+    import pytz
+except Exception:
+    pytz = None
 import base64
-from urllib.parse import parse_qs, unquote
-import jdatetime  
+from urllib.parse import parse_qs, unquote, urlparse, urlunparse, quote
+try:
+    import jdatetime
+except Exception:
+    jdatetime = None
 import platform
 import zipfile
 import tempfile
 import socket
 import time
 from urllib.parse import urlparse
+import urllib.request
+import urllib.error
 from asyncio.subprocess import PIPE, STDOUT
 
 URLS_FILE = 'Files/urls.txt'
@@ -1102,10 +1116,235 @@ def save_to_file(directory, category_name, items_set):
         logging.error(f"Failed to write file {file_path}: {e}")
         return False, 0
 
+# ===== Naming helpers for tested configs =====
+GEO_API_URL = "http://ip-api.com/json/"
+
+def _ensure_b64_padding(data: str) -> str:
+    missing = (-len(data)) % 4
+    if missing:
+        data += "=" * missing
+    return data
+
+def _vmess_decode_json(link: str):
+    try:
+        payload = link.split("vmess://", 1)[-1].strip()
+        payload = _ensure_b64_padding(payload)
+        try:
+            decoded = base64.urlsafe_b64decode(payload).decode('utf-8')
+        except Exception:
+            decoded = base64.b64decode(payload).decode('utf-8')
+        return json.loads(decoded)
+    except Exception:
+        return None
+
+def _vmess_encode_json(data: dict) -> str:
+    raw = json.dumps(data, separators=(",", ":"), ensure_ascii=False).encode('utf-8')
+    try:
+        b64 = base64.urlsafe_b64encode(raw).decode('utf-8').rstrip('=')
+    except Exception:
+        b64 = base64.b64encode(raw).decode('utf-8')
+    return f"vmess://{b64}"
+
+def _get_protocol(config: str) -> str:
+    c = (config or '').strip().lower()
+    if c.startswith('vmess://'):
+        return 'vmess'
+    if c.startswith('vless://'):
+        return 'vless'
+    if c.startswith('trojan://'):
+        return 'trojan'
+    if c.startswith('ss://') or c.startswith('shadowsocks://'):
+        return 'shadowsocks'
+    return 'unknown'
+
+def _parse_query(query: str) -> dict:
+    parsed = parse_qs(query)
+    return {k: v[0] for k, v in parsed.items() if v}
+
+def _extract_details(config: str) -> dict:
+    proto = _get_protocol(config)
+    details = {
+        'protocol': proto,
+        'host': None,
+        'port': None,
+        'transport': None,
+        'security': None,
+    }
+    try:
+        if proto == 'vmess':
+            data = _vmess_decode_json(config)
+            if not data:
+                return details
+            details['host'] = str(data.get('add') or data.get('host') or '').strip() or None
+            details['port'] = str(data.get('port') or '').strip() or None
+            details['transport'] = (data.get('net') or data.get('type') or 'tcp').lower()
+            tls = str(data.get('tls') or data.get('security') or '').lower()
+            if tls and tls != 'none':
+                details['security'] = tls
+            return details
+
+        if proto in {'vless', 'trojan', 'shadowsocks'}:
+            u = urlparse(config)
+            details['host'] = u.hostname or None
+            details['port'] = str(u.port) if u.port else None
+            q = _parse_query(u.query)
+            transport = q.get('type') or q.get('network') or q.get('mode')
+            if proto == 'shadowsocks' and not transport:
+                plugin = q.get('plugin')
+                if plugin:
+                    if 'v2ray' in plugin or 'ws' in plugin:
+                        transport = 'ws'
+                    elif 'obfs' in plugin:
+                        transport = 'obfs'
+            details['transport'] = (transport or 'tcp').lower()
+            security = q.get('security') or q.get('s')
+            if security:
+                details['security'] = security.lower()
+            flow = q.get('flow')
+            if flow and not details['security']:
+                details['security'] = 'xtls'
+            return details
+    except Exception:
+        return details
+    return details
+
+def _apply_name(config: str, protocol: str, new_name: str) -> str:
+    try:
+        if protocol == 'vmess':
+            data = _vmess_decode_json(config)
+            if not data:
+                return config
+            data['ps'] = new_name
+            return _vmess_encode_json(data)
+        u = urlparse(config)
+        fragment = quote(new_name, safe='')
+        return urlunparse(u._replace(fragment=fragment))
+    except Exception:
+        return config
+
+async def _resolve_host_to_ip(host: str | None) -> str | None:
+    if not host:
+        return None
+    try:
+        socket.inet_aton(host)
+        return host
+    except OSError:
+        pass
+    try:
+        loop = asyncio.get_running_loop()
+        infos = await loop.getaddrinfo(host, None, proto=socket.IPPROTO_TCP)
+        for info in infos:
+            ip = info[4][0]
+            if ':' not in ip:
+                return ip
+        return infos[0][4][0] if infos else None
+    except Exception:
+        return None
+
+async def _http_get_json(url: str, timeout: int = 6):
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, timeout=timeout) as resp:
+                if resp.status == 200:
+                    return await resp.json()
+    except Exception:
+        pass
+    def fetch():
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return json.loads(r.read().decode('utf-8', errors='ignore'))
+        except Exception:
+            return None
+    return await asyncio.to_thread(fetch)
+
+def _country_code_to_flag(cc: str | None) -> str:
+    if not cc or len(cc) != 2:
+        return '🏳️'
+    cc = cc.upper()
+    try:
+        return chr(127397 + ord(cc[0])) + chr(127397 + ord(cc[1]))
+    except Exception:
+        return '🏳️'
+
+def _build_label(protocol: str, transport: str | None, security: str | None, ip: str | None, host: str | None, port: str | None, cc: str | None) -> str:
+    flag = _country_code_to_flag(cc)
+    country_disp = (cc or '??').upper()
+    proto_disp = (protocol or '?').upper()
+    transport_disp = (transport or 'tcp').upper()
+    sec_disp = None
+    if security:
+        s = security.lower()
+        if 'reality' in s:
+            sec_disp = 'REALITY'
+        elif 'xtls' in s:
+            sec_disp = 'XTLS'
+        elif s == 'tls' or 'tls' in s:
+            sec_disp = 'TLS'
+    trans_sec = f"{transport_disp}-{sec_disp}" if sec_disp else transport_disp
+    endpoint = ip or host or 'unknown'
+    if port:
+        endpoint = f"{endpoint}:{port}"
+    return f"{flag} {country_disp} | {proto_disp}-{trans_sec} | {endpoint}"
+
+async def rename_and_annotate_configs(configs: set[str]) -> set[str]:
+    if not configs:
+        return set()
+    semaphore = asyncio.Semaphore(HEALTH_CHECK_CONCURRENCY)
+    async def process(c: str) -> str:
+        async with semaphore:
+            d = _extract_details(c)
+            host = d.get('host')
+            port = d.get('port')
+            proto = d.get('protocol') or _get_protocol(c)
+            transport = d.get('transport')
+            security = d.get('security')
+            ip = await _resolve_host_to_ip(host)
+            data = await _http_get_json(f"{GEO_API_URL}{ip}?fields=status,country,countryCode") if ip else None
+            cc = data.get('countryCode') if data and data.get('status') == 'success' else None
+            label = _build_label(proto, transport, security, ip, host, port, cc)
+            return _apply_name(c, proto, label)
+    results = await asyncio.gather(*[process(c) for c in configs], return_exceptions=True)
+    out: set[str] = set()
+    for idx, r in enumerate(results):
+        if isinstance(r, str):
+            out.add(r)
+        else:
+            out.add(list(configs)[idx])
+    return out
+
+def _normalize_config_key(config: str) -> str:
+    try:
+        proto = _get_protocol(config)
+        if proto == 'vmess':
+            data = _vmess_decode_json(config) or {}
+            if 'ps' in data:
+                data = {k: v for k, v in data.items() if k != 'ps'}
+            # sort keys for stability
+            return json.dumps(data, sort_keys=True, separators=(",", ":"))
+        # remove URL fragment for others
+        u = urlparse(config)
+        u2 = u._replace(fragment='')
+        return urlunparse(u2)
+    except Exception:
+        return config.strip()
+
 def generate_simple_readme(protocol_counts, country_counts, all_keywords_data, github_repo_path="Argh94/V2RayAutoConfig", github_branch="main", raw_protocol_counts=None, raw_country_counts=None):
-    tz = pytz.timezone('Asia/Tehran')
-    now = datetime.now(tz)
-    jalali_date = jdatetime.datetime.fromgregorian(datetime=now)
+    if pytz:
+        tz = pytz.timezone('Asia/Tehran')
+        now = datetime.now(tz)
+    else:
+        now = datetime.now()
+    if jdatetime:
+        jalali_date = jdatetime.datetime.fromgregorian(datetime=now)
+    else:
+        class _Dummy:
+            def __init__(self, dt):
+                self._dt = dt
+            def strftime(self, fmt):
+                # Fallback to Gregorian if jdatetime not available
+                return self._dt.strftime(fmt)
+        jalali_date = _Dummy(now)
     time_str = jalali_date.strftime("%H:%M")
     date_str = jalali_date.strftime("%d-%m-%Y")
     timestamp = f"آخرین به‌روزرسانی: {time_str} {date_str}"
@@ -1435,8 +1674,19 @@ async def main():
     async def fetch_with_sem(session, url_to_fetch):
         async with sem:
             return await fetch_url(session, url_to_fetch)
-    async with aiohttp.ClientSession() as session:
-        fetched_pages = await asyncio.gather(*[fetch_with_sem(session, u) for u in urls])
+    if aiohttp is None:
+        # Fallback simple fetch without session (no parallel HTTP w/o aiohttp)
+        fetched_pages = []
+        for u in urls:
+            try:
+                req = urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0"})
+                with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as r:
+                    fetched_pages.append((u, r.read().decode('utf-8', errors='ignore')))
+            except Exception:
+                fetched_pages.append((u, None))
+    else:
+        async with aiohttp.ClientSession() as session:
+            fetched_pages = await asyncio.gather(*[fetch_with_sem(session, u) for u in urls])
 
     final_configs_by_country = {cat: set() for cat in country_category_names}
     final_all_protocols = {cat: set() for cat in PROTOCOL_CATEGORIES}
@@ -1577,6 +1827,12 @@ async def main():
                 items_to_save = items if KEEP_UNTESTED_ON_HEALTH else set()
         if ENABLE_HEALTH_CHECK and MAX_HEALTHY_PER_PROTOCOL:
             items_to_save = set(list(items_to_save)[:MAX_HEALTHY_PER_PROTOCOL])
+        # Apply naming for tested items (only when health check enabled)
+        if ENABLE_HEALTH_CHECK and items_to_save:
+            try:
+                items_to_save = await rename_and_annotate_configs(items_to_save)
+            except Exception as e:
+                logging.warning(f"Naming failed for {category}: {e}")
         saved, count = save_to_file(OUTPUT_DIR, category, items_to_save)
         if saved:
             protocol_counts[category] = count
@@ -1584,6 +1840,12 @@ async def main():
     for category, items in final_configs_by_country.items():
         if ENABLE_HEALTH_CHECK:
             items = {x for x in items if (x in healthy_union) or (KEEP_UNTESTED_ON_HEALTH and not is_supported_link(x))}
+        # Apply naming for country buckets too (only for tested items)
+        if ENABLE_HEALTH_CHECK and items:
+            try:
+                items = await rename_and_annotate_configs(items)
+            except Exception as e:
+                logging.warning(f"Naming failed for country {category}: {e}")
         saved, count = save_to_file(OUTPUT_DIR, category, items)
         if saved:
             country_counts[category] = count
@@ -1601,10 +1863,21 @@ async def main():
         existing_healthy_configs = load_existing_healthy_from_repository()
         logging.info(f"Loaded {len(existing_healthy_configs)} existing configs from repository")
         
-        # Merge new healthy configs with existing ones
-        all_healthy_configs = merge_healthy_configs(existing_healthy_configs, healthy_union)
+        # Merge new healthy configs with existing ones; normalize to avoid duplicates differing only by names
+        merged = merge_healthy_configs(existing_healthy_configs, healthy_union)
+        # De-duplicate by normalized key (remove ps/fragment differences)
+        dedup_map = {}
+        for cfg in merged:
+            key = _normalize_config_key(cfg)
+            dedup_map[key] = cfg
+        all_healthy_configs = set(dedup_map.values())
         logging.info(f"Merge completed: {len(existing_healthy_configs)} existing + {len(healthy_union)} new = {len(all_healthy_configs)} total")
         
+        # Apply naming to merged global healthy configs as well
+        try:
+            all_healthy_configs = await rename_and_annotate_configs(all_healthy_configs)
+        except Exception as e:
+            logging.warning(f"Naming failed for Healthy.txt: {e}")
         saved, count = save_to_file(
             OUTPUT_DIR,
             os.path.splitext(os.path.basename(HEALTHY_OUTPUT_FILE))[0],
