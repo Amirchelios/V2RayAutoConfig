@@ -869,7 +869,6 @@ trojan://Aimer@121.176.175.54:32444/?type=tcp&security=tls&sni=epccx.ambercc.fil
 trojan://Aimer@124.156.202.172:443/?type=tcp&security=tls&sni=epcca.ambercc.filegear-sg.me#%40Hope_Net-join-us-on-Telegram
 trojan://Aimer@129.226.150.167:443/?type=tcp&security=tls&sni=agepq.ambercc.filegear-s...
 trojan://Aimer@130.250.137.63:2083/?type=tcp&security=tls&sni=epccd.ambercc.filegear-sg.me#%40Hope_Net-join-us-on-Telegram
-trojan://Aimer@130.250.137.63:2083?allowInsecure=1&sni=epgc.aimercc.dpdns.org&type=ws&host=epgc.aimercc.dpdns.org&path=/?ed=2560#🇸🇬[openproxylist.com]
 trojan://Aimer@130.250.137.63:2083?security=tls&sni=epgc.aimercc.dpdns.org&type=ws&path=/?ed=2560&Host=epgc.aimercc.dpdns.org#%F0%9F%87%BA%F0%9F%87%B8US-130.250.137.63-0678
 trojan://Aimer@135.84.64.36:2083/?type=tcp&security=tls&sni=epccf.ambercc.filegear-sg.me#%F0%9F%87%BA%F0%9F%87%B8US-135.84.64.36-2000
 trojan://Aimer@135.84.64.77:2096/?type=tcp&security=tls&sni=epccy.ambercc.filegear-sg.me#%F0%9F%87%BA%F0%9F%87%B8US-135.84.64.77-2165
@@ -932,7 +931,6 @@ trojan://Aimer@154.23.172.19:11000/?type=tcp&security=tls&sni=epgb.aimercc.dpdns
 trojan://Aimer@154.26.182.37:443/?type=tcp&security=tls&sni=epgb.aimercc.dpdns.org#%F0%9F%87%BA%F0%9F%87%B8US-154.26.182.37-0680
 trojan://Aimer@154.31.113.72:443/?type=tcp&security=tls&sni=ngepz.ambercc.filegear-sg.me#%F0%9F%8D%8053%40oneclickvpnkeys
 trojan://Aimer@155.46.213.38:2083/?type=tcp&security=tls&sni=agepw.ambercc.filegear-sg.me&allowInsecure=1#%40Hope_Net-join-us-on-Telegram
-trojan://Aimer@155.46.213.38:2083?allowInsecure=1&sni=epgc.aimercc.dpdns.org&type=ws&host=epgc.aimercc.dpdns.org&path=/?ed=2560#🇸🇬[openproxylist.com]
 trojan://Aimer@155.46.213.38:2083?security=tls&sni=epgc.aimercc.dpdns.org&type=ws&path=%2F%3Fed%3D2560&Host=epgc.aimercc.dpdns.org#%F0%9F%8F%81RELAY-155.46.213.38-1134
 trojan://Aimer@155.46.213.38:2083?security=tls&sni=epgc.aimercc.dpdns.org&type=ws&path=/?ed=2560&Host=epgc.aimercc.dpdns.org#%F0%9F%8F%81RELAY-155.46.213.38-0669
 trojan://Aimer@156.225.72.199:2096/?type=tcp&security=tls&sni=ngepx.ambercc.filegear-sg.me#%F0%9F%8F%81RELAY-156.225.72.199-1378
@@ -1179,6 +1177,7 @@ trojan://Aimer@61.76.23.133:10251/?type=ws&path=%2F%3Fed%3D2560%26proxyip%3Dts.h
 trojan://Aimer@63.141.128.66:2087/?type=tcp&security=tls&sni=epmf.ambercc.filegear-sg.me#%F0%9F%87%BA%F0%9F%87%B8US-63.141.128.66-1044
 trojan://Aimer@63.141.128.66:2087?security=tls&sni=epgc.aimercc.dpdns.org&type=ws&path=/?ed=2560&Host=epgc.aimercc.dpdns.org#%F0%9F%87%BA%F0%9F%87%B8US-63.141.128.66-0672
 trojan://Aimer@66.81.247.230:2096/?type=tcp&security=tls&sni=epmf.ambercc.filegear-sg.me#%F0%9F%8F%81RELAY-66.81.247.230-1048
+trojan://Aimer@66.81.247.230:2096?allowInsecure=1&sni=epgc.aimercc.dpdns.org&type=ws&host=epgc.aimercc.dpdns.org&path=/?ed=2560#🇸🇬[openproxylist.com]
 trojan://Aimer@66.81.247.230:2096?security=tls&sni=epgc.aimercc.dpdns.org&type=ws&path=%2F%3Fed%3D2560&Host=epgc.aimercc.dpdns.org#%F0%9F%8F%81RELAY-66.81.247.230-1138
 trojan://Aimer@66.81.247.230:2096?security=tls&sni=epgc.aimercc.dpdns.org&type=ws&path=/?ed=2560&Host=epgc.aimercc.dpdns.org#%F0%9F%8F%81RELAY-66.81.247.230-0685
 trojan://Aimer@66.81.247.88:2083?security=tls&sni=epgc.aimercc.dpdns.org&type=ws&path=%2F%3Fed%3D2560&Host=epgc.aimercc.dpdns.org#%F0%9F%8F%81RELAY-66.81.247.88-1127
