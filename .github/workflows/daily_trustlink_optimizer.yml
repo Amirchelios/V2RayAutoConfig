@@ -40,7 +40,7 @@ jobs:
         cd Files/xray-bin
         # دانلود Xray برای Linux
         wget -O xray.zip "https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip"
-        unzip xray.zip
+        unzip -o xray.zip
         chmod +x xray
         rm xray.zip
         # دانلود فایل‌های geoip و geosite
