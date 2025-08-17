@@ -253,7 +253,6 @@ ss://c325f85d4634427c9c855b17ffc94545Og==@chmod1.mchmod.shop:31520#DE%F0%9F%87%A
 ss://c39a101c-0a7b-4940-8e6a-f8346d70b24b@91.99.221.206:443?security=none&encryption=none&host=zula.ir&headerType=http&type=tcp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Nuremberg🅿️ping:10.58ms
 ss://c39a101c-0a7b-4940-8e6a-f8346d70b24b@91.99.221.206:443?security=none&encryption=none&host=zula.ir&headerType=http&type=tcp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Nuremberg🅿️ping:10.59ms
 ss://c43b7819-008e-4863-aa20-9d3fc2935df8@rezidental.az9x99.ir:2053?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
-ss://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-star.dsadsadads.ir:2070?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
 ss://c80463ca-2231-4f44-ba98-c9518395be38@139.162.188.193:21866/?type=tcp&encryption=none#%F0%9F%87%A9%F0%9F%87%AA%20DE%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40v2rayngn%20%5B13%5D
 ss://c80463ca-2231-4f44-ba98-c9518395be38@139.162.188.193:21866?security=none&encryption=none&headerType=none&type=tcp#DE🇩🇪
 ss://ccbe6b7c-9264-40c4-8bc1-ef8f6205d7a4@www.speedtest.net:8443?path=%2F&security=tls&encryption=none&host=hetzner-2.access.name.ng&fp=random&type=ws&sni=hetzner-2.access.name.ng#DE🇩🇪
@@ -511,7 +510,6 @@ vless://bfae5f06-1b75-4a23-9bbf-a17fb0f4e945@150.241.108.219:51410?mode=auto&pat
 vless://c39a101c-0a7b-4940-8e6a-f8346d70b24b@91.99.221.206:443?security=none&encryption=none&host=zula.ir&headerType=http&type=tcp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Nuremberg🅿️ping:10.58ms
 vless://c39a101c-0a7b-4940-8e6a-f8346d70b24b@91.99.221.206:443?security=none&encryption=none&host=zula.ir&headerType=http&type=tcp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Nuremberg🅿️ping:10.59ms
 vless://c43b7819-008e-4863-aa20-9d3fc2935df8@rezidental.az9x99.ir:2053?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
-vless://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-star.dsadsadads.ir:2070?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
 vless://c80463ca-2231-4f44-ba98-c9518395be38@139.162.188.193:21866/?type=tcp&encryption=none#%F0%9F%87%A9%F0%9F%87%AA%20DE%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40v2rayngn%20%5B13%5D
 vless://c80463ca-2231-4f44-ba98-c9518395be38@139.162.188.193:21866?security=none&encryption=none&headerType=none&type=tcp#DE🇩🇪
 vless://ccbe6b7c-9264-40c4-8bc1-ef8f6205d7a4@www.speedtest.net:8443?path=%2F&security=tls&encryption=none&host=hetzner-2.access.name.ng&fp=random&type=ws&sni=hetzner-2.access.name.ng#DE🇩🇪
