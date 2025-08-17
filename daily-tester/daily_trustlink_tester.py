@@ -496,8 +496,7 @@ async def main():
     
     try:
         # اجرای تست روزانه با timeout
-        async with asyncio.timeout(600):  # timeout 10 دقیقه
-            success = await tester.run_daily_test()
+        success = await asyncio.wait_for(tester.run_daily_test(), timeout=600)  # timeout 10 دقیقه
         
         if success:
             logging.info("🎉 تست روزانه با موفقیت انجام شد")
