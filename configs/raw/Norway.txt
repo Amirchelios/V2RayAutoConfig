@@ -1,7 +1,8 @@
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpmOGY3YUN6Y1BLYnNGOHAz@185.213.23.226:990#%F0%9F%87%B3%F0%9F%87%B4NO-185.213.23.226-0326
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpmOGY3YUN6Y1BLYnNGOHAz@185.213.23.226:990#NO%F0%9F%87%B3%F0%9F%87%B4+%7C+185.213.23.226-990+%7C+96.11ms
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpmOGY3YUN6Y1BLYnNGOHAz@185.213.23.226:990#👉🆔@v2ray_configs_pool📡🇳🇴®️Norway©️Oslo🅿️ping:35.1ms
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpmOGY3YUN6Y1BLYnNGOHAz@185.213.23.226:990#👉🆔@v2ray_configs_pool📡🇳🇴®️Norway©️Oslo🅿️ping:29.06ms
 ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@185.213.23.226:989#%F0%9F%87%B3%F0%9F%87%B4NO-185.213.23.226-0299
+ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@185.213.23.226:989#👉🆔@v2ray_configs_pool📡🇳🇴®️Norway©️Oslo🅿️ping:31.15ms
 ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@185.90.61.153:989#%F0%9F%87%B3%F0%9F%87%B4NO-185.90.61.153-8656
 ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw@185.213.23.226:989#%F0%9F%87%B3%F0%9F%87%B4NO-185.213.23.226-0273
 ss://df54e90b-a045-489e-8666-d77a73e4effe@fastly.extvay.ir:80/?type=ws&encryption=none&host=External_Net.org&path=%3Fed%3D9090#%F0%9F%87%B9%F0%9F%87%B7%20%7C%20Fastly%20no%20tls%20%E2%9A%A1%F0%9F%9A%A8
