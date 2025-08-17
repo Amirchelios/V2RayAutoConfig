@@ -1827,12 +1827,6 @@ async def main():
                 items_to_save = items if KEEP_UNTESTED_ON_HEALTH else set()
         if ENABLE_HEALTH_CHECK and MAX_HEALTHY_PER_PROTOCOL:
             items_to_save = set(list(items_to_save)[:MAX_HEALTHY_PER_PROTOCOL])
-        # Apply naming for tested items (only when health check enabled)
-        if ENABLE_HEALTH_CHECK and items_to_save:
-            try:
-                items_to_save = await rename_and_annotate_configs(items_to_save)
-            except Exception as e:
-                logging.warning(f"Naming failed for {category}: {e}")
         saved, count = save_to_file(OUTPUT_DIR, category, items_to_save)
         if saved:
             protocol_counts[category] = count
@@ -1840,12 +1834,6 @@ async def main():
     for category, items in final_configs_by_country.items():
         if ENABLE_HEALTH_CHECK:
             items = {x for x in items if (x in healthy_union) or (KEEP_UNTESTED_ON_HEALTH and not is_supported_link(x))}
-        # Apply naming for country buckets too (only for tested items)
-        if ENABLE_HEALTH_CHECK and items:
-            try:
-                items = await rename_and_annotate_configs(items)
-            except Exception as e:
-                logging.warning(f"Naming failed for country {category}: {e}")
         saved, count = save_to_file(OUTPUT_DIR, category, items)
         if saved:
             country_counts[category] = count
