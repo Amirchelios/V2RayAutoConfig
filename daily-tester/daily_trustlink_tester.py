@@ -254,21 +254,27 @@ class DailyTrustLinkTester:
         
         semaphore = asyncio.Semaphore(CONCURRENT_TESTS)
         
-        async def test_single_config(config):
+        async def test_single_config(config: str) -> Dict:
             async with semaphore:
-                return await self.test_config_connection(config)
+                try:
+                    return await self.test_config_connection(config)
+                except Exception as e:
+                    return {
+                        "config": config,
+                        "hash": self.create_config_hash(config),
+                        "success": False,
+                        "latency": None,
+                        "download_speed": None,
+                        "error": str(e),
+                        "protocol": self.get_protocol(config)
+                    }
         
         tasks = [test_single_config(config) for config in configs]
-        results = await asyncio.gather(*tasks, return_exceptions=True)
+        results = await asyncio.gather(*tasks, return_exceptions=False)
         
-        # فیلتر کردن نتایج موفق
-        valid_results = []
-        for result in results:
-            if isinstance(result, dict) and result["success"]:
-                valid_results.append(result)
-        
-        logging.info(f"تست کامل شد: {len(valid_results)} کانفیگ موفق از {len(configs)}")
-        return valid_results
+        successful_count = sum(1 for r in results if r.get("success"))
+        logging.info(f"تست کامل شد: {successful_count} کانفیگ موفق از {len(configs)}")
+        return results
     
     def select_best_configs(self, results: List[Dict]) -> List[str]:
         """انتخاب بهترین کانفیگ‌ها"""
@@ -357,12 +363,15 @@ class DailyTrustLinkTester:
             # تست تمام کانفیگ‌ها
             results = await self.test_all_configs(configs)
             
-            if not results:
+            successful_results = [r for r in results if r.get("success")]
+            if not successful_results:
                 logging.warning("⚠️ هیچ کانفیگ موفقی یافت نشد")
+                # ذخیره نتایج ناموفق برای گزارش‌گیری
+                self.save_test_results(results, [])
                 return False
             
-            # انتخاب بهترین کانفیگ‌ها
-            best_configs = self.select_best_configs(results)
+            # انتخاب بهترین کانفیگ‌ها از بین موفق‌ها
+            best_configs = self.select_best_configs(successful_results)
             
             # ذخیره نتایج
             self.save_tested_configs(best_configs)
