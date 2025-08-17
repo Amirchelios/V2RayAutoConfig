@@ -1,0 +1,19 @@
+{
+  "timestamp": "2025-08-17T02:32:03.426280",
+  "total_configs": 13,
+  "successful": 13,
+  "failed": 0,
+  "best_configs": 10,
+  "protocol_stats": {
+    "vmess": {
+      "total": 13,
+      "successful": 13
+    }
+  },
+  "last_test_stats": {
+    "total_configs": 13,
+    "successful": 13,
+    "failed": 0,
+    "best_configs": 10
+  }
+}
