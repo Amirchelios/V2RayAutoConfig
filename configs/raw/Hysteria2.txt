@@ -55,7 +55,6 @@ hysteria2://5OiuCsPmULZ0lJwts89fegLJE@54.169.224.169:17193?sni=bing.com&insecure
 hysteria2://7992f244-8c2c-4a1a-923f-2e116e90149b@198.23.130.211:443/?mport=26666-29999&insecure=1&sni=file-oss-ccs-02.dafei.de#Channel%20id%3A%20%40@proxy_kafee%F0%9F%87%BA%F0%9F%87%B8hysteria://208.87.243.187:15823/?insecure=1&peer=apple.com&auth=dongtaiwang.com&upmbps=100&downmbps=100&alpn=h3#Channel%20id%3A%20%40@proxy_kafee%F0%9F%87%BA%F0%9F%87%B8
 hysteria2://7992f244-8c2c-4a1a-923f-2e116e90149b@198.23.130.211:443/?mport=26666-29999&insecure=1&sni=file-oss-ccs-02.dafei.de#Channel%20id%3A%20%40ShadowProxy66%F0%9F%87%BA%F0%9F%87%B8hysteria://208.87.243.187:15823/?insecure=1&peer=apple.com&auth=dongtaiwang.com&upmbps=100&downmbps=100&alpn=h3#Channel%20id%3A%20%40ShadowProxy66%F0%9F%87%BA%F0%9F%87%B8
 hysteria2://7992f244-8c2c-4a1a-923f-2e116e90149b@198.23.130.211:443?sni=file-oss-ccs-02.dafei.de&insecure=1#US
-hysteria2://7fb6dcc5-5396-4b95-bfe3-789f5c0120be@hsxg.huasuan666.top:22153?sni=hsxg.huasuan666.top&insecure=1#HK
 hysteria2://8418fb71-419d-4fc3-8b29-d7fee8de76c7@104.168.34.109:443?sni=www.bing.com&insecure=1#US
 hysteria2://95d2db5c-e604-4afe-9869-e8c50dac1bfa@hl.dport.top:33659?sni=hl.dport.top&insecure=1&obfs=salamander#NL
 hysteria2://96ccaa92-f487-4673-b8f5-a6ee167d6f39@yume-us.legeth.xyz:11683?insecure=1#XX
