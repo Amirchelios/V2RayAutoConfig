@@ -1,0 +1,116 @@
+name: "VLESS Tester - Hourly Execution"
+
+on:
+  schedule:
+    # اجرای خودکار هر ساعت
+    - cron: "0 * * * *"
+  
+  # اجرای دستی از طریق GitHub Actions
+  workflow_dispatch:
+    inputs:
+      test_mode:
+        description: "حالت تست (سریع/کامل)"
+        required: true
+        default: "سریع"
+        type: choice
+        options:
+          - "سریع"
+          - "کامل"
+
+  # اجرا در push به main branch
+  push:
+    branches: [ main, master ]
+
+jobs:
+  vless-tester:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: "Checkout Repository"
+      uses: actions/checkout@v4
+      
+    - name: "Setup Python"
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+        
+    - name: "Install Dependencies"
+      run: |
+        python -m pip install --upgrade pip
+        cd vless
+        pip install -r requirements.txt
+        
+    - name: "Create Required Directories"
+      run: |
+        mkdir -p logs
+        mkdir -p trustlink
+        
+    - name: "Run VLESS Tester"
+      run: |
+        echo "Starting VLESS Tester..."
+        cd vless
+        python vless_tester.py
+        
+    - name: "Check Results"
+      run: |
+        echo "Checking results..."
+        if [ -f "trustlink/trustlink_vless.txt" ]; then
+          echo "File trustlink_vless.txt created"
+          echo "Line count: $(wc -l < trustlink/trustlink_vless.txt)"
+          echo "File size: $(du -h trustlink/trustlink_vless.txt | cut -f1)"
+        else
+          echo "File trustlink_vless.txt not created"
+          exit 1
+        fi
+        
+        if [ -f "trustlink/.trustlink_vless_metadata.json" ]; then
+          echo "Metadata file created"
+          cat trustlink/.trustlink_vless_metadata.json
+        else
+          echo "Metadata file not created"
+        fi
+        
+    - name: "Upload Logs"
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: "vless-tester-logs"
+        path: |
+          logs/
+          trustlink/
+        retention-days: 7
+        
+    - name: "Commit Results"
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        if [ -f "trustlink/trustlink_vless.txt" ]; then
+          git add trustlink/trustlink_vless.txt
+          git add trustlink/.trustlink_vless_metadata.json
+          git add logs/
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Auto VLESS update - $(date '+%Y-%m-%d %H:%M:%S')"
+            echo "Changes committed"
+          fi
+        fi
+        
+    - name: "Push Changes"
+      run: |
+        if [ -f "trustlink/trustlink_vless.txt" ]; then
+          git push origin HEAD:${{ github.ref }}
+          echo "Changes pushed"
+        else
+          echo "No changes to push"
+        fi
+      continue-on-error: true
+      
+    - name: "Final Status"
+      run: |
+        echo "VLESS Tester execution completed!"
+        echo "Execution time: $(date)"
+        echo "Results saved in trustlink/trustlink_vless.txt"
+        echo "Metadata saved in trustlink/.trustlink_vless_metadata.json"
