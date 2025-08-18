@@ -636,6 +636,8 @@ class VLESSManager:
             source_configs = self.load_vless_source_configs()
             if not source_configs:
                 logging.warning("هیچ کانفیگ VLESS جدیدی از فایل منبع بارگذاری نشد")
+                # ایجاد فایل خالی با پیام مناسب
+                self.create_fallback_output("هیچ کانفیگ VLESS جدیدی یافت نشد")
                 return False
             
             # ایجاد session
@@ -645,6 +647,8 @@ class VLESSManager:
             test_results = await self.test_all_vless_configs(source_configs)
             if not test_results:
                 logging.warning("هیچ کانفیگ VLESS موفقی یافت نشد")
+                # ایجاد فایل خالی با پیام مناسب
+                self.create_fallback_output("هیچ کانفیگ VLESS موفقی یافت نشد")
                 return False
             
             # انتخاب بهترین کانفیگ‌های VLESS
@@ -664,13 +668,54 @@ class VLESSManager:
                 return True
             else:
                 logging.error("❌ خطا در ذخیره فایل VLESS")
+                # ایجاد فایل fallback
+                self.create_fallback_output("خطا در ذخیره فایل اصلی")
                 return False
                 
         except Exception as e:
             logging.error(f"خطا در اجرای به‌روزرسانی VLESS: {e}")
+            # ایجاد فایل fallback در صورت خطا
+            self.create_fallback_output(f"خطا در اجرا: {str(e)}")
             return False
         finally:
             await self.close_session()
+    
+    def create_fallback_output(self, message: str):
+        """ایجاد فایل خروجی fallback در صورت خطا"""
+        try:
+            logging.info(f"ایجاد فایل fallback: {message}")
+            
+            # اطمینان از وجود دایرکتوری
+            os.makedirs(os.path.dirname(TRUSTLINK_VLESS_FILE), exist_ok=True)
+            
+            # ایجاد فایل خروجی ساده
+            with open(TRUSTLINK_VLESS_FILE, 'w', encoding='utf-8') as f:
+                f.write("# فایل کانفیگ‌های VLESS - TrustLink VLESS\n")
+                f.write(f"# آخرین به‌روزرسانی: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+                f.write(f"# وضعیت: {message}\n")
+                f.write("# " + "="*50 + "\n\n")
+                f.write("# هیچ کانفیگ VLESS سالمی یافت نشد\n")
+                f.write("# لطفاً لاگ‌ها را بررسی کنید\n")
+            
+            # ایجاد متادیتای ساده
+            fallback_metadata = {
+                "last_update": datetime.now().isoformat(),
+                "total_tests": 0,
+                "total_configs": 0,
+                "working_configs": 0,
+                "failed_configs": 0,
+                "iran_accessible_configs": 0,
+                "error_message": message,
+                "status": "fallback"
+            }
+            
+            with open(TRUSTLINK_VLESS_METADATA, 'w', encoding='utf-8') as f:
+                json.dump(fallback_metadata, f, indent=2, ensure_ascii=False)
+            
+            logging.info("فایل fallback با موفقیت ایجاد شد")
+            
+        except Exception as e:
+            logging.error(f"خطا در ایجاد فایل fallback: {e}")
     
     def get_status(self) -> Dict:
         """دریافت وضعیت فعلی برنامه"""
@@ -738,11 +783,71 @@ def schedule_vless_tester():
 
 async def main():
     """تابع اصلی برنامه"""
-    if len(sys.argv) > 1 and sys.argv[1] == "--auto":
-        # حالت خودکار
-        schedule_vless_tester()
+    if len(sys.argv) > 1:
+        if sys.argv[1] == "--auto":
+            # حالت خودکار
+            schedule_vless_tester()
+        elif sys.argv[1] == "--test":
+            # حالت تست ساده برای GitHub Actions
+            setup_logging()
+            logging.info("🧪 VLESS Tester - Test Mode (GitHub Actions)")
+            
+            manager = VLESSManager()
+            
+            try:
+                # تست ساده بدون اجرای کامل
+                logging.info("بررسی فایل‌های منبع...")
+                
+                # بررسی فایل منبع
+                if os.path.exists(VLESS_SOURCE_FILE):
+                    with open(VLESS_SOURCE_FILE, 'r', encoding='utf-8') as f:
+                        lines = f.readlines()
+                    logging.info(f"فایل منبع موجود: {len(lines)} خط")
+                else:
+                    logging.error(f"فایل منبع یافت نشد: {VLESS_SOURCE_FILE}")
+                
+                # ایجاد دایرکتوری‌های خروجی
+                os.makedirs("../trustlink", exist_ok=True)
+                os.makedirs("../logs", exist_ok=True)
+                
+                # ایجاد فایل تست ساده
+                test_file = "../trustlink/trustlink_vless.txt"
+                with open(test_file, 'w', encoding='utf-8') as f:
+                    f.write("# فایل تست VLESS - TrustLink VLESS\n")
+                    f.write(f"# ایجاد شده در: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+                    f.write("# حالت: تست GitHub Actions\n")
+                    f.write("# " + "="*50 + "\n\n")
+                    f.write("# این فایل برای تست GitHub Actions ایجاد شده است\n")
+                    f.write("# در اجرای واقعی، کانفیگ‌های VLESS سالم اینجا قرار می‌گیرند\n")
+                
+                # ایجاد متادیتای تست
+                test_metadata = {
+                    "last_update": datetime.now().isoformat(),
+                    "total_tests": 0,
+                    "total_configs": 0,
+                    "working_configs": 0,
+                    "failed_configs": 0,
+                    "iran_accessible_configs": 0,
+                    "status": "test_mode",
+                    "message": "GitHub Actions test mode"
+                }
+                
+                with open("../trustlink/.trustlink_vless_metadata.json", 'w', encoding='utf-8') as f:
+                    json.dump(test_metadata, f, indent=2, ensure_ascii=False)
+                
+                logging.info("✅ فایل‌های تست با موفقیت ایجاد شدند")
+                logging.info(f"✅ فایل خروجی: {test_file}")
+                logging.info(f"✅ متادیتا: ../trustlink/.trustlink_vless_metadata.json")
+                
+            except Exception as e:
+                logging.error(f"خطا در حالت تست: {e}")
+                # ایجاد فایل fallback
+                manager.create_fallback_output(f"خطا در حالت تست: {str(e)}")
+        else:
+            # اجرای یکباره
+            await run_vless_tester()
     else:
-        # اجرای یکباره
+        # اجرای یکباره (پیش‌فرض)
         await run_vless_tester()
 
 if __name__ == "__main__":

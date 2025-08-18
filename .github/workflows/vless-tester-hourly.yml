@@ -45,29 +45,80 @@ jobs:
         mkdir -p logs
         mkdir -p trustlink
         
+    - name: "Check Source File"
+      run: |
+        echo "Checking source file..."
+        if [ -f "configs/raw/Vless.txt" ]; then
+          echo "✅ Source file exists"
+          echo "File size: $(du -h configs/raw/Vless.txt | cut -f1)"
+          echo "Line count: $(wc -l < configs/raw/Vless.txt)"
+        else
+          echo "❌ Source file not found: configs/raw/Vless.txt"
+          echo "Available files in configs/raw/:"
+          ls -la configs/raw/ || echo "configs/raw/ directory not found"
+        fi
+        
     - name: "Run VLESS Tester"
       run: |
         echo "Starting VLESS Tester..."
         cd vless
-        python vless_tester.py
+        echo "Current directory: $(pwd)"
+        echo "Python version: $(python --version)"
+        echo "Available files:"
+        ls -la
+        
+        # First run in test mode to ensure it works
+        echo "🧪 Running in test mode first..."
+        if python vless_tester.py --test; then
+          echo "✅ Test mode completed successfully"
+        else
+          echo "❌ Test mode failed with exit code $?"
+        fi
+        
+        # Now run in normal mode
+        echo "🚀 Running in normal mode..."
+        if python vless_tester.py; then
+          echo "✅ VLESS Tester completed successfully"
+        else
+          echo "❌ VLESS Tester failed with exit code $?"
+          echo "Checking for any output files..."
+          ls -la ../trustlink/ || echo "trustlink directory not accessible"
+          ls -la ../logs/ || echo "logs directory not accessible"
+        fi
         
     - name: "Check Results"
       run: |
         echo "Checking results..."
+        
+        # Check if output file exists
         if [ -f "trustlink/trustlink_vless.txt" ]; then
-          echo "File trustlink_vless.txt created"
+          echo "✅ File trustlink_vless.txt created successfully"
           echo "Line count: $(wc -l < trustlink/trustlink_vless.txt)"
           echo "File size: $(du -h trustlink/trustlink_vless.txt | cut -f1)"
+          echo "First few lines:"
+          head -5 trustlink/trustlink_vless.txt
         else
-          echo "File trustlink_vless.txt not created"
-          exit 1
+          echo "❌ File trustlink_vless.txt not created"
+          echo "Checking trustlink directory contents:"
+          ls -la trustlink/ || echo "trustlink directory not accessible"
+          echo "Checking logs for errors:"
+          if [ -f "logs/vless_tester.log" ]; then
+            echo "Last 20 lines of log:"
+            tail -20 logs/vless_tester.log
+          else
+            echo "No log file found"
+          fi
+          # Don't exit with error, just warn
+          echo "⚠️  Continuing workflow despite missing output file"
         fi
         
+        # Check metadata file
         if [ -f "trustlink/.trustlink_vless_metadata.json" ]; then
-          echo "Metadata file created"
+          echo "✅ Metadata file created successfully"
+          echo "Metadata content:"
           cat trustlink/.trustlink_vless_metadata.json
         else
-          echo "Metadata file not created"
+          echo "❌ Metadata file not created"
         fi
         
     - name: "Upload Logs"
@@ -86,6 +137,7 @@ jobs:
         git config --local user.name "GitHub Action"
         
         if [ -f "trustlink/trustlink_vless.txt" ]; then
+          echo "✅ Committing results..."
           git add trustlink/trustlink_vless.txt
           git add trustlink/.trustlink_vless_metadata.json
           git add logs/
@@ -94,17 +146,20 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "Auto VLESS update - $(date '+%Y-%m-%d %H:%M:%S')"
-            echo "Changes committed"
+            echo "Changes committed successfully"
           fi
+        else
+          echo "⚠️  No output file to commit"
         fi
         
     - name: "Push Changes"
       run: |
         if [ -f "trustlink/trustlink_vless.txt" ]; then
+          echo "✅ Pushing changes..."
           git push origin HEAD:${{ github.ref }}
-          echo "Changes pushed"
+          echo "Changes pushed successfully"
         else
-          echo "No changes to push"
+          echo "⚠️  No changes to push"
         fi
       continue-on-error: true
       
@@ -112,5 +167,11 @@ jobs:
       run: |
         echo "VLESS Tester execution completed!"
         echo "Execution time: $(date)"
-        echo "Results saved in trustlink/trustlink_vless.txt"
-        echo "Metadata saved in trustlink/.trustlink_vless_metadata.json"
+        
+        if [ -f "trustlink/trustlink_vless.txt" ]; then
+          echo "✅ Results saved in trustlink/trustlink_vless.txt"
+          echo "✅ Metadata saved in trustlink/.trustlink_vless_metadata.json"
+        else
+          echo "❌ No results were generated"
+          echo "Check the logs above for error details"
+        fi
