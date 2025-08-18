@@ -3,7 +3,7 @@ name: scraper
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 * * * *' # every hour at minute 0 (UTC)
+    - cron: '0 0 * * *' # once per day at 00:00 UTC
 
 permissions:
   contents: write

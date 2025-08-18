@@ -913,40 +913,35 @@ class VLESSManager:
             
             # ایجاد session
             await self.create_session()
-            
-            # تست تمام کانفیگ‌های VLESS
-            test_results = await self.test_all_vless_configs(source_configs)
-            if not test_results:
-                logging.warning("هیچ کانفیگ VLESS موفقی یافت نشد")
-                # ایجاد فایل خالی با پیام مناسب
-                self.create_fallback_output("هیچ کانفیگ VLESS موفقی یافت نشد")
-                return False
-            
-            # فیلتر با تست سرعت دانلود واقعی (Sequential, via Xray)
-            healthy_configs = [r["config"] for r in test_results if r.get("success")]
-            speed_ok_configs = await self.filter_configs_by_download_speed(healthy_configs)
+
+            # فقط تست سرعت دانلود واقعی (Sequential, via Xray) روی همه کانفیگ‌ها
+            logging.info(f"⏱️ شروع تست سرعت دانلود برای {len(source_configs)} کانفیگ VLESS")
+            speed_ok_configs = await self.filter_configs_by_download_speed(source_configs)
             if not speed_ok_configs:
                 logging.warning("هیچ کانفیگی تست سرعت را پاس نکرد")
                 self.create_fallback_output("هیچ کانفیگی تست سرعت دانلود را پاس نکرد")
                 return False
 
-            # نگه داشتن فقط نتایج سالمی که تست سرعت را هم پاس کرده‌اند
-            speed_filtered_results = [r for r in test_results if r["config"] in speed_ok_configs]
-
-            # انتخاب بهترین کانفیگ‌های VLESS از بین موارد پاس شده در تست سرعت
-            best_configs = self.select_best_vless_configs(speed_filtered_results)
+            # در این حالت، تمام کانفیگ‌های پاس‌شده «بهترین» هستند
+            best_configs = speed_ok_configs
             
             # ادغام کانفیگ‌ها
+            # فقط کانفیگ‌های پاس‌شده در فایل خروجی قرار بگیرند (ریست لیست موجود)
+            self.existing_configs = set()
             stats = self.merge_vless_configs(best_configs)
             
             # ذخیره فایل
             if self.save_trustlink_vless_file():
                 # به‌روزرسانی متادیتا
-                self.update_metadata(stats, test_results)
+                # ساخت نتایج مصنوعی برای آمار
+                ok_set = set(speed_ok_configs)
+                pseudo_results = ([{ 'config': c, 'success': True } for c in speed_ok_configs] +
+                                  [{ 'config': c, 'success': False } for c in source_configs if c not in ok_set])
+                self.update_metadata(stats, pseudo_results)
                 
                 logging.info("✅ به‌روزرسانی VLESS با موفقیت انجام شد")
                 logging.info(f"📊 آمار: {stats['new_added']} جدید، {stats['duplicates_skipped']} تکراری")
-                logging.info(f"🔗 کانفیگ‌های VLESS سالم: {len(best_configs)}")
+                logging.info(f"🔗 کانفیگ‌های VLESS سالم (پس از تست سرعت): {len(best_configs)}")
                 return True
             else:
                 logging.error("❌ خطا در ذخیره فایل VLESS")
