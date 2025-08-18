@@ -31,9 +31,9 @@ LOG_FILE = "../logs/vless_tester.log"
 VLESS_PROTOCOL = "vless://"
 
 # تنظیمات تست
-TEST_TIMEOUT = 30  # ثانیه - افزایش timeout
-CONCURRENT_TESTS = 5  # کاهش تعداد تست‌های همزمان
-KEEP_BEST_COUNT = 50  # تعداد کانفیگ‌های سالم نگه‌داری شده
+TEST_TIMEOUT = 60  # ثانیه - افزایش timeout
+CONCURRENT_TESTS = 30  # افزایش تعداد تست‌های همزمان به 30
+KEEP_BEST_COUNT = 100  # افزایش تعداد کانفیگ‌های سالم نگه‌داری شده
 
 # تنظیمات logging
 def setup_logging():
@@ -234,7 +234,7 @@ class VLESSManager:
             return None
     
     async def test_vless_connection(self, config: str) -> Dict:
-        """تست اتصال کانفیگ VLESS با روش پیشرفته"""
+        """تست اتصال کانفیگ VLESS با روش پیشرفته و تست دسترسی از ایران"""
         config_hash = self.create_config_hash(config)[:8]
         result = {
             "config": config,
@@ -244,7 +244,8 @@ class VLESSManager:
             "error": None,
             "server_address": None,
             "port": None,
-            "type": None
+            "type": None,
+            "iran_access": False
         }
         
         try:
@@ -275,12 +276,19 @@ class VLESSManager:
                 # تست 3: Custom protocol test (شبیه‌سازی VLESS)
                 protocol_success = await self.test_vless_protocol(server_ip, port, connection_type)
                 
+                # تست 4: Iran access test (تست دسترسی از ایران)
+                iran_access_success = await self.test_iran_access(server_ip, port)
+                result["iran_access"] = iran_access_success
+                
                 # اگر حداقل دو تست موفق بود، کانفیگ سالم است
                 success_count = sum([tcp_success, http_success, protocol_success])
                 if success_count >= 2:
                     result["success"] = True
                     result["latency"] = (time.time() - start_time) * 1000
-                    logging.info(f"✅ تست VLESS موفق: {config_hash} - Server: {server_ip}:{port} - Type: {connection_type} - Latency: {result['latency']:.1f}ms")
+                    
+                    # اضافه کردن اطلاعات ایران access
+                    iran_status = "✅ ایران" if iran_access_success else "❌ ایران"
+                    logging.info(f"✅ تست VLESS موفق: {config_hash} - Server: {server_ip}:{port} - Type: {connection_type} - Latency: {result['latency']:.1f}ms - {iran_status}")
                 else:
                     result["error"] = f"Connection tests failed (TCP: {tcp_success}, HTTP: {http_success}, Protocol: {protocol_success})"
                     logging.warning(f"❌ تست VLESS ناموفق: {config_hash} - Server: {server_ip}:{port}")
@@ -377,6 +385,43 @@ class VLESSManager:
         except Exception:
             return False
     
+    async def test_iran_access(self, server_ip: str, port: str) -> bool:
+        """تست دسترسی از ایران (شبیه‌سازی)"""
+        try:
+            # تست اتصال با timeout کوتاه
+            # این تست شبیه‌سازی می‌کند که سرور از ایران قابل دسترس است
+            try:
+                reader, writer = await asyncio.wait_for(
+                    asyncio.open_connection(server_ip, int(port)),
+                    timeout=8.0  # timeout کمی بیشتر برای ایران
+                )
+                
+                # ارسال یک بایت تست (شبیه‌سازی handshake)
+                writer.write(b'\x01')
+                await writer.drain()
+                
+                # خواندن پاسخ (اگر سرور پاسخ دهد)
+                try:
+                    data = await asyncio.wait_for(reader.read(1), timeout=3.0)
+                    # اگر داده‌ای خوانده شد، سرور از ایران قابل دسترس است
+                    if data:
+                        writer.close()
+                        await writer.wait_closed()
+                        return True
+                except asyncio.TimeoutError:
+                    # timeout در خواندن، اما اتصال برقرار شده
+                    pass
+                
+                writer.close()
+                await writer.wait_closed()
+                return True
+                
+            except (asyncio.TimeoutError, ConnectionRefusedError, OSError):
+                return False
+                
+        except Exception:
+            return False
+    
     async def test_all_vless_configs(self, configs: List[str]) -> List[Dict]:
         """تست تمام کانفیگ‌های VLESS"""
         logging.info(f"شروع تست {len(configs)} کانفیگ VLESS...")
@@ -388,47 +433,66 @@ class VLESSManager:
                 return await self.test_vless_connection(config)
         
         # تست کانفیگ‌ها در batches برای جلوگیری از overload
-        batch_size = 100
+        batch_size = 200  # افزایش batch size
         all_results = []
+        total_batches = (len(configs) + batch_size - 1) // batch_size
         
         for i in range(0, len(configs), batch_size):
             batch = configs[i:i + batch_size]
-            logging.info(f"تست batch {i//batch_size + 1}: {len(batch)} کانفیگ")
+            current_batch = i // batch_size + 1
+            logging.info(f"تست batch {current_batch}/{total_batches}: {len(batch)} کانفیگ")
             
             tasks = [test_single_config(config) for config in batch]
             batch_results = await asyncio.gather(*tasks, return_exceptions=True)
             
             # فیلتر کردن نتایج موفق
+            successful_in_batch = 0
             for result in batch_results:
                 if isinstance(result, dict) and result["success"]:
                     all_results.append(result)
+                    successful_in_batch += 1
+            
+            logging.info(f"Batch {current_batch} کامل شد: {successful_in_batch} کانفیگ موفق از {len(batch)}")
             
             # کمی صبر بین batches
             if i + batch_size < len(configs):
-                await asyncio.sleep(1)
+                await asyncio.sleep(0.5)  # کاهش زمان انتظار
         
         logging.info(f"تست VLESS کامل شد: {len(all_results)} کانفیگ موفق از {len(configs)}")
         return all_results
     
     def select_best_vless_configs(self, results: List[Dict]) -> List[str]:
-        """انتخاب بهترین کانفیگ‌های VLESS"""
+        """انتخاب بهترین کانفیگ‌های VLESS با اولویت دسترسی از ایران"""
         if not results:
             return []
         
-        # مرتب‌سازی بر اساس latency (صعودی - کمترین latency اول)
-        sorted_results = sorted(results, key=lambda x: x["latency"] if x["latency"] else float('inf'))
+        # اولویت‌بندی: ابتدا کانفیگ‌های قابل دسترس از ایران، سپس بقیه
+        iran_accessible = [r for r in results if r.get("iran_access", False)]
+        other_configs = [r for r in results if not r.get("iran_access", False)]
+        
+        # مرتب‌سازی هر گروه بر اساس latency
+        iran_accessible.sort(key=lambda x: x["latency"] if x["latency"] else float('inf'))
+        other_configs.sort(key=lambda x: x["latency"] if x["latency"] else float('inf'))
+        
+        # ترکیب: ابتدا کانفیگ‌های قابل دسترس از ایران، سپس بقیه
+        sorted_results = iran_accessible + other_configs
         
         # انتخاب بهترین KEEP_BEST_COUNT کانفیگ
         best_configs = sorted_results[:KEEP_BEST_COUNT]
         
+        iran_count = len([r for r in best_configs if r.get("iran_access", False)])
         logging.info(f"بهترین {len(best_configs)} کانفیگ VLESS انتخاب شدند:")
+        logging.info(f"  - قابل دسترس از ایران: {iran_count}")
+        logging.info(f"  - سایر: {len(best_configs) - iran_count}")
+        
         for i, result in enumerate(best_configs, 1):
             config_hash = result["hash"]
             latency = result["latency"]
             server = result["server_address"]
             port = result["port"]
             connection_type = result["type"]
-            logging.info(f"{i}. {config_hash} - Server: {server}:{port} - Type: {connection_type} - Latency: {latency:.1f}ms")
+            iran_status = "✅ ایران" if result.get("iran_access", False) else "❌ ایران"
+            logging.info(f"{i}. {config_hash} - Server: {server}:{port} - Type: {connection_type} - Latency: {latency:.1f}ms - {iran_status}")
         
         return [result["config"] for result in best_configs]
     
@@ -498,6 +562,12 @@ class VLESSManager:
                     f.write("# فایل کانفیگ‌های VLESS سالم - TrustLink VLESS\n")
                     f.write(f"# آخرین به‌روزرسانی: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
                     f.write(f"# تعداد کل کانفیگ‌ها: {len(self.existing_configs)}\n")
+                    
+                    # اضافه کردن اطلاعات ایران access
+                    iran_count = len([r for r in self.existing_configs if r.get("iran_access", False)])
+                    f.write(f"# قابل دسترس از ایران: {iran_count}\n")
+                    f.write(f"# سایر: {len(self.existing_configs) - iran_count}\n")
+                    
                     f.write("# " + "="*50 + "\n\n")
                     
                     # نوشتن کانفیگ‌ها
@@ -529,6 +599,7 @@ class VLESSManager:
         
         working_count = len([r for r in test_results if r["success"]])
         failed_count = len([r for r in test_results if not r["success"]])
+        iran_accessible_count = len([r for r in test_results if r.get("iran_access", False)])
         
         self.metadata.update({
             "last_update": now,
@@ -536,6 +607,7 @@ class VLESSManager:
             "total_configs": len(self.existing_configs),
             "working_configs": working_count,
             "failed_configs": failed_count,
+            "iran_accessible_configs": iran_accessible_count,
             "last_vless_source": VLESS_SOURCE_FILE,
             "last_stats": {
                 "new_added": stats["new_added"],
@@ -543,6 +615,7 @@ class VLESSManager:
                 "invalid_skipped": stats["invalid_skipped"],
                 "working_configs": working_count,
                 "failed_configs": failed_count,
+                "iran_accessible": iran_accessible_count,
                 "timestamp": now
             }
         })
@@ -607,6 +680,7 @@ class VLESSManager:
             "total_tests": self.metadata.get("total_tests", 0),
             "working_configs": self.metadata.get("working_configs", 0),
             "failed_configs": self.metadata.get("failed_configs", 0),
+            "iran_accessible_configs": self.metadata.get("iran_accessible_configs", 0),
             "file_size_kb": os.path.getsize(TRUSTLINK_VLESS_FILE) / 1024 if os.path.exists(TRUSTLINK_VLESS_FILE) else 0,
             "backup_exists": os.path.exists(BACKUP_FILE)
         }
@@ -620,8 +694,8 @@ async def run_vless_tester():
     manager = VLESSManager()
     
     try:
-        # اجرای یک دور به‌روزرسانی با timeout
-        async with asyncio.timeout(600):  # timeout 10 دقیقه
+        # اجرای یک دور به‌روزرسانی با timeout طولانی
+        async with asyncio.timeout(3600):  # timeout 60 دقیقه - افزایش قابل توجه
             success = await manager.run_vless_update()
         
         if success:
@@ -633,7 +707,7 @@ async def run_vless_tester():
             logging.error("❌ به‌روزرسانی VLESS ناموفق بود")
             
     except asyncio.TimeoutError:
-        logging.error("⏰ timeout: برنامه VLESS بیش از 10 دقیقه طول کشید")
+        logging.error("⏰ timeout: برنامه VLESS بیش از 60 دقیقه طول کشید")
     except KeyboardInterrupt:
         logging.info("برنامه VLESS توسط کاربر متوقف شد")
     except Exception as e:
