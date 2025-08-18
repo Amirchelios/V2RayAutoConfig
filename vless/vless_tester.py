@@ -36,6 +36,16 @@ CONCURRENT_TESTS = 50  # افزایش تعداد تست‌های همزمان ب
 KEEP_BEST_COUNT = 500  # افزایش تعداد کانفیگ‌های سالم نگه‌داری شده
 MAX_CONFIGS_TO_TEST = 10000  # افزایش تعداد کانفیگ‌های تست شده به 10000
 
+# تنظیمات تست سرعت دانلود واقعی از طریق Xray
+DOWNLOAD_TEST_MIN_BYTES = 1024 * 1024  # 1 MB
+DOWNLOAD_TEST_TIMEOUT = 2  # ثانیه
+DOWNLOAD_TEST_URLS = [
+    "https://speed.cloudflare.com/__down?bytes=10485760",  # 10MB stream (به اندازه کافی بزرگ)
+    "https://speed.hetzner.de/1MB.bin",
+    "https://speedtest.ams01.softlayer.com/downloads/test10.zip"
+]
+XRAY_BIN_DIR = "../Files/xray-bin"
+
 # تنظیمات logging
 def setup_logging():
     """تنظیم سیستم logging"""
@@ -482,6 +492,193 @@ class VLESSManager:
                 
         except Exception:
             return False
+
+    # ==========================
+    # تست سرعت دانلود واقعی با Xray (Sequential)
+    # ==========================
+    def _get_xray_binary_path(self) -> Optional[str]:
+        try:
+            system = platform.system().lower()
+            bin_name = 'xray.exe' if system.startswith('win') else 'xray'
+            candidate = os.path.join(XRAY_BIN_DIR, bin_name)
+            if os.path.exists(candidate):
+                # تلاش برای executable کردن در لینوکس
+                try:
+                    if not system.startswith('win'):
+                        os.chmod(candidate, 0o755)
+                except Exception:
+                    pass
+                return candidate
+            logging.error(f"باینری Xray یافت نشد: {candidate}")
+            return None
+        except Exception as e:
+            logging.error(f"خطا در پیدا کردن باینری Xray: {e}")
+            return None
+
+    def _choose_free_port(self) -> int:
+        import socket
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.bind(('127.0.0.1', 0))
+            return s.getsockname()[1]
+
+    def _build_vless_outbound_from_link(self, link: str) -> Optional[Dict]:
+        try:
+            parsed = urlparse(link)
+            host = parsed.hostname
+            port = parsed.port
+            user_id = parsed.username or ''
+            query = {}
+            if parsed.query:
+                for pair in parsed.query.split('&'):
+                    if '=' in pair:
+                        k, v = pair.split('=', 1)
+                        query[k] = v
+            security = (query.get('security') or '').lower()
+            network = (query.get('type') or 'tcp').lower()
+            sni = query.get('sni', '')
+            flow = query.get('flow', '')
+            host_header = query.get('host', '')
+            path = query.get('path', '/')
+
+            outbound: Dict = {
+                'protocol': 'vless',
+                'settings': {
+                    'vnext': [{
+                        'address': host,
+                        'port': int(port),
+                        'users': [{
+                            'id': user_id,
+                            'encryption': 'none',
+                            **({'flow': flow} if flow else {})
+                        }]
+                    }]
+                },
+                'streamSettings': {
+                    'network': network
+                }
+            }
+            if security == 'tls':
+                outbound['streamSettings']['security'] = 'tls'
+                if sni:
+                    outbound['streamSettings']['tlsSettings'] = {'serverName': sni}
+            if network == 'ws':
+                outbound['streamSettings']['wsSettings'] = {
+                    'path': path or '/',
+                    'headers': {'Host': host_header} if host_header else {}
+                }
+            if network == 'grpc':
+                outbound['streamSettings']['grpcSettings'] = {'serviceName': (path or '/').lstrip('/')}
+            return outbound
+        except Exception as e:
+            logging.debug(f"خطا در ساخت outbound VLESS: {e}")
+            return None
+
+    def _build_xray_config_http_proxy(self, link: str, local_http_port: int) -> Optional[Dict]:
+        outbound = self._build_vless_outbound_from_link(link)
+        if not outbound:
+            return None
+        return {
+            'log': {'loglevel': 'warning'},
+            'inbounds': [{
+                'listen': '127.0.0.1',
+                'port': local_http_port,
+                'protocol': 'http',
+                'settings': {}
+            }],
+            'outbounds': [
+                outbound,
+                {'protocol': 'freedom', 'tag': 'direct'},
+                {'protocol': 'blackhole', 'tag': 'blocked'}
+            ]
+        }
+
+    async def _download_min_bytes_via_proxy(self, proxy_port: int) -> bool:
+        try:
+            timeout = aiohttp.ClientTimeout(total=DOWNLOAD_TEST_TIMEOUT + 1)
+            connector = aiohttp.TCPConnector(ssl=False)
+            async with aiohttp.ClientSession(timeout=timeout, connector=connector) as session:
+                for url in DOWNLOAD_TEST_URLS:
+                    start_time = time.perf_counter()
+                    try:
+                        async with session.get(url, proxy=f'http://127.0.0.1:{proxy_port}') as resp:
+                            if resp.status >= 400:
+                                continue
+                            downloaded = 0
+                            chunk_size = 64 * 1024
+                            while True:
+                                if (time.perf_counter() - start_time) > DOWNLOAD_TEST_TIMEOUT:
+                                    return False
+                                chunk = await resp.content.read(chunk_size)
+                                if not chunk:
+                                    break
+                                downloaded += len(chunk)
+                                if downloaded >= DOWNLOAD_TEST_MIN_BYTES:
+                                    elapsed = time.perf_counter() - start_time
+                                    speed_mbps = (downloaded / 1024 / 1024) / max(1e-6, elapsed)
+                                    logging.info(f"✅ تست سرعت: {downloaded} bytes در {elapsed:.2f}s (~{speed_mbps:.2f} MB/s)")
+                                    return elapsed <= DOWNLOAD_TEST_TIMEOUT
+                    except Exception:
+                        continue
+            return False
+        except Exception:
+            return False
+
+    async def download_speed_test_via_xray(self, link: str) -> bool:
+        """اجرای تست دانلود واقعی با Xray: باید ظرف 2 ثانیه حداقل 1MB دانلود شود"""
+        xray_path = self._get_xray_binary_path()
+        if not xray_path:
+            return False
+        local_port = self._choose_free_port()
+        cfg = self._build_xray_config_http_proxy(link, local_port)
+        if not cfg:
+            return False
+        import tempfile, json, shutil
+        tmp_dir = tempfile.mkdtemp(prefix='vless_dl_')
+        cfg_path = os.path.join(tmp_dir, 'config.json')
+        with open(cfg_path, 'w', encoding='utf-8') as f:
+            json.dump(cfg, f, ensure_ascii=False)
+        proc = await asyncio.create_subprocess_exec(
+            xray_path, '-config', cfg_path, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.STDOUT
+        )
+        # زمان کوتاه برای بالا آمدن Xray
+        await asyncio.sleep(0.5)
+        try:
+            ok = await self._download_min_bytes_via_proxy(local_port)
+            return ok
+        finally:
+            try:
+                proc.terminate()
+            except Exception:
+                pass
+            try:
+                await asyncio.wait_for(proc.wait(), timeout=2)
+            except Exception:
+                try:
+                    proc.kill()
+                except Exception:
+                    pass
+            try:
+                shutil.rmtree(tmp_dir, ignore_errors=True)
+            except Exception:
+                pass
+
+    async def filter_configs_by_download_speed(self, configs: List[str]) -> List[str]:
+        """فیلتر کردن کانفیگ‌ها بر اساس تست دانلود واقعی (Sequential)"""
+        passed: List[str] = []
+        for idx, cfg in enumerate(configs, 1):
+            try:
+                ok = await self.download_speed_test_via_xray(cfg)
+                if ok:
+                    passed.append(cfg)
+                    logging.info(f"[{idx}/{len(configs)}] ✅ سرعت کافی - پذیرفته شد")
+                else:
+                    logging.info(f"[{idx}/{len(configs)}] ❌ سرعت ناکافی - رد شد")
+            except Exception as e:
+                logging.warning(f"[{idx}/{len(configs)}] خطا در تست سرعت: {e}")
+            # تاخیر کوتاه بین تست‌ها جهت جلوگیری از فشار
+            await asyncio.sleep(0.1)
+        logging.info(f"نتیجه تست سرعت: {len(passed)} از {len(configs)} پذیرفته شدند")
+        return passed
     
     async def test_all_vless_configs(self, configs: List[str]) -> List[Dict]:
         """تست تمام کانفیگ‌های VLESS"""
@@ -725,8 +922,19 @@ class VLESSManager:
                 self.create_fallback_output("هیچ کانفیگ VLESS موفقی یافت نشد")
                 return False
             
-            # انتخاب بهترین کانفیگ‌های VLESS
-            best_configs = self.select_best_vless_configs(test_results)
+            # فیلتر با تست سرعت دانلود واقعی (Sequential, via Xray)
+            healthy_configs = [r["config"] for r in test_results if r.get("success")]
+            speed_ok_configs = await self.filter_configs_by_download_speed(healthy_configs)
+            if not speed_ok_configs:
+                logging.warning("هیچ کانفیگی تست سرعت را پاس نکرد")
+                self.create_fallback_output("هیچ کانفیگی تست سرعت دانلود را پاس نکرد")
+                return False
+
+            # نگه داشتن فقط نتایج سالمی که تست سرعت را هم پاس کرده‌اند
+            speed_filtered_results = [r for r in test_results if r["config"] in speed_ok_configs]
+
+            # انتخاب بهترین کانفیگ‌های VLESS از بین موارد پاس شده در تست سرعت
+            best_configs = self.select_best_vless_configs(speed_filtered_results)
             
             # ادغام کانفیگ‌ها
             stats = self.merge_vless_configs(best_configs)
