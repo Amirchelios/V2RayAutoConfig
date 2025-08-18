@@ -85,7 +85,11 @@ class VLESSManager:
         self.existing_configs: Set[str] = set()
         self.metadata: Dict = {}
         self.load_metadata()
-        
+        # ذخیره نتایج جزئی برای تداوم در صورت timeout/خطا
+        self.partial_results: List[Dict] = []
+        self.partial_iran_ok: List[str] = []
+        self.partial_speed_ok: List[str] = []
+
     def load_metadata(self):
         """بارگذاری متادیتای برنامه"""
         try:
@@ -704,6 +708,11 @@ class VLESSManager:
         for r in results:
             if isinstance(r, str):
                 accepted.append(r)
+        # ثبت مرحله ایران‌اوکی برای ذخیره‌سازی جزئی
+        try:
+            self.partial_iran_ok = list(accepted)
+        except Exception:
+            pass
         logging.info(f"نتیجه تست دسترسی ایرانی با Xray: {len(accepted)} از {len(configs)} پذیرفته شدند")
         return accepted
 
@@ -754,6 +763,11 @@ class VLESSManager:
                 ok = await self.download_speed_test_via_xray(cfg)
                 if ok:
                     passed.append(cfg)
+                    # نگه‌داری نتیجه جزئی برای ذخیره در صورت timeout
+                    try:
+                        self.partial_speed_ok.append(cfg)
+                    except Exception:
+                        pass
                     logging.info(f"[{idx}/{len(configs)}] ✅ سرعت کافی - پذیرفته شد")
                 else:
                     logging.info(f"[{idx}/{len(configs)}] ❌ سرعت ناکافی - رد شد")
@@ -792,6 +806,11 @@ class VLESSManager:
             for result in batch_results:
                 if isinstance(result, dict) and result["success"]:
                     all_results.append(result)
+                    # ذخیره نتایج موفق برای ذخیره‌سازی جزئی
+                    try:
+                        self.partial_results.append(result)
+                    except Exception:
+                        pass
                     successful_in_batch += 1
             
             logging.info(f"Batch {current_batch} کامل شد: {successful_in_batch} کانفیگ موفق از {len(batch)}")
@@ -802,6 +821,47 @@ class VLESSManager:
         
         logging.info(f"تست VLESS کامل شد: {len(all_results)} کانفیگ موفق از {len(configs)}")
         return all_results
+
+    def save_partial_progress(self, reason: str = "") -> bool:
+        """ذخیره خروجی جزئی در صورت timeout یا خطا"""
+        try:
+            # انتخاب بهترین مرحله‌ای که داده دارد
+            if self.partial_speed_ok:
+                best_configs = list({c for c in self.partial_speed_ok if self.is_valid_vless_config(c)})
+                stage = "speed_ok"
+            elif self.partial_iran_ok:
+                best_configs = list({c for c in self.partial_iran_ok if self.is_valid_vless_config(c)})
+                stage = "iran_ok"
+            elif self.partial_results:
+                best_configs = [r.get("config") for r in self.partial_results if isinstance(r, dict) and r.get("success") and self.is_valid_vless_config(r.get("config", ""))]
+                stage = "connect_ok"
+            else:
+                best_configs = []
+                stage = "none"
+
+            if best_configs:
+                logging.info(f"💾 ذخیره خروجی جزئی ({stage}) به دلیل: {reason} - تعداد: {len(best_configs)}")
+                self.existing_configs = set()
+                stats = self.merge_vless_configs(best_configs)
+                if self.save_trustlink_vless_file():
+                    test_results = self.partial_results if self.partial_results else []
+                    self.update_metadata(stats, test_results)
+                    logging.info("✅ خروجی جزئی با موفقیت ذخیره شد")
+                    return True
+                else:
+                    logging.error("❌ ذخیره خروجی جزئی ناموفق بود")
+                    return False
+            else:
+                logging.warning(f"هیچ نتیجه جزئی برای ذخیره وجود ندارد (reason={reason})")
+                self.create_fallback_output(f"partial-save: no results (reason={reason})")
+                return False
+        except Exception as e:
+            logging.error(f"خطا در ذخیره خروجی جزئی: {e}")
+            try:
+                self.create_fallback_output(f"partial-save error: {str(e)}")
+            except Exception:
+                pass
+            return False
     
     def select_best_vless_configs(self, results: List[Dict]) -> List[str]:
         """انتخاب بهترین کانفیگ‌های VLESS با اولویت دسترسی از ایران"""
@@ -991,8 +1051,9 @@ class VLESSManager:
             source_configs = self.load_vless_source_configs()
             if not source_configs:
                 logging.warning("هیچ کانفیگ VLESS جدیدی از فایل منبع بارگذاری نشد")
-                # ایجاد فایل خالی با پیام مناسب
-                self.create_fallback_output("هیچ کانفیگ VLESS جدیدی یافت نشد")
+                # ذخیره خروجی جزئی اگر چیزی وجود دارد؛ در غیراینصورت fallback
+                if not self.save_partial_progress("no-source-configs"):
+                    self.create_fallback_output("هیچ کانفیگ VLESS جدیدی یافت نشد")
                 return False
             
             # ایجاد session
@@ -1002,21 +1063,24 @@ class VLESSManager:
             test_results = await self.test_all_vless_configs(source_configs)
             if not test_results:
                 logging.warning("هیچ کانفیگ VLESS موفقی یافت نشد")
-                self.create_fallback_output("هیچ کانفیگ VLESS موفقی یافت نشد")
+                if not self.save_partial_progress("no-connect-success"):
+                    self.create_fallback_output("هیچ کانفیگ VLESS موفقی یافت نشد")
                 return False
 
             # فاز 2: تست دسترسی به سایت‌های ایرانی با Xray، فقط روی کانفیگ‌های سالم TCP/پروتکل
             healthy_configs = [r["config"] for r in test_results if r.get("success")]
             if not healthy_configs:
                 logging.warning("هیچ کانفیگ VLESS موفقی یافت نشد")
-                self.create_fallback_output("هیچ کانفیگ VLESS موفقی یافت نشد")
+                if not self.save_partial_progress("no-healthy-after-connect"):
+                    self.create_fallback_output("هیچ کانفیگ VLESS موفقی یافت نشد")
                 return False
 
             logging.info(f"🌐 شروع تست دسترسی ایرانی با Xray برای {len(healthy_configs)} کانفیگ سالم")
             iran_ok_configs = await self.filter_configs_by_iran_access_via_xray(healthy_configs)
             if not iran_ok_configs:
                 logging.warning("هیچ کانفیگی دسترسی ایرانی را پاس نکرد")
-                self.create_fallback_output("هیچ کانفیگی دسترسی ایرانی را پاس نکرد")
+                if not self.save_partial_progress("no-iran-access"):
+                    self.create_fallback_output("هیچ کانفیگی دسترسی ایرانی را پاس نکرد")
                 return False
 
             # فاز 3: تست سرعت دانلود فقط روی کانفیگ‌هایی که دسترسی ایرانی دارند
@@ -1024,7 +1088,8 @@ class VLESSManager:
             speed_ok_configs = await self.filter_configs_by_download_speed(iran_ok_configs)
             if not speed_ok_configs:
                 logging.warning("هیچ کانفیگی تست سرعت را پاس نکرد")
-                self.create_fallback_output("هیچ کانفیگی تست سرعت دانلود را پاس نکرد")
+                if not self.save_partial_progress("no-speed-pass"):
+                    self.create_fallback_output("هیچ کانفیگی تست سرعت دانلود را پاس نکرد")
                 return False
 
             # همه قبولی‌ها، بهترین‌ها محسوب می‌شوند
@@ -1129,10 +1194,20 @@ async def run_vless_tester():
             
     except asyncio.TimeoutError:
         logging.error("⏰ timeout: برنامه VLESS بیش از 60 دقیقه طول کشید")
+        # ذخیره نتایج جزئی جهت جلوگیری از از دست رفتن خروجی‌ها
+        try:
+            manager.save_partial_progress("timeout")
+        except Exception:
+            pass
     except KeyboardInterrupt:
         logging.info("برنامه VLESS توسط کاربر متوقف شد")
     except Exception as e:
         logging.error(f"خطای غیرمنتظره در VLESS: {e}")
+        # در صورت خطای غیرمنتظره نیز تلاش برای ذخیره خروجی جزئی
+        try:
+            manager.save_partial_progress("unexpected-error")
+        except Exception:
+            pass
     finally:
         await manager.close_session()
 
