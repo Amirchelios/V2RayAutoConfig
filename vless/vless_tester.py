@@ -44,6 +44,14 @@ DOWNLOAD_TEST_URLS = [
     "https://speed.hetzner.de/1MB.bin",
     "https://speedtest.ams01.softlayer.com/downloads/test10.zip"
 ]
+IRAN_TEST_URLS = [
+    "https://www.aparat.com",
+    "https://divar.ir",
+    "https://www.cafebazaar.ir",
+    "https://www.digikala.com",
+    "https://www.sheypoor.com",
+    "https://www.telewebion.com"
+]
 XRAY_BIN_DIR = "../Files/xray-bin"
 
 # تنظیمات logging
@@ -623,6 +631,82 @@ class VLESSManager:
         except Exception:
             return False
 
+    async def _check_iran_sites_via_proxy(self, proxy_port: int) -> bool:
+        try:
+            timeout = aiohttp.ClientTimeout(total=5)
+            connector = aiohttp.TCPConnector(ssl=False)
+            async with aiohttp.ClientSession(timeout=timeout, connector=connector) as session:
+                for url in IRAN_TEST_URLS:
+                    try:
+                        async with session.get(url, proxy=f'http://127.0.0.1:{proxy_port}', timeout=5) as resp:
+                            if resp.status < 400:
+                                return True
+                    except Exception:
+                        continue
+            return False
+        except Exception:
+            return False
+
+    async def test_iran_access_via_xray(self, link: str) -> bool:
+        """راه‌اندازی Xray برای لینک و تست دسترسی به سایت‌های ایرانی از طریق پراکسی محلی"""
+        xray_path = self._get_xray_binary_path()
+        if not xray_path:
+            return False
+        local_port = self._choose_free_port()
+        cfg = self._build_xray_config_http_proxy(link, local_port)
+        if not cfg:
+            return False
+        import tempfile, json, shutil
+        tmp_dir = tempfile.mkdtemp(prefix='vless_ir_')
+        cfg_path = os.path.join(tmp_dir, 'config.json')
+        with open(cfg_path, 'w', encoding='utf-8') as f:
+            json.dump(cfg, f, ensure_ascii=False)
+        proc = await asyncio.create_subprocess_exec(
+            xray_path, '-config', cfg_path, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.STDOUT
+        )
+        # زمان کوتاه برای بالا آمدن Xray
+        await asyncio.sleep(0.5)
+        try:
+            ok = await self._check_iran_sites_via_proxy(local_port)
+            return ok
+        finally:
+            try:
+                proc.terminate()
+            except Exception:
+                pass
+            try:
+                await asyncio.wait_for(proc.wait(), timeout=2)
+            except Exception:
+                try:
+                    proc.kill()
+                except Exception:
+                    pass
+            try:
+                shutil.rmtree(tmp_dir, ignore_errors=True)
+            except Exception:
+                pass
+
+    async def filter_configs_by_iran_access_via_xray(self, configs: List[str]) -> List[str]:
+        """فیلتر کردن کانفیگ‌ها بر اساس دسترسی به سایت‌های ایرانی از طریق Xray (همزمانی 50 تایی)"""
+        accepted: List[str] = []
+        semaphore = asyncio.Semaphore(CONCURRENT_TESTS)
+
+        async def run_single(cfg: str) -> Optional[str]:
+            async with semaphore:
+                try:
+                    ok = await self.test_iran_access_via_xray(cfg)
+                    return cfg if ok else None
+                except Exception:
+                    return None
+
+        tasks = [run_single(cfg) for cfg in configs]
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+        for r in results:
+            if isinstance(r, str):
+                accepted.append(r)
+        logging.info(f"نتیجه تست دسترسی ایرانی با Xray: {len(accepted)} از {len(configs)} پذیرفته شدند")
+        return accepted
+
     async def download_speed_test_via_xray(self, link: str) -> bool:
         """اجرای تست دانلود واقعی با Xray: باید ظرف 2 ثانیه حداقل 1MB دانلود شود"""
         xray_path = self._get_xray_binary_path()
@@ -921,15 +1005,23 @@ class VLESSManager:
                 self.create_fallback_output("هیچ کانفیگ VLESS موفقی یافت نشد")
                 return False
 
-            # فاز 2: تست سرعت دانلود فقط روی کانفیگ‌های سالم مرحله اتصال
+            # فاز 2: تست دسترسی به سایت‌های ایرانی با Xray، فقط روی کانفیگ‌های سالم TCP/پروتکل
             healthy_configs = [r["config"] for r in test_results if r.get("success")]
             if not healthy_configs:
                 logging.warning("هیچ کانفیگ VLESS موفقی یافت نشد")
                 self.create_fallback_output("هیچ کانفیگ VLESS موفقی یافت نشد")
                 return False
 
-            logging.info(f"⏱️ شروع تست سرعت دانلود برای {len(healthy_configs)} کانفیگ سالم VLESS")
-            speed_ok_configs = await self.filter_configs_by_download_speed(healthy_configs)
+            logging.info(f"🌐 شروع تست دسترسی ایرانی با Xray برای {len(healthy_configs)} کانفیگ سالم")
+            iran_ok_configs = await self.filter_configs_by_iran_access_via_xray(healthy_configs)
+            if not iran_ok_configs:
+                logging.warning("هیچ کانفیگی دسترسی ایرانی را پاس نکرد")
+                self.create_fallback_output("هیچ کانفیگی دسترسی ایرانی را پاس نکرد")
+                return False
+
+            # فاز 3: تست سرعت دانلود فقط روی کانفیگ‌هایی که دسترسی ایرانی دارند
+            logging.info(f"⏱️ شروع تست سرعت دانلود برای {len(iran_ok_configs)} کانفیگ با دسترسی ایرانی")
+            speed_ok_configs = await self.filter_configs_by_download_speed(iran_ok_configs)
             if not speed_ok_configs:
                 logging.warning("هیچ کانفیگی تست سرعت را پاس نکرد")
                 self.create_fallback_output("هیچ کانفیگی تست سرعت دانلود را پاس نکرد")
