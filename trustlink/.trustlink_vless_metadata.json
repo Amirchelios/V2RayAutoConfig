@@ -1,10 +1,10 @@
 {
-  "last_update": "2025-08-18T08:36:28.937148",
+  "last_update": "2025-08-18T05:16:29.172986",
   "total_tests": 0,
   "total_configs": 0,
   "working_configs": 0,
   "failed_configs": 0,
   "iran_accessible_configs": 0,
-  "status": "test_mode",
-  "message": "GitHub Actions test mode"
+  "error_message": "خطا در ذخیره فایل اصلی",
+  "status": "fallback"
 }
