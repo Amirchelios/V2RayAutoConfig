@@ -265,7 +265,6 @@ trojan://2c605663-b89a-5734-a9d6-97d4743d72cf@dozo01.flztjc.top:8313?security=tl
 trojan://2dab5d78-5c56-4252-850d-c037753a40db@51.81.211.171:443?security=tls#%F0%9F%87%BA%F0%9F%87%B8US-51.81.211.171-4228
 trojan://2e3562a819634de686ade78e434c0963@104.17.147.5:443/?type=ws&host=jobscareertoday.com&path=6b777a91&security=tls&sni=jobscareertoday.com#%40Hope_Net-join-us-on-Telegram
 trojan://2e65577e-8fdb-4bb1-a495-96f3122099a7@172.67.191.174:443/?type=tcp&security=tls&sni=zzzZZZZz.222769.XYZ#%F0%9F%8F%81RELAY-172.67.191.174-0177
-trojan://2ee85121-31de-4581-a492-eb00f606e392@103.252.116.138:443?allowInsecure=0&sni=hk.freeguard.org#🇭🇰[openproxylist.com]
 trojan://2ee85121-31de-4581-a492-eb00f606e392@103.252.116.138:443?security=tls&sni=hk.freeguard.org#%F0%9F%87%AD%F0%9F%87%B0HK-103.252.116.138-0326
 trojan://2ee85121-31de-4581-a492-eb00f606e392@185.208.207.217:443/?type=tcp&security=tls&sni=dus.freeguard.org#%F0%9F%87%A9%F0%9F%87%AADE-185.208.207.217-4922
 trojan://2ee85121-31de-4581-a492-eb00f606e392@185.208.207.217:443/?type=tcp&security=tls&sni=dus.freeguard.org&allowInsecure=1#%F0%9F%87%A9%F0%9F%87%AADE-185.208.207.217-4922
@@ -1224,6 +1223,7 @@ trojan://JKVPN_JKVPN@www.speedtest.net:80?path=%2FTELEGRAM_JKVPN-JKVPN-JKVPN-JKV
 trojan://JKVPN_JKVPN@www.zula.ir:80?path=%2FTELEGRAM_JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-jKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JkVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKvPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN-JKVPN%3Fed%3D2048&security=none&host=joker.ahang-alpha.ir&type=ws#👉🆔@v2ray_configs_pool📡🇨🇦®️Canada©️Toronto🅿️ping:8.24ms
 trojan://KLF0qOU0ZZGw5Tnu@121.78.213.3:443?security=tls&sni=swift.protocolbuffer.com#%F0%9F%87%B0%F0%9F%87%B7KR-121.78.213.3-6925
 trojan://KsMF5kLudbU3@104.21.44.185:2087/?type=ws&host=econews.onetwothree123.ir&path=%2F%F0%9F%86%94%40M3HDIO1&security=tls&sni=econews.onetwothree123.ir#%E2%9B%B3%EF%B8%8F46%40oneclickvpnkeys
+trojan://LG7HKcZFIJ@45.155.54.117:110?security=tls&headerType=none&type=tcp&sni=sws.ftpcomand.com#%F0%9F%87%A8%F0%9F%87%AD%40FreakConfig
 trojan://LG7HKcZFIJ@sws.ftpcomand.com:110/?type=tcp&security=tls&sni=sws.ftpcomand.com#%F0%9F%87%A8%F0%9F%87%ADCH-45.155.54.117-0280
 trojan://Lar3HXz16D@104.21.48.1:443/?type=grpc&security=tls&sni=tabnak.twn24.ir#%40Hope_Net-join-us-on-Telegram
 trojan://McCPa4vups6yAdDbGokjPA@104.21.22.66:2096/?type=tcp&security=tls
