@@ -563,10 +563,10 @@ class VLESSManager:
                     f.write(f"# آخرین به‌روزرسانی: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
                     f.write(f"# تعداد کل کانفیگ‌ها: {len(self.existing_configs)}\n")
                     
-                    # اضافه کردن اطلاعات ایران access
-                    iran_count = len([r for r in self.existing_configs if r.get("iran_access", False)])
-                    f.write(f"# قابل دسترس از ایران: {iran_count}\n")
-                    f.write(f"# سایر: {len(self.existing_configs) - iran_count}\n")
+                    # اضافه کردن اطلاعات ایران access - self.existing_configs فقط شامل strings است
+                    # بنابراین نمی‌توانیم iran_access را از آن بخوانیم
+                    f.write(f"# قابل دسترس از ایران: اطلاعات در متادیتا موجود است\n")
+                    f.write(f"# سایر: اطلاعات در متادیتا موجود است\n")
                     
                     f.write("# " + "="*50 + "\n\n")
                     
