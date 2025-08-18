@@ -17604,3 +17604,126 @@
 2025-08-18 20:05:14,002 - INFO -   iran_accessible_configs: 21
 2025-08-18 20:05:14,002 - INFO -   file_size_kb: 1.7802734375
 2025-08-18 20:05:14,002 - INFO -   backup_exists: True
+2025-08-18 20:10:25,930 - INFO - 🧪 VLESS Tester - Test Mode (GitHub Actions)
+2025-08-18 20:10:25,930 - INFO - متادیتای برنامه VLESS بارگذاری شد
+2025-08-18 20:10:25,930 - INFO - بررسی فایل‌های منبع...
+2025-08-18 20:10:25,930 - INFO - فایل منبع موجود: 77 خط
+2025-08-18 20:10:25,931 - INFO - ✅ فایل‌های تست با موفقیت ایجاد شدند
+2025-08-18 20:10:25,931 - INFO - ✅ فایل خروجی: ../trustlink/trustlink_vless.txt
+2025-08-18 20:10:25,931 - INFO - ✅ متادیتا: ../trustlink/.trustlink_vless_metadata.json
+2025-08-18 20:10:26,129 - INFO - 🚀 راه‌اندازی TrustLink VLESS Tester
+2025-08-18 20:10:26,129 - INFO - متادیتای برنامه VLESS بارگذاری شد
+2025-08-18 20:10:26,129 - INFO - ============================================================
+2025-08-18 20:10:26,129 - INFO - 🚀 شروع به‌روزرسانی TrustLink VLESS
+2025-08-18 20:10:26,129 - INFO - ============================================================
+2025-08-18 20:10:26,130 - INFO - 0 کانفیگ VLESS موجود بارگذاری شد
+2025-08-18 20:10:26,130 - INFO - 77 کانفیگ VLESS از فایل محلی بارگذاری شد
+2025-08-18 20:10:26,130 - INFO - مجموع 77 کانفیگ VLESS منحصر به فرد یافت شد
+2025-08-18 20:10:26,130 - INFO - Session جدید برای تست VLESS ایجاد شد
+2025-08-18 20:10:26,130 - INFO - شروع تست 77 کانفیگ VLESS...
+2025-08-18 20:10:26,130 - INFO - تست batch 1/1: 77 کانفیگ
+2025-08-18 20:10:26,131 - WARNING - ❌ تست VLESS ناموفق: b521fa77 - TCP connection failed
+2025-08-18 20:10:26,131 - WARNING - ❌ تست VLESS ناموفق: 987dff12 - TCP connection failed
+2025-08-18 20:10:26,132 - WARNING - ❌ تست VLESS ناموفق: c301b9a5 - TCP connection failed
+2025-08-18 20:10:26,132 - WARNING - ❌ تست VLESS ناموفق: 1c68ccf4 - TCP connection failed
+2025-08-18 20:10:26,132 - WARNING - ❌ تست VLESS ناموفق: 7e84838c - TCP connection failed
+2025-08-18 20:10:26,132 - WARNING - ❌ تست VLESS ناموفق: 9b115775 - TCP connection failed
+2025-08-18 20:10:26,132 - WARNING - ❌ تست VLESS ناموفق: ea044dea - TCP connection failed
+2025-08-18 20:10:26,132 - WARNING - ❌ تست VLESS ناموفق: ac9f9354 - TCP connection failed
+2025-08-18 20:10:26,132 - WARNING - ❌ تست VLESS ناموفق: 9aaf7d6b - TCP connection failed
+2025-08-18 20:10:26,132 - WARNING - ❌ تست VLESS ناموفق: 23928ef9 - TCP connection failed
+2025-08-18 20:10:26,132 - WARNING - ❌ تست VLESS ناموفق: c7a1eb17 - TCP connection failed
+2025-08-18 20:10:26,133 - WARNING - ❌ تست VLESS ناموفق: 97161058 - TCP connection failed
+2025-08-18 20:10:26,133 - WARNING - ❌ تست VLESS ناموفق: c0eb577e - TCP connection failed
+2025-08-18 20:10:26,133 - WARNING - ❌ تست VLESS ناموفق: 452cbaf0 - TCP connection failed
+2025-08-18 20:10:26,133 - WARNING - ❌ تست VLESS ناموفق: 75a83741 - TCP connection failed
+2025-08-18 20:10:26,133 - WARNING - ❌ تست VLESS ناموفق: f9993238 - TCP connection failed
+2025-08-18 20:10:26,133 - WARNING - ❌ تست VLESS ناموفق: 6c67a5f1 - TCP connection failed
+2025-08-18 20:10:26,133 - WARNING - ❌ تست VLESS ناموفق: 69acdee5 - TCP connection failed
+2025-08-18 20:10:26,133 - WARNING - ❌ تست VLESS ناموفق: 52423dce - TCP connection failed
+2025-08-18 20:10:26,133 - WARNING - ❌ تست VLESS ناموفق: aa72ad12 - TCP connection failed
+2025-08-18 20:10:26,134 - WARNING - ❌ تست VLESS ناموفق: e747cc97 - TCP connection failed
+2025-08-18 20:10:26,134 - WARNING - ❌ تست VLESS ناموفق: 252ee245 - TCP connection failed
+2025-08-18 20:10:26,134 - WARNING - ❌ تست VLESS ناموفق: 419af268 - TCP connection failed
+2025-08-18 20:10:26,134 - WARNING - ❌ تست VLESS ناموفق: b1481f1c - TCP connection failed
+2025-08-18 20:10:26,134 - WARNING - ❌ تست VLESS ناموفق: 748e9bac - TCP connection failed
+2025-08-18 20:10:26,134 - WARNING - ❌ تست VLESS ناموفق: 3bd1cf4c - TCP connection failed
+2025-08-18 20:10:26,134 - WARNING - ❌ تست VLESS ناموفق: ac3df136 - TCP connection failed
+2025-08-18 20:10:26,134 - WARNING - ❌ تست VLESS ناموفق: 17a430eb - TCP connection failed
+2025-08-18 20:10:26,134 - WARNING - ❌ تست VLESS ناموفق: 7662f8ef - TCP connection failed
+2025-08-18 20:10:26,135 - WARNING - ❌ تست VLESS ناموفق: 9c09645d - TCP connection failed
+2025-08-18 20:10:26,135 - WARNING - ❌ تست VLESS ناموفق: e09a1180 - TCP connection failed
+2025-08-18 20:10:26,135 - WARNING - ❌ تست VLESS ناموفق: 89044ab2 - TCP connection failed
+2025-08-18 20:10:26,135 - WARNING - ❌ تست VLESS ناموفق: afbfaaf3 - TCP connection failed
+2025-08-18 20:10:26,135 - WARNING - ❌ تست VLESS ناموفق: be79d0c4 - TCP connection failed
+2025-08-18 20:10:26,135 - WARNING - ❌ تست VLESS ناموفق: 9401eb99 - TCP connection failed
+2025-08-18 20:10:26,135 - WARNING - ❌ تست VLESS ناموفق: 35f538c3 - TCP connection failed
+2025-08-18 20:10:26,135 - WARNING - ❌ تست VLESS ناموفق: 099c7d5e - TCP connection failed
+2025-08-18 20:10:26,135 - WARNING - ❌ تست VLESS ناموفق: 297cdcb6 - TCP connection failed
+2025-08-18 20:10:26,136 - WARNING - ❌ تست VLESS ناموفق: fa996e5b - TCP connection failed
+2025-08-18 20:10:26,136 - WARNING - ❌ تست VLESS ناموفق: 5f39740c - TCP connection failed
+2025-08-18 20:10:26,136 - WARNING - ❌ تست VLESS ناموفق: 53be539f - TCP connection failed
+2025-08-18 20:10:26,136 - WARNING - ❌ تست VLESS ناموفق: 646bb1ff - TCP connection failed
+2025-08-18 20:10:26,136 - WARNING - ❌ تست VLESS ناموفق: bc868953 - TCP connection failed
+2025-08-18 20:10:26,136 - WARNING - ❌ تست VLESS ناموفق: 8ea89b15 - TCP connection failed
+2025-08-18 20:10:26,136 - WARNING - ❌ تست VLESS ناموفق: 64cb3ee7 - TCP connection failed
+2025-08-18 20:10:26,136 - WARNING - ❌ تست VLESS ناموفق: c63ff1b4 - TCP connection failed
+2025-08-18 20:10:26,136 - WARNING - ❌ تست VLESS ناموفق: 811f9acc - TCP connection failed
+2025-08-18 20:10:26,137 - WARNING - ❌ تست VLESS ناموفق: 9dd79a6a - TCP connection failed
+2025-08-18 20:10:26,163 - WARNING - ❌ تست VLESS ناموفق: a14bb2f5 - TCP connection failed
+2025-08-18 20:10:26,383 - WARNING - ❌ تست VLESS ناموفق: 15324110 - TCP connection failed
+2025-08-18 20:10:26,987 - INFO - ✅ تست VLESS موفق: 2ed2f84d - Server: 172.66.40.99:443 - Type: ws - Latency: 852.0ms - ✅ ایران
+2025-08-18 20:10:26,995 - INFO - ✅ تست VLESS موفق: 3840c9f1 - Server: 172.66.40.99:443 - Type: ws - Latency: 860.5ms - ✅ ایران
+2025-08-18 20:10:26,998 - INFO - ✅ تست VLESS موفق: b35e09c7 - Server: 172.66.40.99:443 - Type: ws - Latency: 866.0ms - ✅ ایران
+2025-08-18 20:10:26,999 - INFO - ✅ تست VLESS موفق: 6a10a8b9 - Server: 102.177.189.251:8880 - Type: ws#%E2%98%9E%20%F0%9D%97%9D%F0%9D%97%BC%F0%9D%97%B6%F0%9D%97%BB%20%E2%9E%A0%20%40Viturey - Latency: 868.1ms - ✅ ایران
+2025-08-18 20:10:27,016 - INFO - ✅ تست VLESS موفق: 89529dd1 - Server: 172.66.40.99:80 - Type: ws#👉🆔@v2ray_configs_pool📡🇨🇦®️Canada©️Toronto🅿️ping:6.59ms - Latency: 882.0ms - ✅ ایران
+2025-08-18 20:10:27,020 - INFO - ✅ تست VLESS موفق: 883b1888 - Server: 185.146.173.58:8080 - Type: ws - Latency: 883.1ms - ✅ ایران
+2025-08-18 20:10:27,022 - INFO - ✅ تست VLESS موفق: 0df43314 - Server: 185.207.199.251:8880 - Type: ws - Latency: 890.5ms - ✅ ایران
+2025-08-18 20:10:27,024 - INFO - ✅ تست VLESS موفق: 4f2c244b - Server: 172.66.40.99:80 - Type: ws#FR🇫🇷 - Latency: 891.5ms - ✅ ایران
+2025-08-18 20:10:27,025 - INFO - ✅ تست VLESS موفق: 443fd77d - Server: 159.246.55.251:8880 - Type: ws - Latency: 891.5ms - ✅ ایران
+2025-08-18 20:10:27,041 - INFO - ✅ تست VLESS موفق: f05c77ad - Server: 190.93.247.155:8080 - Type: ws# - Latency: 905.7ms - ✅ ایران
+2025-08-18 20:10:27,232 - WARNING - ❌ تست VLESS ناموفق: 02573c42 - TCP connection failed
+2025-08-18 20:10:27,626 - INFO - ✅ تست VLESS موفق: 1edefcdd - Server: 172.66.40.99:80 - Type: ws#👉🆔@v2ray_configs_pool📡🇨🇦®️Canada©️Toronto🅿️ping:6.22ms - Latency: 1493.5ms - ✅ ایران
+2025-08-18 20:10:27,678 - INFO - ✅ تست VLESS موفق: 62230b1c - Server: www.speedtest.net:80 - Type: ws# - Latency: 1543.2ms - ✅ ایران
+2025-08-18 20:10:27,687 - INFO - ✅ تست VLESS موفق: 79457d91 - Server: 104.26.6.18:443 - Type: ws - Latency: 1550.9ms - ✅ ایران
+2025-08-18 20:10:27,730 - INFO - ✅ تست VLESS موفق: 02663f7f - Server: 104.26.11.194:80 - Type: ws#👉🆔@v2ray_configs_pool📡🇨🇦®️Canada©️Toronto🅿️ping:6.06ms - Latency: 1597.5ms - ✅ ایران
+2025-08-18 20:10:27,766 - INFO - ✅ تست VLESS موفق: 4b3a8060 - Server: 104.26.11.194:80 - Type: ws#👉🆔@v2ray_configs_pool📡🇨🇦®️Canada©️Toronto🅿️ping:8.55ms - Latency: 1631.6ms - ✅ ایران
+2025-08-18 20:10:27,935 - WARNING - ❌ تست VLESS ناموفق: e8f77ac0 - Server: 148.113.180.24:44809
+2025-08-18 20:10:27,941 - WARNING - ❌ تست VLESS ناموفق: 0e76d614 - Server: 148.113.180.24:44809
+2025-08-18 20:10:28,706 - INFO - ✅ تست VLESS موفق: db99753a - Server: cumhuriyet.com.tr:80 - Type: ws - Latency: 2570.4ms - ✅ ایران
+2025-08-18 20:10:29,572 - INFO - ✅ تست VLESS موفق: 5ec640af - Server: llc.v2sub.ir:2082 - Type: xhttp#RELAY🚩 - Latency: 3439.5ms - ✅ ایران
+2025-08-18 20:10:30,556 - INFO - ✅ تست VLESS موفق: 49916bb3 - Server: fishlab.ucdavis.edu:443 - Type: ws - Latency: 4424.4ms - ✅ ایران
+2025-08-18 20:10:30,831 - INFO - ✅ تست VLESS موفق: df01c416 - Server: 93.185.158.14:443 - Type: ws - Latency: 4698.3ms - ✅ ایران
+2025-08-18 20:10:32,849 - INFO - ✅ تست VLESS موفق: 3bcd4cee - Server: 93.185.158.14:443 - Type: ws - Latency: 6713.7ms - ✅ ایران
+2025-08-18 20:10:36,138 - WARNING - ❌ تست VLESS ناموفق: 2b298ace - TCP connection failed
+2025-08-18 20:10:36,138 - WARNING - ❌ تست VLESS ناموفق: c05b3002 - TCP connection failed
+2025-08-18 20:10:36,138 - WARNING - ❌ تست VLESS ناموفق: 36027c44 - TCP connection failed
+2025-08-18 20:10:36,138 - WARNING - ❌ تست VLESS ناموفق: d029ba8d - TCP connection failed
+2025-08-18 20:10:36,139 - INFO - Batch 1 کامل شد: 20 کانفیگ موفق از 77
+2025-08-18 20:10:36,139 - INFO - تست VLESS کامل شد: 20 کانفیگ موفق از 77
+2025-08-18 20:10:36,139 - INFO - 🌐 شروع تست دسترسی ایرانی با Xray برای 20 کانفیگ سالم
+2025-08-18 20:11:06,752 - INFO - نتیجه تست دسترسی ایرانی با Xray: 3 از 20 پذیرفته شدند
+2025-08-18 20:11:06,752 - INFO - ⏱️ شروع تست سرعت دانلود برای 3 کانفیگ با دسترسی ایرانی
+2025-08-18 20:11:12,695 - INFO - [1/3] ❌ سرعت ناکافی - رد شد
+2025-08-18 20:11:14,081 - INFO - ✅ تست سرعت: 1051638 bytes در 0.78s (~1.28 MB/s)
+2025-08-18 20:11:14,083 - INFO - [2/3] ✅ سرعت کافی - پذیرفته شد
+2025-08-18 20:11:15,733 - INFO - ✅ تست سرعت: 1051621 bytes در 1.05s (~0.96 MB/s)
+2025-08-18 20:11:15,735 - INFO - [3/3] ✅ سرعت کافی - پذیرفته شد
+2025-08-18 20:11:15,836 - INFO - نتیجه تست سرعت: 2 از 3 پذیرفته شدند
+2025-08-18 20:11:15,836 - INFO - Backup از فایل VLESS موجود ایجاد شد
+2025-08-18 20:11:15,836 - INFO - ادغام VLESS کامل: 2 جدید، 0 تکراری، 0 نامعتبر
+2025-08-18 20:11:15,836 - INFO - فایل trustlink_vless.txt با موفقیت ذخیره شد: 2 کانفیگ
+2025-08-18 20:11:15,837 - INFO - متادیتای برنامه VLESS ذخیره شد
+2025-08-18 20:11:15,837 - INFO - ✅ به‌روزرسانی VLESS با موفقیت انجام شد
+2025-08-18 20:11:15,837 - INFO - 📊 آمار: 2 جدید، 0 تکراری
+2025-08-18 20:11:15,837 - INFO - 🔗 کانفیگ‌های VLESS سالم (پس از تست سرعت): 2
+2025-08-18 20:11:15,837 - INFO - Session VLESS بسته شد
+2025-08-18 20:11:15,837 - INFO - 📈 وضعیت نهایی VLESS:
+2025-08-18 20:11:15,837 - INFO -   total_configs: 2
+2025-08-18 20:11:15,837 - INFO -   last_update: 2025-08-18T20:11:15.837016
+2025-08-18 20:11:15,837 - INFO -   total_tests: 1
+2025-08-18 20:11:15,837 - INFO -   working_configs: 20
+2025-08-18 20:11:15,837 - INFO -   failed_configs: 0
+2025-08-18 20:11:15,837 - INFO -   iran_accessible_configs: 20
+2025-08-18 20:11:15,837 - INFO -   file_size_kb: 0.798828125
+2025-08-18 20:11:15,838 - INFO -   backup_exists: True
