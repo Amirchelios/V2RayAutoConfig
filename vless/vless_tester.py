@@ -174,11 +174,11 @@ class VLESSManager:
         return hashlib.md5(config.strip().encode('utf-8')).hexdigest()
     
     def load_vless_source_configs(self) -> List[str]:
-        """بارگذاری کانفیگ‌های VLESS از فایل منبع و لینک‌های ساب"""
+        """بارگذاری کانفیگ‌های VLESS از فایل منبع"""
         try:
             configs = []
             
-            # 1. بارگذاری از فایل محلی
+            # بارگذاری از فایل محلی
             if os.path.exists(VLESS_SOURCE_FILE):
                 with open(VLESS_SOURCE_FILE, 'r', encoding='utf-8') as f:
                     lines = f.readlines()
@@ -187,33 +187,8 @@ class VLESSManager:
                         if self.is_valid_vless_config(line):
                             configs.append(line)
                 logging.info(f"{len(configs)} کانفیگ VLESS از فایل محلی بارگذاری شد")
-            
-            # 2. بارگذاری از لینک‌های ساب
-            subscription_urls = [
-                "https://raw.githubusercontent.com/V2RayRoot/V2RayConfig/refs/heads/main/Config/vless.txt",
-                "https://raw.githubusercontent.com/Amirchelios/V2RayAutoConfig/refs/heads/main/configs/raw/Vless.txt",
-                "https://raw.githubusercontent.com/miladtahanian/V2RayScrapeByCountry/refs/heads/main/output_configs/Vless.txt",
-                "https://raw.githubusercontent.com/10ium/V2ray-Config/refs/heads/main/Splitted-By-Protocol/vless.txt"
-            ]
-            
-            for url in subscription_urls:
-                try:
-                    import urllib.request
-                    logging.info(f"دانلود از: {url}")
-                    response = urllib.request.urlopen(url, timeout=30)
-                    content = response.read().decode('utf-8')
-                    lines = content.split('\n')
-                    
-                    for line in lines:
-                        line = line.strip()
-                        if self.is_valid_vless_config(line):
-                            configs.append(line)
-                    
-                    logging.info(f"دانلود موفق از {url}: {len([l for l in lines if self.is_valid_vless_config(l.strip())])} کانفیگ")
-                    
-                except Exception as e:
-                    logging.warning(f"خطا در دانلود از {url}: {e}")
-                    continue
+            else:
+                logging.warning(f"فایل منبع VLESS یافت نشد: {VLESS_SOURCE_FILE}")
             
             # حذف تکراری‌ها
             unique_configs = list(set(configs))
