@@ -2847,6 +2847,7 @@ trojan://ttfang@103.106.230.186:81?security=tls&sni=ttfang.fange.me&type=ws&host
 trojan://ttfang@128.199.237.143:443?type=ws&host=ttfang.fange.me&path=%2F&security=tls&sni=ttfang.fange.me#RELAY🚩
 trojan://ttfang@14.102.228.216:2096?security=tls&sni=ttfang.fange.me&type=ws&path=Telegram🇨🇳&Host=ttfang.fange.me#%F0%9F%8F%81RELAY-14.102.228.216-0605
 trojan://ttfang@14.102.229.216:2096?security=tls&sni=ttfang.fange.me&type=ws&path=Telegram🇨🇳&Host=ttfang.fange.me#%F0%9F%8F%81RELAY-14.102.229.216-0606
+trojan://ttfang@166.0.244.206:2053?security=tls&sni=ttfang.fange.me&type=ws&host=ttfang.fange.me&path=/&allowInsecure=1#🇮🇳[openproxylist.com]
 trojan://ttfang@20.235.105.146:443/?type=ws&path=%2F&security=tls&sni=ttfang.fange.me#%F0%9F%87%AE%F0%9F%87%B3IN-20.235.105.146-0711
 trojan://ttfang@25.25.25.216:2096?security=tls&sni=ttfang.fange.me&type=ws&path=Telegram🇨🇳&Host=ttfang.fange.me#%F0%9F%8F%81RELAY-25.25.25.216-0607
 trojan://ttfang@25.26.27.216:2096?security=tls&sni=ttfang.fange.me&type=ws&path=Telegram🇨🇳&Host=ttfang.fange.me#%F0%9F%8F%81RELAY-25.26.27.216-0608
