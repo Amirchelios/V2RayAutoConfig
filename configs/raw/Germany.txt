@@ -40,6 +40,7 @@ ss://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss19711.tas-bazi.com:443?mode=stream-
 ss://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss2180.tas-bazi.com:443?mode=stream-one&path=%2Fsc&security=&encryption=none&type=xhttp#DE🇩🇪
 ss://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss2180.tas-bazi.com:443?mode=stream-one&path=%2Fsc&security=none&encryption=none&type=xhttp#DE🇩🇪
 ss://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss47060.tas-bazi.com:443?mode=stream-one&path=%2Fsc&security=none&encryption=none&type=xhttp#DE🇩🇪
+ss://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss71706.tas-bazi.com:443?mode=stream-one&path=/sc&security=none&encryption=none&type=xhttp#DE🇩🇪
 ss://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss76953.tas-bazi.com:443?mode=stream-one&path=%2Fsc&security=&encryption=none&type=xhttp#DE🇩🇪
 ss://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss76953.tas-bazi.com:443?mode=stream-one&path=%2Fsc&security=none&encryption=none&type=xhttp#DE🇩🇪
 ss://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss86065.tas-bazi.com:443?mode=stream-one&path=%2Fsc&security=&encryption=none&type=xhttp#DE🇩🇪
@@ -51,6 +52,7 @@ ss://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss94870.tas-bazi.com:443?mode=stream-
 ss://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss94870.tas-bazi.com:443?mode=stream-one&path=%2Fsc&security=none&encryption=none&type=xhttp#DE🇩🇪
 ss://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss94870.tas-bazi.com:443?mode=stream-one&path=%2Fsc&security=none&encryption=none&type=xhttp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Falkenstein🅿️ping:10.93ms
 ss://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss94870.tas-bazi.com:443?mode=stream-one&path=%2Fsc&security=none&encryption=none&type=xhttp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Falkenstein🅿️ping:14.67ms
+ss://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss94870.tas-bazi.com:443?mode=stream-one&path=/sc&security=none&encryption=none&type=xhttp#DE🇩🇪
 ss://4b93d39a-d188-4111-aa6c-23fa528cce41@tyu.learningaii.ir:44048?security=none&encryption=none&headerType=none&type=tcp#DE🇩🇪
 ss://4d3e4850-83e4-4e9e-a4c1-0f11c43663e7@danauhoki88web.shop:443?path=sinavm%2Fproxyip%3D5.83.140.140&security=tls&alpn=http%2F1.1&encryption=none&host=crolinde.carlotta.cloudns.org&fp=random&type=ws&sni=crolinde.carlotta.cloudns.org#DE🇩🇪
 ss://4f929f18-d2c8-49af-9701-6a5b8baabda6@91.99.216.9:2009/?type=xhttp&encryption=none#%F0%9F%87%A9%F0%9F%87%AA%20DE%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40fastfreeconfig%20%5B57%5D
@@ -228,7 +230,6 @@ ss://aa077dd1-0a53-4313-8800-c9ac79a97003@sss71534.tas-bazi.com:443?mode=stream-
 ss://aa077dd1-0a53-4313-8800-c9ac79a97003@sss71534.tas-bazi.com:443?mode=stream-one&path=%2Fsef&security=none&encryption=none&type=xhttp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Falkenstein🅿️ping:10.84ms
 ss://aa077dd1-0a53-4313-8800-c9ac79a97003@sss71534.tas-bazi.com:443?mode=stream-one&path=%2Fsef&security=none&encryption=none&type=xhttp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Falkenstein🅿️ping:10.94ms
 ss://aa077dd1-0a53-4313-8800-c9ac79a97003@sss71534.tas-bazi.com:443?mode=stream-one&path=%2Fsef&security=none&encryption=none&type=xhttp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Falkenstein🅿️ping:15.03ms
-ss://aa077dd1-0a53-4313-8800-c9ac79a97003@sss71534.tas-bazi.com:443?mode=stream-one&path=/sef&security=none&encryption=none&type=xhttp#DE🇩🇪
 ss://aa077dd1-0a53-4313-8800-c9ac79a97003@sss71534.tas-bazi.com:443?type=xhttp&mode=stream-one&path=/sef&security=none#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Falkenstein🅿️ping:10.94ms
 ss://b1400a69-146b-4534-8718-5f2122b620f5@vip1.proxystore11.news:15110?type=xhttp&path=%2Fprx11-prx11-prx11&host=&mode=auto&security=reality&pbk=y7msPZW4eWBT4CJ5v_blgiXUd06HuKvTs3rhlpw9fnk&fp=chrome&sni=yahoo.com&sid=0570&spx=%2F#PRX11-DE-01
 ss://b1fe7cec-3028-4cf0-b1c3-af55efd23ad8@91.99.169.64:8443?mode=stream-one&path=%2Fxhttp&security=&encryption=none&type=xhttp#DE🇩🇪
@@ -274,7 +275,6 @@ ss://db90f3d7-bd8f-4e2d-ae0b-f9510ff3f7b9@87.120.92.135:8080/?encryption=none&ho
 ss://df0e67fc-a6e5-41d8-95fd-97dfb96d2802@207.154.236.4:20087?security=none&encryption=none&headerType=none&type=tcp#DE🇩🇪
 ss://e66beedb-dd44-47f0-baf8-7ba947d919d0@91.99.126.77:8443?mode=stream-one&path=%2Fxhttp&security=none&encryption=none&type=xhttp#DE🇩🇪
 ss://e66beedb-dd44-47f0-baf8-7ba947d919d0@91.99.126.77:8443?mode=stream-one&path=%2Fxhttp&security=none&encryption=none&type=xhttp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Falkenstein🅿️ping:10.57ms
-ss://e66beedb-dd44-47f0-baf8-7ba947d919d0@91.99.126.77:8443?mode=stream-one&path=/xhttp&security=none&encryption=none&type=xhttp#DE🇩🇪
 ss://e66beedb-dd44-47f0-baf8-7ba947d919d0@91.99.85.185:8443?mode=stream-one&path=%2Fxhttp&security=none&encryption=none&type=xhttp#DE🇩🇪
 ss://e89ba39d-ae7e-493a-a57b-cdd55b42b4e3@188.245.75.235:443?security=none&encryption=none&headerType=none&type=tcp#DE🇩🇪
 ss://e89ba39d-ae7e-493a-a57b-cdd55b42b4e3@188.245.75.235:443?security=none&encryption=none&headerType=none&type=tcp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Nuremberg🅿️ping:14.54ms
@@ -389,6 +389,7 @@ vless://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss19711.tas-bazi.com:443?mode=stre
 vless://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss2180.tas-bazi.com:443?mode=stream-one&path=%2Fsc&security=&encryption=none&type=xhttp#DE🇩🇪
 vless://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss2180.tas-bazi.com:443?mode=stream-one&path=%2Fsc&security=none&encryption=none&type=xhttp#DE🇩🇪
 vless://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss47060.tas-bazi.com:443?mode=stream-one&path=%2Fsc&security=none&encryption=none&type=xhttp#DE🇩🇪
+vless://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss71706.tas-bazi.com:443?mode=stream-one&path=/sc&security=none&encryption=none&type=xhttp#DE🇩🇪
 vless://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss76953.tas-bazi.com:443?mode=stream-one&path=%2Fsc&security=&encryption=none&type=xhttp#DE🇩🇪
 vless://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss76953.tas-bazi.com:443?mode=stream-one&path=%2Fsc&security=none&encryption=none&type=xhttp#DE🇩🇪
 vless://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss86065.tas-bazi.com:443?mode=stream-one&path=%2Fsc&security=&encryption=none&type=xhttp#DE🇩🇪
@@ -400,6 +401,7 @@ vless://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss94870.tas-bazi.com:443?mode=stre
 vless://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss94870.tas-bazi.com:443?mode=stream-one&path=%2Fsc&security=none&encryption=none&type=xhttp#DE🇩🇪
 vless://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss94870.tas-bazi.com:443?mode=stream-one&path=%2Fsc&security=none&encryption=none&type=xhttp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Falkenstein🅿️ping:10.93ms
 vless://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss94870.tas-bazi.com:443?mode=stream-one&path=%2Fsc&security=none&encryption=none&type=xhttp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Falkenstein🅿️ping:14.67ms
+vless://43fbd4b6-0e35-4b6f-9ed2-8fe95be28bf5@sss94870.tas-bazi.com:443?mode=stream-one&path=/sc&security=none&encryption=none&type=xhttp#DE🇩🇪
 vless://4b93d39a-d188-4111-aa6c-23fa528cce41@tyu.learningaii.ir:44048?security=none&encryption=none&headerType=none&type=tcp#DE🇩🇪
 vless://4d3e4850-83e4-4e9e-a4c1-0f11c43663e7@danauhoki88web.shop:443?path=sinavm%2Fproxyip%3D5.83.140.140&security=tls&alpn=http%2F1.1&encryption=none&host=crolinde.carlotta.cloudns.org&fp=random&type=ws&sni=crolinde.carlotta.cloudns.org#DE🇩🇪
 vless://4f929f18-d2c8-49af-9701-6a5b8baabda6@91.99.216.9:2009/?type=xhttp&encryption=none#%F0%9F%87%A9%F0%9F%87%AA%20DE%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40fastfreeconfig%20%5B57%5D
@@ -483,7 +485,6 @@ vless://aa077dd1-0a53-4313-8800-c9ac79a97003@sss71534.tas-bazi.com:443?mode=stre
 vless://aa077dd1-0a53-4313-8800-c9ac79a97003@sss71534.tas-bazi.com:443?mode=stream-one&path=%2Fsef&security=none&encryption=none&type=xhttp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Falkenstein🅿️ping:10.84ms
 vless://aa077dd1-0a53-4313-8800-c9ac79a97003@sss71534.tas-bazi.com:443?mode=stream-one&path=%2Fsef&security=none&encryption=none&type=xhttp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Falkenstein🅿️ping:10.94ms
 vless://aa077dd1-0a53-4313-8800-c9ac79a97003@sss71534.tas-bazi.com:443?mode=stream-one&path=%2Fsef&security=none&encryption=none&type=xhttp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Falkenstein🅿️ping:15.03ms
-vless://aa077dd1-0a53-4313-8800-c9ac79a97003@sss71534.tas-bazi.com:443?mode=stream-one&path=/sef&security=none&encryption=none&type=xhttp#DE🇩🇪
 vless://aa077dd1-0a53-4313-8800-c9ac79a97003@sss71534.tas-bazi.com:443?type=xhttp&mode=stream-one&path=/sef&security=none#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Falkenstein🅿️ping:10.94ms
 vless://b1400a69-146b-4534-8718-5f2122b620f5@vip1.proxystore11.news:15110?type=xhttp&path=%2Fprx11-prx11-prx11&host=&mode=auto&security=reality&pbk=y7msPZW4eWBT4CJ5v_blgiXUd06HuKvTs3rhlpw9fnk&fp=chrome&sni=yahoo.com&sid=0570&spx=%2F#PRX11-DE-01
 vless://b1fe7cec-3028-4cf0-b1c3-af55efd23ad8@91.99.169.64:8443?mode=stream-one&path=%2Fxhttp&security=&encryption=none&type=xhttp#DE🇩🇪
@@ -526,7 +527,6 @@ vless://db90f3d7-bd8f-4e2d-ae0b-f9510ff3f7b9@87.120.92.135:8080/?encryption=none
 vless://df0e67fc-a6e5-41d8-95fd-97dfb96d2802@207.154.236.4:20087?security=none&encryption=none&headerType=none&type=tcp#DE🇩🇪
 vless://e66beedb-dd44-47f0-baf8-7ba947d919d0@91.99.126.77:8443?mode=stream-one&path=%2Fxhttp&security=none&encryption=none&type=xhttp#DE🇩🇪
 vless://e66beedb-dd44-47f0-baf8-7ba947d919d0@91.99.126.77:8443?mode=stream-one&path=%2Fxhttp&security=none&encryption=none&type=xhttp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Falkenstein🅿️ping:10.57ms
-vless://e66beedb-dd44-47f0-baf8-7ba947d919d0@91.99.126.77:8443?mode=stream-one&path=/xhttp&security=none&encryption=none&type=xhttp#DE🇩🇪
 vless://e66beedb-dd44-47f0-baf8-7ba947d919d0@91.99.85.185:8443?mode=stream-one&path=%2Fxhttp&security=none&encryption=none&type=xhttp#DE🇩🇪
 vless://e89ba39d-ae7e-493a-a57b-cdd55b42b4e3@188.245.75.235:443?security=none&encryption=none&headerType=none&type=tcp#DE🇩🇪
 vless://e89ba39d-ae7e-493a-a57b-cdd55b42b4e3@188.245.75.235:443?security=none&encryption=none&headerType=none&type=tcp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Nuremberg🅿️ping:14.54ms
