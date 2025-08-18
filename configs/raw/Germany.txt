@@ -25,7 +25,6 @@ ss://199a78a5-b4d4-4064-a0db-bb37c5839134@212.192.31.146:443?path=%2Fpanika&secu
 ss://19de5ba4-82b2-4a11-898e-ae460d6733fe@real-z3.sdcards1.ir:8585?security=reality&encryption=none&pbk=58yfyRJyku8oddKvCIBHz0K8LrTWKr3qTe-DMUcrWEg&headerType=none&fp=firefox&type=tcp&sni=tgju.org&sid=ea0e387f2b260e0d#REALITY|DE🇩🇪
 ss://202ac83e-9012-4283-8acb-9af2c2a2dfeb@ab.iranlit.ir:1611?security=reality&encryption=none&pbk=3EWvgfHUv-7aKL47dJL1WiIHY43aeWo8QUZRjzCw0RI&headerType=none&fp=chrome&type=tcp&sni=zhaket.com&sid=6f84e8adb893b4bd#REALITY|DE🇩🇪
 ss://23240094-d544-6d31-94d5-2416b8ef9dc2@1.clubban.ir:2083?security=tls&alpn=h3%2Ch2%2Chttp%2F1.1&encryption=none&headerType=none&fp=chrome&type=tcp&sni=1.vizitur.ir#DE🇩🇪
-ss://26e06c13-56ec-41d3-a750-d8f070053306@simonil.zarghamportal.ir:2095?path=%2F%40iSpeedTopVPN%3Fed%3D80&security=none&encryption=none&host=shole.zarghamportal.ir&type=ws#%F0%9F%87%A9%F0%9F%87%AAv2rayng%20%28DE%29%F0%9F%94%90-confegraigan
 ss://2d827b0e-93a6-4e65-af06-f962a126a535@rezidental.az9x99.ir:2053?security=none&encryption=none&headerType=none&type=tcp#DE🇩🇪
 ss://330e627f-3752-467a-b0a5-d46d07b5acf9@91.107.241.250:6000?mode=auto&path=%2F&security=reality&encryption=none&pbk=aNK-4Lg53CF9JKVv7LFTAGP9Bmha0HxY6ms1emd57nQ&fp=chrome&spx=%2F&type=xhttp&sni=wiredminds.de&sid=243e#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Nuremberg🅿️ping:9.21ms
 ss://330e627f-3752-467a-b0a5-d46d07b5acf9@91.107.241.250:6000?mode=auto&path=%2F&security=reality&encryption=none&pbk=aNK-4Lg53CF9JKVv7LFTAGP9Bmha0HxY6ms1emd57nQ&fp=chrome&spx=%2F&type=xhttp&sni=wiredminds.de&sid=243e#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Nuremberg🅿️ping:9.27ms
@@ -247,7 +246,6 @@ ss://bfae5f06-1b75-4a23-9bbf-a17fb0f4e945@150.241.108.219:51410?mode=auto&path=%
 ss://c325f85d4634427c9c855b17ffc94545Og==@chmod1.mchmod.shop:31520#DE%F0%9F%87%A9%F0%9F%87%AA+%7C+chmod1.mchmod.shop-31520+%7C+166.46ms
 ss://c39a101c-0a7b-4940-8e6a-f8346d70b24b@91.99.221.206:443?security=none&encryption=none&host=zula.ir&headerType=http&type=tcp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Nuremberg🅿️ping:10.99ms
 ss://c43b7819-008e-4863-aa20-9d3fc2935df8@rezidental.az9x99.ir:2053?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
-ss://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-star.fastsoft98.ir:2010?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
 ss://c52ece5d-2575-43e5-b0a6-8a4a2c7f41fd@gem.talashit.com:8282?security=none&encryption=none&host=cloudflare.com&headerType=http&type=tcp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Nuremberg🅿️ping:9.43ms
 ss://c80463ca-2231-4f44-ba98-c9518395be38@139.162.188.193:21866/?type=tcp&encryption=none#%F0%9F%87%A9%F0%9F%87%AA%20DE%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40v2rayngn%20%5B13%5D
 ss://c80463ca-2231-4f44-ba98-c9518395be38@139.162.188.193:21866?security=none&encryption=none&headerType=none&type=tcp#DE🇩🇪
@@ -373,7 +371,6 @@ vless://199a78a5-b4d4-4064-a0db-bb37c5839134@212.192.31.146:443?path=%2Fpanika&s
 vless://19de5ba4-82b2-4a11-898e-ae460d6733fe@real-z3.sdcards1.ir:8585?security=reality&encryption=none&pbk=58yfyRJyku8oddKvCIBHz0K8LrTWKr3qTe-DMUcrWEg&headerType=none&fp=firefox&type=tcp&sni=tgju.org&sid=ea0e387f2b260e0d#REALITY|DE🇩🇪
 vless://202ac83e-9012-4283-8acb-9af2c2a2dfeb@ab.iranlit.ir:1611?security=reality&encryption=none&pbk=3EWvgfHUv-7aKL47dJL1WiIHY43aeWo8QUZRjzCw0RI&headerType=none&fp=chrome&type=tcp&sni=zhaket.com&sid=6f84e8adb893b4bd#REALITY|DE🇩🇪
 vless://23240094-d544-6d31-94d5-2416b8ef9dc2@1.clubban.ir:2083?security=tls&alpn=h3%2Ch2%2Chttp%2F1.1&encryption=none&headerType=none&fp=chrome&type=tcp&sni=1.vizitur.ir#DE🇩🇪
-vless://26e06c13-56ec-41d3-a750-d8f070053306@simonil.zarghamportal.ir:2095?path=%2F%40iSpeedTopVPN%3Fed%3D80&security=none&encryption=none&host=shole.zarghamportal.ir&type=ws#%F0%9F%87%A9%F0%9F%87%AAv2rayng%20%28DE%29%F0%9F%94%90-confegraigan
 vless://2d827b0e-93a6-4e65-af06-f962a126a535@rezidental.az9x99.ir:2053?security=none&encryption=none&headerType=none&type=tcp#DE🇩🇪
 vless://330e627f-3752-467a-b0a5-d46d07b5acf9@91.107.241.250:6000?mode=auto&path=%2F&security=reality&encryption=none&pbk=aNK-4Lg53CF9JKVv7LFTAGP9Bmha0HxY6ms1emd57nQ&fp=chrome&spx=%2F&type=xhttp&sni=wiredminds.de&sid=243e#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Nuremberg🅿️ping:9.21ms
 vless://330e627f-3752-467a-b0a5-d46d07b5acf9@91.107.241.250:6000?mode=auto&path=%2F&security=reality&encryption=none&pbk=aNK-4Lg53CF9JKVv7LFTAGP9Bmha0HxY6ms1emd57nQ&fp=chrome&spx=%2F&type=xhttp&sni=wiredminds.de&sid=243e#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Nuremberg🅿️ping:9.27ms
@@ -501,7 +498,6 @@ vless://bb7b030f-fd37-488a-be1f-1a26d874cb26@91.99.176.24:8443?mode=stream-one&p
 vless://bfae5f06-1b75-4a23-9bbf-a17fb0f4e945@150.241.108.219:51410?mode=auto&path=%2F%40MdVpnSec----%40MdVpnSec----%40MdVpnSec----%40MdVpnSec----%40MdVpnSec----%40MdVpnSec----%40MdVpnSec----%40MdVpnSec----%40MdVpnSec----%40MdVpnSec----%40MdVpnSec----%40MdVpnSec&security=reality&encryption=none&pbk=D45w-QY77mBJqaIH5b4SOh0vAyXG6quUhvjQRTamHks&fp=chrome&spx=%2F&type=xhttp&sni=zhaket.com&sid=e60c21#REALITY|DE🇩🇪
 vless://c39a101c-0a7b-4940-8e6a-f8346d70b24b@91.99.221.206:443?security=none&encryption=none&host=zula.ir&headerType=http&type=tcp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Nuremberg🅿️ping:10.99ms
 vless://c43b7819-008e-4863-aa20-9d3fc2935df8@rezidental.az9x99.ir:2053?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
-vless://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-star.fastsoft98.ir:2010?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
 vless://c52ece5d-2575-43e5-b0a6-8a4a2c7f41fd@gem.talashit.com:8282?security=none&encryption=none&host=cloudflare.com&headerType=http&type=tcp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Nuremberg🅿️ping:9.43ms
 vless://c80463ca-2231-4f44-ba98-c9518395be38@139.162.188.193:21866/?type=tcp&encryption=none#%F0%9F%87%A9%F0%9F%87%AA%20DE%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40v2rayngn%20%5B13%5D
 vless://c80463ca-2231-4f44-ba98-c9518395be38@139.162.188.193:21866?security=none&encryption=none&headerType=none&type=tcp#DE🇩🇪
