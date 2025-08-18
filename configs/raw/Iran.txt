@@ -156,6 +156,7 @@ ss://c313c27c-97ff-45ed-ab5c-64641af5debc@fierce-data.seotoolsforyou.co.uk:80?pa
 ss://c39a97ac-7e05-4b0c-8ef8-2d456309317a@agerman.kurdanmal.ir:80?security=none&encryption=none&host=agerman.kurdanmal.ir&headerType=http&type=tcp#IR🇮🇷
 ss://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-rezidentali.fastsoft98.ir:2080?encryption=none&security=none&type=tcp&headerType=http&host=http://SpaceNetwork.divarcdn.com#IR🇮🇷
 ss://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-star.dsadsadads.ir:2070?encryption=none&security=none&type=tcp&headerType=none#IR🇮🇷
+ss://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-star.fastsoft98.ir:2010?encryption=none&security=none&type=tcp&headerType=none#IR🇮🇷
 ss://c59695d1-b0d3-440e-a502-76e408805a1e@212.80.9.85:57209/?encryption=none&host=parsabr.com&type=tcp&headerType=http#%F0%9F%87%AE%F0%9F%87%B7%20IR%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40pistachiovpn%20%5B3%5D
 ss://d1e44075-8c92-4698-9db0-e71d7015b757@small-meal.oneeat.co:80?path=%2F&security=none&encryption=none&type=ws#IRAN%20557%20%28%40Outline_Vpn%29%20free
 ss://d2bcb15b-8cf0-402c-af32-6b04615144c9@greenwolf.fonixapp.org:12901?security=reality&encryption=none&pbk=UIgzNUpO2PvGIgjtIK1GEikBFRVvfA1jm7bfor0HlAM&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=canva.com&sid=b538b3#IRAN%20617%20%28%40Outline_Vpn%29%20free
@@ -197,7 +198,6 @@ ss://e16c1f00-afa4-405f-a944-932f81e18e23@nv137.momdping.com:443/?type=ws&encryp
 ss://e4824193-4f54-453b-d037-88368e85ef0e@pqh23v4.vetmainconf.shop:8880?mode=gun&security=none&encryption=none&type=grpc#IRAN%20563%20%28%40Outline_Vpn%29%20free
 ss://e4c339d7-cbdc-41a6-98ab-a0ca04bac5ab@irlast.adkoino.com:443/?encryption=none&host=iranserver.com&type=tcp&headerType=http#%F0%9F%87%AE%F0%9F%87%B7%20IR%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40irlast%20%5B1%5D
 ss://e4ceb917-3020-4486-a1ab-36534aed11de@s16.leader21.top:5053/?type=ws&encryption=none&host=s16.leader21.top&path=%2Fhttp#%F0%9F%87%AE%F0%9F%87%B7%20IR%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40golf_vpn%20%5B14%5D
-ss://e6236ebc-7334-4bed-977f-0c20bcdfcc00@104.18.26.90:443?path=/?ed=#TELEGRAM-MARAMBASHI_MARAMBASHI_MARAMBASHI?ed=512&security=tls&alpn=h3,h2&encryption=none&host=barayeiranmahsang.ghormehsabzi.dpdns.org&fp=chrome&type=ws&sni=barayeiranmahsang.ghormehsabzi.dpdns.org#INT🌍
 ss://e77fbe65-01fe-48d0-8069-f6fa8f7a6d81@104.248.142.176:443?security=&encryption=none&host=skyroom.online&headerType=http&type=tcp#IR🇮🇷
 ss://e902ef3f-118c-45dd-b093-02833846434e@172.67.191.189:2096/?type=ws&encryption=none&host=eiiim.danesh-bonyan.Store&path=join.----------------Telegram-EiiiM----------------Telegram-EiiiM---------------.Telegram-EiiiM.&security=tls&sni=J0in-Te1egram-eiiim.danesh-bonyan.Store#%5B%F0%9F%87%AB%F0%9F%87%AE%5D%20Telegram%3A%20%40netmelliiran%20%E2%9A%A1%EF%B8%8F
 ss://e999db7a-1b17-4da6-bc37-c9fa24af2e93@104.19.144.33:443?path=%2F&security=tls&encryption=none&host=JdYq2881Un.GhEiChI.oRg&fp=chrome&type=ws&sni=JdYq2881Un.GhEiChI.oRg#IRAN%20631%20%28%40Outline_Vpn%29%20free
@@ -341,6 +341,7 @@ vless://c313c27c-97ff-45ed-ab5c-64641af5debc@fierce-data.seotoolsforyou.co.uk:80
 vless://c39a97ac-7e05-4b0c-8ef8-2d456309317a@agerman.kurdanmal.ir:80?security=none&encryption=none&host=agerman.kurdanmal.ir&headerType=http&type=tcp#IR🇮🇷
 vless://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-rezidentali.fastsoft98.ir:2080?encryption=none&security=none&type=tcp&headerType=http&host=http://SpaceNetwork.divarcdn.com#IR🇮🇷
 vless://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-star.dsadsadads.ir:2070?encryption=none&security=none&type=tcp&headerType=none#IR🇮🇷
+vless://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-star.fastsoft98.ir:2010?encryption=none&security=none&type=tcp&headerType=none#IR🇮🇷
 vless://c59695d1-b0d3-440e-a502-76e408805a1e@212.80.9.85:57209/?encryption=none&host=parsabr.com&type=tcp&headerType=http#%F0%9F%87%AE%F0%9F%87%B7%20IR%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40pistachiovpn%20%5B3%5D
 vless://d1e44075-8c92-4698-9db0-e71d7015b757@small-meal.oneeat.co:80?path=%2F&security=none&encryption=none&type=ws#IRAN%20557%20%28%40Outline_Vpn%29%20free
 vless://d2bcb15b-8cf0-402c-af32-6b04615144c9@greenwolf.fonixapp.org:12901?security=reality&encryption=none&pbk=UIgzNUpO2PvGIgjtIK1GEikBFRVvfA1jm7bfor0HlAM&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=canva.com&sid=b538b3#IRAN%20617%20%28%40Outline_Vpn%29%20free
@@ -382,7 +383,6 @@ vless://e16c1f00-afa4-405f-a944-932f81e18e23@nv137.momdping.com:443/?type=ws&enc
 vless://e4824193-4f54-453b-d037-88368e85ef0e@pqh23v4.vetmainconf.shop:8880?mode=gun&security=none&encryption=none&type=grpc#IRAN%20563%20%28%40Outline_Vpn%29%20free
 vless://e4c339d7-cbdc-41a6-98ab-a0ca04bac5ab@irlast.adkoino.com:443/?encryption=none&host=iranserver.com&type=tcp&headerType=http#%F0%9F%87%AE%F0%9F%87%B7%20IR%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40irlast%20%5B1%5D
 vless://e4ceb917-3020-4486-a1ab-36534aed11de@s16.leader21.top:5053/?type=ws&encryption=none&host=s16.leader21.top&path=%2Fhttp#%F0%9F%87%AE%F0%9F%87%B7%20IR%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40golf_vpn%20%5B14%5D
-vless://e6236ebc-7334-4bed-977f-0c20bcdfcc00@104.18.26.90:443?path=/?ed=#TELEGRAM-MARAMBASHI_MARAMBASHI_MARAMBASHI?ed=512&security=tls&alpn=h3,h2&encryption=none&host=barayeiranmahsang.ghormehsabzi.dpdns.org&fp=chrome&type=ws&sni=barayeiranmahsang.ghormehsabzi.dpdns.org#INT🌍
 vless://e77fbe65-01fe-48d0-8069-f6fa8f7a6d81@104.248.142.176:443?security=&encryption=none&host=skyroom.online&headerType=http&type=tcp#IR🇮🇷
 vless://e902ef3f-118c-45dd-b093-02833846434e@172.67.191.189:2096/?type=ws&encryption=none&host=eiiim.danesh-bonyan.Store&path=join.----------------Telegram-EiiiM----------------Telegram-EiiiM---------------.Telegram-EiiiM.&security=tls&sni=J0in-Te1egram-eiiim.danesh-bonyan.Store#%5B%F0%9F%87%AB%F0%9F%87%AE%5D%20Telegram%3A%20%40netmelliiran%20%E2%9A%A1%EF%B8%8F
 vless://e999db7a-1b17-4da6-bc37-c9fa24af2e93@104.19.144.33:443?path=%2F&security=tls&encryption=none&host=JdYq2881Un.GhEiChI.oRg&fp=chrome&type=ws&sni=JdYq2881Un.GhEiChI.oRg#IRAN%20631%20%28%40Outline_Vpn%29%20free
