@@ -720,6 +720,7 @@ ss://7d96f544-c496-41cf-dd61-337f0aff062a@104.16.254.154:80/?type=ws&encryption=
 ss://7dc61cd6-320e-5d71-8bd3-9720e0b03c4b@151.101.1.6:80/?type=ws&encryption=none&host=PABLOO-MOSTAFA.COM#%40Hope_Net-join-us-on-Telegram
 ss://7dc61cd6-320e-5d71-8bd3-9720e0b03c4b@151.101.129.6:80/?type=ws&encryption=none&host=PABLOO-MOSTAFA.COM#%40Hope_Net-join-us-on-Telegram
 ss://7e33cdde-257f-43cf-b02f-5970fabf8a61@140.248.149.43:80/?type=ws&encryption=none&host=JoinBede--Eliv2-Ray.iR&path=%2FChannel-ELiV2RAY---ELiV2RAY---ELiV2RAY---ELiV2RAY----Channel-ELiV2RAY----Channel-ELiV2RAY%3Fed%3D2048#%40Hope_Net-join-us-on-Telegram
+ss://7e74ff43-3a90-48b3-8372-7d92a045c2d4@light-presence.oneeat.co:80?path=/&security=none&encryption=none&host=light-presence.oneeat.co&type=ws#US🇺🇸
 ss://7f037831-591d-4067-9c8c-39f07d12858a@45.131.210.230:80/?type=ws&encryption=none&host=yuming.kkllllkkkk95.workers.dev&path=telegram%40wangcai2%2F%3Fed%3D2048&security=tls&sni=yuming.kkllllkkkk95.workers.dev#%40Hope_Net-join-us-on-Telegram
 ss://7f037831-591d-4067-9c8c-39f07d12858a@45.131.6.243:80/?type=ws&encryption=none#%40Hope_Net-join-us-on-Telegram
 ss://7fa08b3d-86d8-4b14-92b3-4c56a83f027d@viop.fast.hosting-ip.com:80?mode=auto&path=%2FAmirrezagol%3Fed%3D2560&security=none&encryption=none&host=amirrezagol.global.ssl.fastly.net&type=xhttp#US🇺🇸
@@ -4782,6 +4783,7 @@ vless://7d96f544-c496-41cf-dd61-337f0aff062a@104.16.254.154:80/?type=ws&encrypti
 vless://7dc61cd6-320e-5d71-8bd3-9720e0b03c4b@151.101.1.6:80/?type=ws&encryption=none&host=PABLOO-MOSTAFA.COM#%40Hope_Net-join-us-on-Telegram
 vless://7dc61cd6-320e-5d71-8bd3-9720e0b03c4b@151.101.129.6:80/?type=ws&encryption=none&host=PABLOO-MOSTAFA.COM#%40Hope_Net-join-us-on-Telegram
 vless://7e33cdde-257f-43cf-b02f-5970fabf8a61@140.248.149.43:80/?type=ws&encryption=none&host=JoinBede--Eliv2-Ray.iR&path=%2FChannel-ELiV2RAY---ELiV2RAY---ELiV2RAY---ELiV2RAY----Channel-ELiV2RAY----Channel-ELiV2RAY%3Fed%3D2048#%40Hope_Net-join-us-on-Telegram
+vless://7e74ff43-3a90-48b3-8372-7d92a045c2d4@light-presence.oneeat.co:80?path=/&security=none&encryption=none&host=light-presence.oneeat.co&type=ws#US🇺🇸
 vless://7f037831-591d-4067-9c8c-39f07d12858a@45.131.210.230:80/?type=ws&encryption=none&host=yuming.kkllllkkkk95.workers.dev&path=telegram%40wangcai2%2F%3Fed%3D2048&security=tls&sni=yuming.kkllllkkkk95.workers.dev#%40Hope_Net-join-us-on-Telegram
 vless://7f037831-591d-4067-9c8c-39f07d12858a@45.131.6.243:80/?type=ws&encryption=none#%40Hope_Net-join-us-on-Telegram
 vless://7fa08b3d-86d8-4b14-92b3-4c56a83f027d@viop.fast.hosting-ip.com:80?mode=auto&path=%2FAmirrezagol%3Fed%3D2560&security=none&encryption=none&host=amirrezagol.global.ssl.fastly.net&type=xhttp#US🇺🇸
