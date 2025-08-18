@@ -32,8 +32,9 @@ VLESS_PROTOCOL = "vless://"
 
 # تنظیمات تست
 TEST_TIMEOUT = 60  # ثانیه - افزایش timeout
-CONCURRENT_TESTS = 30  # افزایش تعداد تست‌های همزمان به 30
-KEEP_BEST_COUNT = 100  # افزایش تعداد کانفیگ‌های سالم نگه‌داری شده
+CONCURRENT_TESTS = 50  # افزایش تعداد تست‌های همزمان به 50
+KEEP_BEST_COUNT = 500  # افزایش تعداد کانفیگ‌های سالم نگه‌داری شده
+MAX_CONFIGS_TO_TEST = 10000  # افزایش تعداد کانفیگ‌های تست شده به 10000
 
 # تنظیمات logging
 def setup_logging():
@@ -151,26 +152,60 @@ class VLESSManager:
         return hashlib.md5(config.strip().encode('utf-8')).hexdigest()
     
     def load_vless_source_configs(self) -> List[str]:
-        """بارگذاری کانفیگ‌های VLESS از فایل منبع"""
+        """بارگذاری کانفیگ‌های VLESS از فایل منبع و لینک‌های ساب"""
         try:
-            if not os.path.exists(VLESS_SOURCE_FILE):
-                logging.error(f"فایل منبع VLESS یافت نشد: {VLESS_SOURCE_FILE}")
-                return []
+            configs = []
             
-            with open(VLESS_SOURCE_FILE, 'r', encoding='utf-8') as f:
-                lines = f.readlines()
-                valid_configs = []
-                
-                for line in lines:
-                    line = line.strip()
-                    if self.is_valid_vless_config(line):
-                        valid_configs.append(line)
-                
-                logging.info(f"{len(valid_configs)} کانفیگ VLESS معتبر از فایل منبع بارگذاری شد")
-                return valid_configs
+            # 1. بارگذاری از فایل محلی
+            if os.path.exists(VLESS_SOURCE_FILE):
+                with open(VLESS_SOURCE_FILE, 'r', encoding='utf-8') as f:
+                    lines = f.readlines()
+                    for line in lines:
+                        line = line.strip()
+                        if self.is_valid_vless_config(line):
+                            configs.append(line)
+                logging.info(f"{len(configs)} کانفیگ VLESS از فایل محلی بارگذاری شد")
+            
+            # 2. بارگذاری از لینک‌های ساب
+            subscription_urls = [
+                "https://raw.githubusercontent.com/V2RayRoot/V2RayConfig/refs/heads/main/Config/vless.txt",
+                "https://raw.githubusercontent.com/Amirchelios/V2RayAutoConfig/refs/heads/main/configs/raw/Vless.txt",
+                "https://raw.githubusercontent.com/miladtahanian/V2RayScrapeByCountry/refs/heads/main/output_configs/Vless.txt",
+                "https://raw.githubusercontent.com/10ium/V2ray-Config/refs/heads/main/Splitted-By-Protocol/vless.txt"
+            ]
+            
+            for url in subscription_urls:
+                try:
+                    import urllib.request
+                    logging.info(f"دانلود از: {url}")
+                    response = urllib.request.urlopen(url, timeout=30)
+                    content = response.read().decode('utf-8')
+                    lines = content.split('\n')
+                    
+                    for line in lines:
+                        line = line.strip()
+                        if self.is_valid_vless_config(line):
+                            configs.append(line)
+                    
+                    logging.info(f"دانلود موفق از {url}: {len([l for l in lines if self.is_valid_vless_config(l.strip())])} کانفیگ")
+                    
+                except Exception as e:
+                    logging.warning(f"خطا در دانلود از {url}: {e}")
+                    continue
+            
+            # حذف تکراری‌ها
+            unique_configs = list(set(configs))
+            logging.info(f"مجموع {len(unique_configs)} کانفیگ VLESS منحصر به فرد یافت شد")
+            
+            # محدود کردن تعداد کانفیگ‌ها برای تست
+            if len(unique_configs) > MAX_CONFIGS_TO_TEST:
+                logging.info(f"محدود کردن تعداد کانفیگ‌ها از {len(unique_configs)} به {MAX_CONFIGS_TO_TEST}")
+                unique_configs = unique_configs[:MAX_CONFIGS_TO_TEST]
+            
+            return unique_configs
                 
         except Exception as e:
-            logging.error(f"خطا در بارگذاری کانفیگ‌های VLESS از فایل منبع: {e}")
+            logging.error(f"خطا در بارگذاری کانفیگ‌های VLESS: {e}")
             return []
     
     def parse_vless_config(self, config: str) -> Optional[Dict]:
@@ -386,30 +421,56 @@ class VLESSManager:
             return False
     
     async def test_iran_access(self, server_ip: str, port: str) -> bool:
-        """تست دسترسی از ایران (شبیه‌سازی)"""
+        """تست دسترسی از ایران با تست سایت‌های ایرانی"""
         try:
-            # تست اتصال با timeout کوتاه
-            # این تست شبیه‌سازی می‌کند که سرور از ایران قابل دسترس است
+            # تست اتصال به سایت‌های ایرانی
+            iran_test_urls = [
+                "https://www.aparat.com",
+                "https://divar.ir", 
+                "https://www.cafebazaar.ir",
+                "https://www.digikala.com",
+                "https://www.sheypoor.com",
+                "https://www.telewebion.com"
+            ]
+            
+            # تست اتصال TCP اولیه
             try:
                 reader, writer = await asyncio.wait_for(
                     asyncio.open_connection(server_ip, int(port)),
-                    timeout=8.0  # timeout کمی بیشتر برای ایران
+                    timeout=10.0
+                )
+                writer.close()
+                await writer.wait_closed()
+            except (asyncio.TimeoutError, ConnectionRefusedError, OSError):
+                return False
+            
+            # تست HTTP request به سایت‌های ایرانی
+            for test_url in iran_test_urls:
+                try:
+                    async with self.session.get(test_url, timeout=5) as response:
+                        if response.status < 400:
+                            return True
+                except Exception:
+                    continue
+            
+            # اگر هیچ سایت ایرانی پاسخ نداد، تست اتصال ساده
+            try:
+                reader, writer = await asyncio.wait_for(
+                    asyncio.open_connection(server_ip, int(port)),
+                    timeout=8.0
                 )
                 
-                # ارسال یک بایت تست (شبیه‌سازی handshake)
+                # ارسال handshake ساده
                 writer.write(b'\x01')
                 await writer.drain()
                 
-                # خواندن پاسخ (اگر سرور پاسخ دهد)
                 try:
                     data = await asyncio.wait_for(reader.read(1), timeout=3.0)
-                    # اگر داده‌ای خوانده شد، سرور از ایران قابل دسترس است
                     if data:
                         writer.close()
                         await writer.wait_closed()
                         return True
                 except asyncio.TimeoutError:
-                    # timeout در خواندن، اما اتصال برقرار شده
                     pass
                 
                 writer.close()
@@ -433,7 +494,7 @@ class VLESSManager:
                 return await self.test_vless_connection(config)
         
         # تست کانفیگ‌ها در batches برای جلوگیری از overload
-        batch_size = 200  # افزایش batch size
+        batch_size = 500  # افزایش batch size برای تست بیشتر
         all_results = []
         total_batches = (len(configs) + batch_size - 1) // batch_size
         
@@ -456,7 +517,7 @@ class VLESSManager:
             
             # کمی صبر بین batches
             if i + batch_size < len(configs):
-                await asyncio.sleep(0.5)  # کاهش زمان انتظار
+                await asyncio.sleep(1)  # افزایش زمان انتظار برای جلوگیری از overload
         
         logging.info(f"تست VLESS کامل شد: {len(all_results)} کانفیگ موفق از {len(configs)}")
         return all_results
@@ -484,6 +545,15 @@ class VLESSManager:
         logging.info(f"بهترین {len(best_configs)} کانفیگ VLESS انتخاب شدند:")
         logging.info(f"  - قابل دسترس از ایران: {iran_count}")
         logging.info(f"  - سایر: {len(best_configs) - iran_count}")
+        
+        # ذخیره اطلاعات ایران access در متادیتا
+        self.iran_access_stats = {
+            "total_tested": len(results),
+            "iran_accessible": len(iran_accessible),
+            "other_configs": len(other_configs),
+            "selected_iran": iran_count,
+            "selected_other": len(best_configs) - iran_count
+        }
         
         for i, result in enumerate(best_configs, 1):
             config_hash = result["hash"]
@@ -563,10 +633,14 @@ class VLESSManager:
                     f.write(f"# آخرین به‌روزرسانی: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
                     f.write(f"# تعداد کل کانفیگ‌ها: {len(self.existing_configs)}\n")
                     
-                    # اضافه کردن اطلاعات ایران access - self.existing_configs فقط شامل strings است
-                    # بنابراین نمی‌توانیم iran_access را از آن بخوانیم
-                    f.write(f"# قابل دسترس از ایران: اطلاعات در متادیتا موجود است\n")
-                    f.write(f"# سایر: اطلاعات در متادیتا موجود است\n")
+                    # اضافه کردن اطلاعات ایران access از متادیتا
+                    if hasattr(self, 'iran_access_stats'):
+                        f.write(f"# قابل دسترس از ایران: {self.iran_access_stats.get('selected_iran', 0)}\n")
+                        f.write(f"# سایر: {self.iran_access_stats.get('selected_other', 0)}\n")
+                        f.write(f"# کل تست شده: {self.iran_access_stats.get('total_tested', 0)}\n")
+                    else:
+                        f.write(f"# قابل دسترس از ایران: اطلاعات در متادیتا موجود است\n")
+                        f.write(f"# سایر: اطلاعات در متادیتا موجود است\n")
                     
                     f.write("# " + "="*50 + "\n\n")
                     

@@ -49,21 +49,14 @@ jobs:
         run: |
           python Files/scrip.py
 
-      - name: Commit and push changes (rebase on remote)
+      - name: Run Enhanced VLESS tester
+        run: |
+          cd vless
+          python run_vless_tester_enhanced.py
+
+      - name: Commit and push changes (using fix script)
         shell: bash
         run: |
-          set -e
-          BRANCH="${GITHUB_REF#refs/heads/}"
-          if [[ -z "$BRANCH" ]]; then BRANCH="main"; fi
-          if git diff --quiet; then
-            echo "No changes to commit."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "chore: auto-update configs and README [skip ci]"
-          git fetch origin
-          git pull --rebase origin "$BRANCH" || git rebase --abort
-          git push origin HEAD:"$BRANCH"
+          chmod +x scripts/fix_git_push.sh
+          ./scripts/fix_git_push.sh
 
