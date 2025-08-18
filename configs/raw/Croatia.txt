@@ -4,6 +4,6 @@ ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@46.183.184.64:989#%F0%9F%87%AD%F0%
 ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw@46.183.184.60:989#%F0%9F%87%AD%F0%9F%87%B7HR-46.183.184.60-4851
 ss://b4b8aa1f-77d2-4851-a5a4-f78886f3e997@deu246.bypassall.org:443?flow=xtls-rprx-vision&type=tcp&headerType=none&security=reality&fp=chrome&sni=www.bing.com&pbk=BhTJ3phnq-Z-10aFKSsj1lzhA8mULR4L6leE4-0WTAs#👉🆔@v2ray_configs_pool📡🇭🇷®️Croatia©️Sisak🅿️ping:6.69ms
 ss://b4b8aa1f-77d2-4851-a5a4-f78886f3e997@deu246.bypassall.org:443?security=reality&encryption=none&pbk=BhTJ3phnq-Z-10aFKSsj1lzhA8mULR4L6leE4-0WTAs&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=www.bing.com#HR🇭🇷
-ss://fab7bf9cddb945638a04fb01ce6c0fbfOg==@213.182.199.29:8880#HR%F0%9F%87%AD%F0%9F%87%B7+%7C+213.182.199.29-8880+%7C+5.24ms
+ss://fab7bf9cddb945638a04fb01ce6c0fbfOg==@213.182.199.29:8880#HR%F0%9F%87%AD%F0%9F%87%B7+%7C+213.182.199.29-8880+%7C+8.81ms
 vless://b4b8aa1f-77d2-4851-a5a4-f78886f3e997@deu246.bypassall.org:443?flow=xtls-rprx-vision&type=tcp&headerType=none&security=reality&fp=chrome&sni=www.bing.com&pbk=BhTJ3phnq-Z-10aFKSsj1lzhA8mULR4L6leE4-0WTAs#👉🆔@v2ray_configs_pool📡🇭🇷®️Croatia©️Sisak🅿️ping:6.69ms
 vless://b4b8aa1f-77d2-4851-a5a4-f78886f3e997@deu246.bypassall.org:443?security=reality&encryption=none&pbk=BhTJ3phnq-Z-10aFKSsj1lzhA8mULR4L6leE4-0WTAs&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=www.bing.com#HR🇭🇷
