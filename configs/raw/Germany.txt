@@ -247,6 +247,7 @@ ss://bfae5f06-1b75-4a23-9bbf-a17fb0f4e945@150.241.108.219:51410?mode=auto&path=%
 ss://c325f85d4634427c9c855b17ffc94545Og==@chmod1.mchmod.shop:31520#DE%F0%9F%87%A9%F0%9F%87%AA+%7C+chmod1.mchmod.shop-31520+%7C+166.46ms
 ss://c39a101c-0a7b-4940-8e6a-f8346d70b24b@91.99.221.206:443?security=none&encryption=none&host=zula.ir&headerType=http&type=tcp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Nuremberg🅿️ping:10.99ms
 ss://c43b7819-008e-4863-aa20-9d3fc2935df8@rezidental.az9x99.ir:2053?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
+ss://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-star.fastsoft98.ir:2010?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
 ss://c52ece5d-2575-43e5-b0a6-8a4a2c7f41fd@gem.talashit.com:8282?security=none&encryption=none&host=cloudflare.com&headerType=http&type=tcp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Nuremberg🅿️ping:9.43ms
 ss://c80463ca-2231-4f44-ba98-c9518395be38@139.162.188.193:21866/?type=tcp&encryption=none#%F0%9F%87%A9%F0%9F%87%AA%20DE%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40v2rayngn%20%5B13%5D
 ss://c80463ca-2231-4f44-ba98-c9518395be38@139.162.188.193:21866?security=none&encryption=none&headerType=none&type=tcp#DE🇩🇪
@@ -500,6 +501,7 @@ vless://bb7b030f-fd37-488a-be1f-1a26d874cb26@91.99.176.24:8443?mode=stream-one&p
 vless://bfae5f06-1b75-4a23-9bbf-a17fb0f4e945@150.241.108.219:51410?mode=auto&path=%2F%40MdVpnSec----%40MdVpnSec----%40MdVpnSec----%40MdVpnSec----%40MdVpnSec----%40MdVpnSec----%40MdVpnSec----%40MdVpnSec----%40MdVpnSec----%40MdVpnSec----%40MdVpnSec----%40MdVpnSec&security=reality&encryption=none&pbk=D45w-QY77mBJqaIH5b4SOh0vAyXG6quUhvjQRTamHks&fp=chrome&spx=%2F&type=xhttp&sni=zhaket.com&sid=e60c21#REALITY|DE🇩🇪
 vless://c39a101c-0a7b-4940-8e6a-f8346d70b24b@91.99.221.206:443?security=none&encryption=none&host=zula.ir&headerType=http&type=tcp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Nuremberg🅿️ping:10.99ms
 vless://c43b7819-008e-4863-aa20-9d3fc2935df8@rezidental.az9x99.ir:2053?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
+vless://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-star.fastsoft98.ir:2010?encryption=none&security=none&type=tcp&headerType=none#DE🇩🇪
 vless://c52ece5d-2575-43e5-b0a6-8a4a2c7f41fd@gem.talashit.com:8282?security=none&encryption=none&host=cloudflare.com&headerType=http&type=tcp#👉🆔@v2ray_configs_pool📡🇩🇪®️Germany©️Nuremberg🅿️ping:9.43ms
 vless://c80463ca-2231-4f44-ba98-c9518395be38@139.162.188.193:21866/?type=tcp&encryption=none#%F0%9F%87%A9%F0%9F%87%AA%20DE%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40v2rayngn%20%5B13%5D
 vless://c80463ca-2231-4f44-ba98-c9518395be38@139.162.188.193:21866?security=none&encryption=none&headerType=none&type=tcp#DE🇩🇪
