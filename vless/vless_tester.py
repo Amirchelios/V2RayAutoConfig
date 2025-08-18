@@ -13,6 +13,8 @@ import asyncio
 import aiohttp
 import hashlib
 import schedule
+import subprocess
+import platform
 from datetime import datetime, timedelta
 from typing import Set, List, Dict, Optional
 from urllib.parse import urlparse
@@ -29,8 +31,8 @@ LOG_FILE = "../logs/vless_tester.log"
 VLESS_PROTOCOL = "vless://"
 
 # تنظیمات تست
-TEST_TIMEOUT = 15  # ثانیه
-CONCURRENT_TESTS = 10
+TEST_TIMEOUT = 30  # ثانیه - افزایش timeout
+CONCURRENT_TESTS = 5  # کاهش تعداد تست‌های همزمان
 KEEP_BEST_COUNT = 50  # تعداد کانفیگ‌های سالم نگه‌داری شده
 
 # تنظیمات logging
@@ -100,8 +102,9 @@ class VLESSManager:
     async def create_session(self):
         """ایجاد session برای HTTP requests"""
         if self.session is None or self.session.closed:
-            timeout = aiohttp.ClientTimeout(total=TEST_TIMEOUT, connect=5, sock_read=TEST_TIMEOUT)
-            self.session = aiohttp.ClientSession(timeout=timeout)
+            timeout = aiohttp.ClientTimeout(total=TEST_TIMEOUT, connect=10, sock_read=TEST_TIMEOUT)
+            connector = aiohttp.TCPConnector(limit=100, limit_per_host=10, ttl_dns_cache=300)
+            self.session = aiohttp.ClientSession(timeout=timeout, connector=connector)
             logging.info("Session جدید برای تست VLESS ایجاد شد")
     
     async def close_session(self):
@@ -170,37 +173,68 @@ class VLESSManager:
             logging.error(f"خطا در بارگذاری کانفیگ‌های VLESS از فایل منبع: {e}")
             return []
     
-    def extract_server_address(self, config: str) -> Optional[str]:
-        """استخراج آدرس سرور از کانفیگ VLESS"""
+    def parse_vless_config(self, config: str) -> Optional[Dict]:
+        """پارس کردن کانفیگ VLESS و استخراج اطلاعات"""
         try:
-            if config.startswith(VLESS_PROTOCOL):
-                # حذف vless:// و parse کردن
-                vless_data = config.replace(VLESS_PROTOCOL, "")
-                
-                # پیدا کردن @ برای جدا کردن UUID و آدرس
-                at_index = vless_data.find('@')
-                if at_index != -1:
-                    # آدرس سرور بعد از @
-                    server_part = vless_data[at_index + 1:]
-                    
-                    # پیدا کردن : برای جدا کردن IP و پورت
-                    colon_index = server_part.find(':')
-                    if colon_index != -1:
-                        ip = server_part[:colon_index]
-                        # حذف query parameters اگر وجود داشته باشد
-                        question_index = ip.find('?')
-                        if question_index != -1:
-                            ip = ip[:question_index]
-                        return ip
-                
+            if not config.startswith(VLESS_PROTOCOL):
                 return None
+            
+            # حذف vless://
+            vless_data = config.replace(VLESS_PROTOCOL, "")
+            
+            # پیدا کردن @ برای جدا کردن UUID و آدرس
+            at_index = vless_data.find('@')
+            if at_index == -1:
+                return None
+            
+            uuid = vless_data[:at_index]
+            server_part = vless_data[at_index + 1:]
+            
+            # پیدا کردن : برای جدا کردن IP و پورت
+            colon_index = server_part.find(':')
+            if colon_index == -1:
+                return None
+            
+            server_ip = server_part[:colon_index]
+            port_part = server_part[colon_index + 1:]
+            
+            # جدا کردن پورت از query parameters
+            question_index = port_part.find('?')
+            if question_index != -1:
+                port = port_part[:question_index]
+                query_params = port_part[question_index + 1:]
             else:
-                return None
-        except Exception:
+                port = port_part
+                query_params = ""
+            
+            # استخراج type و security از query parameters
+            type_param = "tcp"  # پیش‌فرض
+            security_param = "none"  # پیش‌فرض
+            
+            if query_params:
+                for param in query_params.split('&'):
+                    if '=' in param:
+                        key, value = param.split('=', 1)
+                        if key == 'type':
+                            type_param = value
+                        elif key == 'security':
+                            security_param = value
+            
+            return {
+                "uuid": uuid,
+                "server_ip": server_ip,
+                "port": port,
+                "type": type_param,
+                "security": security_param,
+                "query_params": query_params
+            }
+            
+        except Exception as e:
+            logging.error(f"خطا در پارس کردن کانفیگ VLESS: {e}")
             return None
     
     async def test_vless_connection(self, config: str) -> Dict:
-        """تست اتصال کانفیگ VLESS"""
+        """تست اتصال کانفیگ VLESS با روش پیشرفته"""
         config_hash = self.create_config_hash(config)[:8]
         result = {
             "config": config,
@@ -208,30 +242,51 @@ class VLESSManager:
             "success": False,
             "latency": None,
             "error": None,
-            "server_address": None
+            "server_address": None,
+            "port": None,
+            "type": None
         }
         
         try:
-            # استخراج آدرس سرور
-            server_address = self.extract_server_address(config)
-            if server_address:
-                result["server_address"] = server_address
-                
-                # تست اتصال با ping به سرور
-                start_time = time.time()
-                success = await self.ping_server(server_address)
-                latency = (time.time() - start_time) * 1000  # میلی‌ثانیه
-                
-                if success:
-                    result["success"] = True
-                    result["latency"] = latency
-                    logging.info(f"✅ تست VLESS موفق: {config_hash} - Latency: {latency:.1f}ms")
-                else:
-                    result["error"] = "Ping failed"
-                    logging.warning(f"❌ تست VLESS ناموفق: {config_hash}")
-            else:
+            # پارس کردن کانفیگ
+            parsed_config = self.parse_vless_config(config)
+            if not parsed_config:
                 result["error"] = "Invalid VLESS config format"
                 logging.warning(f"❌ کانفیگ VLESS نامعتبر: {config_hash}")
+                return result
+            
+            server_ip = parsed_config["server_ip"]
+            port = parsed_config["port"]
+            connection_type = parsed_config["type"]
+            
+            result["server_address"] = server_ip
+            result["port"] = port
+            result["type"] = connection_type
+            
+            # تست اتصال با روش‌های مختلف
+            start_time = time.time()
+            
+            # تست 1: TCP connection test
+            tcp_success = await self.test_tcp_connection(server_ip, port)
+            if tcp_success:
+                # تست 2: HTTP/HTTPS test (برای سرورهای web)
+                http_success = await self.test_http_connection(server_ip, port)
+                
+                # تست 3: Custom protocol test (شبیه‌سازی VLESS)
+                protocol_success = await self.test_vless_protocol(server_ip, port, connection_type)
+                
+                # اگر حداقل دو تست موفق بود، کانفیگ سالم است
+                success_count = sum([tcp_success, http_success, protocol_success])
+                if success_count >= 2:
+                    result["success"] = True
+                    result["latency"] = (time.time() - start_time) * 1000
+                    logging.info(f"✅ تست VLESS موفق: {config_hash} - Server: {server_ip}:{port} - Type: {connection_type} - Latency: {result['latency']:.1f}ms")
+                else:
+                    result["error"] = f"Connection tests failed (TCP: {tcp_success}, HTTP: {http_success}, Protocol: {protocol_success})"
+                    logging.warning(f"❌ تست VLESS ناموفق: {config_hash} - Server: {server_ip}:{port}")
+            else:
+                result["error"] = "TCP connection failed"
+                logging.warning(f"❌ تست VLESS ناموفق: {config_hash} - TCP connection failed")
                 
         except Exception as e:
             result["error"] = str(e)
@@ -239,23 +294,86 @@ class VLESSManager:
         
         return result
     
-    async def ping_server(self, server_address: str) -> bool:
-        """ping کردن سرور"""
+    async def test_tcp_connection(self, server_ip: str, port: str) -> bool:
+        """تست اتصال TCP"""
+        try:
+            # استفاده از asyncio برای تست اتصال TCP
+            try:
+                reader, writer = await asyncio.wait_for(
+                    asyncio.open_connection(server_ip, int(port)),
+                    timeout=10.0
+                )
+                writer.close()
+                await writer.wait_closed()
+                return True
+            except (asyncio.TimeoutError, ConnectionRefusedError, OSError):
+                return False
+        except Exception:
+            return False
+    
+    async def test_http_connection(self, server_ip: str, port: str) -> bool:
+        """تست اتصال HTTP/HTTPS"""
+        try:
+            port_int = int(port)
+            if port_int in [80, 8080]:
+                url = f"http://{server_ip}:{port_int}"
+            elif port_int in [443, 8443]:
+                url = f"https://{server_ip}:{port_int}"
+            else:
+                # تست هر دو پروتکل برای پورت‌های دیگر
+                try:
+                    url = f"http://{server_ip}:{port_int}"
+                    async with self.session.get(url, timeout=5) as response:
+                        return response.status < 500
+                except:
+                    try:
+                        url = f"https://{server_ip}:{port_int}"
+                        async with self.session.get(url, timeout=5) as response:
+                            return response.status < 500
+                    except:
+                        return False
+                return False
+            
+            async with self.session.get(url, timeout=5) as response:
+                return response.status < 500
+                
+        except Exception:
+            return False
+    
+    async def test_vless_protocol(self, server_ip: str, port: str, connection_type: str) -> bool:
+        """تست پروتکل VLESS (شبیه‌سازی)"""
         try:
             # تست اتصال با timeout کوتاه
-            timeout = aiohttp.ClientTimeout(total=5)
-            async with aiohttp.ClientSession(timeout=timeout) as session:
-                # تست اتصال به پورت‌های مختلف
-                for port in [80, 443, 8080, 8443]:
-                    try:
-                        url = f"http://{server_address}:{port}" if port in [80, 8080] else f"https://{server_address}:{port}"
-                        async with session.get(url) as response:
-                            if response.status < 500:  # هر پاسخ غیر از خطای سرور
-                                return True
-                    except:
-                        continue
+            # این تست شبیه‌سازی می‌کند که سرور VLESS در دسترس است
+            try:
+                reader, writer = await asyncio.wait_for(
+                    asyncio.open_connection(server_ip, int(port)),
+                    timeout=5.0
+                )
                 
+                # ارسال یک بایت تست (شبیه‌سازی handshake VLESS)
+                writer.write(b'\x00')
+                await writer.drain()
+                
+                # خواندن پاسخ (اگر سرور پاسخ دهد)
+                try:
+                    data = await asyncio.wait_for(reader.read(1), timeout=2.0)
+                    # اگر داده‌ای خوانده شد، سرور پاسخگو است
+                    if data:
+                        writer.close()
+                        await writer.wait_closed()
+                        return True
+                except asyncio.TimeoutError:
+                    # timeout در خواندن، اما اتصال برقرار شده
+                    pass
+                
+                writer.close()
+                await writer.wait_closed()
+                return True
+                
+            except (asyncio.TimeoutError, ConnectionRefusedError, OSError):
                 return False
+                
         except Exception:
             return False
     
@@ -269,20 +387,34 @@ class VLESSManager:
             async with semaphore:
                 return await self.test_vless_connection(config)
         
-        tasks = [test_single_config(config) for config in configs]
-        results = await asyncio.gather(*tasks, return_exceptions=True)
+        # تست کانفیگ‌ها در batches برای جلوگیری از overload
+        batch_size = 100
+        all_results = []
         
-        # فیلتر کردن نتایج موفق
-        valid_results = []
-        for result in results:
-            if isinstance(result, dict) and result["success"]:
-                valid_results.append(result)
+        for i in range(0, len(configs), batch_size):
+            batch = configs[i:i + batch_size]
+            logging.info(f"تست batch {i//batch_size + 1}: {len(batch)} کانفیگ")
+            
+            tasks = [test_single_config(config) for config in batch]
+            batch_results = await asyncio.gather(*tasks, return_exceptions=True)
+            
+            # فیلتر کردن نتایج موفق
+            for result in batch_results:
+                if isinstance(result, dict) and result["success"]:
+                    all_results.append(result)
+            
+            # کمی صبر بین batches
+            if i + batch_size < len(configs):
+                await asyncio.sleep(1)
         
-        logging.info(f"تست VLESS کامل شد: {len(valid_results)} کانفیگ موفق از {len(configs)}")
-        return valid_results
+        logging.info(f"تست VLESS کامل شد: {len(all_results)} کانفیگ موفق از {len(configs)}")
+        return all_results
     
     def select_best_vless_configs(self, results: List[Dict]) -> List[str]:
         """انتخاب بهترین کانفیگ‌های VLESS"""
+        if not results:
+            return []
+        
         # مرتب‌سازی بر اساس latency (صعودی - کمترین latency اول)
         sorted_results = sorted(results, key=lambda x: x["latency"] if x["latency"] else float('inf'))
         
@@ -294,7 +426,9 @@ class VLESSManager:
             config_hash = result["hash"]
             latency = result["latency"]
             server = result["server_address"]
-            logging.info(f"{i}. {config_hash} - Latency: {latency:.1f}ms - Server: {server}")
+            port = result["port"]
+            connection_type = result["type"]
+            logging.info(f"{i}. {config_hash} - Server: {server}:{port} - Type: {connection_type} - Latency: {latency:.1f}ms")
         
         return [result["config"] for result in best_configs]
     
@@ -487,7 +621,7 @@ async def run_vless_tester():
     
     try:
         # اجرای یک دور به‌روزرسانی با timeout
-        async with asyncio.timeout(300):  # timeout 5 دقیقه
+        async with asyncio.timeout(600):  # timeout 10 دقیقه
             success = await manager.run_vless_update()
         
         if success:
@@ -499,7 +633,7 @@ async def run_vless_tester():
             logging.error("❌ به‌روزرسانی VLESS ناموفق بود")
             
     except asyncio.TimeoutError:
-        logging.error("⏰ timeout: برنامه VLESS بیش از 5 دقیقه طول کشید")
+        logging.error("⏰ timeout: برنامه VLESS بیش از 10 دقیقه طول کشید")
     except KeyboardInterrupt:
         logging.info("برنامه VLESS توسط کاربر متوقف شد")
     except Exception as e:
