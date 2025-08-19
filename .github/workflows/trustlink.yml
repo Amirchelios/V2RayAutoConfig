@@ -1,4 +1,4 @@
-name: 🔗 TrustLink Auto Update (DEPRECATED - Now integrated in main workflow)
+name: 🔗 TrustLink Auto Update (REMOVED - No longer needed)
 
 on:
   # این workflow غیرفعال شده چون حالا در workflow اصلی V2Ray AutoConfig ادغام شده
@@ -23,10 +23,10 @@ jobs:
     name: "به‌روزرسانی خودکار TrustLink (غیرفعال)"
     
     steps:
-      - name: ℹ️ Workflow Deprecated
+      - name: ℹ️ Workflow Removed
         run: |
-          echo "⚠️ این workflow غیرفعال شده است!"
-          echo "🔗 TrustLink حالا در workflow اصلی V2Ray AutoConfig ادغام شده"
-          echo "📅 اجرا: هر 2 ساعت بعد از اتمام V2Ray AutoConfig"
+          echo "❌ این workflow حذف شده است!"
+          echo "🔗 TrustLink Updater از منو workflow حذف شد"
+          echo "📅 TrustLink حالا به صورت هوشمند بعد از V2Ray AutoConfig اجرا می‌شود"
           echo "✅ نیازی به اجرای جداگانه نیست"
           exit 0

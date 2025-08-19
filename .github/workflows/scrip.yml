@@ -2,8 +2,8 @@ name: V2Ray Auto Config
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 * * * *"  # هر ساعت در دقیقه 0
+  # schedule:
+  #   - cron: "0 * * * *"  # هر ساعت در دقیقه 0 - غیرفعال شده
 
 permissions:
   contents: write

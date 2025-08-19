@@ -1187,14 +1187,17 @@ async def run_vless_tester():
         await manager.close_session()
 
 def schedule_vless_tester():
-    """تنظیم اجرای خودکار هر ساعت"""
-    logging.info("⏰ تنظیم اجرای خودکار هر ساعت برای VLESS Tester")
+    """تنظیم اجرای خودکار هفتگی"""
+    logging.info("⏰ تنظیم اجرای خودکار هفتگی برای VLESS Tester")
     
-    # اجرای اولیه
-    schedule.every().hour.do(lambda: asyncio.run(run_vless_tester()))
+    # اجرای هفتگی در روز یکشنبه ساعت 06:30 تهران (03:00 UTC)
+    schedule.every().sunday.at("06:30").do(lambda: asyncio.run(run_vless_tester()))
     
-    # اجرای فوری در شروع
+    # اجرای فوری در شروع (برای تست)
     schedule.every().minute.do(lambda: asyncio.run(run_vless_tester())).until("23:59")
+    
+    logging.info("📅 برنامه زمانبندی هفتگی فعال شد")
+    logging.info("🕐 اجرای بعدی: یکشنبه ساعت 06:30 تهران")
     
     while True:
         try:

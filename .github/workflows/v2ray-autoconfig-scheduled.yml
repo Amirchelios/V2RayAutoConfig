@@ -1,0 +1,131 @@
+name: V2Ray AutoConfig - Scheduled (6x Daily)
+
+on:
+  workflow_dispatch:
+  schedule:
+    # اجرای 6 بار در روز در ساعات مختلف
+    - cron: "0 2 * * *"   # 02:00 UTC (05:30 تهران)
+    - cron: "0 6 * * *"   # 06:00 UTC (09:30 تهران)
+    - cron: "0 10 * * *"  # 10:00 UTC (13:30 تهران)
+    - cron: "0 14 * * *"  # 14:00 UTC (17:30 تهران)
+    - cron: "0 18 * * *"  # 18:00 UTC (21:30 تهران)
+    - cron: "0 22 * * *"  # 22:00 UTC (01:30 تهران روز بعد)
+
+permissions:
+  contents: write
+
+concurrency:
+  group: v2ray-autoconfig-scheduled-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  scrape-and-commit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      completion_time: ${{ steps.completion.outputs.time }}
+      status: ${{ job.status }}
+
+    steps:
+      - name: 📥 Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: ⚙️ Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r Files/requirements.txt
+
+      - name: 📂 Check input files
+        run: |
+          echo "Checking urls.txt:"
+          cat Files/urls.txt || echo "urls.txt not found"
+          echo "Checking key.json:"
+          cat Files/key.json || echo "key.json not found"
+
+      - name: 🕸️ Run scraping script
+        timeout-minutes: 12
+        env:
+          ENABLE_HEALTH_CHECK: '1'
+          DISABLE_CONFIG_FILTERS: '1'
+          HEALTH_CHECK_ALL: '1'
+          KEEP_UNTESTED_ON_HEALTH: '1'
+          HEALTH_CHECK_CONCURRENCY: '6'
+          XRAY_TEST_TIMEOUT: '8'
+          HEALTH_CHECK_DEADLINE_SECONDS: '360'
+          FIRST_PHASE_HEALTH_CHECK_CONCURRENCY: '6'
+          FIRST_PHASE_MAX_HEALTH_CHECKS_PER_PROTOCOL: '1000000'
+          FIRST_PHASE_MAX_HEALTH_CHECKS_TOTAL: '1000000'
+          MAX_HEALTH_CHECKS_PER_PROTOCOL: '1000000'
+          MAX_HEALTH_CHECKS_TOTAL: '1000000'
+          MAX_HEALTHY_PER_PROTOCOL: '1000000'
+        run: |
+          python Files/scrip.py || { echo "Scraper failed, but continuing..."; exit 0; }
+
+      - name: 📂 Check directory contents
+        run: |
+          echo "Listing repository contents:"
+          ls -R
+          echo "Checking for configs:"
+          ls -la configs/ || echo "configs does not exist or is empty"
+
+      - name: 🛠️ Create configs if not exists
+        run: |
+          mkdir -p configs
+          touch configs/.gitkeep
+          echo "Created configs/.gitkeep"
+
+      - name: 🔧 Configure Git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: ⬆️ Commit and Push Changes
+        timeout-minutes: 5
+        run: |
+          git fetch origin
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes detected. Skipping commit."
+          else
+            echo "Changes detected. Committing..."
+            git commit -m "🤖 V2Ray AutoConfig Update - $(date -u +'%Y-%m-%d %H:%M:%S UTC') [skip ci]"
+            echo "Pulling remote changes with rebase..."
+            git pull --rebase --autostash origin main || { echo "Rebase failed, aborting..."; git rebase --abort; exit 0; }
+            echo "Pushing changes..."
+            git push origin main || { echo "Push failed, but continuing..."; exit 0; }
+          fi
+
+      - name: 🕐 Set completion time
+        id: completion
+        run: echo "time=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
+
+      - name: 📊 Create summary
+        if: always()
+        run: |
+          echo "## V2Ray AutoConfig Scheduled Run Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Execution Time:** $(date -u +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "**Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ -d "configs" ]; then
+            echo "### Config Files Generated:" >> $GITHUB_STEP_SUMMARY
+            for file in configs/*.txt; do
+              if [ -f "$file" ]; then
+                count=$(wc -l < "$file" 2>/dev/null || echo "0")
+                echo "- **$(basename "$file"):** $count configs" >> $GITHUB_STEP_SUMMARY
+              fi
+            done
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "**Next Run:** Scheduled for 6 times daily" >> $GITHUB_STEP_SUMMARY

@@ -2,8 +2,8 @@ name: Daily TrustLink Optimizer
 
 on:
   schedule:
-    # هر روز در ساعت 00:00 UTC (03:30 تهران)
-    - cron: '0 0 * * *'
+    # هر روز در ساعت 03:00 تهران (23:30 UTC روز قبل)
+    - cron: '30 23 * * *'
   workflow_dispatch:  # امکان اجرای دستی
   push:
     branches: [ main ]

@@ -1,9 +1,9 @@
-name: "VLESS Tester - Hourly Execution"
+name: "VLESS Tester - Weekly Execution"
 
 on:
-  # schedule:
-  #   # اجرای خودکار هر ساعت - غیرفعال شده
-  #   - cron: "0 * * * *"
+  schedule:
+    # اجرای هفتگی در روز یکشنبه ساعت 03:00 UTC (06:30 تهران)
+    - cron: "0 3 * * 0"
   
   # اجرای دستی از طریق GitHub Actions
   workflow_dispatch:
@@ -11,7 +11,7 @@ on:
       test_mode:
         description: "حالت تست (سریع/کامل)"
         required: true
-        default: "سریع"
+        default: "کامل"
         type: choice
         options:
           - "سریع"
@@ -20,10 +20,21 @@ on:
   # اجرا در push به main branch
   push:
     branches: [ main, master ]
+    paths:
+      - 'vless/**'
+      - 'configs/raw/Vless.txt'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: vless-tester-weekly-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   vless-tester:
     runs-on: ubuntu-latest
+    timeout-minutes: 120  # افزایش timeout برای تست کامل
     
     steps:
     - name: "Checkout Repository"
@@ -67,16 +78,8 @@ jobs:
         echo "Available files:"
         ls -la
         
-        # First run in test mode to ensure it works
-        echo "🧪 Running in test mode first..."
-        if python vless_tester.py --test; then
-          echo "✅ Test mode completed successfully"
-        else
-          echo "❌ Test mode failed with exit code $?"
-        fi
-        
-        # Now run in normal mode
-        echo "🚀 Running in normal mode..."
+        # اجرای تستر VLESS
+        echo "🚀 Running VLESS Tester..."
         if python vless_tester.py; then
           echo "✅ VLESS Tester completed successfully"
         else
@@ -98,80 +101,57 @@ jobs:
           echo "First few lines:"
           head -5 trustlink/trustlink_vless.txt
         else
-          echo "❌ File trustlink_vless.txt not created"
-          echo "Checking trustlink directory contents:"
-          ls -la trustlink/ || echo "trustlink directory not accessible"
-          echo "Checking logs for errors:"
-          if [ -f "logs/vless_tester.log" ]; then
-            echo "Last 20 lines of log:"
-            tail -20 logs/vless_tester.log
-          else
-            echo "No log file found"
-          fi
-          # Don't exit with error, just warn
-          echo "⚠️  Continuing workflow despite missing output file"
+          echo "❌ Output file not found: trustlink/trustlink_vless.txt"
         fi
         
         # Check metadata file
         if [ -f "trustlink/.trustlink_vless_metadata.json" ]; then
-          echo "✅ Metadata file created successfully"
+          echo "✅ Metadata file exists"
           echo "Metadata content:"
           cat trustlink/.trustlink_vless_metadata.json
         else
-          echo "❌ Metadata file not created"
+          echo "❌ Metadata file not found"
         fi
         
-    - name: "Upload Logs"
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: "vless-tester-logs"
-        path: |
-          logs/
-          trustlink/
-        retention-days: 7
-        
-    - name: "Commit Results"
+    - name: "Commit and Push Results"
+      if: success()
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         
-        if [ -f "trustlink/trustlink_vless.txt" ]; then
-          echo "✅ Committing results..."
-          git add trustlink/trustlink_vless.txt
-          git add trustlink/.trustlink_vless_metadata.json
-          git add logs/
-          
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "Auto VLESS update - $(date '+%Y-%m-%d %H:%M:%S')"
-            echo "Changes committed successfully"
-          fi
+        # اضافه کردن فایل‌های جدید
+        git add trustlink/trustlink_vless.txt
+        git add trustlink/.trustlink_vless_metadata.json
+        git add logs/vless_tester.log
+        
+        # بررسی تغییرات
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
         else
-          echo "⚠️  No output file to commit"
+          git commit -m "🤖 VLESS Tester Weekly Update - $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+          git push
         fi
         
-    - name: "Push Changes"
+    - name: "Create Summary"
+      if: always()
       run: |
-        if [ -f "trustlink/trustlink_vless.txt" ]; then
-          echo "✅ Pushing changes..."
-          git push origin HEAD:${{ github.ref }}
-          echo "Changes pushed successfully"
-        else
-          echo "⚠️  No changes to push"
-        fi
-      continue-on-error: true
-      
-    - name: "Final Status"
-      run: |
-        echo "VLESS Tester execution completed!"
-        echo "Execution time: $(date)"
+        echo "## VLESS Tester Weekly Run Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Execution Time:** $(date -u +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+        echo "**Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
         
         if [ -f "trustlink/trustlink_vless.txt" ]; then
-          echo "✅ Results saved in trustlink/trustlink_vless.txt"
-          echo "✅ Metadata saved in trustlink/.trustlink_vless_metadata.json"
-        else
-          echo "❌ No results were generated"
-          echo "Check the logs above for error details"
+          count=$(wc -l < trustlink/trustlink_vless.txt)
+          echo "**VLESS Configs Generated:** $count" >> $GITHUB_STEP_SUMMARY
         fi
+        
+        if [ -f "trustlink/.trustlink_vless_metadata.json" ]; then
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Metadata:" >> $GITHUB_STEP_SUMMARY
+          cat trustlink/.trustlink_vless_metadata.json | jq -r '.last_stats | "**New Added:** \(.new_added)\n**Working Configs:** \(.working_configs)\n**Iran Accessible:** \(.iran_accessible)"' >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "---" >> $GITHUB_STEP_SUMMARY
+        echo "**Next Run:** Scheduled for next Sunday at 03:00 UTC" >> $GITHUB_STEP_SUMMARY
