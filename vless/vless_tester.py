@@ -88,6 +88,7 @@ class VLESSManager:
         # ذخیره نتایج جزئی برای تداوم در صورت timeout/خطا
         self.partial_results: List[Dict] = []
         self.partial_iran_ok: List[str] = []
+        self.partial_social_ok: List[str] = []
         self.partial_speed_ok: List[str] = []
 
     def load_metadata(self):
@@ -480,6 +481,91 @@ class VLESSManager:
         except Exception:
             return False
 
+    async def test_social_media_access_via_xray(self, link: str) -> Dict[str, bool]:
+        """تست دسترسی به شبکه‌های اجتماعی (یوتیوب، اینستاگرام، تلگرام) با استفاده از Xray"""
+        try:
+            xray_path = self._get_xray_binary_path()
+            if not xray_path:
+                return {"youtube": False, "instagram": False, "telegram": False}
+            
+            local_port = self._choose_free_port()
+            cfg = self._build_xray_config_http_proxy(link, local_port)
+            if not cfg:
+                return {"youtube": False, "instagram": False, "telegram": False}
+            
+            import tempfile, json, shutil
+            tmp_dir = tempfile.mkdtemp(prefix='vless_social_')
+            cfg_path = os.path.join(tmp_dir, 'config.json')
+            
+            with open(cfg_path, 'w', encoding='utf-8') as f:
+                json.dump(cfg, f, ensure_ascii=False)
+            
+            proc = await asyncio.create_subprocess_exec(
+                xray_path, '-config', cfg_path, 
+                stdout=asyncio.subprocess.PIPE, 
+                stderr=asyncio.subprocess.STDOUT
+            )
+            
+            # زمان کوتاه برای بالا آمدن Xray
+            await asyncio.sleep(0.5)
+            
+            try:
+                # تست دسترسی به شبکه‌های اجتماعی
+                results = {"youtube": False, "instagram": False, "telegram": False}
+                
+                # تست یوتیوب
+                try:
+                    async with aiohttp.ClientSession() as test_session:
+                        async with test_session.get("https://www.youtube.com", 
+                                                 proxy=f"http://127.0.0.1:{local_port}",
+                                                 timeout=aiohttp.ClientTimeout(total=10)) as response:
+                            results["youtube"] = response.status == 200
+                except:
+                    results["youtube"] = False
+                
+                # تست اینستاگرام
+                try:
+                    async with aiohttp.ClientSession() as test_session:
+                        async with test_session.get("https://www.instagram.com", 
+                                                 proxy=f"http://127.0.0.1:{local_port}",
+                                                 timeout=aiohttp.ClientTimeout(total=10)) as response:
+                            results["instagram"] = response.status == 200
+                except:
+                    results["instagram"] = False
+                
+                # تست تلگرام
+                try:
+                    async with aiohttp.ClientSession() as test_session:
+                        async with test_session.get("https://web.telegram.org", 
+                                                 proxy=f"http://127.0.0.1:{local_port}",
+                                                 timeout=aiohttp.ClientTimeout(total=10)) as response:
+                            results["telegram"] = response.status == 200
+                except:
+                    results["telegram"] = False
+                
+                return results
+                
+            finally:
+                try:
+                    proc.terminate()
+                except Exception:
+                    pass
+                try:
+                    await asyncio.wait_for(proc.wait(), timeout=2)
+                except Exception:
+                    try:
+                        proc.kill()
+                    except Exception:
+                        pass
+                try:
+                    shutil.rmtree(tmp_dir, ignore_errors=True)
+                except Exception:
+                    pass
+                    
+        except Exception as e:
+            logging.debug(f"خطا در تست شبکه‌های اجتماعی: {e}")
+            return {"youtube": False, "instagram": False, "telegram": False}
+
     # ==========================
     # تست سرعت دانلود واقعی با Xray (Sequential)
     # ==========================
@@ -730,6 +816,31 @@ class VLESSManager:
             except Exception:
                 pass
 
+    async def filter_configs_by_social_media_access(self, configs: List[str]) -> List[str]:
+        """فیلتر کردن کانفیگ‌ها بر اساس تست دسترسی به شبکه‌های اجتماعی (Sequential)"""
+        passed: List[str] = []
+        for idx, cfg in enumerate(configs, 1):
+            try:
+                results = await self.test_social_media_access_via_xray(cfg)
+                # بررسی اینکه حداقل یکی از شبکه‌های اجتماعی قابل دسترسی باشد
+                if results.get("youtube", False) or results.get("instagram", False) or results.get("telegram", False):
+                    passed.append(cfg)
+                    # نگه‌داری نتیجه جزئی برای ذخیره در صورت timeout
+                    try:
+                        self.partial_social_ok.append(cfg)
+                    except Exception:
+                        pass
+                    logging.info(f"[{idx}/{len(configs)}] ✅ شبکه‌های اجتماعی قابل دسترسی - پذیرفته شد")
+                    logging.info(f"  YouTube: {results.get('youtube', False)}, Instagram: {results.get('instagram', False)}, Telegram: {results.get('telegram', False)}")
+                else:
+                    logging.info(f"[{idx}/{len(configs)}] ❌ شبکه‌های اجتماعی غیرقابل دسترسی - رد شد")
+            except Exception as e:
+                logging.warning(f"[{idx}/{len(configs)}] خطا در تست شبکه‌های اجتماعی: {e}")
+            # تاخیر کوتاه بین تست‌ها جهت جلوگیری از فشار
+            await asyncio.sleep(0.1)
+        logging.info(f"نتیجه تست شبکه‌های اجتماعی: {len(passed)} از {len(configs)} پذیرفته شدند")
+        return passed
+
     async def filter_configs_by_download_speed(self, configs: List[str]) -> List[str]:
         """فیلتر کردن کانفیگ‌ها بر اساس تست دانلود واقعی (Sequential)"""
         passed: List[str] = []
@@ -804,6 +915,9 @@ class VLESSManager:
             if self.partial_speed_ok:
                 best_configs = list({c for c in self.partial_speed_ok if self.is_valid_vless_config(c)})
                 stage = "speed_ok"
+            elif hasattr(self, 'partial_social_ok') and self.partial_social_ok:
+                best_configs = list({c for c in self.partial_social_ok if self.is_valid_vless_config(c)})
+                stage = "social_media_ok"
             elif self.partial_iran_ok:
                 best_configs = list({c for c in self.partial_iran_ok if self.is_valid_vless_config(c)})
                 stage = "iran_ok"
@@ -1058,9 +1172,18 @@ class VLESSManager:
                     self.create_fallback_output("هیچ کانفیگی دسترسی ایرانی را پاس نکرد")
                 return False
 
-            # فاز 3: تست سرعت دانلود فقط روی کانفیگ‌هایی که دسترسی ایرانی دارند
-            logging.info(f"⏱️ شروع تست سرعت دانلود برای {len(iran_ok_configs)} کانفیگ با دسترسی ایرانی")
-            speed_ok_configs = await self.filter_configs_by_download_speed(iran_ok_configs)
+            # فاز 3: تست دسترسی به شبکه‌های اجتماعی (یوتیوب، اینستاگرام، تلگرام)
+            logging.info(f"📱 شروع تست شبکه‌های اجتماعی برای {len(iran_ok_configs)} کانفیگ با دسترسی ایرانی")
+            social_ok_configs = await self.filter_configs_by_social_media_access(iran_ok_configs)
+            if not social_ok_configs:
+                logging.warning("هیچ کانفیگی تست شبکه‌های اجتماعی را پاس نکرد")
+                if not self.save_partial_progress("no-social-media-pass"):
+                    self.create_fallback_output("هیچ کانفیگی تست شبکه‌های اجتماعی را پاس نکرد")
+                return False
+
+            # فاز 4: تست سرعت دانلود فقط روی کانفیگ‌هایی که شبکه‌های اجتماعی را پاس کرده‌اند
+            logging.info(f"⏱️ شروع تست سرعت دانلود برای {len(social_ok_configs)} کانفیگ با دسترسی به شبکه‌های اجتماعی")
+            speed_ok_configs = await self.filter_configs_by_download_speed(social_ok_configs)
             if not speed_ok_configs:
                 logging.warning("هیچ کانفیگی تست سرعت را پاس نکرد")
                 if not self.save_partial_progress("no-speed-pass"):
@@ -1081,7 +1204,8 @@ class VLESSManager:
 
                 logging.info("✅ به‌روزرسانی VLESS با موفقیت انجام شد")
                 logging.info(f"📊 آمار: {stats['new_added']} جدید، {stats['duplicates_skipped']} تکراری")
-                logging.info(f"🔗 کانفیگ‌های VLESS سالم (پس از تست سرعت): {len(best_configs)}")
+                logging.info(f"🔗 کانفیگ‌های VLESS سالم (پس از تمام تست‌ها): {len(best_configs)}")
+                logging.info(f"📱 تست‌های انجام شده: اتصال → دسترسی ایران → شبکه‌های اجتماعی → سرعت دانلود")
                 return True
             else:
                 logging.error("❌ خطا در ذخیره فایل VLESS")
