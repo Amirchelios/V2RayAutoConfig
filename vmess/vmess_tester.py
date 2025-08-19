@@ -344,6 +344,118 @@ class VMESSManager:
             logging.debug(f"خطا در تست دسترسی ایرانی: {e}")
             return False
 
+    async def test_social_media_access(self, config: str) -> Dict[str, bool]:
+        """تست دسترسی به شبکه‌های اجتماعی (یوتیوب، اینستاگرام، تلگرام)"""
+        try:
+            # ایجاد فایل کانفیگ موقت برای Xray
+            parsed = self.parse_vmess_config(config)
+            if not parsed:
+                return {"youtube": False, "instagram": False, "telegram": False}
+            
+            temp_config = {
+                "inbounds": [{
+                    "port": 1080,
+                    "protocol": "socks",
+                    "settings": {
+                        "auth": "noauth",
+                        "udp": True
+                    }
+                }],
+                "outbounds": [{
+                    "protocol": "vmess",
+                    "settings": {
+                        "vnext": [{
+                            "address": parsed.get("add", ""),
+                            "port": int(parsed.get("port", 443)),
+                            "users": [{
+                                "id": parsed.get("id", ""),
+                                "alterId": parsed.get("aid", 0),
+                                "security": parsed.get("scy", "auto")
+                            }]
+                        }]
+                    },
+                    "streamSettings": {
+                        "network": parsed.get("net", "tcp"),
+                        "security": parsed.get("tls", ""),
+                        "tlsSettings": {
+                            "serverName": parsed.get("sni", "")
+                        } if parsed.get("tls") else {},
+                        "wsSettings": {
+                            "path": parsed.get("path", "")
+                        } if parsed.get("net") == "ws" else {}
+                    }
+                }]
+            }
+            
+            # ذخیره کانفیگ موقت
+            temp_config_path = f"temp_vmess_social_{hash(config)}.json"
+            with open(temp_config_path, 'w', encoding='utf-8') as f:
+                json.dump(temp_config, f, ensure_ascii=False, indent=2)
+            
+            # اجرای Xray
+            xray_path = os.path.join(XRAY_BIN_DIR, "xray.exe" if platform.system() == "Windows" else "xray")
+            if not os.path.exists(xray_path):
+                os.remove(temp_config_path)
+                return {"youtube": False, "instagram": False, "telegram": False}
+            
+            try:
+                process = await asyncio.create_subprocess_exec(
+                    xray_path, "run", "-c", temp_config_path,
+                    stdout=asyncio.subprocess.PIPE,
+                    stderr=asyncio.subprocess.PIPE
+                )
+                
+                # انتظار برای راه‌اندازی
+                await asyncio.sleep(2)
+                
+                # تست دسترسی به شبکه‌های اجتماعی
+                results = {"youtube": False, "instagram": False, "telegram": False}
+                
+                async with aiohttp.ClientSession() as test_session:
+                    # تست یوتیوب
+                    try:
+                        async with test_session.get("https://www.youtube.com", 
+                                                 proxy="socks5://127.0.0.1:1080",
+                                                 timeout=aiohttp.ClientTimeout(total=10)) as response:
+                            results["youtube"] = response.status == 200
+                    except:
+                        results["youtube"] = False
+                    
+                    # تست اینستاگرام
+                    try:
+                        async with test_session.get("https://www.instagram.com", 
+                                                 proxy="socks5://127.0.0.1:1080",
+                                                 timeout=aiohttp.ClientTimeout(total=10)) as response:
+                            results["instagram"] = response.status == 200
+                    except:
+                        results["instagram"] = False
+                    
+                    # تست تلگرام
+                    try:
+                        async with test_session.get("https://web.telegram.org", 
+                                                 proxy="socks5://127.0.0.1:1080",
+                                                 timeout=aiohttp.ClientTimeout(total=10)) as response:
+                            results["telegram"] = response.status == 200
+                    except:
+                        results["telegram"] = False
+                
+                process.terminate()
+                await process.wait()
+                os.remove(temp_config_path)
+                
+                return results
+                
+            except Exception as e:
+                if 'process' in locals():
+                    process.terminate()
+                    await process.wait()
+                os.remove(temp_config_path)
+                return {"youtube": False, "instagram": False, "telegram": False}
+                
+        except Exception as e:
+            logging.debug(f"خطا در تست شبکه‌های اجتماعی: {e}")
+            return {"youtube": False, "instagram": False, "telegram": False}
+
     async def test_download_speed(self, config: str) -> bool:
         """تست سرعت دانلود"""
         try:
@@ -360,6 +472,8 @@ class VMESSManager:
         
         await self.create_session()
         
+        # مرحله 1: تست اتصال اولیه
+        logging.info("مرحله 1: تست اتصال اولیه")
         semaphore = asyncio.Semaphore(CONCURRENT_TESTS)
         
         async def test_single_config(config: str):
@@ -367,40 +481,118 @@ class VMESSManager:
                 return await self.test_vmess_connection(config)
         
         tasks = [test_single_config(config) for config in configs]
-        results = []
+        initial_results = []
         
         try:
             for i, task in enumerate(asyncio.as_completed(tasks)):
                 result = await task
-                results.append(result)
+                initial_results.append(result)
                 
                 if (i + 1) % 100 == 0:
-                    logging.info(f"تست {i + 1}/{len(configs)} کانفیگ VMESS تکمیل شد")
-                
-                # ذخیره نتایج جزئی
-                if result["status"] == "working":
-                    self.partial_results.append(result)
-                    if await self.test_iran_access(result["config"]):
-                        self.partial_iran_ok.append(result["config"])
-                    if await self.test_download_speed(result["config"]):
-                        self.partial_speed_ok.append(result["config"])
+                    logging.info(f"تست اتصال {i + 1}/{len(configs)} کانفیگ VMESS تکمیل شد")
                 
         except Exception as e:
-            logging.error(f"خطا در تست کانفیگ‌ها: {e}")
+            logging.error(f"خطا در تست اتصال اولیه: {e}")
+        
+        # فیلتر کردن کانفیگ‌های سالم
+        working_configs = [r["config"] for r in initial_results if r["status"] == "working"]
+        logging.info(f"تعداد {len(working_configs)} کانفیگ سالم برای تست‌های بعدی")
+        
+        # مرحله 2: تست دسترسی ایران (50 تا 50 تا)
+        logging.info("مرحله 2: تست دسترسی ایران")
+        iran_ok_configs = []
+        batch_size = 50
+        
+        for i in range(0, len(working_configs), batch_size):
+            batch = working_configs[i:i + batch_size]
+            logging.info(f"تست دسترسی ایران برای batch {i//batch_size + 1} ({len(batch)} کانفیگ)")
+            
+            tasks = [self.test_iran_access(config) for config in batch]
+            iran_results = await asyncio.gather(*tasks, return_exceptions=True)
+            
+            for config, result in zip(batch, iran_results):
+                if isinstance(result, bool) and result:
+                    iran_ok_configs.append(config)
+            
+            logging.info(f"Batch {i//batch_size + 1} تکمیل شد. تعداد کل سالم: {len(iran_ok_configs)}")
+        
+        logging.info(f"تعداد {len(iran_ok_configs)} کانفیگ از تست دسترسی ایران قبول شدند")
+        
+        # مرحله 3: تست شبکه‌های اجتماعی (50 تا 50 تا)
+        logging.info("مرحله 3: تست شبکه‌های اجتماعی")
+        social_ok_configs = []
+        
+        for i in range(0, len(iran_ok_configs), batch_size):
+            batch = iran_ok_configs[i:i + batch_size]
+            logging.info(f"تست شبکه‌های اجتماعی برای batch {i//batch_size + 1} ({len(batch)} کانفیگ)")
+            
+            tasks = [self.test_social_media_access(config) for config in batch]
+            social_results = await asyncio.gather(*tasks, return_exceptions=True)
+            
+            for config, result in zip(batch, social_results):
+                if isinstance(result, dict):
+                    # بررسی اینکه حداقل یکی از شبکه‌های اجتماعی قابل دسترسی باشد
+                    if result.get("youtube", False) or result.get("instagram", False) or result.get("telegram", False):
+                        social_ok_configs.append(config)
+            
+            logging.info(f"Batch {i//batch_size + 1} تکمیل شد. تعداد کل سالم: {len(social_ok_configs)}")
+        
+        logging.info(f"تعداد {len(social_ok_configs)} کانفیگ از تست شبکه‌های اجتماعی قبول شدند")
+        
+        # مرحله 4: تست سرعت دانلود (50 تا 50 تا)
+        logging.info("مرحله 4: تست سرعت دانلود")
+        final_ok_configs = []
+        
+        for i in range(0, len(social_ok_configs), batch_size):
+            batch = social_ok_configs[i:i + batch_size]
+            logging.info(f"تست سرعت دانلود برای batch {i//batch_size + 1} ({len(batch)} کانفیگ)")
+            
+            tasks = [self.test_download_speed(config) for config in batch]
+            speed_results = await asyncio.gather(*tasks, return_exceptions=True)
+            
+            for config, result in zip(batch, speed_results):
+                if isinstance(result, bool) and result:
+                    final_ok_configs.append(config)
+            
+            logging.info(f"Batch {i//batch_size + 1} تکمیل شد. تعداد کل سالم: {len(final_ok_configs)}")
+        
+        logging.info(f"تعداد {len(final_ok_configs)} کانفیگ از تمام تست‌ها قبول شدند")
+        
+        # ایجاد نتایج نهایی
+        final_results = []
+        for result in initial_results:
+            if result["status"] == "working" and result["config"] in final_ok_configs:
+                # اضافه کردن اطلاعات تست‌ها
+                result["iran_access"] = True
+                result["social_media_access"] = True
+                result["download_speed_ok"] = True
+                final_results.append(result)
+            else:
+                # کانفیگ‌های رد شده
+                if result["status"] == "working":
+                    result["iran_access"] = result["config"] in iran_ok_configs
+                    result["social_media_access"] = result["config"] in social_ok_configs
+                    result["download_speed_ok"] = result["config"] in final_ok_configs
+                final_results.append(result)
         
         await self.close_session()
         
         logging.info(f"تست {len(configs)} کانفیگ VMESS تکمیل شد")
-        return results
+        logging.info(f"نتایج: {len(working_configs)} اتصال سالم، {len(iran_ok_configs)} دسترسی ایران، {len(social_ok_configs)} شبکه‌های اجتماعی، {len(final_ok_configs)} سرعت دانلود")
+        
+        return final_results
 
     def save_working_configs(self, results: List[Dict]):
         """ذخیره کانفیگ‌های سالم"""
         try:
-            # فیلتر کردن کانفیگ‌های سالم
-            working_configs = [r["config"] for r in results if r["status"] == "working"]
+            # فیلتر کردن کانفیگ‌های سالم که تمام تست‌ها را قبول شده‌اند
+            fully_working_configs = [r["config"] for r in results if r["status"] == "working" and r.get("download_speed_ok", False)]
+            
+            # کانفیگ‌های نیمه سالم (فقط اتصال سالم)
+            partially_working_configs = [r["config"] for r in results if r["status"] == "working" and not r.get("download_speed_ok", False)]
             
             # ترکیب با کانفیگ‌های موجود
-            all_configs = list(set(working_configs + list(self.existing_configs)))
+            all_configs = list(set(fully_working_configs + list(self.existing_configs)))
             
             # محدود کردن تعداد
             if len(all_configs) > KEEP_BEST_COUNT:
@@ -419,19 +611,32 @@ class VMESSManager:
                 for config in all_configs:
                     f.write(f"{config}\n")
             
+            # ذخیره آمار تست‌ها
+            stats = {
+                "total_tested": len(results),
+                "connection_ok": len([r for r in results if r["status"] == "working"]),
+                "iran_access_ok": len([r for r in results if r.get("iran_access", False)]),
+                "social_media_ok": len([r for r in results if r.get("social_media_access", False)]),
+                "download_speed_ok": len([r for r in results if r.get("download_speed_ok", False)]),
+                "fully_working": len(fully_working_configs),
+                "partially_working": len(partially_working_configs)
+            }
+            
             # به‌روزرسانی متادیتا
             self.metadata.update({
                 "last_update": datetime.now().isoformat(),
                 "total_tests": len(results),
                 "total_configs": len(all_configs),
-                "working_configs": len(working_configs),
-                "failed_configs": len(results) - len(working_configs),
-                "last_vmess_source": VMESS_SOURCE_FILE
+                "working_configs": len(fully_working_configs),
+                "failed_configs": len(results) - len(fully_working_configs),
+                "last_vmess_source": VMESS_SOURCE_FILE,
+                "test_statistics": stats
             })
             
             self.save_metadata()
             
             logging.info(f"تعداد {len(all_configs)} کانفیگ VMESS سالم ذخیره شد")
+            logging.info(f"آمار تست: {stats}")
             
             # ایجاد پشتیبان
             if os.path.exists(TRUSTLINK_VMESS_FILE):
