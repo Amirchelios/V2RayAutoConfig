@@ -4,7 +4,6 @@ ss://19199927-fb46-4203-8872-672fd1daca14@54.38.214.56:37171/?type=tcp&encryptio
 ss://1e7eaa27-ff66-428d-f86c-7e39855b1637@104.16.1.106:80?path=%2F&security=none&encryption=none&host=eng.vinamarketcenter.ir&type=ws#GB🇬🇧
 ss://401374e6-df77-41fb-f638-dad8184f175b@94.247.142.103:443?security=tls&sni=pqh23v5.hiddendom.shop&alpn=h2&type=grpc&encryption=none#%F0%9F%87%AC%F0%9F%87%A7GB%20%7C%20@V2ray_Collector
 ss://42ead82d-d6d7-4a94-9365-5be73f5d1bcc@57.129.129.41:54974?security=reality&encryption=none&pbk=F2WLUHR5RU2d2zifwKALTGkLLbIut1AjDKEAmx7OEW0&headerType=none&fp=chrome&type=tcp&sni=yahoo.com&sid=2075#REALITY|GB🇬🇧
-ss://4d91916f-a7fd-419b-8b90-640bb8d4b3f2@45.85.119.41:443?security=tls&sni=mypHOtoGRAPICpIctUre.iR&alpn=http/1.1&type=ws&path=/fJBvsL0uR2MtzRig&host=myphotograpicpicture.ir&encryption=none#%F0%9F%87%AC%F0%9F%87%A7GB%20%7C%20@V2ray_Collector
 ss://56c04341-2180-4e1f-9646-cdeb79cbbbad@94.177.253.242:8585?security=reality&encryption=none&pbk=58yfyRJyku8oddKvCIBHz0K8LrTWKr3qTe-DMUcrWEg&headerType=none&fp=firefox&type=tcp&sni=tgju.org&sid=ea0e387f2b260e0d#REALITY|GB🇬🇧
 ss://7e296434-2d17-48d3-928d-19eaa34aecb1@185.33.24.229:28495?security=reality&encryption=none&pbk=KXMH8QzaRa66F6GxOR1CanBunO2uHdJvri2zCbar2RQ&headerType=none&fp=chrome&type=tcp&sni=dl.google.com&sid=0ecc2c1392#REALITY|GB🇬🇧
 ss://7ff23c33-a3b7-4a24-93fd-2d3dcbfa62b1@104.16.1.106:80?path=%2F%3F---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---&security=none&encryption=none&host=eng.vinamarketcenter.ir&type=ws#GB🇬🇧
@@ -244,7 +243,6 @@ trojan://telegram-id-privatevpns@18.135.6.102:22222?security=tls&sni=trj.rolling
 trojan://telegram-id-privatevpns@3.8.123.26:22222?security=tls&sni=trj.rollingnext.co.uk#%F0%9F%87%AC%F0%9F%87%A7GB-3.8.123.26-8226
 trojan://telegram-id-privatevpns@3.8.123.26:22222?security=tls&sni=trj.rollingnext.co.uk#%F0%9F%87%AC%F0%9F%87%A7GB-3.8.123.26-8228
 trojan://telegram-id-privatevpns@35.177.137.88:22222?security=tls&sni=trj.rollingnext.co.uk#%F0%9F%87%AC%F0%9F%87%A7GB-35.177.137.88-1485
-trojan://telegram-id-vlessconfig@35.178.114.243:22222?security=tls&sni=trojan.burgerip.co.uk&type=tcp#%F0%9F%87%AC%F0%9F%87%A7GB%20%7C%20@V2ray_Collector
 trojan://xxoo@146.19.230.241:443?security=tls#%F0%9F%87%AC%F0%9F%87%A7GB-146.19.230.241-2578
 trojan://xxoo@146.19.230.241:443?security=tls&sni=bmi.ir#%F0%9F%87%AC%F0%9F%87%A7GB-146.19.230.241-8699
 trojan://xxoo@146.19.230.241:443?security=tls&sni=loader.tapsell.ir#%F0%9F%87%AC%F0%9F%87%A7GB-146.19.230.241-8695
@@ -253,7 +251,6 @@ vless://19199927-fb46-4203-8872-672fd1daca14@54.38.214.56:37171/?type=tcp&encryp
 vless://1e7eaa27-ff66-428d-f86c-7e39855b1637@104.16.1.106:80?path=%2F&security=none&encryption=none&host=eng.vinamarketcenter.ir&type=ws#GB🇬🇧
 vless://401374e6-df77-41fb-f638-dad8184f175b@94.247.142.103:443?security=tls&sni=pqh23v5.hiddendom.shop&alpn=h2&type=grpc&encryption=none#%F0%9F%87%AC%F0%9F%87%A7GB%20%7C%20@V2ray_Collector
 vless://42ead82d-d6d7-4a94-9365-5be73f5d1bcc@57.129.129.41:54974?security=reality&encryption=none&pbk=F2WLUHR5RU2d2zifwKALTGkLLbIut1AjDKEAmx7OEW0&headerType=none&fp=chrome&type=tcp&sni=yahoo.com&sid=2075#REALITY|GB🇬🇧
-vless://4d91916f-a7fd-419b-8b90-640bb8d4b3f2@45.85.119.41:443?security=tls&sni=mypHOtoGRAPICpIctUre.iR&alpn=http/1.1&type=ws&path=/fJBvsL0uR2MtzRig&host=myphotograpicpicture.ir&encryption=none#%F0%9F%87%AC%F0%9F%87%A7GB%20%7C%20@V2ray_Collector
 vless://56c04341-2180-4e1f-9646-cdeb79cbbbad@94.177.253.242:8585?security=reality&encryption=none&pbk=58yfyRJyku8oddKvCIBHz0K8LrTWKr3qTe-DMUcrWEg&headerType=none&fp=firefox&type=tcp&sni=tgju.org&sid=ea0e387f2b260e0d#REALITY|GB🇬🇧
 vless://7e296434-2d17-48d3-928d-19eaa34aecb1@185.33.24.229:28495?security=reality&encryption=none&pbk=KXMH8QzaRa66F6GxOR1CanBunO2uHdJvri2zCbar2RQ&headerType=none&fp=chrome&type=tcp&sni=dl.google.com&sid=0ecc2c1392#REALITY|GB🇬🇧
 vless://7ff23c33-a3b7-4a24-93fd-2d3dcbfa62b1@104.16.1.106:80?path=%2F%3F---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---VITUREY---&security=none&encryption=none&host=eng.vinamarketcenter.ir&type=ws#GB🇬🇧
