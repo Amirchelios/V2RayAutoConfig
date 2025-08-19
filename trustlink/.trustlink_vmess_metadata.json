@@ -1,0 +1,9 @@
+{
+  "last_update": "2025-08-19T05:43:46.511088",
+  "total_tests": 5597,
+  "total_configs": 500,
+  "working_configs": 2315,
+  "failed_configs": 3282,
+  "last_vmess_source": "../configs/raw/Vmess.txt",
+  "version": "1.0.0"
+}
