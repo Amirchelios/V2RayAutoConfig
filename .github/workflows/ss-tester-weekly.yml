@@ -1,0 +1,171 @@
+name: 🔗 Shadowsocks Tester - Weekly Execution
+
+on:
+  # اجرای خودکار هر هفته (یکشنبه ساعت 2 صبح)
+  schedule:
+    - cron: '0 2 * * 0'
+  
+  # اجرای دستی
+  workflow_dispatch:
+    inputs:
+      test_mode:
+        description: 'حالت تست'
+        required: true
+        default: 'single'
+        type: choice
+        options:
+          - single
+          - auto
+      max_configs:
+        description: 'حداکثر تعداد کانفیگ‌های تست شده'
+        required: false
+        default: '10000'
+        type: string
+      batch_size:
+        description: 'اندازه batch برای تست'
+        required: false
+        default: '50'
+        type: string
+
+env:
+  PYTHON_VERSION: '3.9'
+  WORKING_DIRECTORY: './'
+
+jobs:
+  test-shadowsocks:
+    name: 🧪 تست کانفیگ‌های Shadowsocks
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: 🐍 Setup Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+      
+      - name: 📋 Display Python version
+        run: |
+          python --version
+          pip --version
+      
+      - name: 🔧 Install dependencies
+        run: |
+          cd ss
+          pip install -r requirements.txt
+          pip list
+      
+      - name: 📁 Check environment
+        run: |
+          echo "🔍 بررسی محیط اجرا..."
+          echo "📁 مسیر فعلی: $(pwd)"
+          echo "📁 محتویات دایرکتوری ss:"
+          ls -la ss/
+          echo "📁 بررسی فایل‌های Xray:"
+          ls -la Files/xray-bin/ || echo "❌ دایرکتوری Files/xray-bin یافت نشد"
+          echo "📁 بررسی فایل‌های منبع:"
+          ls -la configs/raw/ || echo "❌ دایرکتوری configs/raw یافت نشد"
+      
+      - name: 🚀 Run Shadowsocks Tester
+        run: |
+          cd ss
+          echo "🚀 شروع تست کانفیگ‌های Shadowsocks..."
+          echo "📊 حالت: ${{ github.event.inputs.test_mode || 'single' }}"
+          echo "🔢 حداکثر کانفیگ: ${{ github.event.inputs.max_configs || '10000' }}"
+          echo "📦 اندازه batch: ${{ github.event.inputs.batch_size || '50' }}"
+          
+          # اجرای تست
+          python ss_tester.py
+          
+          echo "✅ تست تکمیل شد"
+      
+      - name: 📊 Check results
+        run: |
+          echo "📊 بررسی نتایج تست..."
+          
+          # بررسی فایل‌های خروجی
+          if [ -f "trustlink/trustlink_ss.txt" ]; then
+            echo "✅ فایل کانفیگ‌های سالم ایجاد شد"
+            echo "📁 اندازه فایل: $(wc -l < trustlink/trustlink_ss.txt) خط"
+          else
+            echo "❌ فایل کانفیگ‌های سالم یافت نشد"
+          fi
+          
+          if [ -f "trustlink/.trustlink_ss_metadata.json" ]; then
+            echo "✅ فایل متادیتا ایجاد شد"
+            echo "📊 محتویات متادیتا:"
+            cat trustlink/.trustlink_ss_metadata.json | python -m json.tool
+          else
+            echo "❌ فایل متادیتا یافت نشد"
+          fi
+          
+          if [ -f "logs/ss_tester.log" ]; then
+            echo "✅ فایل لاگ ایجاد شد"
+            echo "📝 آخرین خطوط لاگ:"
+            tail -20 logs/ss_tester.log
+          else
+            echo "❌ فایل لاگ یافت نشد"
+          fi
+      
+      - name: 📤 Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: shadowsocks-tester-results-${{ github.run_number }}
+          path: |
+            trustlink/trustlink_ss.txt
+            trustlink/.trustlink_ss_metadata.json
+            trustlink/trustlink_ss_backup.txt
+            logs/ss_tester.log
+            logs/ss_runner.log
+          retention-days: 30
+      
+      - name: 📝 Commit and push results
+        run: |
+          echo "📝 ثبت و ارسال نتایج..."
+          
+          # تنظیم Git
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # اضافه کردن فایل‌های جدید
+          git add trustlink/trustlink_ss.txt || echo "⚠️ فایل کانفیگ‌ها اضافه نشد"
+          git add trustlink/.trustlink_ss_metadata.json || echo "⚠️ فایل متادیتا اضافه نشد"
+          git add trustlink/trustlink_ss_backup.txt || echo "⚠️ فایل پشتیبان اضافه نشد"
+          git add logs/ss_tester.log || echo "⚠️ فایل لاگ اضافه نشد"
+          
+          # بررسی تغییرات
+          if git diff --staged --quiet; then
+            echo "ℹ️ هیچ تغییری برای ثبت وجود ندارد"
+          else
+            echo "💾 ثبت تغییرات..."
+            git commit -m "🔗 Update Shadowsocks configurations - Run #${{ github.run_number }}
+            
+            📊 Test Results:
+            - Source: configs/raw/ShadowSocks.txt
+            - Output: trustlink/trustlink_ss.txt
+            - Metadata: trustlink/.trustlink_ss_metadata.json
+            - Backup: trustlink/trustlink_ss_backup.txt
+            - Logs: logs/ss_tester.log
+            
+            🚀 Triggered by: ${{ github.event_name }}
+            ⏰ Timestamp: $(date -u +'%Y-%m-%d %H:%M:%S UTC')
+            🔢 Run ID: ${{ github.run_number }}"
+            
+            echo "📤 ارسال تغییرات..."
+            git push
+          fi
+      
+      - name: 📈 Summary
+        run: |
+          echo "🎉 تست Shadowsocks تکمیل شد!"
+          echo "📊 خلاصه نتایج:"
+          echo "  🔗 کانفیگ‌های تست شده: $(find configs/raw/ -name '*.txt' -exec wc -l {} + | tail -1 | awk '{print $1}' || echo 'نامشخص')"
+          echo "  ✅ کانفیگ‌های سالم: $(wc -l < trustlink/trustlink_ss.txt 2>/dev/null || echo '0')"
+          echo "  📁 فایل‌های خروجی: trustlink/trustlink_ss.txt"
+          echo "  📊 متادیتا: trustlink/.trustlink_ss_metadata.json"
+          echo "  📝 لاگ‌ها: logs/ss_tester.log"
+          echo "  🎯 Artifact: shadowsocks-tester-results-${{ github.run_number }}"

@@ -1,0 +1,35 @@
+# فایل‌های موقت Shadowsocks Tester
+temp_ss_*.json
+temp_ss_config.json
+
+# فایل‌های لاگ
+*.log
+
+# فایل‌های پایتون
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# فایل‌های محیط مجازی
+venv/
+env/
+ENV/
+
+# فایل‌های IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# فایل‌های سیستم
+.DS_Store
+Thumbs.db
+
+# فایل‌های تست
+test_*.py
+*_test.py
+
+# فایل‌های پشتیبان
+*.bak
+*.backup
