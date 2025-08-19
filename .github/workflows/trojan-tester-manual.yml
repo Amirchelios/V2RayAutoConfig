@@ -1,0 +1,71 @@
+name: 🔗 Trojan Tester - Manual Execution
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_mode:
+        description: 'حالت تست'
+        required: true
+        default: 'single'
+        type: choice
+        options: [single, auto]
+
+env:
+  PYTHON_VERSION: '3.9'
+
+jobs:
+  test-trojan-manual:
+    name: 🧪 تست دستی کانفیگ‌های Trojan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🐍 Setup Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: 🔧 Install dependencies
+        run: |
+          cd trojan
+          pip install -r requirements.txt
+
+      - name: 🚀 Run Trojan Tester
+        run: |
+          cd trojan
+          if [ "${{ github.event.inputs.test_mode }}" = "auto" ]; then
+            timeout 3600 python trojan_tester.py --auto || echo "⏰ timeout after 1h"
+          else
+            python trojan_tester.py
+          fi
+
+      - name: 📤 Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: trojan-tester-manual-${{ github.run_number }}
+          path: |
+            trustlink/trustlink_trojan.txt
+            trustlink/.trustlink_trojan_metadata.json
+            trustlink/trustlink_trojan_backup.txt
+            logs/trojan_tester.log
+          retention-days: 90
+
+      - name: 📝 Commit and push results
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add trustlink/trustlink_trojan.txt || true
+          git add trustlink/.trustlink_trojan_metadata.json || true
+          git add trustlink/trustlink_trojan_backup.txt || true
+          git add logs/trojan_tester.log || true
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🔗 Manual Trojan Test - Run #${{ github.run_number }}"
+            git push || true
+          fi

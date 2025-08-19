@@ -1,0 +1,19 @@
+# Temporary files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Logs
+*.log
+
+# Temp Xray configs
+temp_trojan_*.json
+
+# Virtual envs
+venv/
+ENV/
+.env/
+
+# IDE
+.vscode/
+.idea/
