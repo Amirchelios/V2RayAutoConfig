@@ -1,0 +1,170 @@
+name: "VMESS Tester - Weekly Execution"
+
+on:
+  # اجرای خودکار هر هفته در روز یکشنبه ساعت 2 صبح
+  schedule:
+    - cron: "0 2 * * 0"
+  
+  # اجرای دستی از طریق GitHub Actions
+  workflow_dispatch:
+    inputs:
+      test_mode:
+        description: "حالت تست (سریع/کامل)"
+        required: true
+        default: "کامل"
+        type: choice
+        options:
+          - "سریع"
+          - "کامل"
+
+  # اجرا در push به main branch
+  push:
+    branches: [ main, master ]
+
+jobs:
+  vmess-tester:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: "Checkout Repository"
+      uses: actions/checkout@v4
+      
+    - name: "Setup Python"
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+        
+    - name: "Install Dependencies"
+      run: |
+        python -m pip install --upgrade pip
+        cd vmess
+        pip install -r requirements.txt
+        
+    - name: "Create Required Directories"
+      run: |
+        mkdir -p logs
+        mkdir -p trustlink
+        
+    - name: "Check Source File"
+      run: |
+        echo "Checking VMESS source file..."
+        if [ -f "configs/raw/Vmess.txt" ]; then
+          echo "✅ VMESS source file exists"
+          echo "File size: $(du -h configs/raw/Vmess.txt | cut -f1)"
+          echo "Line count: $(wc -l < configs/raw/Vmess.txt)"
+        else
+          echo "❌ VMESS source file not found: configs/raw/Vmess.txt"
+          echo "Available files in configs/raw/:"
+          ls -la configs/raw/ || echo "configs/raw/ directory not found"
+        fi
+        
+    - name: "Run VMESS Tester"
+      run: |
+        echo "Starting VMESS Tester..."
+        cd vmess
+        echo "Current directory: $(pwd)"
+        echo "Python version: $(python --version)"
+        echo "Available files:"
+        ls -la
+        
+        # Run VMESS tester
+        echo "🚀 Running VMESS Tester..."
+        if python vmess_tester.py; then
+          echo "✅ VMESS Tester completed successfully"
+        else
+          echo "❌ VMESS Tester failed with exit code $?"
+          echo "Checking for any output files..."
+          ls -la ../trustlink/ || echo "trustlink directory not accessible"
+          ls -la ../logs/ || echo "logs directory not accessible"
+        fi
+        
+    - name: "Check Results"
+      run: |
+        echo "Checking VMESS tester results..."
+        
+        # Check if output file exists
+        if [ -f "trustlink/trustlink_vmess.txt" ]; then
+          echo "✅ File trustlink_vmess.txt created successfully"
+          echo "Line count: $(wc -l < trustlink/trustlink_vmess.txt)"
+          echo "File size: $(du -h trustlink/trustlink_vmess.txt | cut -f1)"
+          echo "First few lines:"
+          head -5 trustlink/trustlink_vmess.txt
+        else
+          echo "❌ File trustlink_vmess.txt not created"
+          echo "Checking trustlink directory contents:"
+          ls -la trustlink/ || echo "trustlink directory not accessible"
+          echo "Checking logs for errors:"
+          if [ -f "logs/vmess_tester.log" ]; then
+            echo "Last 20 lines of log:"
+            tail -20 logs/vmess_tester.log
+          else
+            echo "No log file found"
+          fi
+          # Don't exit with error, just warn
+          echo "⚠️  Continuing workflow despite missing output file"
+        fi
+        
+        # Check metadata file
+        if [ -f "trustlink/.trustlink_vmess_metadata.json" ]; then
+          echo "✅ Metadata file created successfully"
+          echo "Metadata content:"
+          cat trustlink/.trustlink_vmess_metadata.json
+        else
+          echo "❌ Metadata file not created"
+        fi
+        
+    - name: "Upload Logs"
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: "vmess-tester-logs-weekly"
+        path: |
+          logs/
+          trustlink/
+        retention-days: 30
+        
+    - name: "Commit Results"
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        if [ -f "trustlink/trustlink_vmess.txt" ]; then
+          echo "✅ Committing VMESS results..."
+          git add trustlink/trustlink_vmess.txt
+          git add trustlink/.trustlink_vmess_metadata.json
+          git add logs/
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Weekly VMESS update - $(date '+%Y-%m-%d %H:%M:%S')"
+            echo "Changes committed successfully"
+          fi
+        else
+          echo "⚠️  No output file to commit"
+        fi
+        
+    - name: "Push Changes"
+      run: |
+        if [ -f "trustlink/trustlink_vmess.txt" ]; then
+          echo "✅ Pushing VMESS changes..."
+          git push origin HEAD:${{ github.ref }}
+          echo "Changes pushed successfully"
+        else
+          echo "⚠️  No changes to push"
+        fi
+      continue-on-error: true
+      
+    - name: "Final Status"
+      run: |
+        echo "VMESS Tester weekly execution completed!"
+        echo "Execution time: $(date)"
+        
+        if [ -f "trustlink/trustlink_vmess.txt" ]; then
+          echo "✅ Results saved in trustlink/trustlink_vmess.txt"
+          echo "✅ Metadata saved in trustlink/.trustlink_vmess_metadata.json"
+          echo "✅ Next execution: Next Sunday at 2:00 AM"
+        else
+          echo "❌ No results were generated"
+          echo "Check the logs above for error details"
+        fi
