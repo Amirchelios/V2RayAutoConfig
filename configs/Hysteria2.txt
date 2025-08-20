@@ -20,6 +20,7 @@ hysteria2://0f78d86d-c753-4b0d-8a1d-945160a41043@dehub.xg-hub.icu:25784?security
 hysteria2://0f78d86d-c753-4b0d-8a1d-945160a41043@ukhub.xg-hub.icu:25785?security=tls&obfs=salamander&obfs-password=ZDQxZDhjZDk4ZjAwYjIwNA%3D%3D&insecure=1&sni=ukhub.xg-hub.icu#%D8%A8%D8%B1%D8%A7%DB%8C%20%D8%A7%D8%AA%D8%B5%D8%A7%D9%84%20%D8%AF%D8%A7%D8%A6%D9%85%DB%8C%20%D8%AC%D9%88%DB%8C%D9%86%20%D8%B4%D9%88%F0%9F%AB%86%20TelegramID%20%E2%8C%B2Express_freevpn%20%F0%9F%AA%A9
 hysteria2://0f78d86d-c753-4b0d-8a1d-945160a41043@ukhub.xg-hub.icu:25785?security=tls&obfs=salamander&obfs-password=ZDQxZDhjZDk4ZjAwYjIwNA%3D%3D&insecure=1&sni=ukhub.xg-hub.icu#🆔express_freevpn%20🔒%20HY2-UDP-N/A%20🇬🇧%20GB%20down
 hysteria2://1045aedf-053c-4585-875d-e2fc3f3ea6dd@172.252.236.213:56704/?sni=dxobg4azmk.gafnode.sbs#Marseille-GetAFreeNode
+hysteria2://1045aedf-053c-4585-875d-e2fc3f3ea6dd@185.126.255.78:49382?sni=real.getafreenode.sbs#qol_144
 hysteria2://1045aedf-053c-4585-875d-e2fc3f3ea6dd@185.126.255.78:49720/?sni=dxobg4azmk.gafnode.sbs#Kyiv-GetAFreeNode
 hysteria2://1045aedf-053c-4585-875d-e2fc3f3ea6dd@23.132.228.217:45860/?sni=dxobg4azmk.gafnode.sbs#Como-GetAFreeNode
 hysteria2://23125f6e-ec56-4c26-9714-0bbacdb53d01@172.252.236.213:56704/?sni=dxobg4azmk.gafnode.sbs#Marseille-GetAFreeNode
@@ -32,7 +33,6 @@ hysteria2://413c8b50-96bf-4457-82f2-54dfa8685f53@172.252.236.213:56704/?sni=dxob
 hysteria2://413c8b50-96bf-4457-82f2-54dfa8685f53@185.126.255.78:49720/?sni=dxobg4azmk.gafnode.sbs#Kyiv-GetAFreeNode
 hysteria2://413c8b50-96bf-4457-82f2-54dfa8685f53@23.132.228.217:45860/?sni=dxobg4azmk.gafnode.sbs#Como-GetAFreeNode
 hysteria2://45cc0b3a-0adb-4dcc-8f54-4ba3d2cc274e@172.252.236.213:56704/?sni=dxobg4azmk.gafnode.sbs#Marseille-GetAFreeNode
-hysteria2://45cc0b3a-0adb-4dcc-8f54-4ba3d2cc274e@185.126.255.78:49382?sni=real.getafreenode.sbs#qoli_138
 hysteria2://45cc0b3a-0adb-4dcc-8f54-4ba3d2cc274e@185.126.255.78:49720/?sni=dxobg4azmk.gafnode.sbs#Kyiv-GetAFreeNode
 hysteria2://45cc0b3a-0adb-4dcc-8f54-4ba3d2cc274e@23.132.228.217:45860/?sni=dxobg4azmk.gafnode.sbs#Como-GetAFreeNode
 hysteria2://4685eb2a-5ddb-4dc6-9e53-f0c90d6124c1@172.252.236.213:56704/?sni=dxobg4azmk.gafnode.sbs#Marseille-GetAFreeNode
