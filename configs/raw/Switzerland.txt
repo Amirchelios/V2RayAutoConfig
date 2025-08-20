@@ -1,3 +1,4 @@
+ss://34c01e61-f4f3-4afb-a83b-406caf8caa33@185.18.250.254:8880?security=&sni=Telegram-channel-WangCai2&allowInsecure=1&type=ws&path=/Telegram%F0%9F%87%A8%F0%9F%87%B3&host=yg.bantony199.top&encryption=none#%F0%9F%87%A8%F0%9F%87%ADCH%20%7C%20@V2ray_Collector
 ss://4d263c1a-fbb9-4946-a639-1de531120cde@185.18.250.67:8080/?type=xhttp&encryption=none#%F0%9F%87%A8%F0%9F%87%AD%20CH%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40minovpnch%20%5B15%5D
 ss://65fc0f65-f9db-46fb-937b-8b1939dffe16@84.234.29.214:8585?security=reality&encryption=none&pbk=UTUFcGPNFCAjXHAiB7272VxBschWBYTRF5Ek7NdflCg&host=%2FTELEGRAM_JKVPN_JKVPN_JKVPN_JKVPN_JKVPB&headerType=none&fp=firefox&spx=%2FJKVPN_JKVPN&type=tcp&sni=telwebion.com&sid=35d941#REALITY|CH🇨🇭
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo5d1l6eFcwaklvUGRiSTZudmNmeXZ3@84.234.31.193:1080#CH%F0%9F%87%A8%F0%9F%87%AD+%7C+84.234.31.193-1080+%7C+94.4ms
@@ -27,6 +28,7 @@ ss://d7dbeb1e-268c-465c-8f59-489f14703efd@5.182.36.251:16331?security=reality&en
 trojan://8a03bc28-2a33-42c4-be59-30464dbb9954@ch12.yukiss.eu.org:18818?security=tls#%F0%9F%87%A8%F0%9F%87%ADCH-152.67.71.149-2442
 trojan://LG7HKcZFIJ@45.155.54.117:110?security=tls&headerType=none&type=tcp&sni=sws.ftpcomand.com#CH🇨🇭
 trojan://LG7HKcZFIJ@sws.ftpcomand.com:110/?type=tcp&security=tls&sni=sws.ftpcomand.com#%F0%9F%87%A8%F0%9F%87%ADCH-45.155.54.117-0280
+vless://34c01e61-f4f3-4afb-a83b-406caf8caa33@185.18.250.254:8880?security=&sni=Telegram-channel-WangCai2&allowInsecure=1&type=ws&path=/Telegram%F0%9F%87%A8%F0%9F%87%B3&host=yg.bantony199.top&encryption=none#%F0%9F%87%A8%F0%9F%87%ADCH%20%7C%20@V2ray_Collector
 vless://4d263c1a-fbb9-4946-a639-1de531120cde@185.18.250.67:8080/?type=xhttp&encryption=none#%F0%9F%87%A8%F0%9F%87%AD%20CH%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40minovpnch%20%5B15%5D
 vless://65fc0f65-f9db-46fb-937b-8b1939dffe16@84.234.29.214:8585?security=reality&encryption=none&pbk=UTUFcGPNFCAjXHAiB7272VxBschWBYTRF5Ek7NdflCg&host=%2FTELEGRAM_JKVPN_JKVPN_JKVPN_JKVPN_JKVPB&headerType=none&fp=firefox&spx=%2FJKVPN_JKVPN&type=tcp&sni=telwebion.com&sid=35d941#REALITY|CH🇨🇭
 vless://d7dbeb1e-268c-465c-8f59-489f14703efd@5.182.36.251:16331?security=reality&encryption=none&pbk=wYtc0dMr5fw5bBQkbLNpTqtu0m4B9NKnOyEWjRJUmzk&headerType=none&fp=chrome&type=tcp&sni=yahoo.com&sid=910aab#CH🇨🇭
