@@ -3,7 +3,7 @@ hysteria2://5OiuCsPmULZ0lJwts89fegLJE@52.221.210.182:17193?sni=bing.com&insecure
 hysteria2://Cyi3TPih9FtQRwsZAh8aT6ynGJk@54.169.144.240:2166?insecure=1#SG
 hysteria2://XON4wZ0sXe1YaqFY2FeM7uZY4@122.248.205.111:15221?sni=bing.com&insecure=1#SG
 hysteria2://Y5kSCRNcOSz5YQUkjehzVXeT2mk@175.41.154.215:19298?sni=bing.com&insecure=1#SG
-ss://06b8c64f-95b4-4810-818e-2489d857bd87@91.242.241.45:8443?security=reality&fp=chrome&type=tcp&flow=xtls-rprx-vision&pbk=1-2fy8f8XeOHzmdFmCENHV1mr_tzJX1M9UXp42mUIiM&sni=google.com#VPNKEY-Singapore
+ss://327748c4-183a-4464-ab72-97b5ceb77909@91.242.241.45:8443?security=reality&fp=chrome&type=tcp&flow=xtls-rprx-vision&pbk=1-2fy8f8XeOHzmdFmCENHV1mr_tzJX1M9UXp42mUIiM&sni=google.com#VPNKEY-Singapore
 ss://3702b1ca-3851-4f1b-8d59-72190cb08bcf@91.242.241.45:8443?security=reality&fp=chrome&type=tcp&flow=xtls-rprx-vision&pbk=1-2fy8f8XeOHzmdFmCENHV1mr_tzJX1M9UXp42mUIiM&sni=google.com#VPNKEY-Singapore
 ss://401374e6-df77-41fb-f638-dad8184f175b@45.8.211.71:443?security=tls&sni=pqh24v3.hiddendom.shop&alpn=h2&type=grpc&encryption=none#%F0%9F%87%B8%F0%9F%87%ACSG%20%7C%20@V2ray_Collector
 ss://55520747-311e-4015-83ce-be46e2060ce3@138.2.107.107:443?path=%2F%3Fed%3D2560&security=tls&encryption=none&host=nv.bgm2024.dpdns.org&type=ws&sni=nv.bgm2024.dpdns.org#Singapore%20Relay
@@ -120,7 +120,6 @@ ss://YWVzLTI1Ni1jZmI6eTlWVVJ5TnpKV05SWUVHUQ==@103.172.116.5:9008#%F0%9F%87%B8%F0
 ss://YWVzLTI1Ni1nY206ekROVmVkUkZQUWV4Rzl2@139.99.68.21:6379#%F0%9F%87%B8%F0%9F%87%ACSG-139.99.68.21-5506
 ss://a4cb890e-8251-488e-9439-3403c9a58e55@free-server.techsonic.cloud:443/?type=tcp&encryption=none&security=tls&sni=android.googleapis.com&alpn=h3%2Ch2%2Chttp%2F1.1&fp=chrome#%F0%9F%87%B8%F0%9F%87%AC%20SG%20%7C%20%F0%9F%94%92%20VLESS%20%7C%20%40prrofile_purple%20%5B134%5D
 ss://ceb82189-6159-429b-aeaa-9145278553a2@91.242.241.45:8443?security=reality&fp=chrome&type=tcp&flow=xtls-rprx-vision&pbk=1-2fy8f8XeOHzmdFmCENHV1mr_tzJX1M9UXp42mUIiM&sni=google.com#VPNKEY-Singapore
-ss://ceb8a844-ad61-4566-8ff5-d8d9de20e1ee@91.242.241.45:8443?security=reality&fp=chrome&type=tcp&flow=xtls-rprx-vision&pbk=1-2fy8f8XeOHzmdFmCENHV1mr_tzJX1M9UXp42mUIiM&sni=google.com#VPNKEY-Singapore
 ss://cmM0LW1kNToxNGZGUHJiZXpFM0hEWnpzTU9yNg==@68.183.235.122:8080#SG%F0%9F%87%B8%F0%9F%87%AC+%7C+68.183.235.122-8080+%7C+206.94ms
 ss://fab7bf9cddb945638a04fb01ce6c0fbfOg==@27.50.48.29:8880#SG%F0%9F%87%B8%F0%9F%87%AC+%7C+27.50.48.29-8880+%7C+2.79ms
 trojan://08964210-e7b8-11ec-95aa-1239d0255272@w12.udpgw.com:443?security=tls#%F0%9F%87%B8%F0%9F%87%ACSG-172.104.177.105-5517
@@ -164,7 +163,7 @@ trojan://iyinglong@13.213.69.245:443?security=tls#%F0%9F%87%B8%F0%9F%87%ACSG-13.
 trojan://iyinglong@18.140.67.76:443?security=tls#%F0%9F%87%B8%F0%9F%87%ACSG-18.140.67.76-5513
 trojan://iyinglong@18.141.8.87:443?security=tls#%F0%9F%87%B8%F0%9F%87%ACSG-18.141.8.87-5511
 trojan://oZAugtgF5T@146.190.87.238:443/?type=ws&host=aka.ms&path=%2F&security=tls&sni=aka.ms#%F0%9F%87%B8%F0%9F%87%AC%20SG%20%7C%20%F0%9F%94%92%20TROJAN%20%7C%20%40mpmehi%20%5B1%5D
-vless://06b8c64f-95b4-4810-818e-2489d857bd87@91.242.241.45:8443?security=reality&fp=chrome&type=tcp&flow=xtls-rprx-vision&pbk=1-2fy8f8XeOHzmdFmCENHV1mr_tzJX1M9UXp42mUIiM&sni=google.com#VPNKEY-Singapore
+vless://327748c4-183a-4464-ab72-97b5ceb77909@91.242.241.45:8443?security=reality&fp=chrome&type=tcp&flow=xtls-rprx-vision&pbk=1-2fy8f8XeOHzmdFmCENHV1mr_tzJX1M9UXp42mUIiM&sni=google.com#VPNKEY-Singapore
 vless://3702b1ca-3851-4f1b-8d59-72190cb08bcf@91.242.241.45:8443?security=reality&fp=chrome&type=tcp&flow=xtls-rprx-vision&pbk=1-2fy8f8XeOHzmdFmCENHV1mr_tzJX1M9UXp42mUIiM&sni=google.com#VPNKEY-Singapore
 vless://401374e6-df77-41fb-f638-dad8184f175b@45.8.211.71:443?security=tls&sni=pqh24v3.hiddendom.shop&alpn=h2&type=grpc&encryption=none#%F0%9F%87%B8%F0%9F%87%ACSG%20%7C%20@V2ray_Collector
 vless://55520747-311e-4015-83ce-be46e2060ce3@138.2.107.107:443?path=%2F%3Fed%3D2560&security=tls&encryption=none&host=nv.bgm2024.dpdns.org&type=ws&sni=nv.bgm2024.dpdns.org#Singapore%20Relay
@@ -172,7 +171,6 @@ vless://6f995056-7802-4a1d-bff7-61678e626c3f@20.212.64.16:443/?type=ws&encryptio
 vless://6f995056-7802-4a1d-bff7-61678e626c3f@52.187.36.104:443?security=tls&sni=werrr.azurewebsites.net&type=ws&host=werrr.azurewebsites.net&path=%2F&fp=chrome#SG🇸🇬
 vless://a4cb890e-8251-488e-9439-3403c9a58e55@free-server.techsonic.cloud:443/?type=tcp&encryption=none&security=tls&sni=android.googleapis.com&alpn=h3%2Ch2%2Chttp%2F1.1&fp=chrome#%F0%9F%87%B8%F0%9F%87%AC%20SG%20%7C%20%F0%9F%94%92%20VLESS%20%7C%20%40prrofile_purple%20%5B134%5D
 vless://ceb82189-6159-429b-aeaa-9145278553a2@91.242.241.45:8443?security=reality&fp=chrome&type=tcp&flow=xtls-rprx-vision&pbk=1-2fy8f8XeOHzmdFmCENHV1mr_tzJX1M9UXp42mUIiM&sni=google.com#VPNKEY-Singapore
-vless://ceb8a844-ad61-4566-8ff5-d8d9de20e1ee@91.242.241.45:8443?security=reality&fp=chrome&type=tcp&flow=xtls-rprx-vision&pbk=1-2fy8f8XeOHzmdFmCENHV1mr_tzJX1M9UXp42mUIiM&sni=google.com#VPNKEY-Singapore
 vmess://ewogICAgImFkZCI6ICI0Ny44NC42Mi4xIiwKICAgICJhaWQiOiAwLAogICAgImhvc3QiOiAiIiwKICAgICJpZCI6ICJkMmEwYmNkNy1lMzJkLTRiNzEtOTFhOS01ZmQ3MDQzYjcwMjUiLAogICAgIm5ldCI6ICJ3cyIsCiAgICAicGF0aCI6ICIvIiwKICAgICJwb3J0IjogMjAwODYsCiAgICAicHMiOiAi8J+HuPCfh6xTRy00Ny44NC42Mi4xLTY4OTQiLAogICAgInRscyI6ICIiLAogICAgInR5cGUiOiAiYXV0byIsCiAgICAic2VjdXJpdHkiOiAiYXV0byIsCiAgICAic2tpcC1jZXJ0LXZlcmlmeSI6IHRydWUsCiAgICAic25pIjogIiIKfQ==
 vmess://ewogICAgImFkZCI6ICI0Ny44NC42Ni43OSIsCiAgICAiYWlkIjogMCwKICAgICJob3N0IjogIiIsCiAgICAiaWQiOiAiOWNhYTcxMWMtMjQ5MC00MDQxLTgxMmQtZWRiY2I5OTRmZDE4IiwKICAgICJuZXQiOiAid3MiLAogICAgInBhdGgiOiAiLyIsCiAgICAicG9ydCI6IDgwLAogICAgInBzIjogIvCfh7jwn4esU0ctNDcuODQuNjYuNzktNzQ5NCIsCiAgICAidGxzIjogIiIsCiAgICAidHlwZSI6ICJhdXRvIiwKICAgICJzZWN1cml0eSI6ICJhdXRvIiwKICAgICJza2lwLWNlcnQtdmVyaWZ5IjogdHJ1ZSwKICAgICJzbmkiOiAiIgp9
 vmess://ewogICAgImFkZCI6ICI4LjIxNC4zMy4xNTgiLAogICAgImFpZCI6IDAsCiAgICAiaG9zdCI6ICI4LjIxNC4zMy4xNTgiLAogICAgImlkIjogImNiODFlNmFiLTFkODMtNGFjMS1mMGFkLWFlNWMyYTdjMjllZiIsCiAgICAibmV0IjogIndzIiwKICAgICJwYXRoIjogIi8iLAogICAgInBvcnQiOiA4MCwKICAgICJwcyI6ICLwn4e48J+HrFNHLTguMjE0LjMzLjE1OC0wMTc3IiwKICAgICJ0bHMiOiAiIiwKICAgICJ0eXBlIjogImF1dG8iLAogICAgInNlY3VyaXR5IjogImF1dG8iLAogICAgInNraXAtY2VydC12ZXJpZnkiOiB0cnVlLAogICAgInNuaSI6ICIiCn0=
