@@ -54,6 +54,13 @@ IRAN_TEST_URLS = [
 ]
 XRAY_BIN_DIR = "../Files/xray-bin"
 
+# تنظیمات check-host.net API
+CHECK_HOST_API_BASE = "https://check-host.net"
+CHECK_HOST_PING_ENDPOINT = "/check-ping"
+CHECK_HOST_RESULT_ENDPOINT = "/check-result"
+CHECK_HOST_FOCUS_NODE = "ir2.node.check-host.net"  # نود ایران مشهد
+CHECK_HOST_BATCH_SIZE = 50  # ارسال 50 تا 50 تا IP
+
 # تنظیمات logging
 def setup_logging():
     """تنظیم سیستم logging"""
@@ -87,9 +94,7 @@ class VLESSManager:
         self.load_metadata()
         # ذخیره نتایج جزئی برای تداوم در صورت timeout/خطا
         self.partial_results: List[Dict] = []
-        self.partial_iran_ok: List[str] = []
-        self.partial_social_ok: List[str] = []
-        self.partial_speed_ok: List[str] = []
+        self.partial_ping_ok: List[str] = []  # نتایج ping check
 
     def load_metadata(self):
         """بارگذاری متادیتای برنامه"""
@@ -265,9 +270,239 @@ class VLESSManager:
         except Exception as e:
             logging.error(f"خطا در پارس کردن کانفیگ VLESS: {e}")
             return None
+
+    # ==========================
+    # جدید: تست Ping با check-host.net API
+    # ==========================
+    
+    async def check_host_ping_batch(self, server_ips: List[str]) -> Dict[str, bool]:
+        """
+        تست ping برای batch از IP ها با استفاده از check-host.net API
+        فقط از نود ایران مشهد (ir2.node.check-host.net) استفاده می‌کند
+        """
+        ping_results = {}
+        
+        try:
+            # ارسال درخواست ping برای batch - فقط از نود ایران مشهد
+            ping_params = {
+                'host': ','.join(server_ips),
+                'node': CHECK_HOST_FOCUS_NODE
+            }
+            
+            headers = {'Accept': 'application/json'}
+            
+            logging.info(f"🌐 ارسال درخواست ping برای {len(server_ips)} IP به check-host.net (نود: {CHECK_HOST_FOCUS_NODE})")
+            
+            async with self.session.post(
+                f"{CHECK_HOST_API_BASE}{CHECK_HOST_PING_ENDPOINT}",
+                params=ping_params,
+                headers=headers,
+                timeout=30
+            ) as response:
+                if response.status != 200:
+                    logging.error(f"خطا در درخواست ping: HTTP {response.status}")
+                    return {ip: False for ip in server_ips}
+                
+                ping_data = await response.json()
+                
+                if not ping_data.get('ok'):
+                    logging.error(f"خطا در پاسخ ping API: {ping_data}")
+                    return {ip: False for ip in server_ips}
+                
+                request_id = ping_data.get('request_id')
+                nodes = ping_data.get('nodes', {})
+                
+                logging.info(f"✅ درخواست ping ارسال شد - Request ID: {request_id}")
+                logging.info(f"🌍 نود تست: {CHECK_HOST_FOCUS_NODE}")
+                
+                # انتظار برای نتایج (حداکثر 30 ثانیه)
+                max_wait_time = 30
+                wait_interval = 2
+                waited_time = 0
+                
+                while waited_time < max_wait_time:
+                    await asyncio.sleep(wait_interval)
+                    waited_time += wait_interval
+                    
+                    # بررسی نتایج
+                    try:
+                        async with self.session.get(
+                            f"{CHECK_HOST_API_BASE}{CHECK_HOST_RESULT_ENDPOINT}/{request_id}",
+                            headers=headers,
+                            timeout=10
+                        ) as result_response:
+                            if result_response.status != 200:
+                                continue
+                            
+                            result_data = await result_response.json()
+                            
+                            # بررسی اینکه آیا همه نتایج آماده هستند
+                            all_ready = True
+                            for node_name, node_result in result_data.items():
+                                if node_result is None:
+                                    all_ready = False
+                                    break
+                            
+                            if all_ready:
+                                logging.info(f"✅ نتایج ping آماده شدند - زمان انتظار: {waited_time} ثانیه")
+                                break
+                            
+                    except Exception as e:
+                        logging.debug(f"خطا در بررسی نتایج ping: {e}")
+                        continue
+                
+                # پردازش نتایج نهایی
+                try:
+                    async with self.session.get(
+                        f"{CHECK_HOST_API_BASE}{CHECK_HOST_RESULT_ENDPOINT}/{request_id}",
+                        headers=headers,
+                        timeout=10
+                    ) as final_response:
+                        if final_response.status == 200:
+                            final_data = await final_response.json()
+                            
+                            # تحلیل نتایج برای هر IP
+                            for server_ip in server_ips:
+                                ping_success = self._analyze_ping_results(final_data, server_ip)
+                                ping_results[server_ip] = ping_success
+                                
+                                if ping_success:
+                                    logging.info(f"✅ IP {server_ip}: Ping موفق")
+                                else:
+                                    logging.debug(f"❌ IP {server_ip}: Ping ناموفق")
+                        else:
+                            logging.error(f"خطا در دریافت نتایج نهایی ping: HTTP {final_response.status}")
+                            ping_results = {ip: False for ip in server_ips}
+                            
+                except Exception as e:
+                    logging.error(f"خطا در پردازش نتایج نهایی ping: {e}")
+                    ping_results = {ip: False for ip in server_ips}
+                
+        except Exception as e:
+            logging.error(f"خطا در تست ping batch: {e}")
+            ping_results = {ip: False for ip in server_ips}
+        
+        return ping_results
+    
+    def _analyze_ping_results(self, result_data: Dict, server_ip: str) -> bool:
+        """
+        تحلیل نتایج ping برای یک IP خاص
+        سرور سالم در نظر گرفته می‌شود اگر:
+        1. حداقل یک نود ping موفق داشته باشد
+        2. هیچ نودی traceroute نداشته باشد (null یا empty)
+        """
+        try:
+            ping_success_count = 0
+            traceroute_exists = False
+            
+            for node_name, node_result in result_data.items():
+                if node_result is None:
+                    continue
+                
+                # بررسی ping results
+                if isinstance(node_result, list) and len(node_result) > 0:
+                    for ping_result in node_result:
+                        if isinstance(ping_result, list) and len(ping_result) >= 2:
+                            status = ping_result[0]
+                            if status == "OK":
+                                ping_success_count += 1
+                
+                # بررسی traceroute (اگر وجود داشته باشد)
+                if isinstance(node_result, dict) and 'traceroute' in node_result:
+                    traceroute_data = node_result['traceroute']
+                    if traceroute_data and len(traceroute_data) > 0:
+                        traceroute_exists = True
+            
+            # سرور سالم: ping موفق + بدون traceroute
+            is_healthy = ping_success_count > 0 and not traceroute_exists
+            
+            if is_healthy:
+                logging.debug(f"✅ IP {server_ip}: Ping موفق ({ping_success_count} نود), بدون traceroute")
+            else:
+                if ping_success_count == 0:
+                    logging.debug(f"❌ IP {server_ip}: هیچ ping موفقی")
+                if traceroute_exists:
+                    logging.debug(f"❌ IP {server_ip}: traceroute موجود")
+            
+            return is_healthy
+            
+        except Exception as e:
+            logging.error(f"خطا در تحلیل نتایج ping برای {server_ip}: {e}")
+            return False
+    
+    async def filter_configs_by_ping_check(self, configs: List[str]) -> List[str]:
+        """
+        فیلتر کردن کانفیگ‌ها بر اساس تست ping با check-host.net
+        ارسال 50 تا 50 تا IP و تمرکز روی لوکیشن ایران، مشهد
+        """
+        try:
+            # استخراج IP های منحصر به فرد
+            unique_ips = set()
+            ip_to_configs = {}
+            
+            for config in configs:
+                parsed = self.parse_vless_config(config)
+                if parsed and parsed.get('server_ip'):
+                    ip = parsed['server_ip']
+                    unique_ips.add(ip)
+                    if ip not in ip_to_configs:
+                        ip_to_configs[ip] = []
+                    ip_to_configs[ip].append(config)
+            
+            logging.info(f"🌐 شروع تست ping برای {len(unique_ips)} IP منحصر به فرد")
+            
+            # تقسیم IP ها به batches
+            ip_list = list(unique_ips)
+            batches = [ip_list[i:i + CHECK_HOST_BATCH_SIZE] for i in range(0, len(ip_list), CHECK_HOST_BATCH_SIZE)]
+            
+            all_ping_results = {}
+            
+            # تست هر batch
+            for i, batch in enumerate(batches, 1):
+                logging.info(f"📦 تست batch {i}/{len(batches)}: {len(batch)} IP")
+                
+                try:
+                    batch_results = await self.check_host_ping_batch(batch)
+                    all_ping_results.update(batch_results)
+                    
+                    # کمی صبر بین batches
+                    if i < len(batches):
+                        await asyncio.sleep(1)
+                        
+                except Exception as e:
+                    logging.error(f"خطا در تست batch {i}: {e}")
+                    # در صورت خطا، همه IP های این batch را ناموفق در نظر بگیر
+                    for ip in batch:
+                        all_ping_results[ip] = False
+            
+            # انتخاب کانفیگ‌های سالم بر اساس ping
+            healthy_configs = []
+            healthy_ips = [ip for ip, success in all_ping_results.items() if success]
+            
+            for ip in healthy_ips:
+                if ip in ip_to_configs:
+                    healthy_configs.extend(ip_to_configs[ip])
+            
+            # حذف تکراری‌ها
+            healthy_configs = list(set(healthy_configs))
+            
+            # ذخیره نتایج جزئی
+            try:
+                self.partial_ping_ok = list(healthy_configs)
+            except Exception:
+                pass
+            
+            logging.info(f"✅ تست ping کامل شد: {len(healthy_configs)} کانفیگ سالم از {len(configs)}")
+            logging.info(f"🌍 IP های سالم: {len(healthy_ips)} از {len(unique_ips)}")
+            
+            return healthy_configs
+            
+        except Exception as e:
+            logging.error(f"خطا در فیلتر کردن بر اساس ping: {e}")
+            return configs  # در صورت خطا، همه کانفیگ‌ها را برگردان
     
     async def test_vless_connection(self, config: str) -> Dict:
-        """تست اتصال کانفیگ VLESS با روش پیشرفته و تست دسترسی از ایران"""
+        """تست اتصال کانفیگ VLESS - فقط تست TCP ساده"""
         config_hash = self.create_config_hash(config)[:8]
         result = {
             "config": config,
@@ -297,34 +532,15 @@ class VLESSManager:
             result["port"] = port
             result["type"] = connection_type
             
-            # تست اتصال با روش‌های مختلف
+            # تست اتصال - فقط TCP connection test (برای سرعت و کارایی)
             start_time = time.time()
             
-            # تست 1: TCP connection test
+            # تست TCP connection test - تست ساده و سریع
             tcp_success = await self.test_tcp_connection(server_ip, port)
             if tcp_success:
-                # تست 2: HTTP/HTTPS test (برای سرورهای web)
-                http_success = await self.test_http_connection(server_ip, port)
-                
-                # تست 3: Custom protocol test (شبیه‌سازی VLESS)
-                protocol_success = await self.test_vless_protocol(server_ip, port, connection_type)
-                
-                # تست 4: Iran access test (تست دسترسی از ایران)
-                iran_access_success = await self.test_iran_access(server_ip, port)
-                result["iran_access"] = iran_access_success
-                
-                # اگر حداقل دو تست موفق بود، کانفیگ سالم است
-                success_count = sum([tcp_success, http_success, protocol_success])
-                if success_count >= 2:
-                    result["success"] = True
-                    result["latency"] = (time.time() - start_time) * 1000
-                    
-                    # اضافه کردن اطلاعات ایران access
-                    iran_status = "✅ ایران" if iran_access_success else "❌ ایران"
-                    logging.info(f"✅ تست VLESS موفق: {config_hash} - Server: {server_ip}:{port} - Type: {connection_type} - Latency: {result['latency']:.1f}ms - {iran_status}")
-                else:
-                    result["error"] = f"Connection tests failed (TCP: {tcp_success}, HTTP: {http_success}, Protocol: {protocol_success})"
-                    logging.warning(f"❌ تست VLESS ناموفق: {config_hash} - Server: {server_ip}:{port}")
+                result["success"] = True
+                result["latency"] = (time.time() - start_time) * 1000
+                logging.info(f"✅ تست TCP موفق: {config_hash} - Server: {server_ip}:{port} - Type: {connection_type} - Latency: {result['latency']:.1f}ms")
             else:
                 result["error"] = "TCP connection failed"
                 logging.warning(f"❌ تست VLESS ناموفق: {config_hash} - TCP connection failed")
@@ -481,90 +697,91 @@ class VLESSManager:
         except Exception:
             return False
 
-    async def test_social_media_access_via_xray(self, link: str) -> Dict[str, bool]:
-        """تست دسترسی به شبکه‌های اجتماعی (یوتیوب، اینستاگرام، تلگرام) با استفاده از Xray"""
-        try:
-            xray_path = self._get_xray_binary_path()
-            if not xray_path:
-                return {"youtube": False, "instagram": False, "telegram": False}
-            
-            local_port = self._choose_free_port()
-            cfg = self._build_xray_config_http_proxy(link, local_port)
-            if not cfg:
-                return {"youtube": False, "instagram": False, "telegram": False}
-            
-            import tempfile, json, shutil
-            tmp_dir = tempfile.mkdtemp(prefix='vless_social_')
-            cfg_path = os.path.join(tmp_dir, 'config.json')
-            
-            with open(cfg_path, 'w', encoding='utf-8') as f:
-                json.dump(cfg, f, ensure_ascii=False)
-            
-            proc = await asyncio.create_subprocess_exec(
-                xray_path, '-config', cfg_path, 
-                stdout=asyncio.subprocess.PIPE, 
-                stderr=asyncio.subprocess.STDOUT
-            )
-            
-            # زمان کوتاه برای بالا آمدن Xray
-            await asyncio.sleep(0.5)
-            
-            try:
-                # تست دسترسی به شبکه‌های اجتماعی
-                results = {"youtube": False, "instagram": False, "telegram": False}
-                
-                # تست یوتیوب
-                try:
-                    async with aiohttp.ClientSession() as test_session:
-                        async with test_session.get("https://www.youtube.com", 
-                                                 proxy=f"http://127.0.0.1:{local_port}",
-                                                 timeout=aiohttp.ClientTimeout(total=10)) as response:
-                            results["youtube"] = response.status == 200
-                except:
-                    results["youtube"] = False
-                
-                # تست اینستاگرام
-                try:
-                    async with aiohttp.ClientSession() as test_session:
-                        async with test_session.get("https://www.instagram.com", 
-                                                 proxy=f"http://127.0.0.1:{local_port}",
-                                                 timeout=aiohttp.ClientTimeout(total=10)) as response:
-                            results["instagram"] = response.status == 200
-                except:
-                    results["instagram"] = False
-                
-                # تست تلگرام
-                try:
-                    async with aiohttp.ClientSession() as test_session:
-                        async with test_session.get("https://web.telegram.org", 
-                                                 proxy=f"http://127.0.0.1:{local_port}",
-                                                 timeout=aiohttp.ClientTimeout(total=10)) as response:
-                            results["telegram"] = response.status == 200
-                except:
-                    results["telegram"] = False
-                
-                return results
-                
-            finally:
-                try:
-                    proc.terminate()
-                except Exception:
-                    pass
-                try:
-                    await asyncio.wait_for(proc.wait(), timeout=2)
-                except Exception:
-                    try:
-                        proc.kill()
-                    except Exception:
-                        pass
-                try:
-                    shutil.rmtree(tmp_dir, ignore_errors=True)
-                except Exception:
-                    pass
-                    
-        except Exception as e:
-            logging.debug(f"خطا در تست شبکه‌های اجتماعی: {e}")
-            return {"youtube": False, "instagram": False, "telegram": False}
+    # DISABLED: تست شبکه‌های اجتماعی غیرفعال شد
+    # async def test_social_media_access_via_xray(self, link: str) -> Dict[str, bool]:
+    #     """تست دسترسی به شبکه‌های اجتماعی (یوتیوب، اینستاگرام، تلگرام) با استفاده از Xray"""
+    #     try:
+    #         xray_path = self._get_xray_binary_path()
+    #         if not xray_path:
+    #             return {"youtube": False, "instagram": False, "telegram": False}
+    #         
+    #         local_port = self._choose_free_port()
+    #         cfg = self._build_xray_config_http_proxy(link, local_port)
+    #         if not cfg:
+    #             return {"youtube": False, "instagram": False, "telegram": False}
+    #         
+    #         import tempfile, json, shutil
+    #         tmp_dir = tempfile.mkdtemp(prefix='vless_social_')
+    #         cfg_path = os.path.join(tmp_dir, 'config.json')
+    #         
+    #         with open(cfg_path, 'w', encoding='utf-8') as f:
+    #             json.dump(cfg, f, ensure_ascii=False)
+    #         
+    #         proc = await asyncio.create_subprocess_exec(
+    #             xray_path, '-config', cfg_path, 
+    #             stdout=asyncio.subprocess.PIPE, 
+    #             stderr=asyncio.subprocess.STDOUT
+    #         )
+    #         
+    #         # زمان کوتاه برای بالا آمدن Xray
+    #         await asyncio.sleep(0.5)
+    #         
+    #         try:
+    #             # تست دسترسی به شبکه‌های اجتماعی
+    #             results = {"youtube": False, "instagram": False, "telegram": False}
+    #             
+    #             # تست یوتیوب
+    #             try:
+    #                 async with aiohttp.ClientSession() as test_session:
+    #                     async with test_session.get("https://www.youtube.com", 
+    #                                              proxy=f"http://127.0.0.1:{local_port}",
+    #                                              timeout=aiohttp.ClientTimeout(total=10)) as response:
+    #                         results["youtube"] = response.status == 200
+    #             except:
+    #                 results["youtube"] = False
+    #             
+    #             # تست اینستاگرام
+    #             try:
+    #                 async with aiohttp.ClientSession() as test_session:
+    #                     async with test_session.get("https://www.instagram.com", 
+    #                                              proxy=f"http://127.0.0.1:{local_port}",
+    #                                              timeout=aiohttp.ClientTimeout(total=10)) as response:
+    #                         results["instagram"] = response.status == 200
+    #             except:
+    #                 results["instagram"] = False
+    #             
+    #             # تست تلگرام
+    #             try:
+    #                 async with aiohttp.ClientSession() as test_session:
+    #                     async with test_session.get("https://web.telegram.org", 
+    #                                              proxy=f"http://127.0.0.1:{local_port}",
+    #                                              timeout=aiohttp.ClientTimeout(total=10)) as response:
+    #                         results["telegram"] = response.status == 200
+    #             except:
+    #                 results["telegram"] = False
+    #             
+    #             return results
+    #             
+    #         finally:
+    #             try:
+    #                 proc.terminate()
+    #             except Exception:
+    #                 pass
+    #             try:
+    #                 await asyncio.wait_for(proc.wait(), timeout=2)
+    #             except Exception:
+    #                 try:
+    #                     proc.kill()
+    #                 except Exception:
+    #                     pass
+    #             try:
+    #                 shutil.rmtree(tmp_dir, ignore_errors=True)
+    #             except Exception:
+    #                 pass
+    #                 
+    #     except Exception as e:
+    #         logging.debug(f"خطا در تست شبکه‌های اجتماعی: {e}")
+    #         return {"youtube": False, "instagram": False, "telegram": False}
 
     # ==========================
     # تست سرعت دانلود واقعی با Xray (Sequential)
@@ -696,7 +913,8 @@ class VLESSManager:
         except Exception:
             return False
 
-    async def _check_iran_sites_via_proxy(self, proxy_port: int) -> bool:
+    # DISABLED: تست دسترسی ایران غیرفعال شد
+    # async def _check_iran_sites_via_proxy(self, proxy_port: int) -> bool:
         try:
             timeout = aiohttp.ClientTimeout(total=5)
             connector = aiohttp.TCPConnector(ssl=False)
@@ -712,8 +930,9 @@ class VLESSManager:
         except Exception:
             return False
 
-    async def test_iran_access_via_xray(self, link: str) -> bool:
-        """راه‌اندازی Xray برای لینک و تست دسترسی به سایت‌های ایرانی از طریق پراکسی محلی"""
+    # DISABLED: تست دسترسی ایران غیرفعال شد
+    # async def test_iran_access_via_xray(self, link: str) -> bool:
+    #     """راه‌اندازی Xray برای لینک و تست دسترسی به سایت‌های ایرانی از طریق پراکسی محلی"""
         xray_path = self._get_xray_binary_path()
         if not xray_path:
             return False
@@ -751,8 +970,9 @@ class VLESSManager:
             except Exception:
                 pass
 
-    async def filter_configs_by_iran_access_via_xray(self, configs: List[str]) -> List[str]:
-        """فیلتر کردن کانفیگ‌ها بر اساس دسترسی به سایت‌های ایرانی از طریق Xray (همزمانی 50 تایی)"""
+    # DISABLED: تست دسترسی ایران غیرفعال شد
+    # async def filter_configs_by_iran_access_via_xray(self, configs: List[str]) -> List[str]:
+    #     """فیلتر کردن کانفیگ‌ها بر اساس دسترسی به سایت‌های ایرانی از طریق Xray (همزمانی 50 تایی)"""
         accepted: List[str] = []
         semaphore = asyncio.Semaphore(CONCURRENT_TESTS)
 
@@ -777,8 +997,9 @@ class VLESSManager:
         logging.info(f"نتیجه تست دسترسی ایرانی با Xray: {len(accepted)} از {len(configs)} پذیرفته شدند")
         return accepted
 
-    async def download_speed_test_via_xray(self, link: str) -> bool:
-        """اجرای تست دانلود واقعی با Xray: باید ظرف 2 ثانیه حداقل 1MB دانلود شود"""
+    # DISABLED: تست سرعت دانلود غیرفعال شد
+    # async def download_speed_test_via_xray(self, link: str) -> bool:
+    #     """اجرای تست دانلود واقعی با Xray: باید ظرف 2 ثانیه حداقل 1MB دانلود شود"""
         xray_path = self._get_xray_binary_path()
         if not xray_path:
             return False
@@ -816,33 +1037,35 @@ class VLESSManager:
             except Exception:
                 pass
 
-    async def filter_configs_by_social_media_access(self, configs: List[str]) -> List[str]:
-        """فیلتر کردن کانفیگ‌ها بر اساس تست دسترسی به شبکه‌های اجتماعی (Sequential)"""
-        passed: List[str] = []
-        for idx, cfg in enumerate(configs, 1):
-            try:
-                results = await self.test_social_media_access_via_xray(cfg)
-                # بررسی اینکه حداقل یکی از شبکه‌های اجتماعی قابل دسترسی باشد
-                if results.get("youtube", False) or results.get("instagram", False) or results.get("telegram", False):
-                    passed.append(cfg)
-                    # نگه‌داری نتیجه جزئی برای ذخیره در صورت timeout
-                    try:
-                        self.partial_social_ok.append(cfg)
-                    except Exception:
-                        pass
-                    logging.info(f"[{idx}/{len(configs)}] ✅ شبکه‌های اجتماعی قابل دسترسی - پذیرفته شد")
-                    logging.info(f"  YouTube: {results.get('youtube', False)}, Instagram: {results.get('instagram', False)}, Telegram: {results.get('telegram', False)}")
-                else:
-                    logging.info(f"[{idx}/{len(configs)}] ❌ شبکه‌های اجتماعی غیرقابل دسترسی - رد شد")
-            except Exception as e:
-                logging.warning(f"[{idx}/{len(configs)}] خطا در تست شبکه‌های اجتماعی: {e}")
-            # تاخیر کوتاه بین تست‌ها جهت جلوگیری از فشار
-            await asyncio.sleep(0.1)
-        logging.info(f"نتیجه تست شبکه‌های اجتماعی: {len(passed)} از {len(configs)} پذیرفته شدند")
-        return passed
+    # DISABLED: تست شبکه‌های اجتماعی غیرفعال شد
+    # async def filter_configs_by_social_media_access(self, configs: List[str]) -> List[str]:
+    #     """فیلتر کردن کانفیگ‌ها بر اساس تست دسترسی به شبکه‌های اجتماعی (Sequential)"""
+    #     passed: List[str] = []
+    #     for idx, cfg in enumerate(configs, 1):
+    #         try:
+    #             results = await self.test_social_media_access_via_xray(cfg)
+    #             # بررسی اینکه حداقل یکی از شبکه‌های اجتماعی قابل دسترسی باشد
+    #             if results.get("youtube", False) or results.get("instagram", False) or results.get("telegram", False):
+    #                 passed.append(cfg)
+    #                 # نگه‌داری نتیجه جزئی برای ذخیره در صورت timeout
+    #                 try:
+    #                     self.partial_social_ok.append(cfg)
+    #                 except Exception:
+    #                     pass
+    #                 logging.info(f"[{idx}/{len(configs)}] ✅ شبکه‌های اجتماعی قابل دسترسی - پذیرفته شد")
+    #                 logging.info(f"  YouTube: {results.get('youtube', False)}, Instagram: {results.get('instagram', False)}, Telegram: {results.get('telegram', False)}")
+    #             else:
+    #                 logging.info(f"[{idx}/{len(configs)}] ❌ شبکه‌های اجتماعی غیرقابل دسترسی - رد شد")
+    #         except Exception as e:
+    #             logging.warning(f"[{idx}/{len(configs)}] خطا در تست شبکه‌های اجتماعی: {e}")
+    #         # تاخیر کوتاه بین تست‌ها جهت جلوگیری از فشار
+    #         await asyncio.sleep(0.1)
+    #     logging.info(f"نتیجه تست شبکه‌های اجتماعی: {len(passed)} از {len(configs)} پذیرفته شدند")
+    #     return passed
 
-    async def filter_configs_by_download_speed(self, configs: List[str]) -> List[str]:
-        """فیلتر کردن کانفیگ‌ها بر اساس تست دانلود واقعی (Sequential)"""
+    # DISABLED: تست سرعت دانلود غیرفعال شد
+    # async def filter_configs_by_download_speed(self, configs: List[str]) -> List[str]:
+    #     """فیلتر کردن کانفیگ‌ها بر اساس تست دانلود واقعی (Sequential)"""
         passed: List[str] = []
         for idx, cfg in enumerate(configs, 1):
             try:
@@ -912,15 +1135,9 @@ class VLESSManager:
         """ذخیره خروجی جزئی در صورت timeout یا خطا"""
         try:
             # انتخاب بهترین مرحله‌ای که داده دارد
-            if self.partial_speed_ok:
-                best_configs = list({c for c in self.partial_speed_ok if self.is_valid_vless_config(c)})
-                stage = "speed_ok"
-            elif hasattr(self, 'partial_social_ok') and self.partial_social_ok:
-                best_configs = list({c for c in self.partial_social_ok if self.is_valid_vless_config(c)})
-                stage = "social_media_ok"
-            elif self.partial_iran_ok:
-                best_configs = list({c for c in self.partial_iran_ok if self.is_valid_vless_config(c)})
-                stage = "iran_ok"
+            if self.partial_ping_ok:
+                best_configs = list({c for c in self.partial_ping_ok if self.is_valid_vless_config(c)})
+                stage = "ping_ok"
             elif self.partial_results:
                 best_configs = [r.get("config") for r in self.partial_results if isinstance(r, dict) and r.get("success") and self.is_valid_vless_config(r.get("config", ""))]
                 stage = "connect_ok"
@@ -1148,7 +1365,10 @@ class VLESSManager:
             # ایجاد session
             await self.create_session()
 
-            # فاز 1: تست اتصال روی همه کانفیگ‌ها
+            # فاز 1: تست اتصال TCP روی همه کانفیگ‌ها
+            # فقط تست TCP ساده برای سرعت بالا - تست‌های دیگر در مراحل بعدی
+            # هر کانفیگ فقط یک بار تست می‌شود - از کل پروکسی‌ها دو بار تست گرفته نمی‌شود
+            # هدف: سرعت بالا و کارایی بهتر
             test_results = await self.test_all_vless_configs(source_configs)
             if not test_results:
                 logging.warning("هیچ کانفیگ VLESS موفقی یافت نشد")
@@ -1156,7 +1376,9 @@ class VLESSManager:
                     self.create_fallback_output("هیچ کانفیگ VLESS موفقی یافت نشد")
                 return False
 
-            # فاز 2: تست دسترسی به سایت‌های ایرانی با Xray، فقط روی کانفیگ‌های سالم TCP/پروتکل
+            # فاز 2: تست ping با check-host.net API، فقط روی کانفیگ‌های سالم TCP
+            # فیلتر کردن کانفیگ‌هایی که تست TCP را پاس کرده‌اند
+            # از کل پروکسی‌ها دو بار تست گرفته نمی‌شود - فقط پروکسی‌های سالم TCP
             healthy_configs = [r["config"] for r in test_results if r.get("success")]
             if not healthy_configs:
                 logging.warning("هیچ کانفیگ VLESS موفقی یافت نشد")
@@ -1164,34 +1386,16 @@ class VLESSManager:
                     self.create_fallback_output("هیچ کانفیگ VLESS موفقی یافت نشد")
                 return False
 
-            logging.info(f"🌐 شروع تست دسترسی ایرانی با Xray برای {len(healthy_configs)} کانفیگ سالم")
-            iran_ok_configs = await self.filter_configs_by_iran_access_via_xray(healthy_configs)
-            if not iran_ok_configs:
-                logging.warning("هیچ کانفیگی دسترسی ایرانی را پاس نکرد")
-                if not self.save_partial_progress("no-iran-access"):
-                    self.create_fallback_output("هیچ کانفیگی دسترسی ایرانی را پاس نکرد")
-                return False
-
-            # فاز 3: تست دسترسی به شبکه‌های اجتماعی (یوتیوب، اینستاگرام، تلگرام)
-            logging.info(f"📱 شروع تست شبکه‌های اجتماعی برای {len(iran_ok_configs)} کانفیگ با دسترسی ایرانی")
-            social_ok_configs = await self.filter_configs_by_social_media_access(iran_ok_configs)
-            if not social_ok_configs:
-                logging.warning("هیچ کانفیگی تست شبکه‌های اجتماعی را پاس نکرد")
-                if not self.save_partial_progress("no-social-media-pass"):
-                    self.create_fallback_output("هیچ کانفیگی تست شبکه‌های اجتماعی را پاس نکرد")
-                return False
-
-            # فاز 4: تست سرعت دانلود فقط روی کانفیگ‌هایی که شبکه‌های اجتماعی را پاس کرده‌اند
-            logging.info(f"⏱️ شروع تست سرعت دانلود برای {len(social_ok_configs)} کانفیگ با دسترسی به شبکه‌های اجتماعی")
-            speed_ok_configs = await self.filter_configs_by_download_speed(social_ok_configs)
-            if not speed_ok_configs:
-                logging.warning("هیچ کانفیگی تست سرعت را پاس نکرد")
-                if not self.save_partial_progress("no-speed-pass"):
-                    self.create_fallback_output("هیچ کانفیگی تست سرعت دانلود را پاس نکرد")
+            logging.info(f"🌐 شروع تست ping با check-host.net برای {len(healthy_configs)} کانفیگ سالم")
+            ping_ok_configs = await self.filter_configs_by_ping_check(healthy_configs)
+            if not ping_ok_configs:
+                logging.warning("هیچ کانفیگی تست ping را پاس نکرد")
+                if not self.save_partial_progress("no-ping-pass"):
+                    self.create_fallback_output("هیچ کانفیگی تست ping را پاس نکرد")
                 return False
 
             # همه قبولی‌ها، بهترین‌ها محسوب می‌شوند
-            best_configs = speed_ok_configs
+            best_configs = ping_ok_configs
 
             # ادغام کانفیگ‌ها
             self.existing_configs = set()
@@ -1205,7 +1409,7 @@ class VLESSManager:
                 logging.info("✅ به‌روزرسانی VLESS با موفقیت انجام شد")
                 logging.info(f"📊 آمار: {stats['new_added']} جدید، {stats['duplicates_skipped']} تکراری")
                 logging.info(f"🔗 کانفیگ‌های VLESS سالم (پس از تمام تست‌ها): {len(best_configs)}")
-                logging.info(f"📱 تست‌های انجام شده: اتصال → دسترسی ایران → شبکه‌های اجتماعی → سرعت دانلود")
+                logging.info(f"📱 تست‌های انجام شده: TCP → Ping")
                 return True
             else:
                 logging.error("❌ خطا در ذخیره فایل VLESS")
