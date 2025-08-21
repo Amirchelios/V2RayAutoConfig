@@ -14,16 +14,15 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 CHECK_HOST_API_BASE = "https://check-host.net"
 CHECK_HOST_PING_ENDPOINT = "/check-ping"
 CHECK_HOST_RESULT_ENDPOINT = "/check-result"
-CHECK_HOST_FOCUS_NODE = "ir2.node.check-host.net"  # نود ایران مشهد
 
 async def test_ping_single_ip(ip: str):
     """تست ping برای یک IP واحد"""
     try:
         async with aiohttp.ClientSession() as session:
-            # ارسال درخواست ping
+            # ارسال درخواست ping - فقط از نود ایران مشهد
             ping_params = {
                 'host': ip,
-                'max_nodes': CHECK_HOST_MAX_NODES
+                'node': 'ir2.node.check-host.net'
             }
             
             headers = {'Accept': 'application/json'}
@@ -115,10 +114,8 @@ async def test_ping_single_ip(ip: str):
                     logging.error(f"خطا در پردازش نتایج نهایی ping: {e}")
                     return False
                 
-        except Exception as e:
-            logging.error(f"خطا در تست ping: {e}")
-            return False
-        
+    except Exception as e:
+        logging.error(f"خطا در تست ping: {e}")
         return False
 
 def analyze_ping_results(result_data: dict, server_ip: str) -> bool:
@@ -132,23 +129,36 @@ def analyze_ping_results(result_data: dict, server_ip: str) -> bool:
         ping_success_count = 0
         traceroute_exists = False
         
+        logging.info(f"🔍 تحلیل نتایج برای {server_ip}: {result_data}")
+        
         for node_name, node_result in result_data.items():
             if node_result is None:
+                logging.info(f"  نود {node_name}: null")
                 continue
+            
+            logging.info(f"  نود {node_name}: {node_result}")
             
             # بررسی ping results
             if isinstance(node_result, list) and len(node_result) > 0:
                 for ping_result in node_result:
-                    if isinstance(ping_result, list) and len(ping_result) >= 2:
-                        status = ping_result[0]
-                        if status == "OK":
-                            ping_success_count += 1
+                    if isinstance(ping_result, list) and len(ping_result) > 0:
+                        # هر ping_result یک لیست از نتایج ping است
+                        for individual_ping in ping_result:
+                            if isinstance(individual_ping, list) and len(individual_ping) >= 2:
+                                status = individual_ping[0]
+                                logging.info(f"    Individual ping: {individual_ping}")
+                                if status == "OK":
+                                    ping_success_count += 1
+                                    logging.info(f"    ✅ Ping موفق شمارش شد")
+                                else:
+                                    logging.info(f"    ❌ Ping ناموفق: {status}")
             
             # بررسی traceroute (اگر وجود داشته باشد)
             if isinstance(node_result, dict) and 'traceroute' in node_result:
                 traceroute_data = node_result['traceroute']
                 if traceroute_data and len(traceroute_data) > 0:
                     traceroute_exists = True
+                    logging.info(f"    Traceroute found: {traceroute_data}")
         
         # سرور سالم: ping موفق + بدون traceroute
         is_healthy = ping_success_count > 0 and not traceroute_exists

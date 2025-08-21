@@ -58,7 +58,7 @@ XRAY_BIN_DIR = "../Files/xray-bin"
 CHECK_HOST_API_BASE = "https://check-host.net"
 CHECK_HOST_PING_ENDPOINT = "/check-ping"
 CHECK_HOST_RESULT_ENDPOINT = "/check-result"
-CHECK_HOST_FOCUS_NODE = "ir2.node.check-host.net"  # نود ایران مشهد
+CHECK_HOST_FOCUS_NODE = "ir2.node.check-host.net"  # نود ایران مشهد - همه تست‌ها از اینجا
 CHECK_HOST_BATCH_SIZE = 50  # ارسال 50 تا 50 تا IP
 
 # تنظیمات logging
@@ -286,12 +286,12 @@ class VLESSManager:
             # ارسال درخواست ping برای batch - فقط از نود ایران مشهد
             ping_params = {
                 'host': ','.join(server_ips),
-                'node': CHECK_HOST_FOCUS_NODE
+                'node': 'ir2.node.check-host.net'
             }
             
             headers = {'Accept': 'application/json'}
             
-            logging.info(f"🌐 ارسال درخواست ping برای {len(server_ips)} IP به check-host.net (نود: {CHECK_HOST_FOCUS_NODE})")
+            logging.info(f"🌐 ارسال درخواست ping برای {len(server_ips)} IP به check-host.net (نود: ir2.node.check-host.net)")
             
             async with self.session.post(
                 f"{CHECK_HOST_API_BASE}{CHECK_HOST_PING_ENDPOINT}",
@@ -313,7 +313,7 @@ class VLESSManager:
                 nodes = ping_data.get('nodes', {})
                 
                 logging.info(f"✅ درخواست ping ارسال شد - Request ID: {request_id}")
-                logging.info(f"🌍 نود تست: {CHECK_HOST_FOCUS_NODE}")
+                logging.info(f"🌍 نود تست: ir2.node.check-host.net (ایران، مشهد)")
                 
                 # انتظار برای نتایج (حداکثر 30 ثانیه)
                 max_wait_time = 30
@@ -402,10 +402,14 @@ class VLESSManager:
                 # بررسی ping results
                 if isinstance(node_result, list) and len(node_result) > 0:
                     for ping_result in node_result:
-                        if isinstance(ping_result, list) and len(ping_result) >= 2:
-                            status = ping_result[0]
-                            if status == "OK":
-                                ping_success_count += 1
+                        if isinstance(ping_result, list) and len(ping_result) > 0:
+                            # هر ping_result یک لیست از نتایج ping است
+                            for individual_ping in ping_result:
+                                if isinstance(individual_ping, list) and len(individual_ping) >= 2:
+                                    status = individual_ping[0]
+                                    if status == "OK":
+                                        ping_success_count += 1
+                                        logging.debug(f"✅ IP {server_ip}: Ping موفق شمارش شد")
                 
                 # بررسی traceroute (اگر وجود داشته باشد)
                 if isinstance(node_result, dict) and 'traceroute' in node_result:
