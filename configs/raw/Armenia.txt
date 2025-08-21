@@ -1,7 +1,7 @@
 ss://35ebf266-908d-4f1e-abea-fbc69816a46f@or1.pmme.top:443?mode=auto&path=%2Fvray%3Fed%3D2048&security=reality&encryption=none&pbk=xfzizKASi1RDkMp0lU9CKVNbcKCL5KzdgIzZjF1d_AI&fp=chrome&spx=%2F&type=xhttp&sni=www.parspack.com&sid=6b#REALITY|AM🇦🇲
 ss://53fa8faf-ba4b-4322-9c69-a3e5b1555049@5.10.215.208:8880/?type=ws&encryption=none&host=reedfree8mahsang2.redorg.ir&path=%2FTelegramU0001F1E8U0001F1F3#%F0%9F%87%A6%F0%9F%87%B2%20AM%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40ai_duet%20%5B7%5D
 ss://89b3cbbae6ac485a9481976a0415eab9Og==@185.162.229.185:80#AM%F0%9F%87%A6%F0%9F%87%B2+%7C+185.162.229.185-80+%7C+1.41ms
-ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@146.185.248.22:989#%F0%9F%87%A6%F0%9F%87%B2AM-146.185.248.22-8638
+ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@146.185.248.22:989#%F0%9F%87%A6%F0%9F%87%B2AM-146.185.248.22-8639
 tuic://6b389472-9094-4c8a-a780-3d371b2eade5:6b389472-9094-4c8a-a780-3d371b2eade5@45.76.82.254:35403?congestion_control=cubic&alpn=h3&sni=vkvd127.mycdn.me&udp_relay_mode=native&allow_insecure=1#%F0%9F%87%A9%F0%9F%87%AA%20Germany%20-%20Frankfurt%20am%20Main%20%F0%9F%8C%8D%20TU-UDP-TLS%204%E2%83%A3
 vless://35ebf266-908d-4f1e-abea-fbc69816a46f@or1.pmme.top:443?mode=auto&path=%2Fvray%3Fed%3D2048&security=reality&encryption=none&pbk=xfzizKASi1RDkMp0lU9CKVNbcKCL5KzdgIzZjF1d_AI&fp=chrome&spx=%2F&type=xhttp&sni=www.parspack.com&sid=6b#REALITY|AM🇦🇲
 vless://53fa8faf-ba4b-4322-9c69-a3e5b1555049@5.10.215.208:8880/?type=ws&encryption=none&host=reedfree8mahsang2.redorg.ir&path=%2FTelegramU0001F1E8U0001F1F3#%F0%9F%87%A6%F0%9F%87%B2%20AM%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40ai_duet%20%5B7%5D
