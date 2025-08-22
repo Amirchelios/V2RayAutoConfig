@@ -442,6 +442,8 @@ class SSManager:
         # DISABLED: Xray functionality has been removed for simplicity
         return {"config": config, "status": "disabled", "latency": None, "error": "Xray test disabled"}
 
+
+
     async def test_iran_access(self, config: str) -> bool:
         """تست دسترسی به سایت‌های ایرانی"""
         try:
@@ -1085,8 +1087,16 @@ class SSManager:
             logging.error(f"خطا در ذخیره کانفیگ‌ها: {e}")
 
     async def test_all_ss_configs(self, configs: List[str]) -> List[Dict]:
-        """تست تمام کانفیگ‌های Shadowsocks"""
-        logging.info(f"شروع تست {len(configs)} کانفیگ Shadowsocks...")
+        """تست هوشمند کانفیگ‌های Shadowsocks با استراتژی بهینه"""
+        logging.info(f"شروع تست هوشمند {len(configs)} کانفیگ Shadowsocks...")
+        
+        import random
+        
+        target_healthy_configs = 50  # هدف: 50 کانفیگ سالم
+        batch_size = 100  # هر بار 100 کانفیگ رندوم انتخاب کن
+        max_iterations = 20  # حداکثر 20 بار تلاش
+        all_healthy_results = []
+        used_indices = set()  # برای جلوگیری از تکرار
         
         semaphore = asyncio.Semaphore(CONCURRENT_TESTS)
         
@@ -1094,39 +1104,105 @@ class SSManager:
             async with semaphore:
                 return await self.test_ss_connection(config)
         
-        # تست کانفیگ‌ها در batches برای جلوگیری از overload
-        batch_size = 500  # افزایش batch size برای تست بیشتر
-        all_results = []
-        total_batches = (len(configs) + batch_size - 1) // batch_size
-        
-        for i in range(0, len(configs), batch_size):
-            batch = configs[i:i + batch_size]
-            current_batch = i // batch_size + 1
-            logging.info(f"تست batch {current_batch}/{total_batches}: {len(batch)} کانفیگ")
+        iteration = 0
+        while len(all_healthy_results) < target_healthy_configs and iteration < max_iterations:
+            iteration += 1
+            remaining_needed = target_healthy_configs - len(all_healthy_results)
+            logging.info(f"🔄 تکرار {iteration}: نیاز به {remaining_needed} کانفیگ سالم دیگر، فعلاً {len(all_healthy_results)}")
             
-            tasks = [test_single_config(config) for config in batch]
-            batch_results = await asyncio.gather(*tasks, return_exceptions=True)
+            # محاسبه تعداد کانفیگ مورد نیاز برای این تکرار
+            # اگر نیاز به 30 تا داریم، 100 تا انتخاب می‌کنیم (احتمالاً 30 تا سالم باشند)
+            # اگر نیاز به 10 تا داریم، 50 تا انتخاب می‌کنیم
+            if remaining_needed <= 10:
+                current_batch_size = 50
+            elif remaining_needed <= 20:
+                current_batch_size = 75
+            else:
+                current_batch_size = batch_size  # 100
             
-            # فیلتر کردن نتایج موفق
-            successful_in_batch = 0
-            for result in batch_results:
+            # انتخاب رندوم کانفیگ‌های غیرتکراری
+            available_indices = [i for i in range(len(configs)) if i not in used_indices]
+            if len(available_indices) < current_batch_size:
+                logging.warning(f"کانفیگ‌های غیرتکراری تمام شد: {len(available_indices)} باقی مانده")
+                break
+            
+            selected_indices = random.sample(available_indices, min(current_batch_size, len(available_indices)))
+            used_indices.update(selected_indices)
+            
+            selected_configs = [configs[i] for i in selected_indices]
+            logging.info(f"📊 انتخاب {len(selected_configs)} کانفیگ رندوم برای تست TCP (نیاز: {remaining_needed})")
+            
+            # تست TCP روی کانفیگ‌های انتخاب شده
+            tasks = [test_single_config(config) for config in selected_configs]
+            tcp_results = await asyncio.gather(*tasks, return_exceptions=True)
+            
+            # فیلتر کردن نتایج TCP موفق
+            tcp_healthy = []
+            for result in tcp_results:
                 if isinstance(result, dict) and result.get("success", False):
-                    all_results.append(result)
-                    # ذخیره نتایج موفق برای ذخیره‌سازی جزئی
-                    try:
-                        self.partial_results.append(result)
-                    except Exception:
-                        pass
-                    successful_in_batch += 1
+                    tcp_healthy.append(result)
             
-            logging.info(f"Batch {current_batch} کامل شد: {successful_in_batch} کانفیگ موفق از {len(batch)}")
+            logging.info(f"✅ تست TCP: {len(tcp_healthy)} کانفیگ سالم از {len(selected_configs)}")
             
-            # کمی صبر بین batches
-            if i + batch_size < len(configs):
-                await asyncio.sleep(1)  # افزایش زمان انتظار برای جلوگیری از overload
+            if not tcp_healthy:
+                logging.warning("هیچ کانفیگ سالمی در این batch یافت نشد")
+                continue
+            
+            # تست ping check-host روی کانفیگ‌های TCP سالم
+            logging.info(f"🌐 شروع تست ping check-host روی {len(tcp_healthy)} کانفیگ TCP سالم")
+            
+            ping_healthy = []
+            for result in tcp_healthy:
+                try:
+                    # تست ping با check-host (استفاده از تابع موجود)
+                    ping_ok = await self.check_host_ping_single(result["server_address"])
+                    if ping_ok:
+                        result["ping_ok"] = True
+                        ping_healthy.append(result)
+                        logging.debug(f"✅ Ping OK: {result['server_address']}")
+                    else:
+                        result["ping_ok"] = False
+                        logging.debug(f"❌ Ping Failed: {result['server_address']}")
+                except Exception as e:
+                    logging.debug(f"خطا در تست ping {result['server_address']}: {e}")
+                    result["ping_ok"] = False
+            
+            logging.info(f"🌐 تست ping: {len(ping_healthy)} کانفیگ سالم از {len(tcp_healthy)}")
+            
+            # اضافه کردن به نتایج کلی (فقط تا حد نیاز)
+            remaining_needed = target_healthy_configs - len(all_healthy_results)
+            if remaining_needed > 0:
+                # فقط تعداد مورد نیاز را اضافه کن
+                configs_to_add = ping_healthy[:remaining_needed]
+                all_healthy_results.extend(configs_to_add)
+                
+                # ذخیره نتایج جزئی
+                try:
+                    self.partial_results.extend(configs_to_add)
+                except Exception:
+                    pass
+                
+                logging.info(f"📈 اضافه شد: {len(configs_to_add)} کانفیگ سالم (نیاز: {remaining_needed})")
+                logging.info(f"📈 مجموع کانفیگ‌های سالم: {len(all_healthy_results)}/{target_healthy_configs}")
+                
+                # اگر به هدف رسیدیم، متوقف شو
+                if len(all_healthy_results) >= target_healthy_configs:
+                    logging.info(f"🎯 هدف {target_healthy_configs} کانفیگ سالم محقق شد!")
+                    break
+            else:
+                logging.info(f"🎯 هدف {target_healthy_configs} کانفیگ سالم قبلاً محقق شده!")
+                break
+            
+            # کمی صبر قبل از تکرار بعدی
+            if iteration < max_iterations:
+                await asyncio.sleep(2)
         
-        logging.info(f"تست Shadowsocks کامل شد: {len(all_results)} کانفیگ موفق از {len(configs)}")
-        return all_results
+        if len(all_healthy_results) >= target_healthy_configs:
+            logging.info(f"🎉 موفقیت! {len(all_healthy_results)} کانفیگ سالم یافت شد")
+        else:
+            logging.warning(f"⚠️ فقط {len(all_healthy_results)} کانفیگ سالم یافت شد (هدف: {target_healthy_configs})")
+        
+        return all_healthy_results[:target_healthy_configs]  # حداکثر target_healthy_configs برگردان
 
     async def test_ss_connection(self, config: str) -> Dict:
         """تست اتصال کانفیگ Shadowsocks - فقط تست TCP ساده"""
