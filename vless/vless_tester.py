@@ -94,6 +94,7 @@ class VLESSManager:
         self.load_metadata()
         # ذخیره نتایج جزئی برای تداوم در صورت timeout/خطا
         self.partial_results: List[Dict] = []
+        self.partial_speed_ok: List[str] = []  # نتایج speed test
         self.partial_ping_ok: List[str] = []  # نتایج ping check
 
     def load_metadata(self):
@@ -179,6 +180,99 @@ class VLESSManager:
         """ایجاد hash برای کانفیگ (برای تشخیص تکراری)"""
         return hashlib.md5(config.strip().encode('utf-8')).hexdigest()
     
+    def get_config_hash(self, config: str) -> str:
+        """دریافت hash کانفیگ (8 کاراکتر اول)"""
+        return self.create_config_hash(config)[:8]
+    
+    def deduplicate_configs(self, configs: List[str]) -> List[str]:
+        """
+        حذف کانفیگ‌های تکراری بر اساس hash
+        نگه‌داری کانفیگ‌هایی که منحصر به فرد هستند
+        """
+        if not configs:
+            return []
+        
+        logging.info(f"🔍 شروع تشخیص و حذف کانفیگ‌های تکراری از {len(configs)} کانفیگ")
+        
+        # ساختار برای نگه‌داری کانفیگ‌های منحصر به فرد
+        unique_configs = {}
+        duplicate_count = 0
+        invalid_count = 0
+        
+        for i, config in enumerate(configs, 1):
+            try:
+                # بررسی اعتبار کانفیگ
+                if not self.is_valid_vless_config(config):
+                    invalid_count += 1
+                    logging.debug(f"❌ کانفیگ نامعتبر #{i}: {config[:50]}...")
+                    continue
+                
+                # ایجاد hash برای کانفیگ
+                config_hash = self.create_config_hash(config)
+                
+                # بررسی تکراری بودن
+                if config_hash in unique_configs:
+                    duplicate_count += 1
+                    logging.debug(f"🔄 کانفیگ تکراری #{i}: {self.get_config_hash(config)}")
+                else:
+                    unique_configs[config_hash] = config
+                    logging.debug(f"✅ کانفیگ منحصر به فرد #{i}: {self.get_config_hash(config)}")
+            
+            except Exception as e:
+                logging.warning(f"خطا در پردازش کانفیگ #{i}: {e}")
+                invalid_count += 1
+                continue
+        
+        # آمار نهایی
+        final_configs = list(unique_configs.values())
+        
+        logging.info(f"📊 نتایج حذف تکراری:")
+        logging.info(f"  🔹 کانفیگ‌های ورودی: {len(configs)}")
+        logging.info(f"  ✅ کانفیگ‌های منحصر به فرد: {len(final_configs)}")
+        logging.info(f"  🔄 کانفیگ‌های تکراری حذف شده: {duplicate_count}")
+        logging.info(f"  ❌ کانفیگ‌های نامعتبر حذف شده: {invalid_count}")
+        logging.info(f"  💾 کاهش حجم: {((len(configs) - len(final_configs)) / len(configs) * 100):.1f}%")
+        
+        return final_configs
+    
+    def analyze_config_patterns(self, configs: List[str]) -> Dict:
+        """
+        تحلیل الگوهای کانفیگ‌ها برای آمار بهتر
+        """
+        analysis = {
+            "total_configs": len(configs),
+            "server_ips": set(),
+            "ports": set(),
+            "connection_types": set(),
+            "security_types": set(),
+            "domains": set()
+        }
+        
+        for config in configs:
+            try:
+                parsed = self.parse_vless_config(config)
+                if parsed:
+                    analysis["server_ips"].add(parsed.get("server_ip", "unknown"))
+                    analysis["ports"].add(parsed.get("port", "unknown"))
+                    analysis["connection_types"].add(parsed.get("type", "unknown"))
+                    analysis["security_types"].add(parsed.get("security", "unknown"))
+                    
+                    # تشخیص domain یا IP
+                    server_ip = parsed.get("server_ip", "")
+                    if server_ip and not server_ip.replace(".", "").replace(":", "").isdigit():
+                        analysis["domains"].add(server_ip)
+            except:
+                continue
+        
+        # تبدیل set ها به تعداد
+        analysis["unique_server_ips"] = len(analysis["server_ips"])
+        analysis["unique_ports"] = len(analysis["ports"])
+        analysis["unique_connection_types"] = len(analysis["connection_types"])
+        analysis["unique_security_types"] = len(analysis["security_types"])
+        analysis["unique_domains"] = len(analysis["domains"])
+        
+        return analysis
+    
     def load_vless_source_configs(self) -> List[str]:
         """بارگذاری کانفیگ‌های VLESS از فایل منبع"""
         try:
@@ -196,15 +290,25 @@ class VLESSManager:
             else:
                 logging.warning(f"فایل منبع VLESS یافت نشد: {VLESS_SOURCE_FILE}")
             
-            # حذف تکراری‌ها
-            unique_configs = list(set(configs))
-            logging.info(f"مجموع {len(unique_configs)} کانفیگ VLESS منحصر به فرد یافت شد")
+            # حذف تکراری‌ها با روش پیشرفته
+            unique_configs = self.deduplicate_configs(configs)
+            
+            # تحلیل آمار کانفیگ‌ها
+            if unique_configs:
+                analysis = self.analyze_config_patterns(unique_configs)
+                logging.info(f"📈 آمار کانفیگ‌های منحصر به فرد:")
+                logging.info(f"  🌐 سرورهای منحصر به فرد: {analysis['unique_server_ips']}")
+                logging.info(f"  🔌 پورت‌های منحصر به فرد: {analysis['unique_ports']}")
+                logging.info(f"  🔗 نوع اتصال‌ها: {analysis['unique_connection_types']}")
+                logging.info(f"  🔐 نوع امنیت‌ها: {analysis['unique_security_types']}")
+                logging.info(f"  🌍 دامین‌های منحصر به فرد: {analysis['unique_domains']}")
             
             # محدود کردن تعداد کانفیگ‌ها برای تست
             if len(unique_configs) > MAX_CONFIGS_TO_TEST:
                 logging.info(f"محدود کردن تعداد کانفیگ‌ها از {len(unique_configs)} به {MAX_CONFIGS_TO_TEST}")
                 unique_configs = unique_configs[:MAX_CONFIGS_TO_TEST]
             
+            logging.info(f"🎯 آماده برای تست: {len(unique_configs)} کانفیگ VLESS منحصر به فرد")
             return unique_configs
                 
         except Exception as e:
@@ -602,6 +706,229 @@ class VLESSManager:
         except Exception as e:
             logging.error(f"خطا در فیلتر کردن بر اساس ping: {e}")
             return configs  # در صورت خطا، همه کانفیگ‌ها را برگردان
+
+    async def filter_configs_by_download_speed(self, configs: List[str], max_configs: int = 50) -> List[str]:
+        """
+        فیلتر کردن کانفیگ‌ها بر اساس تست سرعت دانلود با Xray
+        فقط کانفیگ‌هایی که در 2 ثانیه 1 مگابایت دانلود کنند قبول می‌شوند
+        حداکثر max_configs کانفیگ برتر انتخاب می‌شوند
+        """
+        try:
+            logging.info(f"🚀 شروع تست سرعت دانلود برای {len(configs)} کانفیگ")
+            
+            # تست سرعت دانلود برای همه کانفیگ‌ها
+            speed_results = []
+            
+            for i, config in enumerate(configs, 1):
+                logging.info(f"📡 تست سرعت {i}/{len(configs)}: {self.get_config_hash(config)}")
+                
+                try:
+                    speed_result = await self.test_download_speed_with_xray(config)
+                    if speed_result['success']:
+                        speed_results.append({
+                            'config': config,
+                            'speed_mbps': speed_result['speed_mbps'],
+                            'download_time': speed_result['download_time']
+                        })
+                        logging.info(f"✅ سرعت: {speed_result['speed_mbps']:.2f} Mbps - زمان: {speed_result['download_time']:.2f}s")
+                    else:
+                        logging.debug(f"❌ سرعت ناموفق: {speed_result.get('error', 'unknown')}")
+                    
+                    # کمی صبر بین تست‌ها
+                    if i < len(configs):
+                        await asyncio.sleep(0.5)
+                        
+                except Exception as e:
+                    logging.error(f"خطا در تست سرعت برای کانفیگ {i}: {e}")
+                    continue
+            
+            # مرتب کردن بر اساس سرعت (بالاترین سرعت اول)
+            speed_results.sort(key=lambda x: x['speed_mbps'], reverse=True)
+            
+            # انتخاب حداکثر max_configs کانفیگ برتر
+            best_configs = [result['config'] for result in speed_results[:max_configs]]
+            
+            # ذخیره نتایج جزئی
+            try:
+                self.partial_speed_ok = list(best_configs)
+            except Exception:
+                pass
+            
+            logging.info(f"🏆 {len(best_configs)} کانفیگ برتر انتخاب شدند (سرعت: {speed_results[0]['speed_mbps']:.2f} - {speed_results[-1]['speed_mbps']:.2f} Mbps)")
+            
+            return best_configs
+            
+        except Exception as e:
+            logging.error(f"خطا در تست سرعت دانلود: {e}")
+            return []
+
+    async def test_download_speed_with_xray(self, config: str) -> Dict:
+        """
+        تست سرعت دانلود با Xray برای یک کانفیگ
+        هدف: دانلود 1 مگابایت در کمتر از 2 ثانیه
+        """
+        try:
+            config_hash = self.get_config_hash(config)
+            
+            # ایجاد فایل کانفیگ موقت برای Xray
+            temp_config_file = f"temp_config_{config_hash}.json"
+            
+            try:
+                # تبدیل کانفیگ VLESS به فرمت Xray
+                xray_config = self.convert_vless_to_xray_config(config)
+                
+                # ذخیره کانفیگ موقت
+                with open(temp_config_file, 'w', encoding='utf-8') as f:
+                    json.dump(xray_config, f, indent=2)
+                
+                # تست سرعت دانلود
+                start_time = time.time()
+                
+                # دانلود 1 مگابایت از یک سرور تست
+                download_success = await self.download_1mb_via_xray(temp_config_file)
+                
+                download_time = time.time() - start_time
+                
+                if download_success and download_time <= 2.0:
+                    speed_mbps = 1.0 / download_time  # 1 MB / time = Mbps
+                    return {
+                        'success': True,
+                        'speed_mbps': speed_mbps,
+                        'download_time': download_time
+                    }
+                else:
+                    return {
+                        'success': False,
+                        'error': f'زمان دانلود: {download_time:.2f}s (بیش از 2 ثانیه)',
+                        'download_time': download_time
+                    }
+                    
+            finally:
+                # حذف فایل موقت
+                try:
+                    os.remove(temp_config_file)
+                except:
+                    pass
+                    
+        except Exception as e:
+            return {
+                'success': False,
+                'error': str(e)
+            }
+
+    def convert_vless_to_xray_config(self, vless_config: str) -> Dict:
+        """
+        تبدیل کانفیگ VLESS به فرمت Xray
+        """
+        try:
+            parsed = self.parse_vless_config(vless_config)
+            if not parsed:
+                raise ValueError("خطا در پارس کردن کانفیگ VLESS")
+            
+            # ساخت کانفیگ Xray
+            xray_config = {
+                "log": {
+                    "loglevel": "warning"
+                },
+                "inbounds": [
+                    {
+                        "port": 10808,
+                        "listen": "127.0.0.1",
+                        "protocol": "socks",
+                        "settings": {
+                            "udp": True
+                        }
+                    }
+                ],
+                "outbounds": [
+                    {
+                        "protocol": "vless",
+                        "settings": {
+                            "vnext": [
+                                {
+                                    "address": parsed['server_ip'],
+                                    "port": int(parsed['port']),
+                                    "users": [
+                                        {
+                                            "id": parsed['uuid'],
+                                            "encryption": "none"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "streamSettings": {
+                            "network": parsed['type'],
+                            "security": parsed['security']
+                        }
+                    }
+                ]
+            }
+            
+            # اضافه کردن تنظیمات اضافی بر اساس نوع اتصال
+            if parsed['type'] == 'ws':
+                xray_config['outbounds'][0]['streamSettings']['wsSettings'] = {
+                    "path": "/",
+                    "headers": {}
+                }
+            elif parsed['type'] == 'grpc':
+                xray_config['outbounds'][0]['streamSettings']['grpcSettings'] = {
+                    "serviceName": "grpc"
+                }
+            
+            return xray_config
+            
+        except Exception as e:
+            logging.error(f"خطا در تبدیل کانفیگ VLESS به Xray: {e}")
+            raise
+
+    async def download_1mb_via_xray(self, config_file: str) -> bool:
+        """
+        دانلود 1 مگابایت از طریق Xray
+        """
+        try:
+            # شروع Xray
+            xray_process = None
+            try:
+                # اجرای Xray
+                xray_cmd = ["./xray-bin/xray", "-config", config_file]
+                xray_process = await asyncio.create_subprocess_exec(
+                    *xray_cmd,
+                    stdout=asyncio.subprocess.PIPE,
+                    stderr=asyncio.subprocess.PIPE
+                )
+                
+                # کمی صبر برای راه‌اندازی Xray
+                await asyncio.sleep(1)
+                
+                # تست دانلود از طریق SOCKS proxy
+                proxy_url = "socks5://127.0.0.1:10808"
+                
+                # دانلود 1 مگابایت
+                async with aiohttp.ClientSession() as session:
+                    async with session.get(
+                        "http://speedtest.ftp.otenet.gr/files/test1Mb.db",
+                        proxy=proxy_url,
+                        timeout=aiohttp.ClientTimeout(total=5)
+                    ) as response:
+                        if response.status == 200:
+                            data = await response.read()
+                            return len(data) >= 1024 * 1024  # حداقل 1 MB
+                        else:
+                            return False
+                            
+            finally:
+                # توقف Xray
+                if xray_process:
+                    try:
+                        xray_process.terminate()
+                        await xray_process.wait()
+                    except:
+                        pass
+                        
+        except Exception as e:
+            logging.debug(f"خطا در دانلود از طریق Xray: {e}")
+            return False
     
     async def test_vless_connection(self, config: str) -> Dict:
         """تست اتصال کانفیگ VLESS - فقط تست TCP ساده"""
@@ -1237,7 +1564,10 @@ class VLESSManager:
         """ذخیره خروجی جزئی در صورت timeout یا خطا"""
         try:
             # انتخاب بهترین مرحله‌ای که داده دارد
-            if self.partial_ping_ok:
+            if self.partial_speed_ok:
+                best_configs = list({c for c in self.partial_speed_ok if self.is_valid_vless_config(c)})
+                stage = "speed_ok"
+            elif self.partial_ping_ok:
                 best_configs = list({c for c in self.partial_ping_ok if self.is_valid_vless_config(c)})
                 stage = "ping_ok"
             elif self.partial_results:
@@ -1496,8 +1826,17 @@ class VLESSManager:
                     self.create_fallback_output("هیچ کانفیگی تست ping را پاس نکرد")
                 return False
 
-            # همه قبولی‌ها، بهترین‌ها محسوب می‌شوند
-            best_configs = ping_ok_configs
+            # فاز 3: تست سرعت دانلود با Xray - فقط 50 کانفیگ برتر
+            if ping_ok_configs:
+                logging.info(f"🚀 شروع تست سرعت دانلود برای {len(ping_ok_configs)} کانفیگ سالم ping")
+                speed_ok_configs = await self.filter_configs_by_download_speed(ping_ok_configs, max_configs=50)
+                logging.info(f"✅ تست سرعت دانلود کامل شد: {len(speed_ok_configs)} کانفیگ برتر از {len(ping_ok_configs)}")
+            else:
+                speed_ok_configs = []
+                logging.warning("هیچ کانفیگی برای تست سرعت دانلود یافت نشد")
+            
+            # بهترین‌ها: کانفیگ‌هایی که تست سرعت دانلود را پاس کرده‌اند
+            best_configs = speed_ok_configs
 
             # ادغام کانفیگ‌ها
             self.existing_configs = set()
@@ -1511,7 +1850,7 @@ class VLESSManager:
                 logging.info("✅ به‌روزرسانی VLESS با موفقیت انجام شد")
                 logging.info(f"📊 آمار: {stats['new_added']} جدید، {stats['duplicates_skipped']} تکراری")
                 logging.info(f"🔗 کانفیگ‌های VLESS سالم (پس از تمام تست‌ها): {len(best_configs)}")
-                logging.info(f"📱 تست‌های انجام شده: TCP → Ping")
+                logging.info(f"📱 تست‌های انجام شده: حذف تکراری → TCP → Ping → Speed Test")
                 return True
             else:
                 logging.error("❌ خطا در ذخیره فایل VLESS")
@@ -1586,7 +1925,7 @@ async def run_vless_tester():
     
     try:
         # اجرای یک دور به‌روزرسانی با timeout طولانی
-        async with asyncio.timeout(3600):  # timeout 60 دقیقه - افزایش قابل توجه
+        async with asyncio.timeout(7200):  # timeout 120 دقیقه - افزایش برای تست‌های اضافی
             success = await manager.run_vless_update()
         
         if success:
