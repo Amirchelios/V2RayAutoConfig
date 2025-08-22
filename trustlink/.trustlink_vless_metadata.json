@@ -1,6 +1,6 @@
 {
-  "last_update": "2025-08-22T12:25:04.536268",
-  "total_tests": 3,
+  "last_update": "2025-08-22T18:22:36.332322",
+  "total_tests": 4,
   "total_configs": 49,
   "working_configs": 50,
   "failed_configs": 0,
@@ -15,6 +15,6 @@
     "working_configs": 50,
     "failed_configs": 0,
     "iran_accessible": 0,
-    "timestamp": "2025-08-22T12:25:04.536268"
+    "timestamp": "2025-08-22T18:22:36.332322"
   }
 }
