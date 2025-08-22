@@ -699,13 +699,25 @@ class VLESSManager:
         """
         فیلتر کردن کانفیگ‌ها بر اساس تست ping با check-host.net
         تست یکی یکی IP ها با تمرکز روی نود ایران مشهد
+        بهینه‌سازی: انتخاب تصادفی حداکثر 50 کانفیگ برای تست ping
         """
         try:
-            # استخراج IP های منحصر به فرد
+            # بهینه‌سازی: انتخاب تصادفی حداکثر 50 کانفیگ برای تست ping
+            if len(configs) > 50:
+                import random
+                random.seed()  # استفاده از seed تصادفی
+                selected_configs = random.sample(configs, 50)
+                logging.info(f"🎯 بهینه‌سازی سرعت: انتخاب تصادفی 50 کانفیگ از {len(configs)} کانفیگ سالم TCP")
+                logging.info(f"📊 کانفیگ‌های انتخاب شده برای تست ping: {len(selected_configs)}")
+            else:
+                selected_configs = configs
+                logging.info(f"📊 تست ping برای همه {len(configs)} کانفیگ سالم TCP")
+            
+            # استخراج IP های منحصر به فرد از کانفیگ‌های انتخاب شده
             unique_ips = set()
             ip_to_configs = {}
             
-            for config in configs:
+            for config in selected_configs:
                 parsed = self.parse_vless_config(config)
                 if parsed and parsed.get('server_ip'):
                     ip = parsed['server_ip']
@@ -758,8 +770,10 @@ class VLESSManager:
             except Exception:
                 pass
             
-            logging.info(f"✅ تست ping (4/4) کامل شد: {len(healthy_configs)} کانفیگ سالم از {len(configs)}")
+            logging.info(f"✅ تست ping (4/4) کامل شد: {len(healthy_configs)} کانفیگ سالم از {len(selected_configs)} انتخاب شده")
             logging.info(f"🌍 IP های سالم: {len(healthy_ips)} از {len(unique_ips)}")
+            if len(configs) > 50:
+                logging.info(f"🚀 بهینه‌سازی سرعت: تست ping فقط روی {len(selected_configs)} کانفیگ تصادفی از {len(configs)} کانفیگ سالم TCP")
             
             return healthy_configs
             
@@ -1878,7 +1892,8 @@ class VLESSManager:
                     self.create_fallback_output("هیچ کانفیگ VLESS موفقی یافت نشد")
                 return False
 
-            logging.info(f"🌐 شروع تست ping (4/4) با check-host.net برای {len(healthy_configs)} کانفیگ سالم")
+            logging.info(f"🌐 شروع تست ping (4/4) با check-host.net برای {len(healthy_configs)} کانفیگ سالم TCP")
+            logging.info(f"🎯 بهینه‌سازی: انتخاب تصادفی حداکثر 50 کانفیگ برای تست ping")
             ping_ok_configs = await self.filter_configs_by_ping_check(healthy_configs)
             if not ping_ok_configs:
                 logging.warning("هیچ کانفیگی تست ping را پاس نکرد")
@@ -1910,7 +1925,9 @@ class VLESSManager:
                 logging.info("✅ به‌روزرسانی VLESS با موفقیت انجام شد")
                 logging.info(f"📊 آمار: {stats['new_added']} جدید، {stats['duplicates_skipped']} تکراری")
                 logging.info(f"🔗 کانفیگ‌های VLESS سالم (پس از تمام تست‌ها): {len(best_configs)}")
-                logging.info(f"📱 تست‌های انجام شده: حذف تکراری → TCP → Ping → Speed Test")
+                logging.info(f"📱 تست‌های انجام شده: حذف تکراری → TCP → Ping (تصادفی 50) → Speed Test")
+                if len(healthy_configs) > 50:
+                    logging.info(f"⚡ بهینه‌سازی سرعت: تست ping فقط روی {min(50, len(healthy_configs))} کانفیگ تصادفی")
                 return True
             else:
                 logging.error("❌ خطا در ذخیره فایل VLESS")
