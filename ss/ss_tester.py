@@ -1299,16 +1299,38 @@ class SSManager:
             # ایجاد session
             await self.create_session()
 
-            # فاز 1: تست اتصال TCP روی همه کانفیگ‌ها
-            # فقط تست TCP ساده برای سرعت بالا - تست‌های دیگر در مراحل بعدی
-            # هر کانفیگ فقط یک بار تست می‌شود - از کل پروکسی‌ها دو بار تست گرفته نمی‌شود
-            # هدف: سرعت بالا و کارایی بهتر
+            # فاز 1: تست هوشمند کانفیگ‌ها تا رسیدن به 50 کانفیگ سالم
+            # این تابع خودش تا 20 بار تلاش می‌کند تا به هدف برسد
+            logging.info("🎯 شروع تست هوشمند: هدف 50 کانفیگ سالم")
             test_results = await self.test_all_ss_configs(source_configs)
             if not test_results:
                 logging.warning("هیچ کانفیگ Shadowsocks موفقی یافت نشد")
                 if not self.save_partial_progress("no-connect-success"):
                     self.create_fallback_output("هیچ کانفیگ Shadowsocks موفقی یافت نشد")
                 return False
+            
+            # بررسی اینکه آیا به هدف 50 کانفیگ رسیدیم
+            healthy_count = len([r for r in test_results if r.get("success", False)])
+            if healthy_count < 50:
+                logging.warning(f"⚠️ فقط {healthy_count} کانفیگ سالم یافت شد (هدف: 50)")
+                logging.info("🔄 تلاش برای یافتن کانفیگ‌های بیشتر...")
+                
+                # تلاش مجدد با کانفیگ‌های باقی‌مانده
+                remaining_configs = [c for c in source_configs if c not in [r.get("config") for r in test_results if r.get("success", False)]]
+                if remaining_configs:
+                    logging.info(f"📊 تلاش مجدد با {len(remaining_configs)} کانفیگ باقی‌مانده")
+                    additional_results = await self.test_all_ss_configs(remaining_configs)
+                    if additional_results:
+                        # ترکیب نتایج
+                        test_results.extend(additional_results)
+                        healthy_count = len([r for r in test_results if r.get("success", False)])
+                        logging.info(f"📈 پس از تلاش مجدد: {healthy_count} کانفیگ سالم")
+                    else:
+                        logging.warning("تلاش مجدد ناموفق بود")
+                else:
+                    logging.warning("هیچ کانفیگ باقی‌مانده‌ای برای تلاش مجدد وجود ندارد")
+            else:
+                logging.info(f"🎉 هدف 50 کانفیگ سالم محقق شد: {healthy_count} کانفیگ")
 
             # فاز 2: تست ping با check-host.net API، فقط روی کانفیگ‌های سالم TCP
             # فیلتر کردن کانفیگ‌هایی که تست TCP را پاس کرده‌اند
