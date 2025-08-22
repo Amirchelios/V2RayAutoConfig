@@ -1,18 +1,18 @@
 {
-  "last_update": "2025-08-19T06:51:07.198847",
-  "total_tests": 5597,
+  "last_update": "2025-08-22T00:27:38.815292",
+  "total_tests": 5884,
   "total_configs": 500,
-  "working_configs": 330,
-  "failed_configs": 5267,
+  "working_configs": 305,
+  "failed_configs": 5579,
   "last_vmess_source": "../configs/raw/Vmess.txt",
   "version": "1.0.0",
   "test_statistics": {
-    "total_tested": 5597,
-    "connection_ok": 2302,
-    "iran_access_ok": 2302,
-    "social_media_ok": 330,
-    "download_speed_ok": 330,
-    "fully_working": 330,
-    "partially_working": 1972
+    "total_tested": 5884,
+    "connection_ok": 2393,
+    "iran_access_ok": 2393,
+    "social_media_ok": 305,
+    "download_speed_ok": 305,
+    "fully_working": 305,
+    "partially_working": 2088
   }
 }
