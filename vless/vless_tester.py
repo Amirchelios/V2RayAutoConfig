@@ -36,14 +36,14 @@ CONCURRENT_TESTS = 50  # افزایش تعداد تست‌های همزمان ب
 KEEP_BEST_COUNT = 500  # افزایش تعداد کانفیگ‌های سالم نگه‌داری شده
 MAX_CONFIGS_TO_TEST = 10000  # افزایش تعداد کانفیگ‌های تست شده به 10000
 
-# تنظیمات تست سرعت دانلود واقعی از طریق Xray
-DOWNLOAD_TEST_MIN_BYTES = 1024 * 1024  # 1 MB
-DOWNLOAD_TEST_TIMEOUT = 2  # ثانیه
-DOWNLOAD_TEST_URLS = [
-    "https://speed.cloudflare.com/__down?bytes=10485760",  # 10MB stream (به اندازه کافی بزرگ)
-    "https://speed.hetzner.de/1MB.bin",
-    "https://speedtest.ams01.softlayer.com/downloads/test10.zip"
-]
+# تنظیمات تست سرعت دانلود واقعی از طریق Xray - REMOVED
+# DOWNLOAD_TEST_MIN_BYTES = 1024 * 1024  # 1 MB
+# DOWNLOAD_TEST_TIMEOUT = 2  # ثانیه
+# DOWNLOAD_TEST_URLS = [
+#     "https://speed.cloudflare.com/__down?bytes=10485760",  # 10MB stream (به اندازه کافی بزرگ)
+#     "https://speed.hetzner.de/1MB.bin",
+#     "https://speedtest.ams01.softlayer.com/downloads/test10.zip"
+# ]
 IRAN_TEST_URLS = [
     "https://www.aparat.com",
     "https://divar.ir",
@@ -52,7 +52,7 @@ IRAN_TEST_URLS = [
     "https://www.sheypoor.com",
     "https://www.telewebion.com"
 ]
-XRAY_BIN_DIR = "../Files/xray-bin"
+# XRAY_BIN_DIR = "../Files/xray-bin"  # REMOVED - no longer used
 
 # تنظیمات check-host.net API
 CHECK_HOST_API_BASE = "https://check-host.net"
@@ -94,7 +94,7 @@ class VLESSManager:
         self.load_metadata()
         # ذخیره نتایج جزئی برای تداوم در صورت timeout/خطا
         self.partial_results: List[Dict] = []
-        self.partial_speed_ok: List[str] = []  # نتایج speed test
+        # self.partial_speed_ok: List[str] = []  # نتایج speed test - REMOVED
         self.partial_ping_ok: List[str] = []  # نتایج ping check
 
     def load_metadata(self):
@@ -781,246 +781,11 @@ class VLESSManager:
             logging.error(f"خطا در فیلتر کردن بر اساس ping: {e}")
             return configs  # در صورت خطا، همه کانفیگ‌ها را برگردان
 
-    async def filter_configs_by_download_speed(self, configs: List[str], max_configs: int = 50) -> List[str]:
-        """
-        فیلتر کردن کانفیگ‌ها بر اساس تست سرعت دانلود با Xray
-        فقط کانفیگ‌هایی که در 2 ثانیه 1 مگابایت دانلود کنند قبول می‌شوند
-        حداکثر max_configs کانفیگ برتر انتخاب می‌شوند
-        """
-        try:
-            logging.info(f"🚀 شروع تست سرعت دانلود برای {len(configs)} کانفیگ")
-            
-            # تست سرعت دانلود برای همه کانفیگ‌ها
-            speed_results = []
-            
-            for i, config in enumerate(configs, 1):
-                logging.info(f"📡 تست سرعت {i}/{len(configs)}: {self.get_config_hash(config)}")
-                
-                try:
-                    speed_result = await self.test_download_speed_with_xray(config)
-                    if speed_result['success']:
-                        speed_results.append({
-                            'config': config,
-                            'speed_mbps': speed_result['speed_mbps'],
-                            'download_time': speed_result['download_time']
-                        })
-                        logging.info(f"✅ سرعت: {speed_result['speed_mbps']:.2f} Mbps - زمان: {speed_result['download_time']:.2f}s")
-                    else:
-                        logging.debug(f"❌ سرعت ناموفق: {speed_result.get('error', 'unknown')}")
-                    
-                    # کمی صبر بین تست‌ها
-                    if i < len(configs):
-                        await asyncio.sleep(0.5)
-                        
-                except Exception as e:
-                    logging.error(f"خطا در تست سرعت برای کانفیگ {i}: {e}")
-                    continue
-            
-            # بررسی اینکه آیا هیچ کانفیگی تست سرعت را نگذرانده
-            if not speed_results:
-                logging.warning("⚠️ هیچ کانفیگی تست سرعت دانلود را نگذراند")
-                return []
-            
-            # مرتب کردن بر اساس سرعت (بالاترین سرعت اول)
-            speed_results.sort(key=lambda x: x['speed_mbps'], reverse=True)
-            
-            # انتخاب حداکثر max_configs کانفیگ برتر
-            best_configs = [result['config'] for result in speed_results[:max_configs]]
-            
-            # ذخیره نتایج جزئی
-            try:
-                self.partial_speed_ok = list(best_configs)
-            except Exception:
-                pass
-            
-            # نمایش اطلاعات سرعت (فقط اگر کانفیگی وجود داشته باشد)
-            if len(speed_results) == 1:
-                logging.info(f"🏆 {len(best_configs)} کانفیگ برتر انتخاب شد (سرعت: {speed_results[0]['speed_mbps']:.2f} Mbps)")
-            else:
-                logging.info(f"🏆 {len(best_configs)} کانفیگ برتر انتخاب شدند (سرعت: {speed_results[0]['speed_mbps']:.2f} - {speed_results[-1]['speed_mbps']:.2f} Mbps)")
-            
-            return best_configs
-            
-        except Exception as e:
-            logging.error(f"خطا در تست سرعت دانلود: {e}")
-            return []
-
-    async def test_download_speed_with_xray(self, config: str) -> Dict:
-        """
-        تست سرعت دانلود با Xray برای یک کانفیگ
-        هدف: دانلود 1 مگابایت در کمتر از 2 ثانیه
-        """
-        try:
-            config_hash = self.get_config_hash(config)
-            
-            # بررسی وجود فایل Xray
-            xray_bin_path = "./xray-bin/xray"
-            if not os.path.exists(xray_bin_path):
-                return {
-                    'success': False,
-                    'error': 'فایل Xray یافت نشد'
-                }
-            
-            # ایجاد فایل کانفیگ موقت برای Xray
-            temp_config_file = f"temp_config_{config_hash}.json"
-            
-            try:
-                # تبدیل کانفیگ VLESS به فرمت Xray
-                xray_config = self.convert_vless_to_xray_config(config)
-                
-                # ذخیره کانفیگ موقت
-                with open(temp_config_file, 'w', encoding='utf-8') as f:
-                    json.dump(xray_config, f, indent=2)
-                
-                # تست سرعت دانلود
-                start_time = time.time()
-                
-                # دانلود 1 مگابایت از یک سرور تست
-                download_success = await self.download_1mb_via_xray(temp_config_file)
-                
-                download_time = time.time() - start_time
-                
-                if download_success and download_time <= 2.0:
-                    speed_mbps = 1.0 / download_time  # 1 MB / time = Mbps
-                    return {
-                        'success': True,
-                        'speed_mbps': speed_mbps,
-                        'download_time': download_time
-                    }
-                else:
-                    return {
-                        'success': False,
-                        'error': f'زمان دانلود: {download_time:.2f}s (بیش از 2 ثانیه)',
-                        'download_time': download_time
-                    }
-                    
-            finally:
-                # حذف فایل موقت
-                try:
-                    os.remove(temp_config_file)
-                except:
-                    pass
-                    
-        except Exception as e:
-            logging.debug(f"خطا در تست سرعت دانلود برای کانفیگ {config_hash}: {e}")
-            return {
-                'success': False,
-                'error': str(e)
-            }
-
-    def convert_vless_to_xray_config(self, vless_config: str) -> Dict:
-        """
-        تبدیل کانفیگ VLESS به فرمت Xray
-        """
-        try:
-            parsed = self.parse_vless_config(vless_config)
-            if not parsed:
-                raise ValueError("خطا در پارس کردن کانفیگ VLESS")
-            
-            # ساخت کانفیگ Xray
-            xray_config = {
-                "log": {
-                    "loglevel": "warning"
-                },
-                "inbounds": [
-                    {
-                        "port": 10808,
-                        "listen": "127.0.0.1",
-                        "protocol": "socks",
-                        "settings": {
-                            "udp": True
-                        }
-                    }
-                ],
-                "outbounds": [
-                    {
-                        "protocol": "vless",
-                        "settings": {
-                            "vnext": [
-                                {
-                                    "address": parsed['server_ip'],
-                                    "port": int(parsed['port']),
-                                    "users": [
-                                        {
-                                            "id": parsed['uuid'],
-                                            "encryption": "none"
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        "streamSettings": {
-                            "network": parsed['type'],
-                            "security": parsed['security']
-                        }
-                    }
-                ]
-            }
-            
-            # اضافه کردن تنظیمات اضافی بر اساس نوع اتصال
-            if parsed['type'] == 'ws':
-                xray_config['outbounds'][0]['streamSettings']['wsSettings'] = {
-                    "path": "/",
-                    "headers": {}
-                }
-            elif parsed['type'] == 'grpc':
-                xray_config['outbounds'][0]['streamSettings']['grpcSettings'] = {
-                    "serviceName": "grpc"
-                }
-            
-            return xray_config
-            
-        except Exception as e:
-            logging.error(f"خطا در تبدیل کانفیگ VLESS به Xray: {e}")
-            raise
-
-    async def download_1mb_via_xray(self, config_file: str) -> bool:
-        """
-        دانلود 1 مگابایت از طریق Xray
-        """
-        try:
-            # شروع Xray
-            xray_process = None
-            try:
-                # اجرای Xray
-                xray_cmd = ["./xray-bin/xray", "-config", config_file]
-                xray_process = await asyncio.create_subprocess_exec(
-                    *xray_cmd,
-                    stdout=asyncio.subprocess.PIPE,
-                    stderr=asyncio.subprocess.PIPE
-                )
-                
-                # کمی صبر برای راه‌اندازی Xray
-                await asyncio.sleep(1)
-                
-                # تست دانلود از طریق SOCKS proxy
-                proxy_url = "socks5://127.0.0.1:10808"
-                
-                # دانلود 1 مگابایت
-                async with aiohttp.ClientSession() as session:
-                    async with session.get(
-                        "http://speedtest.ftp.otenet.gr/files/test1Mb.db",
-                        proxy=proxy_url,
-                        timeout=aiohttp.ClientTimeout(total=5)
-                    ) as response:
-                        if response.status == 200:
-                            data = await response.read()
-                            return len(data) >= 1024 * 1024  # حداقل 1 MB
-                        else:
-                            return False
-                            
-            finally:
-                # توقف Xray
-                if xray_process:
-                    try:
-                        xray_process.terminate()
-                        await xray_process.wait()
-                    except:
-                        pass
-                        
-        except Exception as e:
-            logging.debug(f"خطا در دانلود از طریق Xray: {e}")
-            return False
+    # REMOVED: Download speed testing functionality
+    # async def filter_configs_by_download_speed(self, configs: List[str], max_configs: int = 50) -> List[str]:
+    # async def test_download_speed_with_xray(self, config: str) -> Dict:
+    # def convert_vless_to_xray_config(self, vless_config: str) -> Dict:
+    # async def download_1mb_via_xray(self, config_file: str) -> bool:
     
     async def test_vless_connection(self, config: str) -> Dict:
         """تست اتصال کانفیگ VLESS - فقط تست TCP ساده"""
@@ -1304,135 +1069,14 @@ class VLESSManager:
     #         logging.debug(f"خطا در تست شبکه‌های اجتماعی: {e}")
     #         return {"youtube": False, "instagram": False, "telegram": False}
 
-    # ==========================
-    # تست سرعت دانلود واقعی با Xray (Sequential)
-    # ==========================
-    def _get_xray_binary_path(self) -> Optional[str]:
-        try:
-            system = platform.system().lower()
-            bin_name = 'xray.exe' if system.startswith('win') else 'xray'
-            candidate = os.path.join(XRAY_BIN_DIR, bin_name)
-            if os.path.exists(candidate):
-                # تلاش برای executable کردن در لینوکس
-                try:
-                    if not system.startswith('win'):
-                        os.chmod(candidate, 0o755)
-                except Exception:
-                    pass
-                return candidate
-            logging.error(f"باینری Xray یافت نشد: {candidate}")
-            return None
-        except Exception as e:
-            logging.error(f"خطا در پیدا کردن باینری Xray: {e}")
-            return None
+    # REMOVED: Xray utility functions for download speed testing
+    # def _get_xray_binary_path(self) -> Optional[str]:
+    # def _choose_free_port(self) -> int:
+    # def _build_vless_outbound_from_link(self, link: str) -> Optional[Dict]:
+    # def _build_xray_config_http_proxy(self, link: str, local_http_port: int) -> Optional[Dict]:
 
-    def _choose_free_port(self) -> int:
-        import socket
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.bind(('127.0.0.1', 0))
-            return s.getsockname()[1]
-
-    def _build_vless_outbound_from_link(self, link: str) -> Optional[Dict]:
-        try:
-            parsed = urlparse(link)
-            host = parsed.hostname
-            port = parsed.port
-            user_id = parsed.username or ''
-            query = {}
-            if parsed.query:
-                for pair in parsed.query.split('&'):
-                    if '=' in pair:
-                        k, v = pair.split('=', 1)
-                        query[k] = v
-            security = (query.get('security') or '').lower()
-            network = (query.get('type') or 'tcp').lower()
-            sni = query.get('sni', '')
-            flow = query.get('flow', '')
-            host_header = query.get('host', '')
-            path = query.get('path', '/')
-
-            outbound: Dict = {
-                'protocol': 'vless',
-                'settings': {
-                    'vnext': [{
-                        'address': host,
-                        'port': int(port),
-                        'users': [{
-                            'id': user_id,
-                            'encryption': 'none',
-                            **({'flow': flow} if flow else {})
-                        }]
-                    }]
-                },
-                'streamSettings': {
-                    'network': network
-                }
-            }
-            if security == 'tls':
-                outbound['streamSettings']['security'] = 'tls'
-                if sni:
-                    outbound['streamSettings']['tlsSettings'] = {'serverName': sni}
-            if network == 'ws':
-                outbound['streamSettings']['wsSettings'] = {
-                    'path': path or '/',
-                    'headers': {'Host': host_header} if host_header else {}
-                }
-            if network == 'grpc':
-                outbound['streamSettings']['grpcSettings'] = {'serviceName': (path or '/').lstrip('/')}
-            return outbound
-        except Exception as e:
-            logging.debug(f"خطا در ساخت outbound VLESS: {e}")
-            return None
-
-    def _build_xray_config_http_proxy(self, link: str, local_http_port: int) -> Optional[Dict]:
-        outbound = self._build_vless_outbound_from_link(link)
-        if not outbound:
-            return None
-        return {
-            'log': {'loglevel': 'warning'},
-            'inbounds': [{
-                'listen': '127.0.0.1',
-                'port': local_http_port,
-                'protocol': 'http',
-                'settings': {}
-            }],
-            'outbounds': [
-                outbound,
-                {'protocol': 'freedom', 'tag': 'direct'},
-                {'protocol': 'blackhole', 'tag': 'blocked'}
-            ]
-        }
-
-    async def _download_min_bytes_via_proxy(self, proxy_port: int) -> bool:
-        try:
-            timeout = aiohttp.ClientTimeout(total=DOWNLOAD_TEST_TIMEOUT + 1)
-            connector = aiohttp.TCPConnector(ssl=False)
-            async with aiohttp.ClientSession(timeout=timeout, connector=connector) as session:
-                for url in DOWNLOAD_TEST_URLS:
-                    start_time = time.perf_counter()
-                    try:
-                        async with session.get(url, proxy=f'http://127.0.0.1:{proxy_port}') as resp:
-                            if resp.status >= 400:
-                                continue
-                            downloaded = 0
-                            chunk_size = 64 * 1024
-                            while True:
-                                if (time.perf_counter() - start_time) > DOWNLOAD_TEST_TIMEOUT:
-                                    return False
-                                chunk = await resp.content.read(chunk_size)
-                                if not chunk:
-                                    break
-                                downloaded += len(chunk)
-                                if downloaded >= DOWNLOAD_TEST_MIN_BYTES:
-                                    elapsed = time.perf_counter() - start_time
-                                    speed_mbps = (downloaded / 1024 / 1024) / max(1e-6, elapsed)
-                                    logging.info(f"✅ تست سرعت: {downloaded} bytes در {elapsed:.2f}s (~{speed_mbps:.2f} MB/s)")
-                                    return elapsed <= DOWNLOAD_TEST_TIMEOUT
-                    except Exception:
-                        continue
-            return False
-        except Exception:
-            return False
+    # REMOVED: Download speed testing functionality
+    # async def _download_min_bytes_via_proxy(self, proxy_port: int) -> bool:
 
     # DISABLED: تست دسترسی ایران غیرفعال شد
     # async def _check_iran_sites_via_proxy(self, proxy_port: int) -> bool:
@@ -1587,26 +1231,26 @@ class VLESSManager:
     # DISABLED: تست سرعت دانلود غیرفعال شد
     # async def filter_configs_by_download_speed(self, configs: List[str]) -> List[str]:
     #     """فیلتر کردن کانفیگ‌ها بر اساس تست دانلود واقعی (Sequential)"""
-        passed: List[str] = []
-        for idx, cfg in enumerate(configs, 1):
-            try:
-                ok = await self.download_speed_test_via_xray(cfg)
-                if ok:
-                    passed.append(cfg)
-                    # نگه‌داری نتیجه جزئی برای ذخیره در صورت timeout
-                    try:
-                        self.partial_speed_ok.append(cfg)
-                    except Exception:
-                        pass
-                    logging.info(f"[{idx}/{len(configs)}] ✅ سرعت کافی - پذیرفته شد")
-                else:
-                    logging.info(f"[{idx}/{len(configs)}] ❌ سرعت ناکافی - رد شد")
-            except Exception as e:
-                logging.warning(f"[{idx}/{len(configs)}] خطا در تست سرعت: {e}")
-            # تاخیر کوتاه بین تست‌ها جهت جلوگیری از فشار
-            await asyncio.sleep(0.1)
-        logging.info(f"نتیجه تست سرعت: {len(passed)} از {len(configs)} پذیرفته شدند")
-        return passed
+    #     passed: List[str] = []
+    #     for idx, cfg in enumerate(configs, 1):
+    #         try:
+    #             ok = await self.download_speed_test_via_xray(cfg)
+    #             if ok:
+    #             passed.append(cfg)
+    #             # نگه‌داری نتیجه جزئی برای ذخیره در صورت timeout
+    #             try:
+    #             self.partial_speed_ok.append(cfg)
+    #             except Exception:
+    #             pass
+    #             logging.info(f"[{idx}/{len(configs)}] ✅ سرعت کافی - پذیرفته شد")
+    #         else:
+    #             logging.info(f"[{idx}/{len(configs)}] ❌ سرعت ناکافی - رد شد")
+    #     except Exception as e:
+    #         logging.warning(f"[{idx}/{len(configs)}] خطا در تست سرعت: {e}")
+    #     # تاخیر کوتاه بین تست‌ها جهت جلوگیری از فشار
+    #     await asyncio.sleep(0.1)
+    #     logging.info(f"نتیجه تست سرعت: {len(passed)} از {len(configs)} پذیرفته شدند")
+    #     return passed
     
     async def test_all_vless_configs(self, configs: List[str]) -> List[Dict]:
         """تست تمام کانفیگ‌های VLESS"""
@@ -1656,10 +1300,7 @@ class VLESSManager:
         """ذخیره خروجی جزئی در صورت timeout یا خطا"""
         try:
             # انتخاب بهترین مرحله‌ای که داده دارد
-            if self.partial_speed_ok:
-                best_configs = list({c for c in self.partial_speed_ok if self.is_valid_vless_config(c)})
-                stage = "speed_ok"
-            elif self.partial_ping_ok:
+            if self.partial_ping_ok:
                 best_configs = list({c for c in self.partial_ping_ok if self.is_valid_vless_config(c)})
                 stage = "ping_ok"
             elif self.partial_results:
@@ -1938,22 +1579,9 @@ class VLESSManager:
                     self.create_fallback_output("هیچ کانفیگی تست ping را پاس نکرد")
                 return False
 
-            # فاز 3: تست سرعت دانلود با Xray - فقط 50 کانفیگ برتر
-            if ping_ok_configs and len(ping_ok_configs) > 0:
-                logging.info(f"🚀 شروع تست سرعت دانلود برای {len(ping_ok_configs)} کانفیگ سالم ping")
-                try:
-                    speed_ok_configs = await self.filter_configs_by_download_speed(ping_ok_configs, max_configs=50)
-                    logging.info(f"✅ تست سرعت دانلود کامل شد: {len(speed_ok_configs)} کانفیگ برتر از {len(ping_ok_configs)}")
-                except Exception as e:
-                    logging.error(f"خطا در تست سرعت دانلود: {e}")
-                    speed_ok_configs = []
-                    logging.warning("در صورت خطا، هیچ کانفیگی برای تست سرعت دانلود انتخاب نشد")
-            else:
-                speed_ok_configs = []
-                logging.warning("هیچ کانفیگی برای تست سرعت دانلود یافت نشد")
-            
-            # بهترین‌ها: کانفیگ‌هایی که تست سرعت دانلود را پاس کرده‌اند
-            best_configs = speed_ok_configs if speed_ok_configs else []
+            # فاز 3: تست سرعت دانلود - REMOVED
+            # بهترین‌ها: کانفیگ‌هایی که تست ping را پاس کرده‌اند
+            best_configs = ping_ok_configs if ping_ok_configs else []
             
             # اطمینان از اینکه best_configs همیشه یک لیست است
             if not isinstance(best_configs, list):
@@ -1987,7 +1615,7 @@ class VLESSManager:
                     logging.info("✅ به‌روزرسانی VLESS با موفقیت انجام شد")
                     logging.info(f"📊 آمار: {stats['new_added']} جدید، {stats['duplicates_skipped']} تکراری")
                     logging.info(f"🔗 کانفیگ‌های VLESS سالم (پس از تمام تست‌ها): {len(best_configs)}")
-                    logging.info(f"📱 تست‌های انجام شده: حذف تکراری → TCP → Ping (تصادفی 50) → Speed Test")
+                    logging.info(f"📱 تست‌های انجام شده: حذف تکراری → TCP → Ping (تصادفی 50) → Speed Test REMOVED")
                     if len(healthy_configs) > 50:
                         logging.info(f"⚡ بهینه‌سازی سرعت: تست ping فقط روی {min(50, len(healthy_configs))} کانفیگ تصادفی")
                     return True
