@@ -1,20 +1,20 @@
 {
-  "last_update": "2025-08-21T23:39:03.829672",
-  "total_tests": 3,
-  "total_configs": 2092,
-  "working_configs": 2092,
+  "last_update": "2025-08-22T00:02:59.486112",
+  "total_tests": 4,
+  "total_configs": 2099,
+  "working_configs": 2099,
   "failed_configs": 0,
   "iran_accessible_configs": 0,
   "status": "test_mode",
   "message": "GitHub Actions test mode",
   "last_vless_source": "../configs/raw/Vless.txt",
   "last_stats": {
-    "new_added": 2092,
+    "new_added": 2099,
     "duplicates_skipped": 0,
     "invalid_skipped": 0,
-    "working_configs": 2092,
+    "working_configs": 2099,
     "failed_configs": 0,
     "iran_accessible": 0,
-    "timestamp": "2025-08-21T23:39:03.829672"
+    "timestamp": "2025-08-22T00:02:59.486112"
   }
 }
