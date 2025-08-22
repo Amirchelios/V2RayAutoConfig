@@ -275,6 +275,103 @@ class VLESSManager:
     # جدید: تست Ping با check-host.net API
     # ==========================
     
+    async def check_host_ping_single(self, server_ip: str) -> bool:
+        """
+        تست ping برای یک IP با استفاده از check-host.net API
+        فقط از نود ایران مشهد (ir2.node.check-host.net) استفاده می‌کند
+        """
+        try:
+            # ارسال درخواست ping برای تک IP - فقط از نود ایران مشهد
+            ping_params = {
+                'host': server_ip,
+                'node': 'ir2.node.check-host.net'
+            }
+            
+            headers = {'Accept': 'application/json'}
+            
+            logging.debug(f"🌐 ارسال درخواست ping برای IP {server_ip} به check-host.net (نود: ir2.node.check-host.net)")
+            
+            async with self.session.post(
+                f"{CHECK_HOST_API_BASE}{CHECK_HOST_PING_ENDPOINT}",
+                params=ping_params,
+                headers=headers,
+                timeout=30
+            ) as response:
+                if response.status != 200:
+                    logging.error(f"خطا در درخواست ping برای {server_ip}: HTTP {response.status}")
+                    return False
+                
+                ping_data = await response.json()
+                
+                if not ping_data.get('ok'):
+                    logging.error(f"خطا در پاسخ ping API برای {server_ip}: {ping_data}")
+                    return False
+                
+                request_id = ping_data.get('request_id')
+                
+                logging.debug(f"✅ درخواست ping برای {server_ip} ارسال شد - Request ID: {request_id}")
+                
+                # انتظار برای نتایج (حداکثر 30 ثانیه)
+                max_wait_time = 30
+                wait_interval = 2
+                waited_time = 0
+                
+                while waited_time < max_wait_time:
+                    await asyncio.sleep(wait_interval)
+                    waited_time += wait_interval
+                    
+                    # بررسی نتایج
+                    try:
+                        async with self.session.get(
+                            f"{CHECK_HOST_API_BASE}{CHECK_HOST_RESULT_ENDPOINT}/{request_id}",
+                            headers=headers,
+                            timeout=10
+                        ) as result_response:
+                            if result_response.status != 200:
+                                continue
+                            
+                            result_data = await result_response.json()
+                            
+                            # بررسی اینکه آیا همه نتایج آماده هستند
+                            all_ready = True
+                            for node_name, node_result in result_data.items():
+                                if node_result is None:
+                                    all_ready = False
+                                    break
+                            
+                            if all_ready:
+                                logging.debug(f"✅ نتایج ping برای {server_ip} آماده شدند - زمان انتظار: {waited_time} ثانیه")
+                                break
+                            
+                    except Exception as e:
+                        logging.debug(f"خطا در بررسی نتایج ping برای {server_ip}: {e}")
+                        continue
+                
+                # پردازش نتایج نهایی
+                try:
+                    async with self.session.get(
+                        f"{CHECK_HOST_API_BASE}{CHECK_HOST_RESULT_ENDPOINT}/{request_id}",
+                        headers=headers,
+                        timeout=10
+                    ) as final_response:
+                        if final_response.status == 200:
+                            final_data = await final_response.json()
+                            
+                            # تحلیل نتایج برای IP
+                            ping_success = self._analyze_ping_results(final_data, server_ip)
+                            return ping_success
+                        else:
+                            logging.error(f"خطا در دریافت نتایج نهایی ping برای {server_ip}: HTTP {final_response.status}")
+                            return False
+                            
+                except Exception as e:
+                    logging.error(f"خطا در پردازش نتایج نهایی ping برای {server_ip}: {e}")
+                    return False
+                
+        except Exception as e:
+            logging.error(f"خطا در تست ping برای {server_ip}: {e}")
+            return False
+
     async def check_host_ping_batch(self, server_ips: List[str]) -> Dict[str, bool]:
         """
         تست ping برای batch از IP ها با استفاده از check-host.net API
@@ -437,7 +534,7 @@ class VLESSManager:
     async def filter_configs_by_ping_check(self, configs: List[str]) -> List[str]:
         """
         فیلتر کردن کانفیگ‌ها بر اساس تست ping با check-host.net
-        ارسال 50 تا 50 تا IP و تمرکز روی لوکیشن ایران، مشهد
+        تست یکی یکی IP ها با تمرکز روی نود ایران مشهد
         """
         try:
             # استخراج IP های منحصر به فرد
@@ -453,31 +550,32 @@ class VLESSManager:
                         ip_to_configs[ip] = []
                     ip_to_configs[ip].append(config)
             
-            logging.info(f"🌐 شروع تست ping برای {len(unique_ips)} IP منحصر به فرد")
-            
-            # تقسیم IP ها به batches
-            ip_list = list(unique_ips)
-            batches = [ip_list[i:i + CHECK_HOST_BATCH_SIZE] for i in range(0, len(ip_list), CHECK_HOST_BATCH_SIZE)]
+            logging.info(f"🌐 شروع تست ping برای {len(unique_ips)} IP منحصر به فرد (یکی یکی)")
             
             all_ping_results = {}
+            ip_list = list(unique_ips)
             
-            # تست هر batch
-            for i, batch in enumerate(batches, 1):
-                logging.info(f"📦 تست batch {i}/{len(batches)}: {len(batch)} IP")
+            # تست یکی یکی IP ها
+            for i, ip in enumerate(ip_list, 1):
+                logging.info(f"📡 تست IP {i}/{len(ip_list)}: {ip}")
                 
                 try:
-                    batch_results = await self.check_host_ping_batch(batch)
-                    all_ping_results.update(batch_results)
+                    # تست تک IP
+                    single_result = await self.check_host_ping_single(ip)
+                    all_ping_results[ip] = single_result
                     
-                    # کمی صبر بین batches
-                    if i < len(batches):
-                        await asyncio.sleep(1)
+                    if single_result:
+                        logging.info(f"✅ IP {ip}: Ping موفق")
+                    else:
+                        logging.debug(f"❌ IP {ip}: Ping ناموفق")
+                    
+                    # کمی صبر بین تست‌ها
+                    if i < len(ip_list):
+                        await asyncio.sleep(0.5)
                         
                 except Exception as e:
-                    logging.error(f"خطا در تست batch {i}: {e}")
-                    # در صورت خطا، همه IP های این batch را ناموفق در نظر بگیر
-                    for ip in batch:
-                        all_ping_results[ip] = False
+                    logging.error(f"خطا در تست IP {ip}: {e}")
+                    all_ping_results[ip] = False
             
             # انتخاب کانفیگ‌های سالم بر اساس ping
             healthy_configs = []
