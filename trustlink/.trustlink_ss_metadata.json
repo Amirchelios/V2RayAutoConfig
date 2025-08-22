@@ -1,10 +1,10 @@
 {
-  "last_update": "2025-08-22T05:10:52.726710",
+  "last_update": "2025-08-22T08:54:05.884045",
   "total_tests": 0,
   "total_configs": 0,
   "working_configs": 0,
   "failed_configs": 0,
   "iran_accessible_configs": 0,
-  "error_message": "هیچ کانفیگ Shadowsocks موفقی یافت نشد",
-  "status": "fallback"
+  "status": "test_mode",
+  "message": "GitHub Actions test mode"
 }

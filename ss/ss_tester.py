@@ -193,7 +193,7 @@ class SSManager:
             return []
 
     def parse_ss_config(self, config: str) -> Optional[Dict]:
-        """تجزیه کانفیگ Shadowsocks"""
+        """تجزیه کانفیگ Shadowsocks - پشتیبانی از فرمت‌های مختلف"""
         try:
             if not config.startswith(SS_PROTOCOL):
                 return None
@@ -201,36 +201,150 @@ class SSManager:
             # حذف ss:// از ابتدای کانفیگ
             config_data = config[len(SS_PROTOCOL):]
             
-            # تجزیه کانفیگ SS (فرمت base64)
+            # حذف fragment اگر وجود دارد (بخش بعد از #)
+            if '#' in config_data:
+                config_data = config_data.split('#')[0]
+            
+            # بررسی فرمت جدید SIP002 (شامل @ و پارامترهای URL)
+            if '@' in config_data and ('?' in config_data or '/' in config_data):
+                return self._parse_sip002_format(config_data)
+            
+            # بررسی فرمت کلاسیک base64
             try:
                 decoded = base64.b64decode(config_data).decode('utf-8')
-                # فرمت: method:password@server:port
-                if '@' in decoded:
-                    method_password, server_port = decoded.split('@', 1)
-                    if ':' in method_password:
-                        method, password = method_password.split(':', 1)
-                    else:
-                        method, password = method_password, ""
-                    
-                    if ':' in server_port:
-                        server, port = server_port.rsplit(':', 1)
-                    else:
-                        server, port = server_port, "8388"
-                    
-                    return {
-                        "method": method,
-                        "password": password,
-                        "server": server,
-                        "server_ip": server,  # اضافه کردن server_ip برای سازگاری
-                        "port": port
-                    }
-                else:
-                    return {"raw": decoded}
+                return self._parse_classic_format(decoded)
             except:
-                return {"raw": config_data}
+                # اگر base64 decode نشد، تلاش برای پارس مستقیم
+                return self._parse_direct_format(config_data)
                 
         except Exception as e:
             logging.debug(f"خطا در تجزیه کانفیگ Shadowsocks: {e}")
+            return None
+
+    def _parse_sip002_format(self, config_data: str) -> Optional[Dict]:
+        """پارس فرمت SIP002 جدید Shadowsocks"""
+        try:
+            from urllib.parse import unquote, parse_qs, urlparse
+            
+            # تجزیه قسمت قبل از @
+            if '@' not in config_data:
+                return None
+                
+            userinfo, hostinfo = config_data.split('@', 1)
+            
+            # URL decode برای userinfo
+            userinfo = unquote(userinfo)
+            
+            # تجزیه hostinfo (server:port?params یا server:port/path?params)
+            if '?' in hostinfo:
+                server_port, query_string = hostinfo.split('?', 1)
+            else:
+                server_port = hostinfo
+                query_string = ""
+            
+            # استخراج server و port
+            if ':' in server_port:
+                server, port = server_port.rsplit(':', 1)
+                # اطمینان از اینکه port فقط عدد باشد
+                port = ''.join(filter(str.isdigit, port)) or "8388"
+            else:
+                server = server_port
+                port = "8388"
+            
+            # پارس پارامترهای query
+            params = {}
+            if query_string:
+                params = parse_qs(query_string)
+                # تبدیل لیست‌ها به مقادیر تکی
+                for key, value in params.items():
+                    if isinstance(value, list) and len(value) > 0:
+                        params[key] = value[0]
+            
+            return {
+                "method": userinfo if userinfo else "chacha20-ietf-poly1305",
+                "password": userinfo if userinfo else "",
+                "server": server,
+                "server_ip": server,
+                "port": port,
+                "type": params.get("type", "tcp"),
+                "security": params.get("security", "none"),
+                "host": params.get("host", ""),
+                "path": params.get("path", "/"),
+                "params": params
+            }
+            
+        except Exception as e:
+            logging.debug(f"خطا در پارس فرمت SIP002: {e}")
+            return None
+
+    def _parse_classic_format(self, decoded: str) -> Optional[Dict]:
+        """پارس فرمت کلاسیک Shadowsocks"""
+        try:
+            # فرمت: method:password@server:port
+            if '@' in decoded:
+                method_password, server_port = decoded.split('@', 1)
+                if ':' in method_password:
+                    method, password = method_password.split(':', 1)
+                else:
+                    method, password = method_password, ""
+                
+                if ':' in server_port:
+                    server, port = server_port.rsplit(':', 1)
+                else:
+                    server, port = server_port, "8388"
+                
+                return {
+                    "method": method,
+                    "password": password,
+                    "server": server,
+                    "server_ip": server,
+                    "port": port
+                }
+            else:
+                return {"raw": decoded}
+                
+        except Exception as e:
+            logging.debug(f"خطا در پارس فرمت کلاسیک: {e}")
+            return None
+
+    def _parse_direct_format(self, config_data: str) -> Optional[Dict]:
+        """پارس فرمت مستقیم (بدون base64)"""
+        try:
+            from urllib.parse import unquote
+            
+            # اگر @ وجود دارد، احتمالاً فرمت username@server:port است
+            if '@' in config_data:
+                userinfo, hostinfo = config_data.split('@', 1)
+                
+                # URL decode
+                userinfo = unquote(userinfo)
+                
+                # استخراج server و port
+                if ':' in hostinfo:
+                    server, port = hostinfo.rsplit(':', 1)
+                    # حذف پارامترهای اضافی از port
+                    if '?' in port:
+                        port = port.split('?')[0]
+                    if '/' in port:
+                        port = port.split('/')[0]
+                    # اطمینان از اینکه port فقط عدد باشد
+                    port = ''.join(filter(str.isdigit, port)) or "8388"
+                else:
+                    server = hostinfo
+                    port = "8388"
+                
+                return {
+                    "method": "chacha20-ietf-poly1305",  # پیش‌فرض
+                    "password": userinfo,
+                    "server": server,
+                    "server_ip": server,
+                    "port": port
+                }
+            
+            return None
+            
+        except Exception as e:
+            logging.debug(f"خطا در پارس فرمت مستقیم: {e}")
             return None
 
     async def test_ss_connection(self, config: str) -> Dict:
@@ -268,84 +382,9 @@ class SSManager:
             return {"config": config, "status": "error", "latency": None, "error": str(e)}
 
     async def test_with_xray(self, config: str, parsed: Dict) -> Dict:
-        """تست کانفیگ Shadowsocks با استفاده از Xray"""
-        try:
-            # ایجاد فایل کانفیگ موقت برای Xray
-            temp_config = {
-                "inbounds": [{
-                    "port": 1080,
-                    "protocol": "socks",
-                    "settings": {
-                        "auth": "noauth",
-                        "udp": True
-                    }
-                }],
-                "outbounds": [{
-                    "protocol": "shadowsocks",
-                    "settings": {
-                        "servers": [{
-                            "address": parsed.get("server", ""),
-                            "port": int(parsed.get("port", 8388)),
-                            "method": parsed.get("method", "aes-256-gcm"),
-                            "password": parsed.get("password", "")
-                        }]
-                    }
-                }]
-            }
-            
-            # ذخیره کانفیگ موقت
-            temp_config_path = "temp_ss_config.json"
-            with open(temp_config_path, 'w', encoding='utf-8') as f:
-                json.dump(temp_config, f, ensure_ascii=False, indent=2)
-            
-            # اجرای Xray
-            xray_path = os.path.join(XRAY_BIN_DIR, "xray.exe" if platform.system() == "Windows" else "xray")
-            if not os.path.exists(xray_path):
-                return {"config": config, "status": "error", "latency": None, "error": "Xray یافت نشد"}
-            
-            # تست اتصال
-            start_time = time.time()
-            try:
-                process = await asyncio.create_subprocess_exec(
-                    xray_path, "run", "-c", temp_config_path,
-                    stdout=asyncio.subprocess.PIPE,
-                    stderr=asyncio.subprocess.PIPE
-                )
-                
-                # انتظار برای راه‌اندازی
-                await asyncio.sleep(2)
-                
-                # تست اتصال
-                async with aiohttp.ClientSession() as test_session:
-                    async with test_session.get("https://www.google.com", 
-                                             proxy="socks5://127.0.0.1:1080",
-                                             timeout=aiohttp.ClientTimeout(total=10)) as response:
-                        if response.status == 200:
-                            latency = (time.time() - start_time) * 1000
-                            process.terminate()
-                            await process.wait()
-                            os.remove(temp_config_path)
-                            return {
-                                "config": config,
-                                "status": "working",
-                                "latency": latency,
-                                "server": parsed.get("server", ""),
-                                "port": parsed.get("port", "")
-                            }
-                
-                process.terminate()
-                await process.wait()
-                
-            except Exception as e:
-                if 'process' in locals():
-                    process.terminate()
-                    await process.wait()
-                
-            os.remove(temp_config_path)
-            return {"config": config, "status": "failed", "latency": None, "error": "تست با Xray ناموفق"}
-            
-        except Exception as e:
-            return {"config": config, "status": "error", "latency": None, "error": str(e)}
+        """تست کانفیگ Shadowsocks با استفاده از Xray - DISABLED"""
+        # DISABLED: Xray functionality has been removed for simplicity
+        return {"config": config, "status": "disabled", "latency": None, "error": "Xray test disabled"}
 
     async def test_iran_access(self, config: str) -> bool:
         """تست دسترسی به سایت‌های ایرانی"""
@@ -358,103 +397,9 @@ class SSManager:
             return False
 
     async def test_social_media_access(self, config: str) -> Dict[str, bool]:
-        """تست دسترسی به شبکه‌های اجتماعی (یوتیوب، اینستاگرام، تلگرام)"""
-        try:
-            # ایجاد فایل کانفیگ موقت برای Xray
-            parsed = self.parse_ss_config(config)
-            if not parsed:
-                return {"youtube": False, "instagram": False, "telegram": False}
-            
-            temp_config = {
-                "inbounds": [{
-                    "port": 1080,
-                    "protocol": "socks",
-                    "settings": {
-                        "auth": "noauth",
-                        "udp": True
-                    }
-                }],
-                "outbounds": [{
-                    "protocol": "shadowsocks",
-                    "settings": {
-                        "servers": [{
-                            "address": parsed.get("server", ""),
-                            "port": int(parsed.get("port", 8388)),
-                            "method": parsed.get("method", "aes-256-gcm"),
-                            "password": parsed.get("password", "")
-                        }]
-                    }
-                }]
-            }
-            
-            # ذخیره کانفیگ موقت
-            temp_config_path = f"temp_ss_social_{hash(config)}.json"
-            with open(temp_config_path, 'w', encoding='utf-8') as f:
-                json.dump(temp_config, f, ensure_ascii=False, indent=2)
-            
-            # اجرای Xray
-            xray_path = os.path.join(XRAY_BIN_DIR, "xray.exe" if platform.system() == "Windows" else "xray")
-            if not os.path.exists(xray_path):
-                os.remove(temp_config_path)
-                return {"youtube": False, "instagram": False, "telegram": False}
-            
-            try:
-                process = await asyncio.create_subprocess_exec(
-                    xray_path, "run", "-c", temp_config_path,
-                    stdout=asyncio.subprocess.PIPE,
-                    stderr=asyncio.subprocess.PIPE
-                )
-                
-                # انتظار برای راه‌اندازی
-                await asyncio.sleep(2)
-                
-                # تست دسترسی به شبکه‌های اجتماعی
-                results = {"youtube": False, "instagram": False, "telegram": False}
-                
-                async with aiohttp.ClientSession() as test_session:
-                    # تست یوتیوب
-                    try:
-                        async with test_session.get("https://www.youtube.com", 
-                                                 proxy="socks5://127.0.0.1:1080",
-                                                 timeout=aiohttp.ClientTimeout(total=10)) as response:
-                            results["youtube"] = response.status == 200
-                    except:
-                        results["youtube"] = False
-                    
-                    # تست اینستاگرام
-                    try:
-                        async with test_session.get("https://www.instagram.com", 
-                                                 proxy="socks5://127.0.0.1:1080",
-                                                 timeout=aiohttp.ClientTimeout(total=10)) as response:
-                            results["instagram"] = response.status == 200
-                    except:
-                        results["instagram"] = False
-                    
-                    # تست تلگرام
-                    try:
-                        async with test_session.get("https://web.telegram.org", 
-                                                 proxy="socks5://127.0.0.1:1080",
-                                                 timeout=aiohttp.ClientTimeout(total=10)) as response:
-                            results["telegram"] = response.status == 200
-                    except:
-                        results["telegram"] = False
-                
-                process.terminate()
-                await process.wait()
-                os.remove(temp_config_path)
-                
-                return results
-                
-            except Exception as e:
-                if 'process' in locals():
-                    process.terminate()
-                    await process.wait()
-                os.remove(temp_config_path)
-                return {"youtube": False, "instagram": False, "telegram": False}
-                
-        except Exception as e:
-            logging.debug(f"خطا در تست شبکه‌های اجتماعی: {e}")
-            return {"youtube": False, "instagram": False, "telegram": False}
+        """تست دسترسی به شبکه‌های اجتماعی (یوتیوب، اینستاگرام، تلگرام) - DISABLED"""
+        # DISABLED: Xray functionality has been removed for simplicity
+        return {"youtube": False, "instagram": False, "telegram": False}
 
     async def test_download_speed(self, config: str) -> bool:
         """تست سرعت دانلود"""
@@ -1002,20 +947,16 @@ class SSManager:
     def is_valid_ss_config(self, config: str) -> bool:
         """بررسی اعتبار کانفیگ Shadowsocks"""
         try:
+            if not config or len(config.strip()) < 10:
+                return False
+            
             if not config.startswith(SS_PROTOCOL):
                 return False
             
-            # حذف ss:// از ابتدای کانفیگ
-            config_data = config[len(SS_PROTOCOL):]
-            
-            # تجزیه کانفیگ SS (فرمت base64)
-            try:
-                decoded = base64.b64decode(config_data).decode('utf-8')
-                # بررسی فرمت: method:password@server:port
-                if '@' in decoded and ':' in decoded:
-                    return True
-            except:
-                pass
+            # تلاش برای پارس کانفیگ
+            parsed = self.parse_ss_config(config)
+            if parsed and parsed.get('server_ip') and parsed.get('port'):
+                return True
             
             return False
             
