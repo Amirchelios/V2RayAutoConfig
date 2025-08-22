@@ -37,14 +37,14 @@ CONCURRENT_TESTS = 50  # تعداد تست‌های همزمان
 KEEP_BEST_COUNT = 500  # تعداد کانفیگ‌های سالم نگه‌داری شده
 MAX_CONFIGS_TO_TEST = 10000  # تعداد کانفیگ‌های تست شده
 
-# تنظیمات تست سرعت دانلود واقعی از طریق Xray
-DOWNLOAD_TEST_MIN_BYTES = 1024 * 1024  # 1 MB
-DOWNLOAD_TEST_TIMEOUT = 2  # ثانیه
-DOWNLOAD_TEST_URLS = [
-    "https://speed.cloudflare.com/__down?bytes=10485760",  # 10MB stream
-    "https://speed.hetzner.de/1MB.bin",
-    "https://speedtest.ams01.softlayer.com/downloads/test10.zip"
-]
+# تنظیمات تست سرعت دانلود واقعی از طریق Xray - REMOVED
+# DOWNLOAD_TEST_MIN_BYTES = 1024 * 1024  # 1 MB
+# DOWNLOAD_TEST_TIMEOUT = 2  # ثانیه
+# DOWNLOAD_TEST_URLS = [
+#     "https://speed.cloudflare.com/__down?bytes=10485760",  # 10MB stream
+#     "https://speed.hetzner.de/1MB.bin",
+#     "https://speedtest.ams01.softlayer.com/downloads/test10.zip"
+# ]
 IRAN_TEST_URLS = [
     "https://www.aparat.com",
     "https://divar.ir",
@@ -53,7 +53,14 @@ IRAN_TEST_URLS = [
     "https://www.sheypoor.com",
     "https://www.telewebion.com"
 ]
-XRAY_BIN_DIR = "../Files/xray-bin"
+# XRAY_BIN_DIR = "../Files/xray-bin"  # REMOVED - no longer used
+
+# تنظیمات check-host.net API
+CHECK_HOST_API_BASE = "https://check-host.net"
+CHECK_HOST_PING_ENDPOINT = "/check-ping"
+CHECK_HOST_RESULT_ENDPOINT = "/check-result"
+CHECK_HOST_FOCUS_NODE = "ir2.node.check-host.net"  # نود ایران مشهد - همه تست‌ها از اینجا
+CHECK_HOST_BATCH_SIZE = 50  # ارسال 50 تا 50 تا IP
 
 # تنظیمات logging
 def setup_logging():
@@ -88,9 +95,8 @@ class SSManager:
         self.load_metadata()
         # ذخیره نتایج جزئی برای تداوم در صورت timeout/خطا
         self.partial_results: List[Dict] = []
-        self.partial_iran_ok: List[str] = []
-        self.partial_social_ok: List[str] = []
-        self.partial_speed_ok: List[str] = []
+        # self.partial_speed_ok: List[str] = []  # نتایج speed test - REMOVED
+        self.partial_ping_ok: List[str] = []  # نتایج ping check
 
     def load_metadata(self):
         """بارگذاری متادیتای برنامه"""
@@ -575,6 +581,444 @@ class SSManager:
         
         return final_results
 
+    async def filter_configs_by_ping_check(self, configs: List[str]) -> List[str]:
+        """
+        فیلتر کردن کانفیگ‌ها بر اساس تست ping با check-host.net
+        تست یکی یکی IP ها با تمرکز روی نود ایران مشهد
+        بهینه‌سازی: انتخاب تصادفی حداکثر 50 کانفیگ برای تست ping
+        """
+        try:
+            # بهینه‌سازی: انتخاب تصادفی حداکثر 50 کانفیگ برای تست ping
+            if len(configs) > 50:
+                import random
+                random.seed()  # استفاده از seed تصادفی
+                selected_configs = random.sample(configs, 50)
+                logging.info(f"🎯 بهینه‌سازی سرعت: انتخاب تصادفی 50 کانفیگ از {len(configs)} کانفیگ سالم TCP")
+                logging.info(f"📊 کانفیگ‌های انتخاب شده برای تست ping: {len(selected_configs)}")
+            else:
+                selected_configs = configs
+                logging.info(f"📊 تست ping برای همه {len(configs)} کانفیگ سالم TCP")
+            
+            # استخراج IP های منحصر به فرد از کانفیگ‌های انتخاب شده
+            unique_ips = set()
+            ip_to_configs = {}
+            
+            for config in selected_configs:
+                parsed = self.parse_ss_config(config)
+                if parsed and parsed.get('server_ip'):
+                    ip = parsed['server_ip']
+                    unique_ips.add(ip)
+                    if ip not in ip_to_configs:
+                        ip_to_configs[ip] = []
+                    ip_to_configs[ip].append(config)
+            
+            logging.info(f"🌐 شروع تست ping (4/4) برای {len(unique_ips)} IP منحصر به فرد (یکی یکی)")
+            
+            all_ping_results = {}
+            ip_list = list(unique_ips)
+            
+            # تست یکی یکی IP ها
+            for i, ip in enumerate(ip_list, 1):
+                logging.info(f"📡 تست IP {i}/{len(ip_list)}: {ip}")
+                
+                try:
+                    # تست تک IP
+                    single_result = await self.check_host_ping_single(ip)
+                    all_ping_results[ip] = single_result
+                    
+                    if single_result:
+                        logging.info(f"✅ IP {ip}: همه 4 ping موفق (4/4)")
+                    else:
+                        logging.debug(f"❌ IP {ip}: حداقل یکی از 4 ping ناموفق")
+                    
+                    # کمی صبر بین تست‌ها
+                    if i < len(ip_list):
+                        await asyncio.sleep(0.5)
+                        
+                except Exception as e:
+                    logging.error(f"خطا در تست IP {ip}: {e}")
+                    all_ping_results[ip] = False
+            
+            # انتخاب کانفیگ‌های سالم بر اساس ping
+            healthy_configs = []
+            healthy_ips = [ip for ip, success in all_ping_results.items() if success]
+            
+            for ip in healthy_ips:
+                if ip in ip_to_configs:
+                    healthy_configs.extend(ip_to_configs[ip])
+            
+            # حذف تکراری‌ها
+            healthy_configs = list(set(healthy_configs))
+            
+            # ذخیره نتایج جزئی
+            try:
+                self.partial_ping_ok = list(healthy_configs)
+            except Exception:
+                pass
+            
+            logging.info(f"✅ تست ping (4/4) کامل شد: {len(healthy_configs)} کانفیگ سالم از {len(selected_configs)} انتخاب شده")
+            logging.info(f"🌍 IP های سالم: {len(healthy_ips)} از {len(unique_ips)}")
+            if len(configs) > 50:
+                logging.info(f"🚀 بهینه‌سازی سرعت: تست ping فقط روی {len(selected_configs)} کانفیگ تصادفی از {len(configs)} کانفیگ سالم TCP")
+            
+            return healthy_configs
+            
+        except Exception as e:
+            logging.error(f"خطا در فیلتر کردن بر اساس ping: {e}")
+            return configs  # در صورت خطا، همه کانفیگ‌ها را برگردان
+
+    async def check_host_ping_single(self, server_ip: str) -> bool:
+        """
+        تست ping برای یک IP با استفاده از check-host.net API
+        ارسال 4 درخواست ping و بررسی اینکه همه 4 درخواست OK باشند
+        فقط از نود ایران مشهد (ir2.node.check-host.net) استفاده می‌کند
+        """
+        try:
+            # ارسال 4 درخواست ping برای تک IP - فقط از نود ایران مشهد
+            ping_params = {
+                'host': server_ip,
+                'node': 'ir2.node.check-host.net',
+                'count': '4'  # ارسال 4 درخواست ping
+            }
+            
+            headers = {'Accept': 'application/json'}
+            
+            logging.debug(f"🌐 ارسال 4 درخواست ping برای IP {server_ip} به check-host.net (نود: ir2.node.check-host.net)")
+            
+            async with self.session.post(
+                f"{CHECK_HOST_API_BASE}{CHECK_HOST_PING_ENDPOINT}",
+                params=ping_params,
+                headers=headers,
+                timeout=30
+            ) as response:
+                if response.status != 200:
+                    logging.error(f"خطا در درخواست ping برای {server_ip}: HTTP {response.status}")
+                    return False
+                
+                ping_data = await response.json()
+                
+                if not ping_data.get('ok'):
+                    logging.error(f"خطا در پاسخ ping API برای {server_ip}: {ping_data}")
+                    return False
+                
+                request_id = ping_data.get('request_id')
+                
+                logging.debug(f"✅ درخواست ping برای {server_ip} ارسال شد - Request ID: {request_id}")
+                
+                # انتظار برای نتایج (حداکثر 30 ثانیه)
+                max_wait_time = 30
+                wait_interval = 2
+                waited_time = 0
+                
+                while waited_time < max_wait_time:
+                    await asyncio.sleep(wait_interval)
+                    waited_time += wait_interval
+                    
+                    # بررسی نتایج
+                    try:
+                        async with self.session.get(
+                            f"{CHECK_HOST_API_BASE}{CHECK_HOST_RESULT_ENDPOINT}/{request_id}",
+                            headers=headers,
+                            timeout=10
+                        ) as result_response:
+                            if result_response.status != 200:
+                                continue
+                            
+                            result_data = await result_response.json()
+                            
+                            # بررسی اینکه آیا همه نتایج آماده هستند
+                            all_ready = True
+                            for node_name, node_result in result_data.items():
+                                if node_result is None:
+                                    all_ready = False
+                                    break
+                            
+                            if all_ready:
+                                logging.debug(f"✅ نتایج ping برای {server_ip} آماده شدند - زمان انتظار: {waited_time} ثانیه")
+                                break
+                            
+                    except Exception as e:
+                        logging.debug(f"خطا در بررسی نتایج ping برای {server_ip}: {e}")
+                        continue
+                
+                # پردازش نتایج نهایی
+                try:
+                    async with self.session.get(
+                        f"{CHECK_HOST_API_BASE}{CHECK_HOST_RESULT_ENDPOINT}/{request_id}",
+                        headers=headers,
+                        timeout=10
+                    ) as final_response:
+                        if final_response.status == 200:
+                            final_data = await final_response.json()
+                            
+                            # تحلیل نتایج برای IP - بررسی اینکه همه 4 ping OK باشند
+                            ping_success = self._analyze_ping_results_4_required(final_data, server_ip)
+                            return ping_success
+                        else:
+                            logging.error(f"خطا در دریافت نتایج نهایی ping برای {server_ip}: HTTP {final_response.status}")
+                            return False
+                            
+                except Exception as e:
+                    logging.error(f"خطا در پردازش نتایج نهایی ping برای {server_ip}: {e}")
+                    return False
+                
+        except Exception as e:
+            logging.error(f"خطا در تست ping برای {server_ip}: {e}")
+            return False
+
+    def _analyze_ping_results_4_required(self, result_data: Dict, server_ip: str) -> bool:
+        """
+        تحلیل نتایج ping برای یک IP خاص - نیاز به 4 ping موفق
+        سرور سالم در نظر گرفته می‌شود اگر:
+        1. همه 4 ping OK باشند (4/4)
+        2. هیچ نودی traceroute نداشته باشد (null یا empty)
+        """
+        try:
+            ping_success_count = 0
+            total_ping_count = 0
+            traceroute_exists = False
+            
+            for node_name, node_result in result_data.items():
+                if node_result is None:
+                    continue
+                
+                # بررسی ping results
+                if isinstance(node_result, list) and len(node_result) > 0:
+                    for ping_result in node_result:
+                        if isinstance(ping_result, list) and len(ping_result) > 0:
+                            # هر ping_result یک لیست از نتایج ping است
+                            for individual_ping in ping_result:
+                                if isinstance(individual_ping, list) and len(individual_ping) >= 2:
+                                    status = individual_ping[0]
+                                    total_ping_count += 1
+                                    if status == "OK":
+                                        ping_success_count += 1
+                                        logging.debug(f"✅ IP {server_ip}: Ping موفق شمارش شد ({ping_success_count})")
+                                    else:
+                                        logging.debug(f"❌ IP {server_ip}: Ping ناموفق شمارش شد")
+                
+                # بررسی traceroute (اگر وجود داشته باشد)
+                if isinstance(node_result, dict) and 'traceroute' in node_result:
+                    traceroute_data = node_result['traceroute']
+                    if traceroute_data and len(traceroute_data) > 0:
+                        traceroute_exists = True
+            
+            # سرور سالم: همه 4 ping موفق + بدون traceroute
+            is_healthy = ping_success_count == 4 and total_ping_count >= 4 and not traceroute_exists
+            
+            if is_healthy:
+                logging.debug(f"✅ IP {server_ip}: همه 4 ping موفق (4/4), بدون traceroute")
+            else:
+                if ping_success_count < 4:
+                    logging.debug(f"❌ IP {server_ip}: فقط {ping_success_count}/4 ping موفق")
+                if traceroute_exists:
+                    logging.debug(f"❌ IP {server_ip}: traceroute موجود")
+                if total_ping_count < 4:
+                    logging.debug(f"❌ IP {server_ip}: تعداد کل ping کمتر از 4 ({total_ping_count})")
+            
+            return is_healthy
+            
+        except Exception as e:
+            logging.error(f"خطا در تحلیل نتایج ping برای {server_ip}: {e}")
+            return False
+
+    def merge_ss_configs(self, new_configs: List[str]) -> Dict[str, int]:
+        """ادغام کانفیگ‌های جدید با موجود"""
+        try:
+            new_added = 0
+            duplicates_skipped = 0
+            total_processed = len(new_configs)
+            
+            for config in new_configs:
+                if config not in self.existing_configs:
+                    self.existing_configs.add(config)
+                    new_added += 1
+                else:
+                    duplicates_skipped += 1
+            
+            logging.info(f"ادغام کانفیگ‌ها: {new_added} جدید، {duplicates_skipped} تکراری")
+            return {
+                'new_added': new_added,
+                'duplicates_skipped': duplicates_skipped,
+                'total_processed': total_processed
+            }
+            
+        except Exception as e:
+            logging.error(f"خطا در ادغام کانفیگ‌ها: {e}")
+            return {
+                'new_added': 0,
+                'duplicates_skipped': 0,
+                'total_processed': 0
+            }
+
+    def save_trustlink_ss_file(self) -> bool:
+        """ذخیره فایل trustlink_ss.txt"""
+        try:
+            # بررسی اینکه آیا کانفیگی برای ذخیره وجود دارد
+            if not self.existing_configs or len(self.existing_configs) == 0:
+                logging.warning("هیچ کانفیگی برای ذخیره وجود ندارد")
+                return False
+            
+            os.makedirs(os.path.dirname(TRUSTLINK_SS_FILE), exist_ok=True)
+            
+            # ذخیره در فایل اصلی
+            with open(TRUSTLINK_SS_FILE, 'w', encoding='utf-8') as f:
+                f.write(f"# فایل کانفیگ‌های Shadowsocks - TrustLink Shadowsocks\n")
+                f.write(f"# آخرین به‌روزرسانی: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+                f.write(f"# تعداد کانفیگ‌ها: {len(self.existing_configs)}\n")
+                f.write(f"# ==================================================\n\n")
+                
+                for config in self.existing_configs:
+                    f.write(f"{config}\n")
+            
+            logging.info(f"فایل trustlink_ss.txt با موفقیت ذخیره شد: {len(self.existing_configs)} کانفیگ")
+            return True
+            
+        except Exception as e:
+            logging.error(f"خطا در ذخیره فایل trustlink_ss.txt: {e}")
+            return False
+
+    def update_metadata(self, stats: Dict[str, int], test_results: List[Dict]):
+        """به‌روزرسانی متادیتای برنامه"""
+        now = datetime.now().isoformat()
+        
+        # اطمینان از اینکه test_results خالی نیست
+        if not test_results or len(test_results) == 0:
+            logging.warning("test_results خالی است، استفاده از مقادیر پیش‌فرض")
+            working_count = 0
+            failed_count = 0
+            iran_accessible_count = 0
+        else:
+            working_count = len([r for r in test_results if r.get("success", False)])
+            failed_count = len([r for r in test_results if not r.get("success", True)])
+            iran_accessible_count = len([r for r in test_results if r.get("iran_access", False)])
+        
+        # اطمینان از اینکه stats شامل تمام فیلدهای مورد نیاز است
+        safe_stats = {
+            "new_added": stats.get("new_added", 0),
+            "duplicates_skipped": stats.get("duplicates_skipped", 0),
+            "invalid_skipped": stats.get("invalid_skipped", 0)
+        }
+        
+        self.metadata.update({
+            "last_update": now,
+            "total_tests": self.metadata.get("total_tests", 0) + 1,
+            "total_configs": len(self.existing_configs),
+            "working_configs": working_count,
+            "failed_configs": failed_count,
+            "iran_accessible_configs": iran_accessible_count,
+            "last_ss_source": SS_SOURCE_FILE,
+            "last_stats": {
+                "new_added": safe_stats["new_added"],
+                "duplicates_skipped": safe_stats["duplicates_skipped"],
+                "invalid_skipped": safe_stats["invalid_skipped"],
+                "working_configs": working_count,
+                "failed_configs": failed_count,
+                "iran_accessible": iran_accessible_count,
+                "timestamp": now
+            }
+        })
+        
+        self.save_metadata()
+
+    def save_partial_progress(self, reason: str = "") -> bool:
+        """ذخیره خروجی جزئی در صورت timeout یا خطا"""
+        try:
+            # انتخاب بهترین مرحله‌ای که داده دارد
+            if self.partial_ping_ok:
+                best_configs = list({c for c in self.partial_ping_ok if self.is_valid_ss_config(c)})
+                stage = "ping_ok"
+            elif self.partial_results:
+                best_configs = [r.get("config") for r in self.partial_results if isinstance(r, dict) and r.get("success") and self.is_valid_ss_config(r.get("config", ""))]
+                stage = "connect_ok"
+            else:
+                best_configs = []
+                stage = "none"
+
+            if best_configs:
+                logging.info(f"💾 ذخیره خروجی جزئی ({stage}) به دلیل: {reason} - تعداد: {len(best_configs)}")
+                self.existing_configs = set()
+                stats = self.merge_ss_configs(best_configs)
+                if self.save_trustlink_ss_file():
+                    test_results = self.partial_results if self.partial_results else []
+                    self.update_metadata(stats, test_results)
+                    logging.info("✅ خروجی جزئی با موفقیت ذخیره شد")
+                    return True
+                else:
+                    logging.error("❌ ذخیره خروجی جزئی ناموفق بود")
+                    return False
+            else:
+                logging.warning(f"هیچ نتیجه جزئی برای ذخیره وجود ندارد (reason={reason})")
+                self.create_fallback_output(f"partial-save: no results (reason={reason})")
+                return False
+        except Exception as e:
+            logging.error(f"خطا در ذخیره خروجی جزئی: {e}")
+            try:
+                self.create_fallback_output(f"partial-save error: {str(e)}")
+            except:
+                pass
+            return False
+
+    def create_fallback_output(self, message: str):
+        """ایجاد فایل خروجی fallback در صورت خطا"""
+        try:
+            logging.info(f"ایجاد فایل fallback: {message}")
+            
+            # اطمینان از وجود دایرکتوری
+            os.makedirs(os.path.dirname(TRUSTLINK_SS_FILE), exist_ok=True)
+            
+            # ایجاد فایل خروجی ساده
+            with open(TRUSTLINK_SS_FILE, 'w', encoding='utf-8') as f:
+                f.write("# فایل کانفیگ‌های Shadowsocks - TrustLink Shadowsocks\n")
+                f.write(f"# آخرین به‌روزرسانی: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+                f.write(f"# وضعیت: {message}\n")
+                f.write("# " + "="*50 + "\n\n")
+                f.write("# هیچ کانفیگ Shadowsocks سالمی یافت نشد\n")
+                f.write("# لطفاً لاگ‌ها را بررسی کنید\n")
+            
+            # ایجاد متادیتای ساده
+            fallback_metadata = {
+                "last_update": datetime.now().isoformat(),
+                "total_tests": 0,
+                "total_configs": 0,
+                "working_configs": 0,
+                "failed_configs": 0,
+                "iran_accessible_configs": 0,
+                "error_message": message,
+                "status": "fallback"
+            }
+            
+            with open(TRUSTLINK_SS_METADATA, 'w', encoding='utf-8') as f:
+                json.dump(fallback_metadata, f, indent=2, ensure_ascii=False)
+            
+            logging.info("فایل fallback با موفقیت ایجاد شد")
+            
+        except Exception as e:
+            logging.error(f"خطا در ایجاد فایل fallback: {e}")
+
+    def is_valid_ss_config(self, config: str) -> bool:
+        """بررسی اعتبار کانفیگ Shadowsocks"""
+        try:
+            if not config.startswith(SS_PROTOCOL):
+                return False
+            
+            # حذف ss:// از ابتدای کانفیگ
+            config_data = config[len(SS_PROTOCOL):]
+            
+            # تجزیه کانفیگ SS (فرمت base64)
+            try:
+                decoded = base64.b64decode(config_data).decode('utf-8')
+                # بررسی فرمت: method:password@server:port
+                if '@' in decoded and ':' in decoded:
+                    return True
+            except:
+                pass
+            
+            return False
+            
+        except Exception:
+            return False
+
     def save_working_configs(self, results: List[Dict]):
         """ذخیره کانفیگ‌های سالم"""
         try:
@@ -640,8 +1084,239 @@ class SSManager:
         except Exception as e:
             logging.error(f"خطا در ذخیره کانفیگ‌ها: {e}")
 
+    async def test_all_ss_configs(self, configs: List[str]) -> List[Dict]:
+        """تست تمام کانفیگ‌های Shadowsocks"""
+        logging.info(f"شروع تست {len(configs)} کانفیگ Shadowsocks...")
+        
+        semaphore = asyncio.Semaphore(CONCURRENT_TESTS)
+        
+        async def test_single_config(config):
+            async with semaphore:
+                return await self.test_ss_connection(config)
+        
+        # تست کانفیگ‌ها در batches برای جلوگیری از overload
+        batch_size = 500  # افزایش batch size برای تست بیشتر
+        all_results = []
+        total_batches = (len(configs) + batch_size - 1) // batch_size
+        
+        for i in range(0, len(configs), batch_size):
+            batch = configs[i:i + batch_size]
+            current_batch = i // batch_size + 1
+            logging.info(f"تست batch {current_batch}/{total_batches}: {len(batch)} کانفیگ")
+            
+            tasks = [test_single_config(config) for config in batch]
+            batch_results = await asyncio.gather(*tasks, return_exceptions=True)
+            
+            # فیلتر کردن نتایج موفق
+            successful_in_batch = 0
+            for result in batch_results:
+                if isinstance(result, dict) and result["success"]:
+                    all_results.append(result)
+                    # ذخیره نتایج موفق برای ذخیره‌سازی جزئی
+                    try:
+                        self.partial_results.append(result)
+                    except Exception:
+                        pass
+                    successful_in_batch += 1
+            
+            logging.info(f"Batch {current_batch} کامل شد: {successful_in_batch} کانفیگ موفق از {len(batch)}")
+            
+            # کمی صبر بین batches
+            if i + batch_size < len(configs):
+                await asyncio.sleep(1)  # افزایش زمان انتظار برای جلوگیری از overload
+        
+        logging.info(f"تست Shadowsocks کامل شد: {len(all_results)} کانفیگ موفق از {len(configs)}")
+        return all_results
+
+    async def test_ss_connection(self, config: str) -> Dict:
+        """تست اتصال کانفیگ Shadowsocks - فقط تست TCP ساده"""
+        config_hash = self.create_config_hash(config)[:8]
+        result = {
+            "config": config,
+            "hash": config_hash,
+            "success": False,
+            "latency": None,
+            "error": None,
+            "server_address": None,
+            "port": None,
+            "iran_access": False
+        }
+        
+        try:
+            # پارس کردن کانفیگ
+            parsed_config = self.parse_ss_config(config)
+            if not parsed_config:
+                result["error"] = "Invalid Shadowsocks config format"
+                logging.warning(f"❌ کانفیگ Shadowsocks نامعتبر: {config_hash}")
+                return result
+            
+            server_ip = parsed_config["server_ip"]
+            port = parsed_config["port"]
+            
+            result["server_address"] = server_ip
+            result["port"] = port
+            
+            # تست اتصال TCP ساده
+            start_time = time.time()
+            try:
+                # ایجاد اتصال TCP
+                reader, writer = await asyncio.wait_for(
+                    asyncio.open_connection(server_ip, port),
+                    timeout=10
+                )
+                
+                # بستن اتصال
+                writer.close()
+                await writer.wait_closed()
+                
+                # محاسبه latency
+                latency = (time.time() - start_time) * 1000
+                result["latency"] = latency
+                result["success"] = True
+                
+                logging.debug(f"✅ اتصال موفق: {server_ip}:{port} - Latency: {latency:.2f}ms")
+                
+            except asyncio.TimeoutError:
+                result["error"] = "Connection timeout"
+                logging.debug(f"⏰ timeout: {server_ip}:{port}")
+            except Exception as e:
+                result["error"] = str(e)
+                logging.debug(f"❌ خطا در اتصال: {server_ip}:{port} - {e}")
+                
+        except Exception as e:
+            result["error"] = f"Unexpected error: {e}"
+            logging.error(f"خطای غیرمنتظره در تست {config_hash}: {e}")
+        
+        return result
+
+    def create_config_hash(self, config: str) -> str:
+        """ایجاد hash برای کانفیگ"""
+        return hashlib.md5(config.encode()).hexdigest()
+
+    async def run_ss_update(self) -> bool:
+        """اجرای یک دور کامل به‌روزرسانی Shadowsocks"""
+        try:
+            logging.info("=" * 60)
+            logging.info("🚀 شروع به‌روزرسانی TrustLink Shadowsocks")
+            logging.info("=" * 60)
+            
+            # بارگذاری کانفیگ‌های موجود
+            self.load_existing_configs()
+            
+            # بارگذاری کانفیگ‌های Shadowsocks از فایل منبع
+            source_configs = self.load_ss_configs()
+            if not source_configs:
+                logging.warning("هیچ کانفیگ Shadowsocks جدیدی از فایل منبع بارگذاری نشد")
+                # ذخیره خروجی جزئی اگر چیزی وجود دارد؛ در غیراینصورت fallback
+                if not self.save_partial_progress("no-source-configs"):
+                    self.create_fallback_output("هیچ کانفیگ Shadowsocks جدیدی یافت نشد")
+                return False
+            
+            # ایجاد session
+            await self.create_session()
+
+            # فاز 1: تست اتصال TCP روی همه کانفیگ‌ها
+            # فقط تست TCP ساده برای سرعت بالا - تست‌های دیگر در مراحل بعدی
+            # هر کانفیگ فقط یک بار تست می‌شود - از کل پروکسی‌ها دو بار تست گرفته نمی‌شود
+            # هدف: سرعت بالا و کارایی بهتر
+            test_results = await self.test_all_ss_configs(source_configs)
+            if not test_results:
+                logging.warning("هیچ کانفیگ Shadowsocks موفقی یافت نشد")
+                if not self.save_partial_progress("no-connect-success"):
+                    self.create_fallback_output("هیچ کانفیگ Shadowsocks موفقی یافت نشد")
+                return False
+
+            # فاز 2: تست ping با check-host.net API، فقط روی کانفیگ‌های سالم TCP
+            # فیلتر کردن کانفیگ‌هایی که تست TCP را پاس کرده‌اند
+            # از کل پروکسی‌ها دو بار تست گرفته نمی‌شود - فقط پروکسی‌های سالم TCP
+            healthy_configs = [r["config"] for r in test_results if r.get("success")]
+            if not healthy_configs:
+                logging.warning("هیچ کانفیگ Shadowsocks موفقی یافت نشد")
+                if not self.save_partial_progress("no-healthy-after-connect"):
+                    self.create_fallback_output("هیچ کانفیگ Shadowsocks موفقی یافت نشد")
+                return False
+
+            logging.info(f"🌐 شروع تست ping (4/4) با check-host.net برای {len(healthy_configs)} کانفیگ سالم TCP")
+            logging.info(f"🎯 بهینه‌سازی: انتخاب تصادفی حداکثر 50 کانفیگ برای تست ping")
+            ping_ok_configs = await self.filter_configs_by_ping_check(healthy_configs)
+            if not ping_ok_configs:
+                logging.warning("هیچ کانفیگی تست ping را پاس نکرد")
+                if not self.save_partial_progress("no-ping-pass"):
+                    self.create_fallback_output("هیچ کانفیگی تست ping را پاس نکرد")
+                return False
+
+            # فاز 3: تست سرعت دانلود - REMOVED
+            # بهترین‌ها: کانفیگ‌هایی که تست ping را پاس کرده‌اند
+            best_configs = ping_ok_configs if ping_ok_configs else []
+            
+            # اطمینان از اینکه best_configs همیشه یک لیست است
+            if not isinstance(best_configs, list):
+                logging.warning("best_configs باید یک لیست باشد، تبدیل به لیست خالی")
+                best_configs = []
+
+            # ادغام کانفیگ‌ها
+            self.existing_configs = set()
+            
+            # اطمینان از اینکه best_configs خالی نیست
+            if not best_configs:
+                logging.warning("هیچ کانفیگی برای ادغام وجود ندارد")
+                stats = {
+                    'new_added': 0,
+                    'duplicates_skipped': 0,
+                    'total_processed': 0
+                }
+            else:
+                stats = self.merge_ss_configs(best_configs)
+
+            # ذخیره فایل
+            if best_configs and len(best_configs) > 0:
+                if self.save_trustlink_ss_file():
+                    # به‌روزرسانی متادیتا با نتایج فاز اتصال
+                    # اطمینان از اینکه test_results خالی نیست
+                    if test_results and len(test_results) > 0:
+                        self.update_metadata(stats, test_results)
+                    else:
+                        logging.warning("test_results خالی است، متادیتا به‌روزرسانی نمی‌شود")
+
+                    logging.info("✅ به‌روزرسانی Shadowsocks با موفقیت انجام شد")
+                    logging.info(f"📊 آمار: {stats['new_added']} جدید، {stats['duplicates_skipped']} تکراری")
+                    logging.info(f"🔗 کانفیگ‌های Shadowsocks سالم (پس از تمام تست‌ها): {len(best_configs)}")
+                    logging.info(f"📱 تست‌های انجام شده: حذف تکراری → TCP → Ping (تصادفی 50) → Speed Test REMOVED")
+                    if len(healthy_configs) > 50:
+                        logging.info(f"⚡ بهینه‌سازی سرعت: تست ping فقط روی {min(50, len(healthy_configs))} کانفیگ تصادفی")
+                    return True
+                else:
+                    logging.error("❌ خطا در ذخیره فایل Shadowsocks")
+                    self.create_fallback_output("خطا در ذخیره فایل اصلی")
+                    return False
+            else:
+                logging.warning("⚠️ هیچ کانفیگ سالمی برای ذخیره یافت نشد")
+                self.create_fallback_output("هیچ کانفیگ سالمی یافت نشد")
+                return False
+                
+        except Exception as e:
+            logging.error(f"خطا در اجرای به‌روزرسانی Shadowsocks: {e}")
+            # ایجاد فایل fallback در صورت خطا
+            self.create_fallback_output(f"خطا در اجرا: {str(e)}")
+            return False
+        finally:
+            await self.close_session()
+
+    def get_status(self) -> Dict:
+        """دریافت وضعیت فعلی برنامه"""
+        return {
+            "total_configs": len(self.existing_configs),
+            "last_update": self.metadata.get("last_update", "نامشخص"),
+            "total_tests": self.metadata.get("total_tests", 0),
+            "working_configs": self.metadata.get("working_configs", 0),
+            "failed_configs": self.metadata.get("failed_configs", 0),
+            "iran_accessible_configs": self.metadata.get("iran_accessible_configs", 0),
+            "file_size_kb": os.path.getsize(TRUSTLINK_SS_FILE) / 1024 if os.path.exists(TRUSTLINK_SS_FILE) else 0,
+            "backup_exists": os.path.exists(BACKUP_FILE)
+        }
+
     async def run_full_test(self):
-        """اجرای کامل تست"""
+        """اجرای کامل تست (نسخه قدیمی - حفظ شده برای سازگاری)"""
         try:
             logging.info("شروع تست کامل کانفیگ‌های Shadowsocks")
             
@@ -665,36 +1340,141 @@ class SSManager:
         except Exception as e:
             logging.error(f"خطا در اجرای تست کامل: {e}")
 
+async def run_ss_tester():
+    """اجرای تستر Shadowsocks"""
+    setup_logging()
+    
+    logging.info("🚀 راه‌اندازی TrustLink Shadowsocks Tester")
+    
+    manager = SSManager()
+    
+    try:
+        # اجرای یک دور به‌روزرسانی با timeout طولانی
+        async with asyncio.timeout(7200):  # timeout 120 دقیقه - افزایش برای تست‌های اضافی
+            success = await manager.run_ss_update()
+        
+        if success:
+            status = manager.get_status()
+            logging.info("📈 وضعیت نهایی Shadowsocks:")
+            for key, value in status.items():
+                logging.info(f"  {key}: {value}")
+        else:
+            logging.error("❌ به‌روزرسانی Shadowsocks ناموفق بود")
+            
+    except asyncio.TimeoutError:
+        logging.error("⏰ timeout: برنامه Shadowsocks بیش از 120 دقیقه طول کشید")
+        # ذخیره نتایج جزئی جهت جلوگیری از از دست رفتن خروجی‌ها
+        try:
+            manager.save_partial_progress("timeout")
+        except Exception:
+            pass
+    except KeyboardInterrupt:
+        logging.info("برنامه Shadowsocks توسط کاربر متوقف شد")
+    except Exception as e:
+        logging.error(f"خطای غیرمنتظره در Shadowsocks: {e}")
+        # در صورت خطای غیرمنتظره نیز تلاش برای ذخیره خروجی جزئی
+        try:
+            manager.save_partial_progress("unexpected-error")
+        except Exception:
+            pass
+    finally:
+        await manager.close_session()
+
 def main():
     """تابع اصلی"""
     setup_logging()
     
     # بررسی آرگومان‌ها
-    auto_mode = "--auto" in sys.argv
-    
-    if auto_mode:
-        logging.info("حالت خودکار فعال شد - تست هر ساعت اجرا خواهد شد")
-        
-        manager = SSManager()
-        
-        def run_test():
-            asyncio.run(manager.run_full_test())
-        
-        # برنامه‌ریزی اجرای هر ساعت
-        schedule.every().hour.do(run_test)
-        
-        # اجرای اولیه
-        run_test()
-        
-        # حلقه اصلی
-        while True:
-            schedule.run_pending()
-            time.sleep(60)
+    if len(sys.argv) > 1:
+        if sys.argv[1] == "--auto":
+            # حالت خودکار
+            schedule_ss_tester()
+        elif sys.argv[1] == "--test":
+            # حالت تست ساده برای GitHub Actions
+            setup_logging()
+            logging.info("🧪 Shadowsocks Tester - Test Mode (GitHub Actions)")
+            
+            manager = SSManager()
+            
+            try:
+                # تست ساده بدون اجرای کامل
+                logging.info("بررسی فایل‌های منبع...")
+                
+                # بررسی فایل منبع
+                if os.path.exists(SS_SOURCE_FILE):
+                    with open(SS_SOURCE_FILE, 'r', encoding='utf-8') as f:
+                        lines = f.readlines()
+                    logging.info(f"فایل منبع موجود: {len(lines)} خط")
+                else:
+                    logging.error(f"فایل منبع یافت نشد: {SS_SOURCE_FILE}")
+                
+                # ایجاد دایرکتوری‌های خروجی
+                os.makedirs("../trustlink", exist_ok=True)
+                os.makedirs("../logs", exist_ok=True)
+                
+                # ایجاد فایل تست ساده
+                test_file = "../trustlink/trustlink_ss.txt"
+                with open(test_file, 'w', encoding='utf-8') as f:
+                    f.write("# فایل تست Shadowsocks - TrustLink Shadowsocks\n")
+                    f.write(f"# ایجاد شده در: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+                    f.write("# حالت: تست GitHub Actions\n")
+                    f.write("# " + "="*50 + "\n\n")
+                    f.write("# این فایل برای تست GitHub Actions ایجاد شده است\n")
+                    f.write("# در اجرای واقعی، کانفیگ‌های Shadowsocks سالم اینجا قرار می‌گیرند\n")
+                
+                # ایجاد متادیتای تست
+                test_metadata = {
+                    "last_update": datetime.now().isoformat(),
+                    "total_tests": 0,
+                    "total_configs": 0,
+                    "working_configs": 0,
+                    "failed_configs": 0,
+                    "iran_accessible_configs": 0,
+                    "status": "test_mode",
+                    "message": "GitHub Actions test mode"
+                }
+                
+                with open("../trustlink/.trustlink_ss_metadata.json", 'w', encoding='utf-8') as f:
+                    json.dump(test_metadata, f, indent=2, ensure_ascii=False)
+                
+                logging.info("✅ فایل‌های تست با موفقیت ایجاد شدند")
+                logging.info(f"✅ فایل خروجی: {test_file}")
+                logging.info(f"✅ متادیتا: ../trustlink/.trustlink_ss_metadata.json")
+                
+            except Exception as e:
+                logging.error(f"خطا در حالت تست: {e}")
+                # ایجاد فایل fallback
+                manager.create_fallback_output(f"خطا در حالت تست: {str(e)}")
+        else:
+            # اجرای یکباره
+            asyncio.run(run_ss_tester())
     else:
-        logging.info("شروع تست یکباره کانفیگ‌های Shadowsocks")
-        manager = SSManager()
-        asyncio.run(manager.run_full_test())
-        logging.info("تست یکباره تکمیل شد")
+        # اجرای یکباره (پیش‌فرض)
+        asyncio.run(run_ss_tester())
+
+def schedule_ss_tester():
+    """تنظیم اجرای خودکار هفتگی"""
+    logging.info("⏰ تنظیم اجرای خودکار هفتگی برای Shadowsocks Tester")
+    
+    # اجرای هفتگی در روز یکشنبه ساعت 06:30 تهران (03:00 UTC)
+    schedule.every().sunday.at("06:30").do(lambda: asyncio.run(run_ss_tester()))
+    
+    # اجرای فوری در شروع (برای تست)
+    schedule.every().minute.do(lambda: asyncio.run(run_ss_tester())).until("23:59")
+    
+    logging.info("📅 برنامه زمانبندی هفتگی فعال شد")
+    logging.info("🕐 اجرای بعدی: یکشنبه ساعت 06:30 تهران")
+    
+    while True:
+        try:
+            schedule.run_pending()
+            time.sleep(60)  # بررسی هر دقیقه
+        except KeyboardInterrupt:
+            logging.info("برنامه Shadowsocks Tester متوقف شد")
+            break
+        except Exception as e:
+            logging.error(f"خطا در اجرای خودکار: {e}")
+            time.sleep(60)
 
 if __name__ == "__main__":
     main()
