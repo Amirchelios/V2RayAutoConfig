@@ -816,6 +816,11 @@ class VLESSManager:
                     logging.error(f"خطا در تست سرعت برای کانفیگ {i}: {e}")
                     continue
             
+            # بررسی اینکه آیا هیچ کانفیگی تست سرعت را نگذرانده
+            if not speed_results:
+                logging.warning("⚠️ هیچ کانفیگی تست سرعت دانلود را نگذراند")
+                return []
+            
             # مرتب کردن بر اساس سرعت (بالاترین سرعت اول)
             speed_results.sort(key=lambda x: x['speed_mbps'], reverse=True)
             
@@ -828,7 +833,11 @@ class VLESSManager:
             except Exception:
                 pass
             
-            logging.info(f"🏆 {len(best_configs)} کانفیگ برتر انتخاب شدند (سرعت: {speed_results[0]['speed_mbps']:.2f} - {speed_results[-1]['speed_mbps']:.2f} Mbps)")
+            # نمایش اطلاعات سرعت (فقط اگر کانفیگی وجود داشته باشد)
+            if len(speed_results) == 1:
+                logging.info(f"🏆 {len(best_configs)} کانفیگ برتر انتخاب شد (سرعت: {speed_results[0]['speed_mbps']:.2f} Mbps)")
+            else:
+                logging.info(f"🏆 {len(best_configs)} کانفیگ برتر انتخاب شدند (سرعت: {speed_results[0]['speed_mbps']:.2f} - {speed_results[-1]['speed_mbps']:.2f} Mbps)")
             
             return best_configs
             
@@ -843,6 +852,14 @@ class VLESSManager:
         """
         try:
             config_hash = self.get_config_hash(config)
+            
+            # بررسی وجود فایل Xray
+            xray_bin_path = "./xray-bin/xray"
+            if not os.path.exists(xray_bin_path):
+                return {
+                    'success': False,
+                    'error': 'فایل Xray یافت نشد'
+                }
             
             # ایجاد فایل کانفیگ موقت برای Xray
             temp_config_file = f"temp_config_{config_hash}.json"
@@ -885,6 +902,7 @@ class VLESSManager:
                     pass
                     
         except Exception as e:
+            logging.debug(f"خطا در تست سرعت دانلود برای کانفیگ {config_hash}: {e}")
             return {
                 'success': False,
                 'error': str(e)
@@ -1773,6 +1791,11 @@ class VLESSManager:
     def save_trustlink_vless_file(self):
         """ذخیره فایل trustlink_vless.txt"""
         try:
+            # بررسی اینکه آیا کانفیگی برای ذخیره وجود دارد
+            if not self.existing_configs or len(self.existing_configs) == 0:
+                logging.warning("هیچ کانفیگی برای ذخیره وجود ندارد")
+                return False
+            
             os.makedirs(os.path.dirname(TRUSTLINK_VLESS_FILE), exist_ok=True)
             
             # نوشتن اتمیک با فایل موقت
@@ -1824,9 +1847,23 @@ class VLESSManager:
         """به‌روزرسانی متادیتای برنامه"""
         now = datetime.now().isoformat()
         
-        working_count = len([r for r in test_results if r["success"]])
-        failed_count = len([r for r in test_results if not r["success"]])
-        iran_accessible_count = len([r for r in test_results if r.get("iran_access", False)])
+        # اطمینان از اینکه test_results خالی نیست
+        if not test_results or len(test_results) == 0:
+            logging.warning("test_results خالی است، استفاده از مقادیر پیش‌فرض")
+            working_count = 0
+            failed_count = 0
+            iran_accessible_count = 0
+        else:
+            working_count = len([r for r in test_results if r.get("success", False)])
+            failed_count = len([r for r in test_results if not r.get("success", True)])
+            iran_accessible_count = len([r for r in test_results if r.get("iran_access", False)])
+        
+        # اطمینان از اینکه stats شامل تمام فیلدهای مورد نیاز است
+        safe_stats = {
+            "new_added": stats.get("new_added", 0),
+            "duplicates_skipped": stats.get("duplicates_skipped", 0),
+            "invalid_skipped": stats.get("invalid_skipped", 0)
+        }
         
         self.metadata.update({
             "last_update": now,
@@ -1837,9 +1874,9 @@ class VLESSManager:
             "iran_accessible_configs": iran_accessible_count,
             "last_vless_source": VLESS_SOURCE_FILE,
             "last_stats": {
-                "new_added": stats["new_added"],
-                "duplicates_skipped": stats["duplicates_skipped"],
-                "invalid_skipped": stats["invalid_skipped"],
+                "new_added": safe_stats["new_added"],
+                "duplicates_skipped": safe_stats["duplicates_skipped"],
+                "invalid_skipped": safe_stats["invalid_skipped"],
                 "working_configs": working_count,
                 "failed_configs": failed_count,
                 "iran_accessible": iran_accessible_count,
@@ -1902,36 +1939,65 @@ class VLESSManager:
                 return False
 
             # فاز 3: تست سرعت دانلود با Xray - فقط 50 کانفیگ برتر
-            if ping_ok_configs:
+            if ping_ok_configs and len(ping_ok_configs) > 0:
                 logging.info(f"🚀 شروع تست سرعت دانلود برای {len(ping_ok_configs)} کانفیگ سالم ping")
-                speed_ok_configs = await self.filter_configs_by_download_speed(ping_ok_configs, max_configs=50)
-                logging.info(f"✅ تست سرعت دانلود کامل شد: {len(speed_ok_configs)} کانفیگ برتر از {len(ping_ok_configs)}")
+                try:
+                    speed_ok_configs = await self.filter_configs_by_download_speed(ping_ok_configs, max_configs=50)
+                    logging.info(f"✅ تست سرعت دانلود کامل شد: {len(speed_ok_configs)} کانفیگ برتر از {len(ping_ok_configs)}")
+                except Exception as e:
+                    logging.error(f"خطا در تست سرعت دانلود: {e}")
+                    speed_ok_configs = []
+                    logging.warning("در صورت خطا، هیچ کانفیگی برای تست سرعت دانلود انتخاب نشد")
             else:
                 speed_ok_configs = []
                 logging.warning("هیچ کانفیگی برای تست سرعت دانلود یافت نشد")
             
             # بهترین‌ها: کانفیگ‌هایی که تست سرعت دانلود را پاس کرده‌اند
-            best_configs = speed_ok_configs
+            best_configs = speed_ok_configs if speed_ok_configs else []
+            
+            # اطمینان از اینکه best_configs همیشه یک لیست است
+            if not isinstance(best_configs, list):
+                logging.warning("best_configs باید یک لیست باشد، تبدیل به لیست خالی")
+                best_configs = []
 
             # ادغام کانفیگ‌ها
             self.existing_configs = set()
-            stats = self.merge_vless_configs(best_configs)
+            
+            # اطمینان از اینکه best_configs خالی نیست
+            if not best_configs:
+                logging.warning("هیچ کانفیگی برای ادغام وجود ندارد")
+                stats = {
+                    'new_added': 0,
+                    'duplicates_skipped': 0,
+                    'total_processed': 0
+                }
+            else:
+                stats = self.merge_vless_configs(best_configs)
 
             # ذخیره فایل
-            if self.save_trustlink_vless_file():
-                # به‌روزرسانی متادیتا با نتایج فاز اتصال
-                self.update_metadata(stats, test_results)
+            if best_configs and len(best_configs) > 0:
+                if self.save_trustlink_vless_file():
+                    # به‌روزرسانی متادیتا با نتایج فاز اتصال
+                    # اطمینان از اینکه test_results خالی نیست
+                    if test_results and len(test_results) > 0:
+                        self.update_metadata(stats, test_results)
+                    else:
+                        logging.warning("test_results خالی است، متادیتا به‌روزرسانی نمی‌شود")
 
-                logging.info("✅ به‌روزرسانی VLESS با موفقیت انجام شد")
-                logging.info(f"📊 آمار: {stats['new_added']} جدید، {stats['duplicates_skipped']} تکراری")
-                logging.info(f"🔗 کانفیگ‌های VLESS سالم (پس از تمام تست‌ها): {len(best_configs)}")
-                logging.info(f"📱 تست‌های انجام شده: حذف تکراری → TCP → Ping (تصادفی 50) → Speed Test")
-                if len(healthy_configs) > 50:
-                    logging.info(f"⚡ بهینه‌سازی سرعت: تست ping فقط روی {min(50, len(healthy_configs))} کانفیگ تصادفی")
-                return True
+                    logging.info("✅ به‌روزرسانی VLESS با موفقیت انجام شد")
+                    logging.info(f"📊 آمار: {stats['new_added']} جدید، {stats['duplicates_skipped']} تکراری")
+                    logging.info(f"🔗 کانفیگ‌های VLESS سالم (پس از تمام تست‌ها): {len(best_configs)}")
+                    logging.info(f"📱 تست‌های انجام شده: حذف تکراری → TCP → Ping (تصادفی 50) → Speed Test")
+                    if len(healthy_configs) > 50:
+                        logging.info(f"⚡ بهینه‌سازی سرعت: تست ping فقط روی {min(50, len(healthy_configs))} کانفیگ تصادفی")
+                    return True
+                else:
+                    logging.error("❌ خطا در ذخیره فایل VLESS")
+                    self.create_fallback_output("خطا در ذخیره فایل اصلی")
+                    return False
             else:
-                logging.error("❌ خطا در ذخیره فایل VLESS")
-                self.create_fallback_output("خطا در ذخیره فایل اصلی")
+                logging.warning("⚠️ هیچ کانفیگ سالمی برای ذخیره یافت نشد")
+                self.create_fallback_output("هیچ کانفیگ سالمی یافت نشد")
                 return False
                 
         except Exception as e:
