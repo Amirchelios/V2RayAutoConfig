@@ -1,20 +1,20 @@
 {
-  "last_update": "2025-08-22T04:17:40.231076",
-  "total_tests": 2,
-  "total_configs": 18,
-  "working_configs": 18,
+  "last_update": "2025-08-22T05:07:26.738154",
+  "total_tests": 3,
+  "total_configs": 41,
+  "working_configs": 2101,
   "failed_configs": 0,
   "iran_accessible_configs": 0,
   "error_message": "هیچ کانفیگ سالمی یافت نشد",
   "status": "fallback",
   "last_vless_source": "../configs/raw/Vless.txt",
   "last_stats": {
-    "new_added": 18,
+    "new_added": 41,
     "duplicates_skipped": 0,
     "invalid_skipped": 0,
-    "working_configs": 18,
+    "working_configs": 2101,
     "failed_configs": 0,
     "iran_accessible": 0,
-    "timestamp": "2025-08-22T04:17:40.231076"
+    "timestamp": "2025-08-22T05:07:26.738154"
   }
 }
