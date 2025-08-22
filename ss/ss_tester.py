@@ -221,6 +221,7 @@ class SSManager:
                         "method": method,
                         "password": password,
                         "server": server,
+                        "server_ip": server,  # اضافه کردن server_ip برای سازگاری
                         "port": port
                     }
                 else:
@@ -494,7 +495,7 @@ class SSManager:
             logging.error(f"خطا در تست اتصال اولیه: {e}")
         
         # فیلتر کردن کانفیگ‌های سالم
-        working_configs = [r["config"] for r in initial_results if r["status"] == "working"]
+        working_configs = [r["config"] for r in initial_results if r.get("status") == "working"]
         logging.info(f"تعداد {len(working_configs)} کانفیگ سالم برای تست‌های بعدی")
         
         # مرحله 2: تست دسترسی ایران (50 تا 50 تا)
@@ -560,7 +561,7 @@ class SSManager:
         # ایجاد نتایج نهایی
         final_results = []
         for result in initial_results:
-            if result["status"] == "working" and result["config"] in final_ok_configs:
+            if result.get("status") == "working" and result["config"] in final_ok_configs:
                 # اضافه کردن اطلاعات تست‌ها
                 result["iran_access"] = True
                 result["social_media_access"] = True
@@ -568,7 +569,7 @@ class SSManager:
                 final_results.append(result)
             else:
                 # کانفیگ‌های رد شده
-                if result["status"] == "working":
+                if result.get("status") == "working":
                     result["iran_access"] = result["config"] in iran_ok_configs
                     result["social_media_access"] = result["config"] in social_ok_configs
                     result["download_speed_ok"] = result["config"] in final_ok_configs
@@ -605,12 +606,14 @@ class SSManager:
             
             for config in selected_configs:
                 parsed = self.parse_ss_config(config)
-                if parsed and parsed.get('server_ip'):
-                    ip = parsed['server_ip']
-                    unique_ips.add(ip)
-                    if ip not in ip_to_configs:
-                        ip_to_configs[ip] = []
-                    ip_to_configs[ip].append(config)
+                if parsed:
+                    # بررسی وجود server_ip یا server
+                    server_ip = parsed.get('server_ip') or parsed.get('server')
+                    if server_ip:
+                        unique_ips.add(server_ip)
+                        if server_ip not in ip_to_configs:
+                            ip_to_configs[server_ip] = []
+                        ip_to_configs[server_ip].append(config)
             
             logging.info(f"🌐 شروع تست ping (4/4) برای {len(unique_ips)} IP منحصر به فرد (یکی یکی)")
             
@@ -890,7 +893,7 @@ class SSManager:
             iran_accessible_count = 0
         else:
             working_count = len([r for r in test_results if r.get("success", False)])
-            failed_count = len([r for r in test_results if not r.get("success", True)])
+            failed_count = len([r for r in test_results if not r.get("success", False)])
             iran_accessible_count = len([r for r in test_results if r.get("iran_access", False)])
         
         # اطمینان از اینکه stats شامل تمام فیلدهای مورد نیاز است
@@ -929,7 +932,7 @@ class SSManager:
                 best_configs = list({c for c in self.partial_ping_ok if self.is_valid_ss_config(c)})
                 stage = "ping_ok"
             elif self.partial_results:
-                best_configs = [r.get("config") for r in self.partial_results if isinstance(r, dict) and r.get("success") and self.is_valid_ss_config(r.get("config", ""))]
+                best_configs = [r.get("config") for r in self.partial_results if isinstance(r, dict) and r.get("success", False) and self.is_valid_ss_config(r.get("config", ""))]
                 stage = "connect_ok"
             else:
                 best_configs = []
@@ -1023,10 +1026,10 @@ class SSManager:
         """ذخیره کانفیگ‌های سالم"""
         try:
             # فیلتر کردن کانفیگ‌های سالم که تمام تست‌ها را قبول شده‌اند
-            fully_working_configs = [r["config"] for r in results if r["status"] == "working" and r.get("download_speed_ok", False)]
+            fully_working_configs = [r["config"] for r in results if r.get("status") == "working" and r.get("download_speed_ok", False)]
             
             # کانفیگ‌های نیمه سالم (فقط اتصال سالم)
-            partially_working_configs = [r["config"] for r in results if r["status"] == "working" and not r.get("download_speed_ok", False)]
+            partially_working_configs = [r["config"] for r in results if r.get("status") == "working" and not r.get("download_speed_ok", False)]
             
             # ترکیب با کانفیگ‌های موجود
             all_configs = list(set(fully_working_configs + list(self.existing_configs)))
@@ -1051,7 +1054,7 @@ class SSManager:
             # ذخیره آمار تست‌ها
             stats = {
                 "total_tested": len(results),
-                "connection_ok": len([r for r in results if r["status"] == "working"]),
+                "connection_ok": len([r for r in results if r.get("status") == "working"]),
                 "iran_access_ok": len([r for r in results if r.get("iran_access", False)]),
                 "social_media_ok": len([r for r in results if r.get("social_media_access", False)]),
                 "download_speed_ok": len([r for r in results if r.get("download_speed_ok", False)]),
@@ -1110,7 +1113,7 @@ class SSManager:
             # فیلتر کردن نتایج موفق
             successful_in_batch = 0
             for result in batch_results:
-                if isinstance(result, dict) and result["success"]:
+                if isinstance(result, dict) and result.get("success", False):
                     all_results.append(result)
                     # ذخیره نتایج موفق برای ذخیره‌سازی جزئی
                     try:
@@ -1150,8 +1153,16 @@ class SSManager:
                 logging.warning(f"❌ کانفیگ Shadowsocks نامعتبر: {config_hash}")
                 return result
             
+            # بررسی وجود فیلدهای مورد نیاز
+            if "server_ip" not in parsed_config and "server" in parsed_config:
+                parsed_config["server_ip"] = parsed_config["server"]
+            elif "server_ip" not in parsed_config:
+                result["error"] = "Server IP not found in config"
+                logging.warning(f"❌ کانفیگ Shadowsocks بدون IP سرور: {config_hash}")
+                return result
+            
             server_ip = parsed_config["server_ip"]
-            port = parsed_config["port"]
+            port = parsed_config.get("port", "8388")
             
             result["server_address"] = server_ip
             result["port"] = port
@@ -1161,7 +1172,7 @@ class SSManager:
             try:
                 # ایجاد اتصال TCP
                 reader, writer = await asyncio.wait_for(
-                    asyncio.open_connection(server_ip, port),
+                    asyncio.open_connection(server_ip, int(port)),
                     timeout=10
                 )
                 
@@ -1229,7 +1240,7 @@ class SSManager:
             # فاز 2: تست ping با check-host.net API، فقط روی کانفیگ‌های سالم TCP
             # فیلتر کردن کانفیگ‌هایی که تست TCP را پاس کرده‌اند
             # از کل پروکسی‌ها دو بار تست گرفته نمی‌شود - فقط پروکسی‌های سالم TCP
-            healthy_configs = [r["config"] for r in test_results if r.get("success")]
+            healthy_configs = [r["config"] for r in test_results if r.get("success", False)]
             if not healthy_configs:
                 logging.warning("هیچ کانفیگ Shadowsocks موفقی یافت نشد")
                 if not self.save_partial_progress("no-healthy-after-connect"):
