@@ -209,7 +209,11 @@ class SSManager:
             if '@' in config_data and ('?' in config_data or '/' in config_data):
                 return self._parse_sip002_format(config_data)
             
-            # بررسی فرمت کلاسیک base64
+            # بررسی فرمت ترکیبی (base64@server:port)
+            if '@' in config_data:
+                return self._parse_hybrid_format(config_data)
+            
+            # بررسی فرمت کلاسیک base64 خالص
             try:
                 decoded = base64.b64decode(config_data).decode('utf-8')
                 return self._parse_classic_format(decoded)
@@ -275,6 +279,58 @@ class SSManager:
             
         except Exception as e:
             logging.debug(f"خطا در پارس فرمت SIP002: {e}")
+            return None
+
+    def _parse_hybrid_format(self, config_data: str) -> Optional[Dict]:
+        """پارس فرمت ترکیبی Shadowsocks (base64@server:port)"""
+        try:
+            # تجزیه قسمت قبل از @ (base64) و قسمت بعد از @ (server:port)
+            if '@' not in config_data:
+                return None
+                
+            base64_part, server_port = config_data.split('@', 1)
+            
+            # تلاش برای decode کردن base64
+            try:
+                decoded = base64.b64decode(base64_part).decode('utf-8')
+                logging.debug(f"Hybrid format decoded: {decoded}")
+            except:
+                # اگر base64 decode نشد، از userinfo استفاده کن
+                decoded = base64_part
+            
+            # پارس کردن قسمت server:port
+            if ':' in server_port:
+                server, port = server_port.rsplit(':', 1)
+                # اطمینان از اینکه port فقط عدد باشد
+                port = ''.join(filter(str.isdigit, port)) or "8388"
+            else:
+                server = server_port
+                port = "8388"
+            
+            # پارس کردن قسمت decoded برای استخراج method و password
+            method = "chacha20-ietf-poly1305"  # پیش‌فرض
+            password = ""
+            
+            if ':' in decoded:
+                parts = decoded.split(':')
+                if len(parts) >= 2:
+                    method = parts[0]
+                    password = ':'.join(parts[1:])  # password ممکن است شامل : باشد
+                else:
+                    password = decoded
+            else:
+                password = decoded
+            
+            return {
+                "method": method,
+                "password": password,
+                "server": server,
+                "server_ip": server,
+                "port": port
+            }
+            
+        except Exception as e:
+            logging.debug(f"خطا در پارس فرمت ترکیبی: {e}")
             return None
 
     def _parse_classic_format(self, decoded: str) -> Optional[Dict]:
