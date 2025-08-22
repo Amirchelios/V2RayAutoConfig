@@ -376,24 +376,26 @@ class VLESSManager:
             return None
 
     # ==========================
-    # جدید: تست Ping با check-host.net API
+    # جدید: تست Ping با check-host.net API (4/4 ping required)
     # ==========================
     
     async def check_host_ping_single(self, server_ip: str) -> bool:
         """
         تست ping برای یک IP با استفاده از check-host.net API
+        ارسال 4 درخواست ping و بررسی اینکه همه 4 درخواست OK باشند
         فقط از نود ایران مشهد (ir2.node.check-host.net) استفاده می‌کند
         """
         try:
-            # ارسال درخواست ping برای تک IP - فقط از نود ایران مشهد
+            # ارسال 4 درخواست ping برای تک IP - فقط از نود ایران مشهد
             ping_params = {
                 'host': server_ip,
-                'node': 'ir2.node.check-host.net'
+                'node': 'ir2.node.check-host.net',
+                'count': '4'  # ارسال 4 درخواست ping
             }
             
             headers = {'Accept': 'application/json'}
             
-            logging.debug(f"🌐 ارسال درخواست ping برای IP {server_ip} به check-host.net (نود: ir2.node.check-host.net)")
+            logging.debug(f"🌐 ارسال 4 درخواست ping برای IP {server_ip} به check-host.net (نود: ir2.node.check-host.net)")
             
             async with self.session.post(
                 f"{CHECK_HOST_API_BASE}{CHECK_HOST_PING_ENDPOINT}",
@@ -461,8 +463,8 @@ class VLESSManager:
                         if final_response.status == 200:
                             final_data = await final_response.json()
                             
-                            # تحلیل نتایج برای IP
-                            ping_success = self._analyze_ping_results(final_data, server_ip)
+                            # تحلیل نتایج برای IP - بررسی اینکه همه 4 ping OK باشند
+                            ping_success = self._analyze_ping_results_4_required(final_data, server_ip)
                             return ping_success
                         else:
                             logging.error(f"خطا در دریافت نتایج نهایی ping برای {server_ip}: HTTP {final_response.status}")
@@ -479,6 +481,7 @@ class VLESSManager:
     async def check_host_ping_batch(self, server_ips: List[str]) -> Dict[str, bool]:
         """
         تست ping برای batch از IP ها با استفاده از check-host.net API
+        ارسال 4 درخواست ping برای هر IP و بررسی اینکه همه 4 درخواست OK باشند
         فقط از نود ایران مشهد (ir2.node.check-host.net) استفاده می‌کند
         """
         ping_results = {}
@@ -487,12 +490,13 @@ class VLESSManager:
             # ارسال درخواست ping برای batch - فقط از نود ایران مشهد
             ping_params = {
                 'host': ','.join(server_ips),
-                'node': 'ir2.node.check-host.net'
+                'node': 'ir2.node.check-host.net',
+                'count': '4'  # ارسال 4 درخواست ping برای هر IP
             }
             
             headers = {'Accept': 'application/json'}
             
-            logging.info(f"🌐 ارسال درخواست ping برای {len(server_ips)} IP به check-host.net (نود: ir2.node.check-host.net)")
+            logging.info(f"🌐 ارسال 4 درخواست ping برای {len(server_ips)} IP به check-host.net (نود: ir2.node.check-host.net)")
             
             async with self.session.post(
                 f"{CHECK_HOST_API_BASE}{CHECK_HOST_PING_ENDPOINT}",
@@ -562,15 +566,15 @@ class VLESSManager:
                         if final_response.status == 200:
                             final_data = await final_response.json()
                             
-                            # تحلیل نتایج برای هر IP
+                            # تحلیل نتایج برای هر IP - بررسی اینکه همه 4 ping OK باشند
                             for server_ip in server_ips:
-                                ping_success = self._analyze_ping_results(final_data, server_ip)
+                                ping_success = self._analyze_ping_results_4_required(final_data, server_ip)
                                 ping_results[server_ip] = ping_success
                                 
                                 if ping_success:
-                                    logging.info(f"✅ IP {server_ip}: Ping موفق")
+                                    logging.info(f"✅ IP {server_ip}: همه 4 ping موفق")
                                 else:
-                                    logging.debug(f"❌ IP {server_ip}: Ping ناموفق")
+                                    logging.debug(f"❌ IP {server_ip}: حداقل یکی از 4 ping ناموفق")
                         else:
                             logging.error(f"خطا در دریافت نتایج نهایی ping: HTTP {final_response.status}")
                             ping_results = {ip: False for ip in server_ips}
@@ -585,9 +589,65 @@ class VLESSManager:
         
         return ping_results
     
+    def _analyze_ping_results_4_required(self, result_data: Dict, server_ip: str) -> bool:
+        """
+        تحلیل نتایج ping برای یک IP خاص - نیاز به 4 ping موفق
+        سرور سالم در نظر گرفته می‌شود اگر:
+        1. همه 4 ping OK باشند (4/4)
+        2. هیچ نودی traceroute نداشته باشد (null یا empty)
+        """
+        try:
+            ping_success_count = 0
+            total_ping_count = 0
+            traceroute_exists = False
+            
+            for node_name, node_result in result_data.items():
+                if node_result is None:
+                    continue
+                
+                # بررسی ping results
+                if isinstance(node_result, list) and len(node_result) > 0:
+                    for ping_result in node_result:
+                        if isinstance(ping_result, list) and len(ping_result) > 0:
+                            # هر ping_result یک لیست از نتایج ping است
+                            for individual_ping in ping_result:
+                                if isinstance(individual_ping, list) and len(individual_ping) >= 2:
+                                    status = individual_ping[0]
+                                    total_ping_count += 1
+                                    if status == "OK":
+                                        ping_success_count += 1
+                                        logging.debug(f"✅ IP {server_ip}: Ping موفق شمارش شد ({ping_success_count})")
+                                    else:
+                                        logging.debug(f"❌ IP {server_ip}: Ping ناموفق شمارش شد")
+                
+                # بررسی traceroute (اگر وجود داشته باشد)
+                if isinstance(node_result, dict) and 'traceroute' in node_result:
+                    traceroute_data = node_result['traceroute']
+                    if traceroute_data and len(traceroute_data) > 0:
+                        traceroute_exists = True
+            
+            # سرور سالم: همه 4 ping موفق + بدون traceroute
+            is_healthy = ping_success_count == 4 and total_ping_count >= 4 and not traceroute_exists
+            
+            if is_healthy:
+                logging.debug(f"✅ IP {server_ip}: همه 4 ping موفق (4/4), بدون traceroute")
+            else:
+                if ping_success_count < 4:
+                    logging.debug(f"❌ IP {server_ip}: فقط {ping_success_count}/4 ping موفق")
+                if traceroute_exists:
+                    logging.debug(f"❌ IP {server_ip}: traceroute موجود")
+                if total_ping_count < 4:
+                    logging.debug(f"❌ IP {server_ip}: تعداد کل ping کمتر از 4 ({total_ping_count})")
+            
+            return is_healthy
+            
+        except Exception as e:
+            logging.error(f"خطا در تحلیل نتایج ping برای {server_ip}: {e}")
+            return False
+    
     def _analyze_ping_results(self, result_data: Dict, server_ip: str) -> bool:
         """
-        تحلیل نتایج ping برای یک IP خاص
+        تحلیل نتایج ping برای یک IP خاص (نسخه قدیمی - حفظ شده برای سازگاری)
         سرور سالم در نظر گرفته می‌شود اگر:
         1. حداقل یک نود ping موفق داشته باشد
         2. هیچ نودی traceroute نداشته باشد (null یا empty)
@@ -654,7 +714,7 @@ class VLESSManager:
                         ip_to_configs[ip] = []
                     ip_to_configs[ip].append(config)
             
-            logging.info(f"🌐 شروع تست ping برای {len(unique_ips)} IP منحصر به فرد (یکی یکی)")
+            logging.info(f"🌐 شروع تست ping (4/4) برای {len(unique_ips)} IP منحصر به فرد (یکی یکی)")
             
             all_ping_results = {}
             ip_list = list(unique_ips)
@@ -669,9 +729,9 @@ class VLESSManager:
                     all_ping_results[ip] = single_result
                     
                     if single_result:
-                        logging.info(f"✅ IP {ip}: Ping موفق")
+                        logging.info(f"✅ IP {ip}: همه 4 ping موفق (4/4)")
                     else:
-                        logging.debug(f"❌ IP {ip}: Ping ناموفق")
+                        logging.debug(f"❌ IP {ip}: حداقل یکی از 4 ping ناموفق")
                     
                     # کمی صبر بین تست‌ها
                     if i < len(ip_list):
@@ -698,7 +758,7 @@ class VLESSManager:
             except Exception:
                 pass
             
-            logging.info(f"✅ تست ping کامل شد: {len(healthy_configs)} کانفیگ سالم از {len(configs)}")
+            logging.info(f"✅ تست ping (4/4) کامل شد: {len(healthy_configs)} کانفیگ سالم از {len(configs)}")
             logging.info(f"🌍 IP های سالم: {len(healthy_ips)} از {len(unique_ips)}")
             
             return healthy_configs
@@ -1818,7 +1878,7 @@ class VLESSManager:
                     self.create_fallback_output("هیچ کانفیگ VLESS موفقی یافت نشد")
                 return False
 
-            logging.info(f"🌐 شروع تست ping با check-host.net برای {len(healthy_configs)} کانفیگ سالم")
+            logging.info(f"🌐 شروع تست ping (4/4) با check-host.net برای {len(healthy_configs)} کانفیگ سالم")
             ping_ok_configs = await self.filter_configs_by_ping_check(healthy_configs)
             if not ping_ok_configs:
                 logging.warning("هیچ کانفیگی تست ping را پاس نکرد")
