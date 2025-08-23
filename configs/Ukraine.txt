@@ -1,1 +1,1 @@
-hysteria2://942b9cb8-92fa-46ac-ae91-f69c8234434b@185.126.255.78:43429?sni=real.getafreenode.sbs&insecure=0#UA
+hysteria2://c6e02cd8-ce11-40f0-afeb-e2c412b6cc3a@185.126.255.78:37058?sni=dxobg4azmk.gafnode.sbs&insecure=0#UA
