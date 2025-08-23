@@ -1,3 +1,1 @@
 ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw@171.22.254.17:989#%F0%9F%87%B2%F0%9F%87%B9MT-171.22.254.17-4906
-ss://b5441b0d-2147-4898-8a6a-9b2c87f58382@46.202.30.3:8880?security=&sni=Telegram-channel-WangCai2&allowInsecure=1&type=ws&path=/Telegram%F0%9F%87%A8%F0%9F%87%B3&host=bitget1.asdasd.click&encryption=none#%F0%9F%87%B2%F0%9F%87%B9MT%20%7C%20@V2ray_Collector
-vless://b5441b0d-2147-4898-8a6a-9b2c87f58382@46.202.30.3:8880?security=&sni=Telegram-channel-WangCai2&allowInsecure=1&type=ws&path=/Telegram%F0%9F%87%A8%F0%9F%87%B3&host=bitget1.asdasd.click&encryption=none#%F0%9F%87%B2%F0%9F%87%B9MT%20%7C%20@V2ray_Collector
