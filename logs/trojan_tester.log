@@ -1,0 +1,6 @@
+2025-08-23 01:52:19,085 - INFO - 🚀 راه‌اندازی TrustLink Trojan Tester
+2025-08-23 01:52:19,085 - INFO - متادیتای جدید Trojan ایجاد شد
+2025-08-23 01:52:19,086 - ERROR - خطای غیرمنتظره در Trojan: module 'asyncio' has no attribute 'timeout'
+2025-08-23 01:52:19,086 - WARNING - هیچ نتیجه جزئی برای ذخیره وجود ندارد (reason=unexpected-error)
+2025-08-23 01:52:19,086 - INFO - ایجاد فایل fallback: partial-save: no results (reason=unexpected-error)
+2025-08-23 01:52:19,086 - INFO - فایل fallback با موفقیت ایجاد شد
