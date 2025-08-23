@@ -1,4 +1,4 @@
 hysteria2://0f78d86d-c753-4b0d-8a1d-945160a41043@ukhub.xg-hub.icu:25785?security=tls&obfs=salamander&obfs-password=ZDQxZDhjZDk4ZjAwYjIwNA%3D%3D&insecure=1&sni=ukhub.xg-hub.icu#🆔express_freevpn%20🔒%20HY2-UDP-N/A%20🇬🇧%20GB%20down
 hysteria2://7GEEGxAfgQaVPQX0PGk7lIuj3I@158.41.110.234:10820?sni=bing.com&insecure=1#GB
 hysteria2://O0URQrRTemVsvUP6jvcBwEIN7Ng@35.178.136.205:10832?sni=bing.com&insecure=1#GB
-ssr://NjIuMTAwLjIwNS40ODo5ODk6b3JpZ2luOmFlcy0yNTYtY2ZiOnBsYWluOlpqaG1OMkZEZW1OUVMySnpSamh3TXc9PS8/b2Jmc3BhcmFtPSZyZW1hcmtzPThKJTJCSHJQQ2ZoNmRIUWkwMk1pNHhNREF1TWpBMUxqUTRMVFE0TWpRJTNEJnByb3RvcGFyYW09
+ssr://NjIuMTAwLjIwNS40ODo5ODk6b3JpZ2luOmFlcy0yNTYtY2ZiOnBsYWluOlpqaG1OMkZEZW1OUVMySnpSamh3TXc9PS8/b2Jmc3BhcmFtPSZyZW1hcmtzPThKJTJCSHJQQ2ZoNmRIUWkwMk1pNHhNREF1TWpBMUxqUTRMVFE0TWpnJTNEJnByb3RvcGFyYW09
