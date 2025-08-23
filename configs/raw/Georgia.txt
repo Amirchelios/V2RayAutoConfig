@@ -1,0 +1,2 @@
+ss://fac1c66f-3ba3-4d24-8ae8-d6049d949898@51.38.64.196:443/?type=tcp&encryption=none&flow=&sni=yahoo.com&fp=chrome&security=reality&pbk=guQofANvA8Ia_uVwhRMriU09zudRTM_k7Nr498g161s&sid=a31a8d04622560#Channel%20id%3A%3A%20%40v2rayng_021%20GE
+vless://fac1c66f-3ba3-4d24-8ae8-d6049d949898@51.38.64.196:443/?type=tcp&encryption=none&flow=&sni=yahoo.com&fp=chrome&security=reality&pbk=guQofANvA8Ia_uVwhRMriU09zudRTM_k7Nr498g161s&sid=a31a8d04622560#Channel%20id%3A%3A%20%40v2rayng_021%20GE

@@ -99,6 +99,7 @@ hysteria2://dongtaiwang.com@51.159.111.32:5355?security=tls&insecure=1&sni=www.b
 hysteria2://dongtaiwang.com@51.159.111.32:5355?security=tls&insecure=1&sni=www.bing.com#%E2%98%9E%20%F0%9D%97%9D%F0%9D%97%BC%F0%9D%97%B6%F0%9D%97%BB%20%E2%9E%A0%20%40Viturey🔗
 hysteria2://dongtaiwang.com@51.159.111.32:5355?sni=www.bing.com&insecure=1#FR
 hysteria2://f192a1eb-5987-49b2-9b2d-31a1410d7566@hsyg.huasuan666.top:22156?security=tls&insecure=1&sni=hsyg.huasuan666.top#%F0%9F%87%AC%F0%9F%87%A7%40FreakConfighysteria2://8b583292-c936-4723-a8c7-8adb8ecf5044@hsxjp.huasuan666.top:22154?security=tls&insecure=1#%F0%9F%87%BA%F0%9F%87%B2%40FreakConfig
+hysteria2://f192a1eb-5987-49b2-9b2d-31a1410d7566@hsyg.huasuan666.top:22156?sni=hsyg.huasuan666.top&insecure=1#GB
 hysteria2://f6e4b19a3110d19d@66.135.28.59:443?sni=www.apple.com&insecure=1&obfs=salamander#US
 hysteria2://nfsn666@45.207.222.138:8888/?insecure=1&sni=hk.nfsn666.gq#Channel%20id%3A%20%40@proxy_kafee%F0%9F%87%AD%F0%9F%87%B0
 hysteria2://y0qochAspE+u-HLfrip-@45.32.234.211:443?sni=Google.com&insecure=1&obfs=salamander#NL
