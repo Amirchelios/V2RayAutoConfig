@@ -63,6 +63,7 @@ hysteria2://7JnRmdeMP4gsvp0nXjYofBNvsdk@3.75.180.49:7414/?insecure=1&sni=bing.co
 hysteria2://7JnRmdeMP4gsvp0nXjYofBNvsdk@3.75.180.49:7414/?insecure=1&sni=bing.com#Channel%20id%3A%20%40ShadowProxy66%F0%9F%87%A9%F0%9F%87%AA
 hysteria2://7JnRmdeMP4gsvp0nXjYofBNvsdk@3.75.180.49:7414?sni=bing.com&insecure=1#DE
 hysteria2://8418fb71-419d-4fc3-8b29-d7fee8de76c7@104.168.34.109:443?sni=www.bing.com&insecure=1#US
+hysteria2://942b9cb8-92fa-46ac-ae91-f69c8234434b@185.126.255.78:43429?sni=real.getafreenode.sbs&insecure=0#UA
 hysteria2://95d2db5c-e604-4afe-9869-e8c50dac1bfa@hl.dport.top:33659?sni=hl.dport.top&insecure=1&obfs=salamander#NL
 hysteria2://96ccaa92-f487-4673-b8f5-a6ee167d6f39@yume-us.legeth.xyz:11683?insecure=1#XX
 hysteria2://9TItIjHPMopRBvBQpeTKTNJf2k@54.166.221.95:26533?insecure=1#US
@@ -97,7 +98,6 @@ hysteria2://Yet-Another-Public-Config-1@yapc-1.adamhayward.co.uk:36600?security=
 hysteria2://Yet-Another-Public-Config-1@yapc-1.adamhayward.co.uk:36600?sni=YAPC-1.afshin.ir&insecure=0&obfs=salamander#NL
 hysteria2://Yet-Another-Public-Config-1@yapc-1.adamhayward.co.uk:36600?sni=YAPC-1.afshin.ir&obfs=salamander&obfs-password=Yet-Another-Public-Config-1&insecure=1#%40Daily_Configs
 hysteria2://aad14334740e854a0e24fe5dcf414967@p1ldar.fizikade.ir:8883?security=tls&obfs=salamander&obfs-password=esdxfcghoewaahabvrrbU9dfghjh&insecure=0&sni=p1ldar.fizikade.ir#%F0%9F%87%A6%F0%9F%87%AA%20%F0%9D%90%94%F0%9D%90%80%F0%9D%90%84%20%F0%9D%9F%9A%20-%20%F0%9D%90%86%F0%9D%90%9A%F0%9D%90%A6%F0%9D%90%9E%20NaranV2ray
-hysteria2://c6e02cd8-ce11-40f0-afeb-e2c412b6cc3a@185.126.255.78:37058?sni=dxobg4azmk.gafnode.sbs&insecure=0#UA
 hysteria2://c8631767-f45c-4f48-bf19-5405e6d18679@45.136.245.177:33079/?insecure=1&obfs=salamander&obfs-password=NDhhNmY5YTY0MGYzOTgxYQ%3D%3D#Channel%20id%3A%20%40@proxy_kafee%F0%9F%87%BA%F0%9F%87%B8
 hysteria2://c8631767-f45c-4f48-bf19-5405e6d18679@45.136.245.177:33079/?insecure=1&obfs=salamander&obfs-password=NDhhNmY5YTY0MGYzOTgxYQ%3D%3D#Channel%20id%3A%20%40ShadowProxy66%F0%9F%87%BA%F0%9F%87%B8
 hysteria2://c8631767-f45c-4f48-bf19-5405e6d18679@45.136.245.177:33079?insecure=1&obfs=salamander#RU
