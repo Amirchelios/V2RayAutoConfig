@@ -1,7 +1,7 @@
 hysteria2://942b9cb8-92fa-46ac-ae91-f69c8234434b@185.126.255.78:43429?sni=real.getafreenode.sbs&insecure=0#UA
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpzaHdvZ2hSaWE=@195.28.182.217:51348#%F0%9F%87%BA%F0%9F%87%A6UA-195.28.182.217-8260
-ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@5.188.6.8:989#%F0%9F%87%BA%F0%9F%87%A6UA-5.188.6.8-7996
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpzaHdvZ2hSaWE=@195.28.182.217:51348#%F0%9F%87%BA%F0%9F%87%A6UA-195.28.182.217-8286
+ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@5.188.6.8:989#%F0%9F%87%BA%F0%9F%87%A6UA-5.188.6.8-8022
 ss://c0bec1db-8577-46cf-aad1-a107e1c866a1@undl.doctorrezaaeissite.ir:80?security=reality&encryption=none&pbk=-3T3wKBehm_NOsTnrZfWIKklAe3sTXhlAS_9rjdQMTw&headerType=none&fp=firefox&spx=%2F&type=tcp&sni=maps.google.com&sid=9b806ce1#REALITY|UA🇺🇦
 trojan://6884d714-d3c4-4b49-aa20-767ea92837d6@itarmy.com.ua:443/?type=ws&host=icecream.955850.xyz&path=%2Fproxyip%3D45.67.215.153%3A443%26proxyIP%3Dnull&security=tls&sni=icecream.955850.xyz&alpn=h3&fp=randomized#itarmy.com.ua
 vless://c0bec1db-8577-46cf-aad1-a107e1c866a1@undl.doctorrezaaeissite.ir:80?security=reality&encryption=none&pbk=-3T3wKBehm_NOsTnrZfWIKklAe3sTXhlAS_9rjdQMTw&headerType=none&fp=firefox&spx=%2F&type=tcp&sni=maps.google.com&sid=9b806ce1#REALITY|UA🇺🇦
-vmess://ewogICAgImFkZCI6ICIxNDEuMTEuMjUyLjY0IiwKICAgICJhaWQiOiAwLAogICAgImhvc3QiOiAiIiwKICAgICJpZCI6ICJiN2IyMzJkMS03OWFlLTRmYjEtOGZkYi02ZjBiZGM4YTQxZWUiLAogICAgIm5ldCI6ICJ3cyIsCiAgICAicGF0aCI6ICIvYjdiMjMyZDEiLAogICAgInBvcnQiOiAyMDYzMCwKICAgICJwcyI6ICLwn4e68J+HplVBLTE0MS4xMS4yNTIuNjQtNjkwMCIsCiAgICAidGxzIjogIiIsCiAgICAidHlwZSI6ICJhdXRvIiwKICAgICJzZWN1cml0eSI6ICJhdXRvIiwKICAgICJza2lwLWNlcnQtdmVyaWZ5IjogdHJ1ZSwKICAgICJzbmkiOiAiIgp9
+vmess://ewogICAgImFkZCI6ICIxNDEuMTEuMjUyLjY0IiwKICAgICJhaWQiOiAwLAogICAgImhvc3QiOiAiIiwKICAgICJpZCI6ICJiN2IyMzJkMS03OWFlLTRmYjEtOGZkYi02ZjBiZGM4YTQxZWUiLAogICAgIm5ldCI6ICJ3cyIsCiAgICAicGF0aCI6ICIvYjdiMjMyZDEiLAogICAgInBvcnQiOiAyMDYzMCwKICAgICJwcyI6ICLwn4e68J+HplVBLTE0MS4xMS4yNTIuNjQtNjkyNyIsCiAgICAidGxzIjogIiIsCiAgICAidHlwZSI6ICJhdXRvIiwKICAgICJzZWN1cml0eSI6ICJhdXRvIiwKICAgICJza2lwLWNlcnQtdmVyaWZ5IjogdHJ1ZSwKICAgICJzbmkiOiAiIgp9
