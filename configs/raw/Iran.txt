@@ -161,6 +161,7 @@ ss://c142dd91-b36b-430b-b0d7-8c9c2a073a1e@WWW.SPEEDTEST.NET:2086?path=%2FTelegra
 ss://c3dd7afc-151f-44f6-8263-ad3c8420ae2f@45.83.21.107:59997?security=reality&encryption=none&pbk=m4ipEx1PUfb6F5Uv5Mwe5g34TzdNkG_rIQ0xw-Do1mI&headerType=none&fp=chrome&type=tcp&sni=yahoo.com&sid=816473be23c2#IRAN%20709%20%28%40Outline_Vpn%29%20free
 ss://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-rezidentali.fastsoft98.ir:2080?encryption=none&security=none&type=tcp&headerType=http&host=http://SpaceNetwork.divarcdn.com#IR🇮🇷
 ss://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-star.dsadsadads.ir:2070?encryption=none&security=none&type=tcp&headerType=none#IR🇮🇷
+ss://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-star.fastsoft98.ir:2010?encryption=none&security=none&type=tcp&headerType=none#IR🇮🇷
 ss://c59695d1-b0d3-440e-a502-76e408805a1e@212.80.9.85:57209/?encryption=none&host=parsabr.com&type=tcp&headerType=http#%F0%9F%87%AE%F0%9F%87%B7%20IR%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40pistachiovpn%20%5B3%5D
 ss://c9032a96-614a-4e8c-bc01-c96aa2ef749c@zarin8i.alireza031.pw:26734?path=%2F%3Fed%3D2048%40HiByeVPNN--%40HiByeVPNN--%40HiByeVPNN--%40HiByeVPNN--%40HiByeVPNN--%40HiByeVPNN--%40HiByeVPNN--%40HiByeVPNN--%40HiByeVPNN--%40HiByeVPNN--%40HiByeVPNN--%40HiByeVPNN--%40HiByeVPNN&security=none&encryption=none&type=ws#IR🇮🇷
 ss://c9032a96-614a-4e8c-bc01-c96aa2ef749c@zarin8i.alireza031.pw:26734?path=/&security=none&encryption=none&type=ws#IR🇮🇷
@@ -341,6 +342,7 @@ vless://c142dd91-b36b-430b-b0d7-8c9c2a073a1e@WWW.SPEEDTEST.NET:2086?path=%2FTele
 vless://c3dd7afc-151f-44f6-8263-ad3c8420ae2f@45.83.21.107:59997?security=reality&encryption=none&pbk=m4ipEx1PUfb6F5Uv5Mwe5g34TzdNkG_rIQ0xw-Do1mI&headerType=none&fp=chrome&type=tcp&sni=yahoo.com&sid=816473be23c2#IRAN%20709%20%28%40Outline_Vpn%29%20free
 vless://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-rezidentali.fastsoft98.ir:2080?encryption=none&security=none&type=tcp&headerType=http&host=http://SpaceNetwork.divarcdn.com#IR🇮🇷
 vless://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-star.dsadsadads.ir:2070?encryption=none&security=none&type=tcp&headerType=none#IR🇮🇷
+vless://c43b7819-008e-4863-aa20-9d3fc2935df8@tunell-star.fastsoft98.ir:2010?encryption=none&security=none&type=tcp&headerType=none#IR🇮🇷
 vless://c59695d1-b0d3-440e-a502-76e408805a1e@212.80.9.85:57209/?encryption=none&host=parsabr.com&type=tcp&headerType=http#%F0%9F%87%AE%F0%9F%87%B7%20IR%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40pistachiovpn%20%5B3%5D
 vless://c9032a96-614a-4e8c-bc01-c96aa2ef749c@zarin8i.alireza031.pw:26734?path=%2F%3Fed%3D2048%40HiByeVPNN--%40HiByeVPNN--%40HiByeVPNN--%40HiByeVPNN--%40HiByeVPNN--%40HiByeVPNN--%40HiByeVPNN--%40HiByeVPNN--%40HiByeVPNN--%40HiByeVPNN--%40HiByeVPNN--%40HiByeVPNN--%40HiByeVPNN&security=none&encryption=none&type=ws#IR🇮🇷
 vless://c9032a96-614a-4e8c-bc01-c96aa2ef749c@zarin8i.alireza031.pw:26734?path=/&security=none&encryption=none&type=ws#IR🇮🇷
