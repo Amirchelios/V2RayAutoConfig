@@ -1,7 +1,7 @@
 {
-  "last_update": "2025-08-25T01:50:46.080199",
-  "total_tests": 6,
-  "total_configs": 50,
+  "last_update": "2025-08-25T12:52:38.795448",
+  "total_tests": 7,
+  "total_configs": 49,
   "working_configs": 50,
   "failed_configs": 0,
   "iran_accessible_configs": 0,
@@ -9,12 +9,12 @@
   "message": "GitHub Actions test mode",
   "last_ss_source": "../configs/raw/ShadowSocks.txt",
   "last_stats": {
-    "new_added": 50,
+    "new_added": 49,
     "duplicates_skipped": 0,
     "invalid_skipped": 0,
     "working_configs": 50,
     "failed_configs": 0,
     "iran_accessible": 0,
-    "timestamp": "2025-08-25T01:50:46.080199"
+    "timestamp": "2025-08-25T12:52:38.795448"
   }
 }
