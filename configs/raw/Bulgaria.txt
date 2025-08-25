@@ -1,4 +1,5 @@
 ss://8672bdcd-e331-464d-9ed8-93a242ca7d2e@89.44.197.77:15946/?type=ws&encryption=none&path=%2F#%F0%9F%87%A7%F0%9F%87%AC%20BG%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40v2rayng3%20%5B13%5D
+ss://8672bdcd-e331-464d-9ed8-93a242ca7d2e@89.44.197.77:15946?path=%2F&security=&encryption=none&type=ws#BG🇧🇬
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvSjd4blVrbkV1TVNjTTIxY2xDeUVpdDY2SlJobVpyQXJSU0UweGVhcEdSMjRIcUg@89.44.197.181:31348#%F0%9F%87%A7%F0%9F%87%ACBG-89.44.197.181-0918
 ss://YWVzLTI1Ni1jZmI6VFBxWDhlZGdiQVVSY0FNYg==@213.183.63.218:9079#%F0%9F%87%A7%F0%9F%87%ACBG-213.183.63.218-4199
 ss://YWVzLTI1Ni1jZmI6VTZxbllSaGZ5RG1uOHNnbg==@213.183.63.221:9041#%F0%9F%87%A7%F0%9F%87%ACBG-213.183.63.221-4207
@@ -14,6 +15,7 @@ ss://YWVzLTI1Ni1jZmI6cnBnYk5uVTlyRERVNGFXWg==@213.183.63.217:9094#%F0%9F%87%A7%F
 ss://YWVzLTI1Ni1jZmI6dWVMWFZrdmg0aGNraEVyUQ==@213.183.63.221:9060#%F0%9F%87%A7%F0%9F%87%ACBG-213.183.63.221-4198
 ss://YWVzLTI1Ni1jZmI6eTlWVVJ5TnpKV05SWUVHUQ==@213.183.63.218:9008#%F0%9F%87%A7%F0%9F%87%ACBG-213.183.63.218-4202
 ss://fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf@89.117.112.63:8880?security=&sni=sg.laoyoutiao.link&allowInsecure=1&type=ws&path=/Telegram%F0%9F%87%A8%F0%9F%87%B3&host=sg.laoyoutiao.link&encryption=none#%F0%9F%87%A7%F0%9F%87%ACBG%20%7C%20@V2ray_Collector
-ss://fab7bf9cddb945638a04fb01ce6c0fbfOg==@147.78.140.20:8880#BG%F0%9F%87%A7%F0%9F%87%AC+%7C+147.78.140.20-8880+%7C+1.36ms
+ss://fab7bf9cddb945638a04fb01ce6c0fbfOg==@147.78.140.20:8880#BG%F0%9F%87%A7%F0%9F%87%AC+%7C+147.78.140.20-8880+%7C+5.45ms
 vless://8672bdcd-e331-464d-9ed8-93a242ca7d2e@89.44.197.77:15946/?type=ws&encryption=none&path=%2F#%F0%9F%87%A7%F0%9F%87%AC%20BG%20%7C%20%F0%9F%94%93%20VLESS%20%7C%20%40v2rayng3%20%5B13%5D
+vless://8672bdcd-e331-464d-9ed8-93a242ca7d2e@89.44.197.77:15946?path=%2F&security=&encryption=none&type=ws#BG🇧🇬
 vless://fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf@89.117.112.63:8880?security=&sni=sg.laoyoutiao.link&allowInsecure=1&type=ws&path=/Telegram%F0%9F%87%A8%F0%9F%87%B3&host=sg.laoyoutiao.link&encryption=none#%F0%9F%87%A7%F0%9F%87%ACBG%20%7C%20@V2ray_Collector

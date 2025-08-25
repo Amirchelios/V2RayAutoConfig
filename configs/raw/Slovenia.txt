@@ -1,11 +1,8 @@
 ss://171c1154-6b3e-4e1d-ad11-e75de2f56f0b@tunnyl.ru:443?security=reality&encryption=none&pbk=suqEZ-Y0ekSa7F_zGFeRhCLIJqZbnmBbnZJ-zYT7iQI&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=yahoo.com&sid=5c0333ed45b1#REALITY|SI🇸🇮
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpmOGY3YUN6Y1BLYnNGOHAz@192.71.244.150:990#SI%F0%9F%87%B8%F0%9F%87%AE+%7C+192.71.244.150-990+%7C+138.75ms
 ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@192.71.244.150:989#%F0%9F%87%B8%F0%9F%87%AESI-192.71.244.150-4819
 ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@91.132.94.200:989#%F0%9F%87%B8%F0%9F%87%AESI-91.132.94.200-4877
 ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw@192.71.244.150:989#%F0%9F%87%B8%F0%9F%87%AESI-192.71.244.150-0357
 ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw@192.71.244.150:989#%F0%9F%87%B8%F0%9F%87%AESI-192.71.244.150-4992
 ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw@91.132.94.200:989#%F0%9F%87%B8%F0%9F%87%AESI-91.132.94.200-0341
 ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw@91.132.94.200:989#%F0%9F%87%B8%F0%9F%87%AESI-91.132.94.200-0350
-ss://d8dd94fd-540e-461d-b5d4-acebef02c22a@45.83.130.133:34045?security=reality&encryption=none&pbk=cDaDzPr3PlS3NM8lreHZbdo-Mhqz8vMBzMSkHXhGIUA&headerType=none&type=tcp&sni=visit-this-invitation-link-to-join-tg-enkelte-notif.ekt.me&sid=e8ab71d0#REALITY|SI🇸🇮
 vless://171c1154-6b3e-4e1d-ad11-e75de2f56f0b@tunnyl.ru:443?security=reality&encryption=none&pbk=suqEZ-Y0ekSa7F_zGFeRhCLIJqZbnmBbnZJ-zYT7iQI&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=yahoo.com&sid=5c0333ed45b1#REALITY|SI🇸🇮
-vless://d8dd94fd-540e-461d-b5d4-acebef02c22a@45.83.130.133:34045?security=reality&encryption=none&pbk=cDaDzPr3PlS3NM8lreHZbdo-Mhqz8vMBzMSkHXhGIUA&headerType=none&type=tcp&sni=visit-this-invitation-link-to-join-tg-enkelte-notif.ekt.me&sid=e8ab71d0#REALITY|SI🇸🇮
