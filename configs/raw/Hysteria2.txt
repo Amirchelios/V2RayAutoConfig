@@ -110,7 +110,6 @@ hysteria2://dongtaiwang.com@45.129.2.108:50850?insecure=1#RU
 hysteria2://dongtaiwang.com@51.158.54.46:44550?sni=bing.com&insecure=1#FR
 hysteria2://dongtaiwang.com@51.159.111.32:5355/?insecure=1&sni=www.bing.com#Channel%20id%3A%20%40ShadowProxy66%F0%9F%87%AB%F0%9F%87%B7
 hysteria2://dongtaiwang.com@51.159.111.32:5355/?insecure=1&sni=www.bing.com#Channel%20id%3A%20%40proxy_kafee%F0%9F%87%AB%F0%9F%87%B7
-hysteria2://dongtaiwang.com@51.159.111.32:5355?security=tls&insecure=1&sni=www.bing.com#%E2%98%9E%20%F0%9D%97%9D%F0%9D%97%BC%F0%9D%97%B6%F0%9D%97%BB%20%E2%9E%A0%20%40Viturey🔗
 hysteria2://dongtaiwang.com@51.159.111.32:5355?sni=www.bing.com&insecure=1#FR
 hysteria2://f192a1eb-5987-49b2-9b2d-31a1410d7566@hsyg.huasuan666.top:22156?security=tls&insecure=1&sni=hsyg.huasuan666.top#%D8%A8%D8%B1%D8%A7%DB%8C%20%D8%A7%D8%AA%D8%B5%D8%A7%D9%84%20%D8%AF%D8%A7%D8%A6%D9%85%DB%8C%20%D8%AC%D9%88%DB%8C%D9%86%20%D8%B4%D9%88%F0%9F%AB%86%20TelegramID%20%E2%8C%B2Express_freevpn%20%F0%9F%AA%A9
 hysteria2://f192a1eb-5987-49b2-9b2d-31a1410d7566@hsyg.huasuan666.top:22156?security=tls&insecure=1&sni=hsyg.huasuan666.top#%F0%9F%87%AC%F0%9F%87%A7%40FreakConfighysteria2://8b583292-c936-4723-a8c7-8adb8ecf5044@hsxjp.huasuan666.top:22154?security=tls&insecure=1#%F0%9F%87%BA%F0%9F%87%B2%40FreakConfig
