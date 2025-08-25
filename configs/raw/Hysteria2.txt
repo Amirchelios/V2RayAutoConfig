@@ -91,8 +91,8 @@ hysteria2://Y5kSCRNcOSz5YQUkjehzVXeT2mk@175.41.154.215:19298?sni=bing.com&insecu
 hysteria2://Yet-Another-Public-Config-1@2a14:3f87:f001:13::a:36400?sni=YAPC-1.afshin.ir&insecure=1&obfs=salamander#NL
 hysteria2://Yet-Another-Public-Config-1@[2a14:3f87:f001:13::a]:36400/?insecure=1&sni=YAPC-1.afshin.ir&obfs=salamander&obfs-password=Yet-Another-Public-Config-1#Channel%20id%3A%20%40ShadowProxy66%F0%9F%87%B3%F0%9F%87%B1
 hysteria2://Yet-Another-Public-Config-1@[2a14:3f87:f001:13::a]:36400/?insecure=1&sni=YAPC-1.afshin.ir&obfs=salamander&obfs-password=Yet-Another-Public-Config-1#Channel%20id%3A%20%40proxy_kafee%F0%9F%87%B3%F0%9F%87%B1
+hysteria2://Yet-Another-Public-Config-1@yapc-1.adamhayward.co.uk:35000?sni=YAPC-1.afshin.ir&insecure=1&obfs=salamander#NL
 hysteria2://Yet-Another-Public-Config-1@yapc-1.adamhayward.co.uk:36600?security=tls&obfs=salamander&obfs-password=Yet-Another-Public-Config-1&insecure=1&sni=YAPC-1.afshin.ir#%F0%9D%97%9D%F0%9D%97%BC%F0%9D%97%B6%F0%9D%97%BB%20%E2%9E%A0%20%F0%9D%90%93%F0%9D%90%9E%F0%9D%90%A5%F0%9D%90%9E%F0%9D%90%A0%F0%9D%90%AB%F0%9D%90%9A%F0%9D%90%A6%3A%20%40V2rayTun0
-hysteria2://Yet-Another-Public-Config-1@yapc-1.adamhayward.co.uk:36600?sni=YAPC-1.afshin.ir&insecure=0&obfs=salamander#NL
 hysteria2://Yet-Another-Public-Config-1@yapc-1.adamhayward.co.uk:36600?sni=YAPC-1.afshin.ir&obfs=salamander&obfs-password=Yet-Another-Public-Config-1&insecure=1#%40Daily_Configs
 hysteria2://a16d62f6-048d-11f0-af5a-f23c93136cb3@b9c3912b-t07z40-t1l1nh-d6ar.la.shifen.uk:1743?sni=b9c3912b-t07z40-t1l1nh-d6ar.la.shifen.uk&insecure=0#US
 hysteria2://c6e02cd8-ce11-40f0-afeb-e2c412b6cc3a@185.126.255.78:37058?sni=dxobg4azmk.gafnode.sbs&insecure=0#UA
