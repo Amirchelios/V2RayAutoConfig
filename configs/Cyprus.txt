@@ -16,6 +16,7 @@ ss://dbf403f4b87144468712675562dbbb7b@195.85.59.161:2095#CY%F0%9F%87%A8%F0%9F%87
 ss://e48241934f54453bd03788368e85ef0eOg==@45.82.251.109:8880#CY%F0%9F%87%A8%F0%9F%87%BE+%7C+45.82.251.109-8880+%7C+22.85ms
 trojan://750a29bf-0a40-437f-b120-38de74ae7eaf@45.82.253.234:28443?security=tls#%F0%9F%87%A8%F0%9F%87%BECY-45.82.253.234-2823
 trojan://a1b16d10-4f43-4dd9-8c4f-52065b2b0910@45.82.253.237:28443?security=tls#%F0%9F%87%A8%F0%9F%87%BECY-45.82.253.237-2864
+tuic://e033ef6e-ab4b-47d4-a523-ff568d2c8dbb:strong-secret-pass-777@45.82.245.37:50043?allow_insecure=1&alpn=h3&udp_relay_mode=native&congestion_control=bbr&version=5#%F0%9F%87%A8%F0%9F%87%BE%20%E6%9C%BA%E5%9C%BA%E6%8E%A8%E8%8D%90%3Adafei.de%20%E5%A1%9E%E6%B5%A6%E8%B7%AF%E6%96%AF%2001
 vless://00b0d4de-b126-4511-87c1-8f1feb462fa6@171.22.114.248:27394?security=reality&encryption=none&pbk=TZO1nvxk-x90cL3v9ixowQNC56sQ8k76_KaGU6jczks&headerType=none&fp=chrome&type=tcp&sni=yahoo.com&sid=c2fa#Cyprus%20WorkTitans
 vless://700815ef3f0242af93ab59dec3d57626@45.15.162.212:8443?encryption=none&type=xhttp&path=%2Fx&security=reality&sni=apple.com&pbk=75FkbYU36RrbJp70spt8PBura__t4isg1UQuZr1gAgc&sid=aabbccdd&fp=random#REALITY|CY🇨🇾
 vless://8b648e4c-ac38-4809-951b-e1c8862b13d1@45.149.115.148:443?security=reality&encryption=none&pbk=0pX0dvxDHHJS2uK0t_SHauP1LB65JsRD1kQp9MK9vjI&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=google.com&sid=96#REALITY|CY🇨🇾
