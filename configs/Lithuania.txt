@@ -5,9 +5,7 @@ ss://ca5ab635-fbaa-4ff2-8283-3954b92ae477@93.115.25.42:8443?security=reality&enc
 ss://fab7bf9cddb945638a04fb01ce6c0fbfOg==@88.216.66.29:8880#LT%F0%9F%87%B1%F0%9F%87%B9+%7C+88.216.66.29-8880+%7C+4.43ms
 ss://ff6fb512-147d-419a-9672-e131133f7189@lt-cherry-01.com:8443?security=reality&encryption=none&pbk=L3X1eh1Jq_6PKJ6LlwjgiWq0XNaDOqCVKgIElJ5nkVA&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=tradingview.com&sid=e0ef3d5c0aacb615#REALITY|LT🇱🇹
 trojan://4f9ca636-5195-406a-b48c-0388689dd9a7@212.24.103.3:443?security=tls#%F0%9F%87%B1%F0%9F%87%B9LT-212.24.103.3-2708
-trojan://8r%3C%5B9%27l6hAO%238ZQi@185.80.128.115:8443?allowInsecure=1&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B1%F0%9F%87%B9LT%E7%AB%8B%E9%99%B6%E5%AE%9B%E4%B8%A8yoyapai.com%5Cr
 trojan://8r%3C%5B9%27l6hAO%238ZQi@185.80.128.115:8443?sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B1%F0%9F%87%B9LT%E7%AB%8B%E9%99%B6%E5%AE%9B2
-trojan://8r%3C%5B9%27l6hAO%238ZQi@46.29.234.91:8443?allowInsecure=1&sni=Koma-YT.PAGeS.Dev#%E7%AB%8B%E9%99%B6%E5%AE%9B%E7%AF%80%E9%BB%9E%F0%9F%87%B1%F0%9F%87%B9LT%E4%B8%A8yoyapai.com%5Cr
 trojan://8r%3C%5B9%27l6hAO%238ZQi@46.29.234.91:8443?sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B1%F0%9F%87%B9LT%E7%AB%8B%E9%99%B6%E5%AE%9B
 vless://6202b230-417c-4d8e-b624-0f71afa9c75d@5.34.209.231:8443?encryption=none&host=sni.111000.v6.navy&path=%2F&security=tls&sni=sni.111000.v6.navy&type=ws#%3E%3E%40oneclickvpnkeys%3A%3ALT
 vless://ca5ab635-fbaa-4ff2-8283-3954b92ae477@93.115.25.42:8443?security=reality&encryption=none&pbk=L3X1eh1Jq_6PKJ6LlwjgiWq0XNaDOqCVKgIElJ5nkVA&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=tradingview.com&sid=2cfb5a0ae8ab0cb0#REALITY|LT🇱🇹
