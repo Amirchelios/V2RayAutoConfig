@@ -1,4 +1,3 @@
-ss://6202b230-417c-4d8e-b624-0f71afa9c75d@14.102.228.238:2096?allowInsecure=1&encryption=none&host=sni.jpmj.dev&path=%2F%3FTelegram%25F0%259F%2587%25A8%25F0%259F%2587%25B3%2B%2540WangCai2%3D&security=tls&sni=sni.jpmj.dev&type=ws#👉🆔@v2ray_configs_pool📡🇨🇿®️Czechia©️Prague🅿️ping:56.14ms
 ss://6202b230-417c-4d8e-b624-0f71afa9c75d@211.193.169.223:10243?security=tls&type=ws&path=%2F&host=sni.111000.v6.army&sni=sni.111000.v6.army&fp=chrome#%F0%9F%87%A8%F0%9F%87%BF%20%E6%9C%BA%E5%9C%BA%E6%8E%A8%E8%8D%90%3Adafei.de%20%E6%8D%B7%E5%85%8B%2002
 ss://6202b230-417c-4d8e-b624-0f71afa9c75d@77.110.96.142:443?security=tls&type=ws&path=%2F&host=sni.latonyamadeline.ndjp.net&sni=sni.latonyamadeline.ndjp.net&fp=chrome#%F0%9F%87%A8%F0%9F%87%BF%20%E6%9C%BA%E5%9C%BA%E6%8E%A8%E8%8D%90%3Adafei.de%20%E6%8D%B7%E5%85%8B%2001
 ss://948fac3c-42bf-41a6-a5f9-704d36ff0d8d@80.211.205.173:8443?security=tls&type=ws&path=/danfeng&host=snippet.fgfw.ye.gs&sni=snippet.fgfw.ye.gs&fp=random#CZ🇨🇿
@@ -9,7 +8,7 @@ ss://YWVzLTI1Ni1jZmI6YXNkS2thc2tKS2Zuc2E=@212.102.38.88:443#%F0%9F%87%A8%F0%9F%8
 ss://b6ce8a51-19b9-4979-91ba-b4298c26d5fc@45.151.183.111:443?alpn=http%2F1.1%2Ch2&encryption=none&flow=xtls-rprx-vision&security=tls&sni=czu.ksnodes.net&type=tcp#%3E%3E%40oneclickvpnkeys%3A%3ACZ
 ss://b6ce8a51-19b9-4979-91ba-b4298c26d5fc@czu.ksnodes.net:443?alpn=http%2F1.1%2Ch2&encryption=none&flow=xtls-rprx-vision&security=tls&sni=czu.ksnodes.net&type=tcp#%3E%3E%40oneclickvpnkeys%3A%3ACZ
 trojan://3gLlCYBipVwr6Y5F@92.118.149.85:443?security=tls#%F0%9F%87%A8%F0%9F%87%BFCZ-92.118.149.85-2401
-vless://6202b230-417c-4d8e-b624-0f71afa9c75d@14.102.228.238:2096?allowInsecure=1&encryption=none&host=sni.jpmj.dev&path=%2F%3FTelegram%25F0%259F%2587%25A8%25F0%259F%2587%25B3%2B%2540WangCai2%3D&security=tls&sni=sni.jpmj.dev&type=ws#👉🆔@v2ray_configs_pool📡🇨🇿®️Czechia©️Prague🅿️ping:56.14ms
+trojan://8r%3C%5B9%27l6hAO%238ZQi@185.253.46.5:443?allowInsecure=1&sni=Koma-YT.PAGeS.Dev#%E6%8D%B7%E5%85%8B%E7%AF%80%E9%BB%9E%E4%B8%A8yoyapai.com%5Cr
 vless://6202b230-417c-4d8e-b624-0f71afa9c75d@211.193.169.223:10243?security=tls&type=ws&path=%2F&host=sni.111000.v6.army&sni=sni.111000.v6.army&fp=chrome#%F0%9F%87%A8%F0%9F%87%BF%20%E6%9C%BA%E5%9C%BA%E6%8E%A8%E8%8D%90%3Adafei.de%20%E6%8D%B7%E5%85%8B%2002
 vless://6202b230-417c-4d8e-b624-0f71afa9c75d@77.110.96.142:443?security=tls&type=ws&path=%2F&host=sni.latonyamadeline.ndjp.net&sni=sni.latonyamadeline.ndjp.net&fp=chrome#%F0%9F%87%A8%F0%9F%87%BF%20%E6%9C%BA%E5%9C%BA%E6%8E%A8%E8%8D%90%3Adafei.de%20%E6%8D%B7%E5%85%8B%2001
 vless://948fac3c-42bf-41a6-a5f9-704d36ff0d8d@80.211.205.173:8443?security=tls&type=ws&path=/danfeng&host=snippet.fgfw.ye.gs&sni=snippet.fgfw.ye.gs&fp=random#CZ🇨🇿
