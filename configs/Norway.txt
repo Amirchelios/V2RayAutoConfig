@@ -3,7 +3,7 @@ ss://39039c78-41a2-45f1-a64d-f6818efcae03@172.104.161.138:27420?&security=false&
 ss://3c52e091-6714-4915-949f-2149fe69951b@116.206.124.228:80?&security=false&fp=chrome&type=ws&headerType=none&host=aIs.SpEeDtEsT.nEt&path=%2Fws#%5B%F0%9F%87%B9%F0%9F%87%AD%5D%20%5Bvl-no-ws%5D%20%5B260511-235031.349%5D
 ss://3ddce082-7e03-429c-8af8-9a873d23f0ba@91.244.70.205:443?&security=false&fp=chrome&type=ws&headerType=none&path=%2F#%5B%F0%9F%87%A6%F0%9F%87%B9%5D%20%5Bvl-no-ws%5D%20%5B260511-235032.351%5D
 ss://478cc26d-16b3-4fdd-be64-60d5a58c1622@172.64.146.211:80?&security=false&fp=chrome&type=ws&headerType=none&host=tt.andishehparenting.com&path=%2F#%5B%F0%9F%87%A9%F0%9F%87%AA%5D%20%5Bvl-no-ws%5D%20%5B260511-235039.657%5D
-ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@185.90.61.153:989#%F0%9F%87%B3%F0%9F%87%B4NO-185.90.61.153-8420
+ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@185.90.61.153:989#%F0%9F%87%B3%F0%9F%87%B4NO-185.90.61.153-8411
 ss://e08f1ad7-0c60-446d-baec-08b3b69bb3d0@nl-90w-c.southnetworks.cloud:80?&security=false&fp=chrome&type=ws&headerType=none&host=nl-90w-c.southnetworks.cloud&path=%2FgetWorkerUpdates#%5B%F0%9F%87%B3%F0%9F%87%B1%5D%20%5Bvl-no-ws%5D%20%5B260511-235222.477%5D
 ss://f2a806c6-f36b-4cd9-8bb6-7addb218ad2d@91.244.70.205:443?&security=false&fp=chrome&type=ws&headerType=none&path=%2F#%5B%F0%9F%87%A6%F0%9F%87%B9%5D%20%5Bvl-no-ws%5D%20%5B260511-235234.453%5D
 vless://388a6c57-87e7-420b-afe2-b3eb670fd7da@104.17.145.59:80?&security=false&fp=chrome&type=ws&headerType=none&host=vip.yaml7.ggff.net&path=%2F#%5B%F0%9F%87%BA%F0%9F%87%B8%5D%20%5Bvl-no-ws%5D%20%5B260511-235028.582%5D
