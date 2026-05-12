@@ -82,7 +82,6 @@ ss://3c20a16d-2001-4bf0-9b12-c1c82a2200ed@www.linuweb.ir:80?path=%2F&security=no
 ss://3cd763c4-4825-401f-b133-fa5cc7fa6e1e@snapp.ir:80?encryption=none&host=iranfuture.musicritmic.ir&path=%2F&security=none&type=ws#IR🇮🇷
 ss://3dcd6767-ec3e-4eeb-9fa6-c70b8661072f@212.192.246.57:2087?security=reality&encryption=none&pbk=DwNl_pR9JMgEQoq_cdx4HuZRPyapUBn4FkLZs1U3fXQ&headerType=none&fp=chrome&type=tcp&sni=refersion.com&sid=e004#Iran
 ss://3e0e8d14-e337-49ab-92e4-e414826e7d8c@nobitex.ir:8080?path=%2F&security=&encryption=none&host=sayanstoree.tel.goleij.ir&type=ws#IR🇮🇷
-ss://3e11a680-daa4-4b74-af6a-20b2bf971fd9@r.jblserver.ir:2082/?type=ws&encryption=none&path=%2F&host=r.jblserver.ir&security=none#👉🆔@v2ray_configs_pool📡🇮🇷®️Iran©️Tehrān🅿️ping:165.53ms
 ss://3e11a680-daa4-4b74-af6a-20b2bf971fd9@r.jblserver.ir:2082/?type=ws&encryption=none&path=/&host=r.jblserver.ir&security=none#👉🆔@v2ray_configs_pool📡🇮🇷®️Iran©️Tehrān🅿️ping:165.53ms
 ss://3f0f36f5-f091-45c5-88c9-4bcc545b922c@104.17.148.22:2096?path=/45.76.183.217=49292&security=tls&encryption=none&insecure=0&host=hetz.x-smm.com&fp=chrome&type=ws&allowInsecure=0&sni=hetz.x-smm.com#IR-@V2rayAlpha-6
 ss://3f0f36f5-f091-45c5-88c9-4bcc545b922c@betty.ns.cloudflare.com:2096?path=%2F45.76.183.217%3D49292&security=tls&encryption=none&insecure=0&host=hetz.x-smm.com&fp=chrome&type=ws&allowInsecure=0&sni=hetz.x-smm.com#%F0%9F%8C%90%20WS-TLS%20%7C%20%40Express_alaki%20%7C%20src%20%40vmess_iran
@@ -428,7 +427,6 @@ vless://3c20a16d-2001-4bf0-9b12-c1c82a2200ed@www.linuweb.ir:80?path=%2F&security
 vless://3cd763c4-4825-401f-b133-fa5cc7fa6e1e@snapp.ir:80?encryption=none&host=iranfuture.musicritmic.ir&path=%2F&security=none&type=ws#IR🇮🇷
 vless://3dcd6767-ec3e-4eeb-9fa6-c70b8661072f@212.192.246.57:2087?security=reality&encryption=none&pbk=DwNl_pR9JMgEQoq_cdx4HuZRPyapUBn4FkLZs1U3fXQ&headerType=none&fp=chrome&type=tcp&sni=refersion.com&sid=e004#Iran
 vless://3e0e8d14-e337-49ab-92e4-e414826e7d8c@nobitex.ir:8080?path=%2F&security=&encryption=none&host=sayanstoree.tel.goleij.ir&type=ws#IR🇮🇷
-vless://3e11a680-daa4-4b74-af6a-20b2bf971fd9@r.jblserver.ir:2082/?type=ws&encryption=none&path=%2F&host=r.jblserver.ir&security=none#👉🆔@v2ray_configs_pool📡🇮🇷®️Iran©️Tehrān🅿️ping:165.53ms
 vless://3e11a680-daa4-4b74-af6a-20b2bf971fd9@r.jblserver.ir:2082/?type=ws&encryption=none&path=/&host=r.jblserver.ir&security=none#👉🆔@v2ray_configs_pool📡🇮🇷®️Iran©️Tehrān🅿️ping:165.53ms
 vless://3f0f36f5-f091-45c5-88c9-4bcc545b922c@104.17.148.22:2096?path=/45.76.183.217=49292&security=tls&encryption=none&insecure=0&host=hetz.x-smm.com&fp=chrome&type=ws&allowInsecure=0&sni=hetz.x-smm.com#IR-@V2rayAlpha-6
 vless://3f0f36f5-f091-45c5-88c9-4bcc545b922c@betty.ns.cloudflare.com:2096?path=%2F45.76.183.217%3D49292&security=tls&encryption=none&insecure=0&host=hetz.x-smm.com&fp=chrome&type=ws&allowInsecure=0&sni=hetz.x-smm.com#%F0%9F%8C%90%20WS-TLS%20%7C%20%40Express_alaki%20%7C%20src%20%40vmess_iran
