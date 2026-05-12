@@ -1,4 +1,4 @@
-ss://73bcd72f-9545-4cb8-8daf-7d004501880d@104.26.8.111:443?allowInsecure=1&sni=mybloh.ccwu.cc&type=ws&host=mybloh.ccwu.cc&path=/security=tls#B%20-%20%F0%9F%87%B9%F0%9F%87%BC%20TW%2005%20TG%3A%20%40nodpai
+ss://73bcd72f-9545-4cb8-8daf-7d004501880d@104.26.8.111:443?allowInsecure=1&sni=mybloh.ccwu.cc&type=ws&host=mybloh.ccwu.cc&path=/security=tls#B%20-%20%F0%9F%87%B9%F0%9F%87%BC%20TW%2006%20TG%3A%20%40nodpai
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo3ZTczMWVjMy1mOGUxLTQzZjYtOTJjZi0zOTc4ZDE0NzA1YzQ=@111.248.87.102:50099#%F0%9F%87%B9%F0%9F%87%BCTW-111.248.87.102-0295
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo3ZTczMWVjMy1mOGUxLTQzZjYtOTJjZi0zOTc4ZDE0NzA1YzQ=@nbmrcg0034686rw.cybervena.com:50099#%F0%9F%87%B9%F0%9F%87%BCTW-36.228.140.86-0302
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo3ZTczMWVjMy1mOGUxLTQzZjYtOTJjZi0zOTc4ZDE0NzA1YzQ=@nbmrcg0034686rw.cybervena.com:50099#TW%F0%9F%87%B9%F0%9F%87%BC+%7C+nbmrcg0034686rw.cybervena.com-50099+%7C+315.72ms
@@ -19,6 +19,7 @@ ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@223.165.4.173:989#%F0%9F%87%B9%F0%
 ss://YWVzLTI1Ni1jZmI6cXdlclJFV1FAQA==@185.189.160.105:41632#%F0%9F%87%B9%F0%9F%87%BCTW-185.189.160.105-0290
 ss://YWVzLTI1Ni1jZmI6cXdlclJFV1FAQA==@61.220.130.70:50701#%F0%9F%87%B9%F0%9F%87%BCTW-61.220.130.70-8100
 ss://ae0dd58e-e222-40bf-84ae-365a97532737@220.128.110.108:43?&security=tls&fp=chrome&sni=pagescm.freen6.cc.cd&type=ws&headerType=none&host=pagescm.freen6.cc.cd&path=%2Ftags%2Fdetails#%E5%8F%B0%E6%B9%BE%20254
+ss://ce069292-c8bf-40dd-a6b1-87818a1e64e9@1.161.58.221:443?sni=gogo.wknm.qzz.io&type=ws&host=gogo.wknm.qzz.io&path=/fp=chromesecurity=tls#A%20-%20%F0%9F%87%B9%F0%9F%87%BC%20TW%2001%20TG%3A%20%40nodpai
 ss://ce069292-c8bf-40dd-a6b1-87818a1e64e9@114.33.57.170:443?&security=tls&fp=chrome&sni=1-aym.pages.dev&type=ws&headerType=none&host=1-aym.pages.dev&path=%2Ffp%3Dchrome#C%20-%20%F0%9F%87%B9%F0%9F%87%BC%20TW%2008%20TG%3A%20%40nodpai
 ss://ce069292-c8bf-40dd-a6b1-87818a1e64e9@60.249.21.29:443?sni=gogo4.kmj.qzz.io&type=ws&host=gogo4.kmj.qzz.io&path=/fp=chrome&security=tls#%3E%3E%40v2ray_configs_pool%3A%3ATW
 trojan://0cc6b4268dea0ba8@60.249.3.231:3389?security=tls#%F0%9F%87%B9%F0%9F%87%BCTW-60.249.3.231-2360
@@ -39,7 +40,6 @@ trojan://7b06d22a8a7c764f@211.72.35.156:3389?security=tls#%F0%9F%87%B9%F0%9F%87%
 trojan://7b06d22a8a7c764f@211.72.35.158:3389?security=tls#%F0%9F%87%B9%F0%9F%87%BCTW-211.72.35.158-2317
 trojan://8b475d9e868e43e0@211.72.35.157:3389?security=tls#%F0%9F%87%B9%F0%9F%87%BCTW-211.72.35.157-2275
 trojan://8b475d9e868e43e0@211.72.35.157:3389?security=tls#%F0%9F%87%B9%F0%9F%87%BCTW-211.72.35.157-3364
-trojan://8r%253C%255B9%2527l6hAO%25238ZQi@114.32.9.249:16443?sni=Koma-YT.PAGeS.Dev#B%20-%20%F0%9F%87%B9%F0%9F%87%BC%20TW%2002%20TG%3A%20%40nodpai
 trojan://8r%3C%5B9%27l6hAO%238ZQi@114.32.9.249:16443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B9%F0%9F%87%BCTW-114.32.9.249-1662
 trojan://96983eb4-c8f1-316e-ab00-500014ed3d8b@official.taipeicitygovernment.biz.ua:8443?security=tls#%F0%9F%87%B9%F0%9F%87%BCTW-211.20.245.140-2644
 trojan://96983eb4-c8f1-316e-ab00-500014ed3d8b@official.taipeicitygovernment.chernovtsy.ua:8443?security=tls#%F0%9F%87%B9%F0%9F%87%BCTW-60.250.152.209-2702
@@ -58,8 +58,9 @@ trojan://b09d2aaa443af97a@211.72.35.152:3389?security=tls#%F0%9F%87%B9%F0%9F%87%
 trojan://b09d2aaa443af97a@211.72.35.155:3389?security=tls#%F0%9F%87%B9%F0%9F%87%BCTW-211.72.35.155-2234
 trojan://b84d16a244460e09@211.72.35.152:3389?security=tls#%F0%9F%87%B9%F0%9F%87%BCTW-211.72.35.152-2282
 trojan://b84d16a244460e09@211.72.35.152:3389?security=tls#%F0%9F%87%B9%F0%9F%87%BCTW-211.72.35.152-3350
-vless://73bcd72f-9545-4cb8-8daf-7d004501880d@104.26.8.111:443?allowInsecure=1&sni=mybloh.ccwu.cc&type=ws&host=mybloh.ccwu.cc&path=/security=tls#B%20-%20%F0%9F%87%B9%F0%9F%87%BC%20TW%2005%20TG%3A%20%40nodpai
+vless://73bcd72f-9545-4cb8-8daf-7d004501880d@104.26.8.111:443?allowInsecure=1&sni=mybloh.ccwu.cc&type=ws&host=mybloh.ccwu.cc&path=/security=tls#B%20-%20%F0%9F%87%B9%F0%9F%87%BC%20TW%2006%20TG%3A%20%40nodpai
 vless://ae0dd58e-e222-40bf-84ae-365a97532737@220.128.110.108:43?&security=tls&fp=chrome&sni=pagescm.freen6.cc.cd&type=ws&headerType=none&host=pagescm.freen6.cc.cd&path=%2Ftags%2Fdetails#%E5%8F%B0%E6%B9%BE%20254
+vless://ce069292-c8bf-40dd-a6b1-87818a1e64e9@1.161.58.221:443?sni=gogo.wknm.qzz.io&type=ws&host=gogo.wknm.qzz.io&path=/fp=chromesecurity=tls#A%20-%20%F0%9F%87%B9%F0%9F%87%BC%20TW%2001%20TG%3A%20%40nodpai
 vless://ce069292-c8bf-40dd-a6b1-87818a1e64e9@114.33.57.170:443?&security=tls&fp=chrome&sni=1-aym.pages.dev&type=ws&headerType=none&host=1-aym.pages.dev&path=%2Ffp%3Dchrome#C%20-%20%F0%9F%87%B9%F0%9F%87%BC%20TW%2008%20TG%3A%20%40nodpai
 vless://ce069292-c8bf-40dd-a6b1-87818a1e64e9@60.249.21.29:443?sni=gogo4.kmj.qzz.io&type=ws&host=gogo4.kmj.qzz.io&path=/fp=chrome&security=tls#%3E%3E%40v2ray_configs_pool%3A%3ATW
 vmess://ewogICAgImFkZCI6ICI0NS4xMjEuNTEuMTAzIiwKICAgICJhaWQiOiAwLAogICAgImhvc3QiOiAiIiwKICAgICJpZCI6ICJmNjQwNmI2ZC01NDg3LTQ2ZGEtZjc5My00NjYxMTI2OWEzMDYiLAogICAgIm5ldCI6ICJodHRwIiwKICAgICJwYXRoIjogIiIsCiAgICAicG9ydCI6IDIwNzE1LAogICAgInBzIjogIvCfh7nwn4e8VFctNDUuMTIxLjUxLjEwMy0wNzQzIiwKICAgICJ0bHMiOiAiIiwKICAgICJ0eXBlIjogImF1dG8iLAogICAgInNlY3VyaXR5IjogImF1dG8iLAogICAgInNraXAtY2VydC12ZXJpZnkiOiB0cnVlLAogICAgInNuaSI6ICIiCn0=
