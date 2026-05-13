@@ -3,6 +3,7 @@ ss://39039c78-41a2-45f1-a64d-f6818efcae03@172.104.161.138:27420?&security=false&
 ss://3c52e091-6714-4915-949f-2149fe69951b@116.206.124.228:80?&security=false&fp=chrome&type=ws&headerType=none&host=aIs.SpEeDtEsT.nEt&path=%2Fws#%5B%F0%9F%87%B9%F0%9F%87%AD%5D%20%5Bvl-no-ws%5D%20%5B260512-234831.612%5D
 ss://3ddce082-7e03-429c-8af8-9a873d23f0ba@91.244.70.205:443?&security=false&fp=chrome&type=ws&headerType=none&path=%2F#%5B%F0%9F%87%A6%F0%9F%87%B9%5D%20%5Bvl-no-ws%5D%20%5B260512-234832.784%5D
 ss://5f1811a9-292a-4d7e-b59f-1a5ff9390647@45.12.132.183:80?&security=false&fp=chrome&type=ws&headerType=none&path=%2Fvless%2F#%5B%F0%9F%87%AD%F0%9F%87%BA%5D%20%5Bvl-no-ws%5D%20%5B260512-234900.501%5D
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpBUmd2R1p5d0ErZ2FjZ0dWMjZCdm11MDUrd1ptUlcvaitBZFUrWjhCdDQ0PQ==@185.213.23.63:990#Norway
 ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@185.90.61.153:989#%F0%9F%87%B3%F0%9F%87%B4NO-185.90.61.153-8546
 ss://dc8eccdb-ecfa-435f-9ac1-5dc4882e7b51@de.vpnbase.net:80?&security=false&fp=chrome&type=ws&headerType=none&host=de.vpnbase.net&path=%2Fhttp#%5B%F0%9F%87%A9%F0%9F%87%AA%5D%20%5Bvl-no-ws%5D%20%5B260512-235034.436%5D
 ss://e08f1ad7-0c60-446d-baec-08b3b69bb3d0@146.103.102.82:80?&security=false&fp=chrome&type=ws&headerType=none&path=%2FgetWorkerUpdates#%5B%F0%9F%87%B3%F0%9F%87%B1%5D%20%5Bvl-no-ws%5D%20%5B260512-235036.601%5D
