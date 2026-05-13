@@ -40,7 +40,6 @@ ss://ae0dd58e-e222-40bf-84ae-365a97532737@61.98.237.169:14147?&security=tls&fp=c
 ss://ae0dd58e-e222-40bf-84ae-365a97532737@61.98.237.169:14147?&security=tls&fp=chrome&sni=pagescm.freen24.cc.cd&type=ws&headerType=none&host=pagescm.freen24.cc.cd&path=%2Ftorrent%2Fredirect#%E9%9F%A9%E5%9B%BD%20203
 ss://ae0dd58e-e222-40bf-84ae-365a97532737@61.98.237.169:14147?&security=tls&fp=chrome&sni=pagescm.freen32.cc.cd&type=ws&headerType=none&host=pagescm.freen32.cc.cd&path=%2Fmall#%E9%9F%A9%E5%9B%BD%20204
 trojan://3a2c0c6c-9ee5-c05f-c951-fcd73831983e@138.2.115.240:443?security=tls#%F0%9F%87%B0%F0%9F%87%B7KR-138.2.115.240-2428
-trojan://5dc15e15-f285-4a9d-959b-0e4fbdd77b63@cf.130519.xyz:443?allowInsecure=0&sni=cloudflare-proxy-1jk.pages.dev&ws=1&wspath=%2F%3Fed%3D2560#%F0%9F%87%B0%F0%9F%87%B7%20KR%E9%9F%A9%E5%9B%BD%28mibei77.com%20%E7%B1%B3%E8%B4%9D%E8%8A%82%E7%82%B9%E5%88%86%E4%BA%AB%29
 trojan://5dc15e15-f285-4a9d-959b-0e4fbdd77b63@cf.130519.xyz:443?sni=cloudflare-proxy-1jk.pages.dev#%F0%9F%87%B0%F0%9F%87%B7KR%E9%9F%A9%E5%9B%BD
 trojan://7118b5f4-0ea4-4c11-be7f-11471cb91e4a@144.24.72.126:443?security=tls#%F0%9F%87%B0%F0%9F%87%B7KR-144.24.72.126-2644
 trojan://8r%3C%5B9%27l6hAO%238ZQi@118.39.136.248:20002?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B0%F0%9F%87%B7KR-118.39.136.248-0856
