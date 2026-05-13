@@ -44,11 +44,11 @@ ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@38.60.223.8:989#%F0%9F%87%B7%F0%9F
 ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@92.223.109.126:989#%F0%9F%87%B7%F0%9F%87%BARU-92.223.109.126-3916
 ss://YWVzLTI1Ni1jZmI6cDl6NUJWQURIMllGczNNTg==@45.89.52.66:9040#%F0%9F%87%B7%F0%9F%87%BARU-45.89.52.66-8260
 ss://YWVzLTI1Ni1nY206MzE1MDQ2NjU2OGVkYTg3Yg==@195.58.49.26:60129#%F0%9F%87%B7%F0%9F%87%BARU-195.58.49.26-0229
-ss://YWVzLTI1Ni1nY206YzVmY2RmNzgyOTExMmNiNA@45.140.169.216:30112#%F0%9F%87%B7%F0%9F%87%BA%20%E4%BF%84%E7%BD%97%E6%96%AF%20%E8%8E%AB%E6%96%AF%E7%A7%91JustHost
 ss://YWVzLTI1Ni1nY206ZjM0NTc5ZDAxNDhiMjU4MQ==@185.22.154.104:50129#%F0%9F%87%B7%F0%9F%87%BARU-185.22.154.104-0234
 ss://a21cd99660e54a6da3e328c305860be9@95.142.47.40:8443?encryption=none&type=xhttp&path=%2Fx&security=reality&sni=ya.ru&pbk=7xngDaHJXf2VtdXYaSA-tSvCRCR4rse0r1RidvAV7nY&sid=aabbccdd&fp=random#REALITY|RU🇷🇺
 ss://b9571cb5fcc541e99a36a4ad8bdf70f6@94.103.89.223:8443?encryption=none&type=xhttp&path=%2Fx&security=reality&sni=ya.ru&pbk=9XS6MeMlQBh4qCT1dhavAwGPKsWQGSyrSH_xHwotw0k&sid=aabbccdd&fp=random#REALITY|RU🇷🇺
 ss://d2de6d6d-4735-4fe3-b4b6-00a81ced69f5@youtube.happvpn.com:443?type=tcp&encryption=none&flow=xtls-rprx-vision&sni=cdnjs.com&fp=chrome&security=reality&pbk=MNTWCLyV7EquFn-J0a6KRlQZ0dt6QY5mmu7Dq8uDkxw&sid=4c02bbbfa833b3b6#REALITY|RU🇷🇺
+ss://e387b1c6-c344-Fade-b068-094f5b92aa23@s28233.cdn.ngenix.net:443?encryption=none&type=ws&host=s28233.cdn.ngenix.net&path=%2F&security=tls#RU%E3%80%90%E6%9C%BA%E5%9C%BA%E6%8E%A8%E8%8D%90%EF%BC%9Ahttps%3A//a9a.xyz%E3%80%9112
 ss://f1e74548-4c0b-463b-b68d-0d1ec48c965d@45.12.114.73:8443?path=/ws-vless/&security=tls&encryption=none&insecure=1&host=rus21.unboundworld.org&type=ws&allowInsecure=1&sni=rus21.unboundworld.org#RU🇷🇺
 ss://fab7bf9cddb945638a04fb01ce6c0fbfOg==@45.67.215.29:8880#RU%F0%9F%87%B7%F0%9F%87%BA+%7C+45.67.215.29-8880+%7C+2.08ms
 ss://fab7bf9cddb945638a04fb01ce6c0fbfOg==@77.232.140.20:8880#RU%F0%9F%87%B7%F0%9F%87%BA+%7C+77.232.140.20-8880+%7C+1.61ms
@@ -73,6 +73,7 @@ vless://93961d050c164d01aa96cc07522338d9@145.249.109.121:8443?encryption=none&ty
 vless://a21cd99660e54a6da3e328c305860be9@95.142.47.40:8443?encryption=none&type=xhttp&path=%2Fx&security=reality&sni=ya.ru&pbk=7xngDaHJXf2VtdXYaSA-tSvCRCR4rse0r1RidvAV7nY&sid=aabbccdd&fp=random#REALITY|RU🇷🇺
 vless://b9571cb5fcc541e99a36a4ad8bdf70f6@94.103.89.223:8443?encryption=none&type=xhttp&path=%2Fx&security=reality&sni=ya.ru&pbk=9XS6MeMlQBh4qCT1dhavAwGPKsWQGSyrSH_xHwotw0k&sid=aabbccdd&fp=random#REALITY|RU🇷🇺
 vless://d2de6d6d-4735-4fe3-b4b6-00a81ced69f5@youtube.happvpn.com:443?type=tcp&encryption=none&flow=xtls-rprx-vision&sni=cdnjs.com&fp=chrome&security=reality&pbk=MNTWCLyV7EquFn-J0a6KRlQZ0dt6QY5mmu7Dq8uDkxw&sid=4c02bbbfa833b3b6#REALITY|RU🇷🇺
+vless://e387b1c6-c344-Fade-b068-094f5b92aa23@s28233.cdn.ngenix.net:443?encryption=none&type=ws&host=s28233.cdn.ngenix.net&path=%2F&security=tls#RU%E3%80%90%E6%9C%BA%E5%9C%BA%E6%8E%A8%E8%8D%90%EF%BC%9Ahttps%3A//a9a.xyz%E3%80%9112
 vless://f1e74548-4c0b-463b-b68d-0d1ec48c965d@45.12.114.73:8443?path=/ws-vless/&security=tls&encryption=none&insecure=1&host=rus21.unboundworld.org&type=ws&allowInsecure=1&sni=rus21.unboundworld.org#RU🇷🇺
 vmess://ewogICAgImFkZCI6ICI0NS42Ny4yMTUuMTE5IiwKICAgICJhaWQiOiAwLAogICAgImhvc3QiOiAiZTEzMDkxN2MtMWI1OC00MTM2LWIyZDktNzZkYzkyMGUwYWRkLmFkZDk3ZWU4LTBmMTQtNDhhMy1iMmNkLTk3OWM1Njc0MmU2NC5sb3NleW91cmlwLmNvbSIsCiAgICAiaWQiOiAiMDU2NDFjZjUtNThkMi00YmE0LWE5ZjEtYjNjZGEwYjFmYjFkIiwKICAgICJuZXQiOiAid3MiLAogICAgInBhdGgiOiAiLyIsCiAgICAicG9ydCI6IDQ0MywKICAgICJwcyI6ICLwn4e38J+HulJVLTQ1LjY3LjIxNS4xMTktNzkwNSIsCiAgICAidGxzIjogInRscyIsCiAgICAidHlwZSI6ICJhdXRvIiwKICAgICJzZWN1cml0eSI6ICJhdXRvIiwKICAgICJza2lwLWNlcnQtdmVyaWZ5IjogdHJ1ZSwKICAgICJzbmkiOiAiIgp9
 vmess://ewogICAgImFkZCI6ICI0NS44OS4yMzAuMTk2IiwKICAgICJhaWQiOiAwLAogICAgImhvc3QiOiAiIiwKICAgICJpZCI6ICI4ZjlmNTI2Yi1jYWI2LTQxZDItOTQyNC1jYmRkZTk0ZWExNGYiLAogICAgIm5ldCI6ICJ3cyIsCiAgICAicGF0aCI6ICIvIiwKICAgICJwb3J0IjogODAsCiAgICAicHMiOiAi8J+Ht/Cfh7pSVS00NS44OS4yMzAuMTk2LTEyOTkiLAogICAgInRscyI6ICIiLAogICAgInR5cGUiOiAiYXV0byIsCiAgICAic2VjdXJpdHkiOiAiYXV0byIsCiAgICAic2tpcC1jZXJ0LXZlcmlmeSI6IHRydWUsCiAgICAic25pIjogIiIKfQ==
