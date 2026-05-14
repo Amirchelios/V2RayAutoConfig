@@ -1,7 +1,5 @@
-hysteria2://8de68ddc-e24e-4224-9c2a-457d4a8176df@172.105.239.243:17200,17200-20999?insecure=1&sni=www.iq.com#B%20-%20%F0%9F%87%AF%F0%9F%87%B5%20JP%2015%20TG%3A%20%40nodpai
-hysteria2://qQe1z5kU8kN6SlKnDt9Ru3Qp@vpn-jp-001.fastervpn.world:443?insecure=1&sni=vpn-jp-001.fastervpn.world#B%20-%20%F0%9F%87%AF%F0%9F%87%B5%20JP%2022%20TG%3A%20%40nodpai
-hysteria2://qQe1z5kU8kN6SlKnDt9Ru3Qp@vpn-jp-002.fastervpn.world:443?insecure=1&sni=vpn-jp-002.fastervpn.world#B%20-%20%F0%9F%87%AF%F0%9F%87%B5%20JP%2007%20TG%3A%20%40nodpai
-ss://2219a1b1-9290-4ac5-94fd-6cfc1fb25280@jpvless.yydzx.xyz:12578?allowInsecure=0&sni=jpvless.yydzx.xyz&flow=xtls-rprx-vision-udp443&security=tls#C%20-%20%F0%9F%87%AF%F0%9F%87%B5%20JP%2016%20TG%3A%20%40nodpai
+hysteria2://qQe1z5kU8kN6SlKnDt9Ru3Qp@vpn-jp-003.fastervpn.world:443?insecure=1&sni=vpn-jp-003.fastervpn.world#B%20-%20%F0%9F%87%AF%F0%9F%87%B5%20JP%2009%20TG%3A%20%40nodpai
+ss://2219a1b1-9290-4ac5-94fd-6cfc1fb25280@jpvless.yydzx.xyz:12427?sni=jpvless.yydzx.xyz&flow=xtls-rprx-vision-udp443-udp443-udp443&security=tls#C%20-%20%F0%9F%87%AF%F0%9F%87%B5%20JP%2022%20TG%3A%20%40nodpai
 ss://6202b230-417c-4d8e-b624-0f71afa9c75d@140.83.57.114:25965/?type=ws&encryption=none&host=sni.111000.indevs.in&path=%2F%3Fed%3D2560%26telegram%F0%9F%87%A8%F0%9F%87%B3%20%40wangcai2&security=tls&sni=sni.111000.indevs.in&fp=chrome#%F0%9F%87%AF%F0%9F%87%B5Japan%2B-%3E%2B%F0%9F%87%AF%F0%9F%87%B5Japan%2B%E2%9A%A1%40DeamNet_Proxy%20%2832%29
 ss://86b414b6-966e-4f6d-ab16-32049ef732d3@47.245.38.111:443/?type=raw&encryption=none&sni=www.autodesk.com&fp=chrome&security=reality&pbk=y167aJhpgWWjltY4UCir_uu8Mj__Hkc1W4etD0QXYH4&sid=860705e716cbe6ed#%F0%9F%87%AF%F0%9F%87%B5Japan%2B-%3E%2B%F0%9F%87%AF%F0%9F%87%B5Japan%2B%E2%9A%A1%40DeamNet_Proxy
 ss://86b414b6-966e-4f6d-ab16-32049ef732d3@47.245.38.111:443?type=tcp&encryption=none&flow=&sni=www.autodesk.com&fp=chrome&security=reality&pbk=y167aJhpgWWjltY4UCir_uu8Mj__Hkc1W4etD0QXYH4&sid=860705e716cbe6ed#REALITY|JP🇯🇵
@@ -53,8 +51,11 @@ ssr://c2hvdy5iaWxpYmlsaWNsb3VkMDEuY29tOjU0MTAxOmF1dGhfYWVzMTI4X3NoYTE6Y2hhY2hhMj
 ssr://c2hvdy5iaWxpYmlsaWNsb3VkMDEuY29tOjU0MTAyOmF1dGhfYWVzMTI4X3NoYTE6Y2hhY2hhMjAtaWV0ZjpwbGFpbjpUWFkwWlRCUlNGZFFkMlJpUzJsRFJnPT0vP29iZnNwYXJhbT0mcmVtYXJrcz04SiUyQkhyJTJGQ2ZoN1ZLVUMwek5TNDNPQzR5TkRndU9EVXRORGs0TkElM0QlM0QmcHJvdG9wYXJhbT0=
 ssr://c2hvdy5iaWxpYmlsaWNsb3VkMDEuY29tOjU0MTAyOmF1dGhfYWVzMTI4X3NoYTE6Y2hhY2hhMjAtaWV0ZjpwbGFpbjpUWFkwWlRCUlNGZFFkMlJpUzJsRFJnPT0vP29iZnNwYXJhbT0mcmVtYXJrcz04SiUyQkhyJTJGQ2ZoN1ZLVUMwek5TNDNPQzR5TkRndU9EVXRORGs0TkElM0QlM0QmcHJvdG9wYXJhbT0gIyBbQnkgRWJyYVNoYV0g4pqh
 ssr://c2hvdy5iaWxpYmlsaWNsb3VkMDEuY29tOjU0MTAzOmF1dGhfYWVzMTI4X3NoYTE6Y2hhY2hhMjAtaWV0ZjpwbGFpbjpUWFkwWlRCUlNGZFFkMlJpUzJsRFJnPT0vP29iZnNwYXJhbT0mcmVtYXJrcz04SiUyQkhyJTJGQ2ZoN1ZLVUMweE9DNHhPRE11TlRNdU1qVXdMVFE1T0RJJTNEJnByb3RvcGFyYW09
+ssr://c2hvdy5iaWxpYmlsaWNsb3VkMDEuY29tOjU0MTAzOmF1dGhfYWVzMTI4X3NoYTE6Y2hhY2hhMjAtaWV0ZjpwbGFpbjpUWFkwWlRCUlNGZFFkMlJpUzJsRFJnPT0vP29iZnNwYXJhbT0mcmVtYXJrcz04SiUyQkhyJTJGQ2ZoN1ZLVUMweE9DNHhPRE11TlRNdU1qVXdMVFE1T0RJJTNEJnByb3RvcGFyYW09ICMgW0J5IEVicmFTaGFdIOKaoQ==
 ssr://c2hvdy5iaWxpYmlsaWNsb3VkMDEuY29tOjU0MTE0OmF1dGhfYWVzMTI4X3NoYTE6Y2hhY2hhMjAtaWV0ZjpwbGFpbjpUWFkwWlRCUlNGZFFkMlJpUzJsRFJnPT0vP29iZnNwYXJhbT0mcmVtYXJrcz04SiUyQkhyJTJGQ2ZoN1ZLVUMwek5TNDNPQzR5TkRndU9EVXROVEF4TnclM0QlM0QmcHJvdG9wYXJhbT0=
+ssr://c2hvdy5iaWxpYmlsaWNsb3VkMDEuY29tOjU0MTE0OmF1dGhfYWVzMTI4X3NoYTE6Y2hhY2hhMjAtaWV0ZjpwbGFpbjpUWFkwWlRCUlNGZFFkMlJpUzJsRFJnPT0vP29iZnNwYXJhbT0mcmVtYXJrcz04SiUyQkhyJTJGQ2ZoN1ZLVUMwek5TNDNPQzR5TkRndU9EVXROVEF4TnclM0QlM0QmcHJvdG9wYXJhbT0gIyBbQnkgRWJyYVNoYV0g4pqh
 ssr://c2hvdy5iaWxpYmlsaWNsb3VkMDEuY29tOjU0MTE1OmF1dGhfYWVzMTI4X3NoYTE6Y2hhY2hhMjAtaWV0ZjpwbGFpbjpUWFkwWlRCUlNGZFFkMlJpUzJsRFJnPT0vP29iZnNwYXJhbT0mcmVtYXJrcz04SiUyQkhyJTJGQ2ZoN1ZLVUMwek5TNDNPQzR4TURjdU1UUTRMVFE1T0RNJTNEJnByb3RvcGFyYW09
+ssr://c2hvdy5iaWxpYmlsaWNsb3VkMDEuY29tOjU0MTE1OmF1dGhfYWVzMTI4X3NoYTE6Y2hhY2hhMjAtaWV0ZjpwbGFpbjpUWFkwWlRCUlNGZFFkMlJpUzJsRFJnPT0vP29iZnNwYXJhbT0mcmVtYXJrcz04SiUyQkhyJTJGQ2ZoN1ZLVUMwek5TNDNPQzR4TURjdU1UUTRMVFE1T0RNJTNEJnByb3RvcGFyYW09ICMgW0J5IEVicmFTaGFdIOKaoQ==
 trojan://0c6a3341e8d5ab17@f5465c4.pg.gladns.com:3389?security=tls#%F0%9F%87%AF%F0%9F%87%B5JP-52.196.144.61-1572
 trojan://14bdba6dede262387ebdebaa706e1c90@trs12.bolab.net:443?security=tls#%F0%9F%87%AF%F0%9F%87%B5JP-153.125.148.41-3956
 trojan://1b5eff5a-f36b-4149-8001-7c8c0c4ed2eb@43.206.67.76:36306?security=tls&sni=sunmoon02.abzoones.xyz#%F0%9F%87%AF%F0%9F%87%B5JP-43.206.67.76-4089
@@ -73,12 +74,10 @@ trojan://750a29bf-0a40-437f-b120-38de74ae7eaf@155.248.172.87:28443?security=tls#
 trojan://7a566d21dfcd0f12490275fd3dd3cfc4@trs09.bolab.net:443?security=tls#%F0%9F%87%AF%F0%9F%87%B5JP-140.227.54.4-2244
 trojan://7ebc402f3383366fe4f554abd8625439@16.162.100.5:11541?allowInsecure=1&sni=www.nintendogames.net#%E6%97%A5%E6%9C%AC2%7C%40ripaojiedian
 trojan://7ebc402f3383366fe4f554abd8625439@16.162.100.5:11541?allowInsecure=1&sni=www.nintendogames.net#%F0%9F%87%AF%F0%9F%87%B5%20%E6%97%A5%E6%9C%AC2%7C%40ripaojiedian
-trojan://7ebc402f3383366fe4f554abd8625439@16.162.100.5:11541?sni=www.nintendogames.net#%F0%9F%87%AF%F0%9F%87%B5JP%E6%97%A5%E6%9C%AC
 trojan://7ebc402f3383366fe4f554abd8625439@16.162.100.5:11541?sni=www.nintendogames.net#%F0%9F%87%AF%F0%9F%87%B5JP%E6%97%A5%E6%9C%AC2
 trojan://7ebc402f3383366fe4f554abd8625439@3.112.61.186:8066?allowInsecure=1&sni=www.nintendogames.net#%E6%97%A5%E6%9C%AC3%7C%40ripaojiedian
 trojan://7ebc402f3383366fe4f554abd8625439@3.112.61.186:8066?allowInsecure=1&sni=www.nintendogames.net#%F0%9F%87%AF%F0%9F%87%B5%20%E6%97%A5%E6%9C%AC3%7C%40ripaojiedian
 trojan://7ebc402f3383366fe4f554abd8625439@3.112.61.186:8066?security=tls&sni=www.nintendogames.net#%F0%9F%87%AF%F0%9F%87%B5JP-3.112.61.186-1711
-trojan://7ebc402f3383366fe4f554abd8625439@3.112.61.186:8066?sni=www.nintendogames.net#%F0%9F%87%AF%F0%9F%87%B5JP%E6%97%A5%E6%9C%AC2
 trojan://7ebc402f3383366fe4f554abd8625439@3.112.61.186:8066?sni=www.nintendogames.net#%F0%9F%87%AF%F0%9F%87%B5JP%E6%97%A5%E6%9C%AC3
 trojan://7ebc402f3383366fe4f554abd8625439@35.75.5.164:24184?security=tls&sni=www.nintendogames.net#%F0%9F%87%AF%F0%9F%87%B5JP-35.75.5.164-0718
 trojan://7ebc402f3383366fe4f554abd8625439@35.75.5.164:6604?security=tls&sni=www.nintendogames.net#%F0%9F%87%AF%F0%9F%87%B5JP-35.75.5.164-0724
@@ -93,8 +92,11 @@ trojan://8d2d5953-d649-4034-94f2-72f2df2623da@168.138.44.176:443?security=tls#%F
 trojan://8d2d5953-d649-4034-94f2-72f2df2623da@168.138.44.176:443?security=tls#%F0%9F%87%AF%F0%9F%87%B5JP-168.138.44.176-2982
 trojan://8r%3C%5B9%27l6hAO%238ZQi@103.150.8.160:50888?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%AF%F0%9F%87%B5JP-103.150.8.160-1635
 trojan://8r%3C%5B9%27l6hAO%238ZQi@140.83.50.165:443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%AF%F0%9F%87%B5JP-140.83.50.165-1637
+trojan://8r%3C%5B9%27l6hAO%238ZQi@142.91.108.54:443?sni=Koma-YT.PAGeS.Dev#B%20-%20%F0%9F%87%AF%F0%9F%87%B5%20JP%2018%20TG%3A%20%40nodpai
+trojan://8r%3C%5B9%27l6hAO%238ZQi@149.28.21.222:443?allowInsecure=1&sni=Koma-YT.PAGeS.Dev&type=ws&host=Koma-YT.PAGeS.Dev&path=/trTelegram🇨🇳#%E6%97%A5%E6%9C%AC+%E4%B8%9C%E4%BA%ACChoopa%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83
 trojan://8r%3C%5B9%27l6hAO%238ZQi@149.28.21.222:443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%AF%F0%9F%87%B5JP-149.28.21.222-1630
 trojan://8r%3C%5B9%27l6hAO%238ZQi@150.230.214.172:16957?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%AF%F0%9F%87%B5JP-150.230.214.172-1629
+trojan://8r%3C%5B9%27l6hAO%238ZQi@154.197.108.253:443?sni=Koma-YT.PAGeS.Dev#B%20-%20%F0%9F%87%AF%F0%9F%87%B5%20JP%2008%20TG%3A%20%40nodpai
 trojan://8r%3C%5B9%27l6hAO%238ZQi@155.248.168.35:18122?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%AF%F0%9F%87%B5JP-155.248.168.35-1638
 trojan://8r%3C%5B9%27l6hAO%238ZQi@155.248.181.189:443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%AF%F0%9F%87%B5JP-155.248.181.189-1640
 trojan://8r%3C%5B9%27l6hAO%238ZQi@167.179.76.8:443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%AF%F0%9F%87%B5JP-167.179.76.8-1633
@@ -103,6 +105,8 @@ trojan://8r%3C%5B9%27l6hAO%238ZQi@185.130.46.81:443?security=tls&sni=Koma-YT.PAG
 trojan://8r%3C%5B9%27l6hAO%238ZQi@43.165.190.11:42841?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%AF%F0%9F%87%B5JP-43.165.190.11-1642
 trojan://8r%3C%5B9%27l6hAO%238ZQi@45.32.51.200:443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%AF%F0%9F%87%B5JP-45.32.51.200-1631
 trojan://8r%3C%5B9%27l6hAO%238ZQi@64.176.36.61:443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%AF%F0%9F%87%B5JP-64.176.36.61-1639
+trojan://8r%3C%5B9%27l6hAO%238ZQi@64.176.38.23:2083?allowInsecure=1&sni=Koma-YT.PAGeS.Dev&type=ws&host=Koma-YT.PAGeS.Dev&path=/trTelegram🇨🇳#B%20-%20%F0%9F%87%AF%F0%9F%87%B5%20JP%2014%20TG%3A%20%40nodpai
+trojan://8r%3C%5B9%27l6hAO%238ZQi@88.214.22.165:10563?sni=Koma-YT.PAGeS.Dev#B%20-%20%F0%9F%87%AF%F0%9F%87%B5%20JP%2015%20TG%3A%20%40nodpai
 trojan://8r%3C%5B9%27l6hAO%238ZQi@91.200.242.118:16847?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%AF%F0%9F%87%B5JP-91.200.242.118-0225
 trojan://8r%3C%5B9%27l6hAO%238ZQi@91.200.242.118:26517?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%AF%F0%9F%87%B5JP-91.200.242.118-1628
 trojan://96983eb4-c8f1-316e-ab00-500014ed3d8b@133.167.100.203:2053?security=tls#%F0%9F%87%AF%F0%9F%87%B5JP-133.167.100.203-2412
@@ -123,7 +127,6 @@ trojan://BxceQaOe@18.183.7.25:4633?allowInsecure=1&sni=t.me%252Fripaojiedian#%E6
 trojan://BxceQaOe@18.183.7.25:4633?allowInsecure=1&sni=t.me%252Fripaojiedian#%F0%9F%87%AF%F0%9F%87%B5%20%E6%97%A5%E6%9C%AC%7C%40ripaojiedian
 trojan://BxceQaOe@18.183.7.25:4633?security=tls&sni=t.me%252Fripaojiedian#%F0%9F%87%AF%F0%9F%87%B5JP-18.183.7.25-1709
 trojan://BxceQaOe@18.183.7.25:4633?sni=t.me%2Fripaojiedian#%F0%9F%87%AF%F0%9F%87%B5JP%E6%97%A5%E6%9C%AC
-trojan://BxceQaOe@18.183.7.25:4633?sni=t.me%2Fripaojiedian#%F0%9F%87%AF%F0%9F%87%B5JP%E6%97%A5%E6%9C%AC3
 trojan://BxceQaOe@3.115.10.179:14919?security=tls&sni=t.me%2Fripaojiedian#%F0%9F%87%AF%F0%9F%87%B5JP-3.115.10.179-0725
 trojan://BxceQaOe@35.76.116.18:44386?security=tls&sni=t.me%2Fripaojiedian#%F0%9F%87%AF%F0%9F%87%B5JP-35.76.116.18-1717
 trojan://BxceQaOe@54.64.143.245:5823?security=tls&sni=t.me%2Fripaojiedian#%F0%9F%87%AF%F0%9F%87%B5JP-54.64.143.245-0715
@@ -138,7 +141,7 @@ trojan://c51d3975-a40c-4a5b-929b-c8595ed87850@15.168.28.231:443?security=tls&sni
 trojan://d06a3f01-1ff0-4792-9b8e-a5a604bc74a2@168.138.43.89:443?security=tls#%F0%9F%87%AF%F0%9F%87%B5JP-168.138.43.89-2324
 trojan://da777aae-defb-41d0-a183-2c27da2b4677@150.230.96.103:443?security=tls#%F0%9F%87%AF%F0%9F%87%B5JP-150.230.96.103-2608
 trojan://f42e1a2e-e650-44f4-8d17-bcb68663da18@150.230.201.192:443?security=tls&sni=www.seetheworldjp.ga#%F0%9F%87%AF%F0%9F%87%B5JP-150.230.201.192-4090
-vless://2219a1b1-9290-4ac5-94fd-6cfc1fb25280@jpvless.yydzx.xyz:12578?allowInsecure=0&sni=jpvless.yydzx.xyz&flow=xtls-rprx-vision-udp443&security=tls#C%20-%20%F0%9F%87%AF%F0%9F%87%B5%20JP%2016%20TG%3A%20%40nodpai
+vless://2219a1b1-9290-4ac5-94fd-6cfc1fb25280@jpvless.yydzx.xyz:12427?sni=jpvless.yydzx.xyz&flow=xtls-rprx-vision-udp443-udp443-udp443&security=tls#C%20-%20%F0%9F%87%AF%F0%9F%87%B5%20JP%2022%20TG%3A%20%40nodpai
 vless://6202b230-417c-4d8e-b624-0f71afa9c75d@140.83.57.114:25965/?type=ws&encryption=none&host=sni.111000.indevs.in&path=%2F%3Fed%3D2560%26telegram%F0%9F%87%A8%F0%9F%87%B3%20%40wangcai2&security=tls&sni=sni.111000.indevs.in&fp=chrome#%F0%9F%87%AF%F0%9F%87%B5Japan%2B-%3E%2B%F0%9F%87%AF%F0%9F%87%B5Japan%2B%E2%9A%A1%40DeamNet_Proxy%20%2832%29
 vless://86b414b6-966e-4f6d-ab16-32049ef732d3@47.245.38.111:443/?type=raw&encryption=none&sni=www.autodesk.com&fp=chrome&security=reality&pbk=y167aJhpgWWjltY4UCir_uu8Mj__Hkc1W4etD0QXYH4&sid=860705e716cbe6ed#%F0%9F%87%AF%F0%9F%87%B5Japan%2B-%3E%2B%F0%9F%87%AF%F0%9F%87%B5Japan%2B%E2%9A%A1%40DeamNet_Proxy
 vless://86b414b6-966e-4f6d-ab16-32049ef732d3@47.245.38.111:443?type=tcp&encryption=none&flow=&sni=www.autodesk.com&fp=chrome&security=reality&pbk=y167aJhpgWWjltY4UCir_uu8Mj__Hkc1W4etD0QXYH4&sid=860705e716cbe6ed#REALITY|JP🇯🇵
