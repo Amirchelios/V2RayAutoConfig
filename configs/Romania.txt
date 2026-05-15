@@ -1,9 +1,7 @@
 ss://401374e6df7741fbf638dad8184f175bOg==@45.85.118.141:443#RO%F0%9F%87%B7%F0%9F%87%B4+%7C+45.85.118.141-443+%7C+1.95ms
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpRRld6Q3cydVg5QjlpNnFBWWVGQklF@154.46.31.106:443#%3E%3E%40v2ray_configs_pool%3A%3ARO
 ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@194.14.217.115:989#%F0%9F%87%B7%F0%9F%87%B4RO-194.14.217.115-8252
-ss://bfa4a609-1b77-4c9d-8b7d-2d821235b61c@185.120.16.208:2087?encryption=none&flow=xtls-rprx-vision&fp=&pbk=8D9kfvKUuvsA_3quE8T0-3kOu9EOCZBvvLKMMacZTi4&security=reality&sid=b1c3d5e7f9a0b2c4&sni=lolesports.com&type=tcp#%E7%BD%97%E9%A9%AC%E5%B0%BC%E4%BA%9A+V2CROSS.COM
 ss://d342d11ed4244583b36e524ab1f0afa4Og==@45.85.118.93:2095#RO%F0%9F%87%B7%F0%9F%87%B4+%7C+45.85.118.93-2095+%7C+1.66ms
 trojan://8r%3C%5B9%27l6hAO%238ZQi@188.241.241.20:2053?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B7%F0%9F%87%B4RO-188.241.241.20-1703
 trojan://8r%3C%5B9%27l6hAO%238ZQi@38.180.205.71:443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B7%F0%9F%87%B4RO-38.180.205.71-0766
 trojan://8r%3C%5B9%27l6hAO%238ZQi@38.180.35.88:443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B7%F0%9F%87%B4RO-38.180.35.88-0795
-vless://bfa4a609-1b77-4c9d-8b7d-2d821235b61c@185.120.16.208:2087?encryption=none&flow=xtls-rprx-vision&fp=&pbk=8D9kfvKUuvsA_3quE8T0-3kOu9EOCZBvvLKMMacZTi4&security=reality&sid=b1c3d5e7f9a0b2c4&sni=lolesports.com&type=tcp#%E7%BD%97%E9%A9%AC%E5%B0%BC%E4%BA%9A+V2CROSS.COM
