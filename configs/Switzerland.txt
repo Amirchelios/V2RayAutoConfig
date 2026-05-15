@@ -1,7 +1,6 @@
 ss://6202b230-417c-4d8e-b624-0f71afa9c75d@138.124.32.78:443?&security=tls&fp=chrome&sni=sni.latonyamadeline.ndjp.net&type=ws&headerType=none&host=sni.latonyamadeline.ndjp.net&path=%2F%3Fed%3D2560%26https%3A%2F%2Ft.me%2FWangCai2%F0%9F%87%A8%F0%9F%87%B3#%E7%91%9E%E5%A3%AB%28mibei77.com%20%E7%B1%B3%E8%B4%9D%E8%8A%82%E7%82%B9%E5%88%86%E4%BA%AB%29
 ss://6e44b298-a091-4433-af5e-c89afd438c98@ch-4.hwowst.ru:443?security=reality&encryption=none&pbk=alCKf4MZILvvBYncFnXEpX1V1rcdFJb78JtDBL-VjFE&headerType=none&type=tcp&flow=xtls-rprx-vision&sni=www.samsung.com#REALITY|CH🇨🇭
 ss://YWVzLTEyOC1jZmI6c2hhZG93c29ja3M=@156.146.62.160:443#%F0%9F%87%A8%F0%9F%87%ADCH-156.146.62.160-3823
-ss://YWVzLTI1Ni1nY206Y2RCSURWNDJEQ3duZklO@38.180.161.123:8119#%3E%3E%40FreakConfig%3A%3ACH
 ss://cdb38f5b-12c3-414b-eacd-a635dc633701@193.168.144.46:443?mode=gun&%3Bsecurity=reality&%3Bencryption=none&%3Bpbk=rsoZpDByMW3Ukcj68I5vw_-k-CivE6CV6TPJxyPl6WY&%3Bfp=chrome&%3Bspx=/storage&%3Btype=grpc&%3Bsni=mega.io&%3Bsid=07a9a22b#%F0%9F%87%A8%F0%9F%87%AD%20CH%20%7C%20VLESS%20%7C%20%40proxyfn%20%231
 ss://ce069292-c8bf-40dd-a6b1-87818a1e64e9@45.15.167.17:443?allowInsecure=1&encryption=none&host=2-eox.pages.dev&security=tls&sni=2-eox.pages.dev&type=ws#%3E%3E%40oneclickvpnkeys%3A%3ACH
 ss://d342d11ed4244583b36e524ab1f0afa4Og==@185.18.250.121:2095#CH%F0%9F%87%A8%F0%9F%87%AD+%7C+185.18.250.121-2095+%7C+2.38ms
