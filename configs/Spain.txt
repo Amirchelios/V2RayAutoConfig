@@ -1,4 +1,4 @@
-ss://1a79d43fb41c496ba241dcbeefa81f0eOg==@185.114.72.31:2053#ES%F0%9F%87%AA%F0%9F%87%B8+%7C+185.114.72.31-2053+%7C+148.78ms
+ss://1a79d43fb41c496ba241dcbeefa81f0eOg==@185.114.72.31:2053#ES%F0%9F%87%AA%F0%9F%87%B8+%7C+185.114.72.31-2053+%7C+144.71ms
 ss://6202b230-417c-4d8e-b624-0f71afa9c75d@185.18.250.238:2096?&security=tls&fp=chrome&sni=sni.jpmj.dev&type=ws&headerType=none&host=sni.jpmj.dev&path=%2F#%E8%A5%BF%E7%8F%AD%E7%89%99%20V2CROSS.COM
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpBUmd2R1p5d0ErZ2FjZ0dWMjZCdm11MDUrd1ptUlcvaitBZFUrWjhCdDQ0PQ==@188.214.157.30:990#%3E%3E%40v2ray_configs_pool%3A%3AES
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpBUmd2R1p5d0ErZ2FjZ0dWMjZCdm11MDUrd1ptUlcvaitBZFUrWjhCdDQ0PQ==@37.143.130.203:990#%3E%3E%40configshub2%3A%3AES
