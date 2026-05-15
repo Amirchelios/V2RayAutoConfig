@@ -1,4 +1,3 @@
-hysteria2://qQe1z5kU8kN6SlKnDt9Ru3Qp@vpn-jp-003.fastervpn.world:443?insecure=1&sni=vpn-jp-003.fastervpn.world#%E2%9D%93Other_1%7C1.6MB%2Fs%20%7C%20%E7%BD%91%E7%9B%98%E6%90%9C%E5%AE%9D%3A%20https%3A%2F%2Ft.me%2Fdiskseeker
 ss://006e4730-9370-48fa-a7be-98e49833ca6e@185.143.234.235:80?encryption=none&type=ws&path=/&host=felorida4.newcallapphelper.online#t.me/ConfigFori
 ss://00ba6032-1ed2-46e0-b242-d5fe4d59a1de@188.121.124.181:443?mode=auto&security=tls&encryption=none&insecure=1&host=static.cdn.asset.aparat.com&fp=chrome&type=xhttp&allowInsecure=1&sni=static.cdn.asset.aparat.com#%F0%9F%87%AE%F0%9F%87%B724798%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FSOSkeyNET
 ss://00ba6032-1ed2-46e0-b242-d5fe4d59a1de@188.121.124.181:443?mode=auto&security=tls&encryption=none&insecure=1&host=static.cdn.asset.aparat.com&fp=chrome&type=xhttp&allowInsecure=1&sni=static.cdn.asset.aparat.com#%F0%9F%87%AE%F0%9F%87%B724847%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FLonUp_M
@@ -91,8 +90,6 @@ ss://45d95284-05ce-4e8b-ad84-a6bcdfebcb59@144.31.92.173:443/?type=tcp&encryption
 ss://4787a5a0-a3be-40b7-994d-1bd42662f659@185.143.234.122:80?encryption=none&type=ws&path=%2Fs4&host=snapp.hibyeacademy.ir#%F0%9F%87%AE%F0%9F%87%B724782%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FSOSkeyNET
 ss://4787a5a0-a3be-40b7-994d-1bd42662f659@185.143.234.122:80?encryption=none&type=ws&path=%2Fs4&host=snapp.hibyeacademy.ir#%F0%9F%87%AE%F0%9F%87%B724831%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FLonUp_M
 ss://48eee95d-73d5-4342-928f-279612a3c552@185.143.233.235:80?security=&encryption=none&host=d.nsa03.com&type=ws#%F0%9F%87%AE%F0%9F%87%B724877%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FLonUp_M
-ss://48ff2b70-e180-582f-8866-d9a2edeed5f5@51.158.206.26:23576/?type=tcp&encryption=none&flow=xtls-rprx-vision&sni=fuck.rkn&fp=chrome&security=reality&pbk=1y5h2FGWKXTJ9xLPCqPo6Mw7RxoZzh6fGkEQKNxpZ3s&sid=01#@https://t.me/+J5owF1HCjkdiZDc0
-ss://48ff2b70-e180-582f-8866-d9a2edeed5f5@51.158.206.87:23576?security=reality&encryption=none&pbk=1y5h2FGWKXTJ9xLPCqPo6Mw7RxoZzh6fGkEQKNxpZ3s&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=fuck.rkn&sid=01#https://t.me/VIPV2rayNGNP
 ss://4bdd11a6-c993-499d-b19c-85bfee509ff6@javid.izadyar.shop:443?path=%2F&security=tls&alpn=http%2F1.1&encryption=none&insecure=0&host=javid.izadyar.shop&fp=chrome&type=ws&allowInsecure=0#%F0%9F%87%AE%F0%9F%87%B724962%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FLonUp_M
 ss://4d00db3d-7f92-4eec-8e6a-e076ef4b845a@goto.colonell.top:80?path=%2F&security=none&encryption=none&type=ws#%F0%9F%87%AE%F0%9F%87%B724875%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FSOSkeyNET
 ss://4d00db3d-7f92-4eec-8e6a-e076ef4b845a@goto.colonell.top:80?path=%2F&security=none&encryption=none&type=ws#%F0%9F%87%AE%F0%9F%87%B724924%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FLonUp_M
@@ -214,7 +211,9 @@ ss://9ea9e54b-d4da-4773-855a-e5371e4da946@snapp.ir:80?path=/&security=none&encry
 ss://MjAyMi1ibGFrZTMtYWVzLTI1Ni1nY206ZENtd2FUUXhLazZRQU16Rm5RZEhrUmh4SEYxZHVuaUJYNE9WOXhJekxFRT0@51.38.141.210:8388#https%3A%2F%2Ft.me%2Fallproconf
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo2YzgxNWJiODRjNzgxZGE1@51.75.168.50:13030#https%3A%2F%2Ft.me%2Fallproconf
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpPUElHSFNlSVpWQlM3aERY@series1.samanehha.co:443#t.me/V2ray_Custom😉
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@193.29.139.235:8080#t.me/config_fre
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.122:8080#https%3A%2F%2Ft.me%2Fallproconf
+ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M@141.98.101.179:443#t.me/OutlineVpnOfficial
 ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M@141.98.101.181:443#t.me/OutlineVpnOfficial
 ss://a2129318-5a87-4724-87d5-e46685437c6e@185.243.48.205:45003?mode=auto&path=%2F&security=reality&encryption=none&pbk=VQAkDt9USo0NiyvgQKW3N4xn-DCBh-vUMJ2L6KSDPiA&fp=chrome&spx=%2F&type=xhttp&sni=www.aparat.com&sid=62a48d#%F0%9F%87%AE%F0%9F%87%B724916%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FLonUp_M
 ss://a303bec5-0c0b-422f-98f4-140a2ad4bf50@arvancloud.ir:2095?encryption=none&type=ws&path=%2Fstream&host=hosting.linuweb.ir#%F0%9F%87%AE%F0%9F%87%B724815%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FLonUp_M
@@ -279,7 +278,6 @@ ss://daf8a45c-5a32-47a5-8da1-db3e323a2fbb@185.143.233.5:2087?encryption=none&fp=
 ss://dc656dcf-27d6-45d8-9e95-2828c5f0ec41@snapp.ir:8080?path=%2F&security=none&encryption=none&host=ts.programming-coding.ir&type=ws#%F0%9F%87%AE%F0%9F%87%B724814%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FSOSkeyNET
 ss://dc656dcf-27d6-45d8-9e95-2828c5f0ec41@snapp.ir:8080?path=%2F&security=none&encryption=none&host=ts.programming-coding.ir&type=ws#%F0%9F%87%AE%F0%9F%87%B724863%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FLonUp_M
 ss://dc7b8019-893f-4583-b95c-044b1f9696f4@dl4.paycollection.lol:80?path=/flutter&security=&encryption=none&host=dl4.paycollection.lol&type=ws#t.me/ConfigFori
-ss://dd777f39-2996-4269-b88f-0b64436d0274@23.227.60.12:2096?type=ws&path=/&host=capitalnet.sameasyou.sbs&security=tls&fp=chrome&alpn=h2,http/1.1&sni=joinchannel.sameasyou.sbs#https://t.me/+J5owF1HCjkdiZDc0
 ss://df274825-5a4a-4b0d-ae6c-77793c374261@snapp.ir:8080?type=ws&encryption=none&path=%2FEmbestpro1&host=Cyrus.zomavo.ir&security=none#%F0%9F%87%AE%F0%9F%87%B724961%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FLonUp_M
 ss://e30c9e98-50b8-4033-be04-0676d6977074@85.198.16.112:52641?type=tcp&encryption=none&security=none#%F0%9F%87%AE%F0%9F%87%B724807%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FSOSkeyNET
 ss://e30c9e98-50b8-4033-be04-0676d6977074@85.198.16.112:52641?type=tcp&encryption=none&security=none#%F0%9F%87%AE%F0%9F%87%B724856%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FLonUp_M
@@ -325,7 +323,6 @@ trojan://humanity@172.64.155.209:443/?type=ws&host=www.gossipglove.com&path=%2Fa
 trojan://humanity@8.6.112.0:443?path=/assignment&security=tls&host=www.multiplydose.com&type=ws&sni=www.multiplydose.com#https://t.me/v2rayRoom
 trojan://telegram-id-privatevpns@13.36.109.123:22222?security=tls&alpn=http/1.1&headerType=none&type=tcp&sni=trojan.burgerip.co.uk#(S103)🇨🇵t.me/PrivateVPNs
 trojan://telegram-id-privatevpns@13.37.117.168:22222?security=tls&alpn=http/1.1&headerType=none&type=tcp&sni=trojan.burgerip.co.uk#(S103)🇨🇵t.me/PrivateVPNs
-trojan://telegram-id-privatevpns@13.37.158.16:22222?security=tls&alpn=http/1.1&headerType=none&type=tcp&sni=trojan.burgerip.co.uk#(S103)🇨🇵t.me/PrivateVPNs
 trojan://telegram-id-privatevpns@13.37.198.44:22222?security=tls&alpn=http/1.1&headerType=none&type=tcp&sni=trojan.burgerip.co.uk#(S104)🇨🇵t.me/PrivateVPNs
 trojan://telegram-id-privatevpns@13.38.154.94:22222?security=tls&alpn=http/1.1&headerType=none&type=tcp&sni=trojan.burgerip.co.uk#(S103)🇨🇵t.me/PrivateVPNs
 trojan://telegram-id-privatevpns@13.38.241.41:22222?security=tls&alpn=http/1.1&headerType=none&type=tcp&sni=trojan.burgerip.co.uk#(S104)🇨🇵t.me/PrivateVPNs
@@ -438,8 +435,6 @@ vless://45d95284-05ce-4e8b-ad84-a6bcdfebcb59@144.31.92.173:443/?type=tcp&encrypt
 vless://4787a5a0-a3be-40b7-994d-1bd42662f659@185.143.234.122:80?encryption=none&type=ws&path=%2Fs4&host=snapp.hibyeacademy.ir#%F0%9F%87%AE%F0%9F%87%B724782%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FSOSkeyNET
 vless://4787a5a0-a3be-40b7-994d-1bd42662f659@185.143.234.122:80?encryption=none&type=ws&path=%2Fs4&host=snapp.hibyeacademy.ir#%F0%9F%87%AE%F0%9F%87%B724831%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FLonUp_M
 vless://48eee95d-73d5-4342-928f-279612a3c552@185.143.233.235:80?security=&encryption=none&host=d.nsa03.com&type=ws#%F0%9F%87%AE%F0%9F%87%B724877%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FLonUp_M
-vless://48ff2b70-e180-582f-8866-d9a2edeed5f5@51.158.206.26:23576/?type=tcp&encryption=none&flow=xtls-rprx-vision&sni=fuck.rkn&fp=chrome&security=reality&pbk=1y5h2FGWKXTJ9xLPCqPo6Mw7RxoZzh6fGkEQKNxpZ3s&sid=01#@https://t.me/+J5owF1HCjkdiZDc0
-vless://48ff2b70-e180-582f-8866-d9a2edeed5f5@51.158.206.87:23576?security=reality&encryption=none&pbk=1y5h2FGWKXTJ9xLPCqPo6Mw7RxoZzh6fGkEQKNxpZ3s&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=fuck.rkn&sid=01#https://t.me/VIPV2rayNGNP
 vless://4bdd11a6-c993-499d-b19c-85bfee509ff6@javid.izadyar.shop:443?path=%2F&security=tls&alpn=http%2F1.1&encryption=none&insecure=0&host=javid.izadyar.shop&fp=chrome&type=ws&allowInsecure=0#%F0%9F%87%AE%F0%9F%87%B724962%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FLonUp_M
 vless://4d00db3d-7f92-4eec-8e6a-e076ef4b845a@goto.colonell.top:80?path=%2F&security=none&encryption=none&type=ws#%F0%9F%87%AE%F0%9F%87%B724875%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FSOSkeyNET
 vless://4d00db3d-7f92-4eec-8e6a-e076ef4b845a@goto.colonell.top:80?path=%2F&security=none&encryption=none&type=ws#%F0%9F%87%AE%F0%9F%87%B724924%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FLonUp_M
@@ -621,7 +616,6 @@ vless://daf8a45c-5a32-47a5-8da1-db3e323a2fbb@185.143.233.5:2087?encryption=none&
 vless://dc656dcf-27d6-45d8-9e95-2828c5f0ec41@snapp.ir:8080?path=%2F&security=none&encryption=none&host=ts.programming-coding.ir&type=ws#%F0%9F%87%AE%F0%9F%87%B724814%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FSOSkeyNET
 vless://dc656dcf-27d6-45d8-9e95-2828c5f0ec41@snapp.ir:8080?path=%2F&security=none&encryption=none&host=ts.programming-coding.ir&type=ws#%F0%9F%87%AE%F0%9F%87%B724863%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FLonUp_M
 vless://dc7b8019-893f-4583-b95c-044b1f9696f4@dl4.paycollection.lol:80?path=/flutter&security=&encryption=none&host=dl4.paycollection.lol&type=ws#t.me/ConfigFori
-vless://dd777f39-2996-4269-b88f-0b64436d0274@23.227.60.12:2096?type=ws&path=/&host=capitalnet.sameasyou.sbs&security=tls&fp=chrome&alpn=h2,http/1.1&sni=joinchannel.sameasyou.sbs#https://t.me/+J5owF1HCjkdiZDc0
 vless://df274825-5a4a-4b0d-ae6c-77793c374261@snapp.ir:8080?type=ws&encryption=none&path=%2FEmbestpro1&host=Cyrus.zomavo.ir&security=none#%F0%9F%87%AE%F0%9F%87%B724961%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FLonUp_M
 vless://e30c9e98-50b8-4033-be04-0676d6977074@85.198.16.112:52641?type=tcp&encryption=none&security=none#%F0%9F%87%AE%F0%9F%87%B724807%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FSOSkeyNET
 vless://e30c9e98-50b8-4033-be04-0676d6977074@85.198.16.112:52641?type=tcp&encryption=none&security=none#%F0%9F%87%AE%F0%9F%87%B724856%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FLonUp_M
