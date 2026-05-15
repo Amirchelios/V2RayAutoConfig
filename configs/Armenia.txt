@@ -1,7 +1,5 @@
-ss://6202b230-417c-4d8e-b624-0f71afa9c75d@185.16.110.40:8880?security=none&type=ws&path=%2F%3Fed%3D2560%26https%3A%2F%2Ft.me%2Fyoutube%40ZYFXS%F0%9F%87%A8%F0%9F%87%B3&host=vms.lifetime44.workers.dev&fp=chrome#%F0%9F%87%A6%F0%9F%87%B2%20%E6%9C%BA%E5%9C%BA%E6%8E%A8%E8%8D%90%3Adafei.de%20%E4%BA%9A%E7%BE%8E%E5%B0%BC%E4%BA%9A%2001
-ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@146.185.248.22:989#%F0%9F%87%A6%F0%9F%87%B2AM-146.185.248.22-8569
+ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@146.185.248.22:989#%F0%9F%87%A6%F0%9F%87%B2AM-146.185.248.22-8581
 ss://c24a32f1-b645-47da-98a3-1e7c713229c1@104.18.12.149:8880?path=/api&security=none&encryption=none&host=armenia.chatgpt.com.siasia.ir&type=httpupgrade#Armenia(@proSSH)
 ss://f667a096-5231-4cfb-8759-92bb32473139@77.91.68.70:55983?type=tcp&encryption=none&flow=&sni=yahoo.com&security=reality&pbk=nWQ7b9l9X6N3PrXLgIzOvMM8iSYrqjVHEb9ikWxqYSg&sid=0e#REALITY|AM🇦🇲
-vless://6202b230-417c-4d8e-b624-0f71afa9c75d@185.16.110.40:8880?security=none&type=ws&path=%2F%3Fed%3D2560%26https%3A%2F%2Ft.me%2Fyoutube%40ZYFXS%F0%9F%87%A8%F0%9F%87%B3&host=vms.lifetime44.workers.dev&fp=chrome#%F0%9F%87%A6%F0%9F%87%B2%20%E6%9C%BA%E5%9C%BA%E6%8E%A8%E8%8D%90%3Adafei.de%20%E4%BA%9A%E7%BE%8E%E5%B0%BC%E4%BA%9A%2001
 vless://c24a32f1-b645-47da-98a3-1e7c713229c1@104.18.12.149:8880?path=/api&security=none&encryption=none&host=armenia.chatgpt.com.siasia.ir&type=httpupgrade#Armenia(@proSSH)
 vless://f667a096-5231-4cfb-8759-92bb32473139@77.91.68.70:55983?type=tcp&encryption=none&flow=&sni=yahoo.com&security=reality&pbk=nWQ7b9l9X6N3PrXLgIzOvMM8iSYrqjVHEb9ikWxqYSg&sid=0e#REALITY|AM🇦🇲
