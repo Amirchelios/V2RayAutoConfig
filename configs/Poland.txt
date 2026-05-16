@@ -1,5 +1,4 @@
 ss://195573b7-ea63-485e-b2a5-58dd7bbfc9f7@plb.tunnelguard.ru:443?mode=auto&path=%2F&security=tls&alpn=h2%2Chttp%2F1.1&encryption=none&type=xhttp&sni=plb.tunnelguard.ru#PL🇵🇱
-ss://3d0e06ce-de86-4bcd-87ab-99b5b4e47ffe@snapp.ir:80?type=ws&encryption=none&path=/&host=gm.borna-otbas.ir&security=none#pl-T
 ss://6d916d55-fead-4ff3-a3a9-83e175ea8ad7@pl74.mechvpn.online:443?sni=pl74.mechvpn.online&flow=xtls-rprx-vision-udp443&security=tls#%3E%3E%40v2nodes%3A%3APL
 ss://YWVzLTI1Ni1jZmI6QndjQVVaazhoVUZBa0RHTg==@217.30.10.68:9031#%F0%9F%87%B5%F0%9F%87%B1PL-217.30.10.68-8064
 ss://YWVzLTI1Ni1jZmI6R0E5S3plRWd2ZnhOcmdtTQ==@217.30.10.68:9019#%F0%9F%87%B5%F0%9F%87%B1PL-217.30.10.68-8055
@@ -54,7 +53,6 @@ ss://YWVzLTI1Ni1nY206cEtFVzhKUEJ5VFZUTHRN@51.77.53.200:4444#%F0%9F%87%B5%F0%9F%8
 ss://YWVzLTI1Ni1nY206ekROVmVkUkZQUWV4Rzl2@51.77.53.200:6379#%F0%9F%87%B5%F0%9F%87%B1PL-51.77.53.200-1708
 ss://ae8ddd8e-00af-48e5-bd57-05074a1bbffb@144.31.5.247:443?encryption=none&flow=xtls-rprx-vision&fp=&pbk=ZHEMPjSWslk6_qD2JNQzd5enUPz8nY9mYRRuM6NkZmU&security=reality&sni=deepl.com&type=tcp#%3E%3E%40oneclickvpnkeys%3A%3APL
 ss://ae8ddd8e-00af-48e5-bd57-05074a1bbffb@144.31.5.247:443?encryption=none&flow=xtls-rprx-vision&fp=&pbk=ZHEMPjSWslk6_qD2JNQzd5enUPz8nY9mYRRuM6NkZmU&security=reality&sni=deepl.com&type=tcp#REALITY|PL🇵🇱
-ss://c30fc05c-6c86-4af7-b616-25e9093cb394@snapp.ir:80/?type=ws&encryption=none&path=/&host=gm.borna-otbas.ir&security=none#pl-Ts
 ss://f9d8aa07-589f-4da0-9cb0-fd8f2f0e4fa8@144.31.4.166:443?encryption=none&flow=xtls-rprx-vision&fp=&pbk=ZHEMPjSWslk6_qD2JNQzd5enUPz8nY9mYRRuM6NkZmU&security=reality&sid=0123456789abcdef&sni=www.deepl.com&type=tcp#%3E%3E%40oneclickvpnkeys%3A%3APL
 trojan://555034c8-6420-45d0-893c-905c02342150@51.83.186.142:443?security=tls&sni=pl1.trojanvh.xyz#%F0%9F%87%B5%F0%9F%87%B1PL-51.83.186.142-2473
 trojan://555034c8-6420-45d0-893c-905c02342150@51.83.186.142:80?security=tls&sni=pl1.trojanvh.xyz#%F0%9F%87%B5%F0%9F%87%B1PL-51.83.186.142-3502
@@ -63,11 +61,9 @@ trojan://humanity@188.114.96.3:443?security=tls&sni=www.creationlong.org&allowIn
 trojan://humanity@208.103.161.110:443?allowInsecure=1&host=www.creationlong.org&path=%2Fassignment&sni=www.creationlong.org&type=ws#%3E%3E%40oneclickvpnkeys%3A%3APL
 trojan://humanity@v1.dabache.top:443?allowInsecure=1&host=www.creationlong.org&path=%2Fassignment&sni=www.creationlong.org&type=ws#%3E%3E%40oneclickvpnkeys%3A%3APL
 vless://195573b7-ea63-485e-b2a5-58dd7bbfc9f7@plb.tunnelguard.ru:443?mode=auto&path=%2F&security=tls&alpn=h2%2Chttp%2F1.1&encryption=none&type=xhttp&sni=plb.tunnelguard.ru#PL🇵🇱
-vless://3d0e06ce-de86-4bcd-87ab-99b5b4e47ffe@snapp.ir:80?type=ws&encryption=none&path=/&host=gm.borna-otbas.ir&security=none#pl-T
 vless://6d916d55-fead-4ff3-a3a9-83e175ea8ad7@pl74.mechvpn.online:443?sni=pl74.mechvpn.online&flow=xtls-rprx-vision-udp443&security=tls#%3E%3E%40v2nodes%3A%3APL
 vless://ae8ddd8e-00af-48e5-bd57-05074a1bbffb@144.31.5.247:443?encryption=none&flow=xtls-rprx-vision&fp=&pbk=ZHEMPjSWslk6_qD2JNQzd5enUPz8nY9mYRRuM6NkZmU&security=reality&sni=deepl.com&type=tcp#%3E%3E%40oneclickvpnkeys%3A%3APL
 vless://ae8ddd8e-00af-48e5-bd57-05074a1bbffb@144.31.5.247:443?encryption=none&flow=xtls-rprx-vision&fp=&pbk=ZHEMPjSWslk6_qD2JNQzd5enUPz8nY9mYRRuM6NkZmU&security=reality&sni=deepl.com&type=tcp#REALITY|PL🇵🇱
-vless://c30fc05c-6c86-4af7-b616-25e9093cb394@snapp.ir:80/?type=ws&encryption=none&path=/&host=gm.borna-otbas.ir&security=none#pl-Ts
 vless://f9d8aa07-589f-4da0-9cb0-fd8f2f0e4fa8@144.31.4.166:443?encryption=none&flow=xtls-rprx-vision&fp=&pbk=ZHEMPjSWslk6_qD2JNQzd5enUPz8nY9mYRRuM6NkZmU&security=reality&sid=0123456789abcdef&sni=www.deepl.com&type=tcp#%3E%3E%40oneclickvpnkeys%3A%3APL
 vmess://ewogICAgImFkZCI6ICI1MS42OC4xMzkuMjIiLAogICAgImFpZCI6IDAsCiAgICAiaG9zdCI6ICIiLAogICAgImlkIjogImM2NzQ0YzQ0LTRlYjctNDhkNS1hODc5LWExMDQ3NGUyYmEzNCIsCiAgICAibmV0IjogIndzIiwKICAgICJwYXRoIjogIi92bWVzcyIsCiAgICAicG9ydCI6IDgwLAogICAgInBzIjogIvCfh7Xwn4exUEwtNTEuNjguMTM5LjIyLTAzMzMiLAogICAgInRscyI6ICIiLAogICAgInR5cGUiOiAiYXV0byIsCiAgICAic2VjdXJpdHkiOiAiYXV0byIsCiAgICAic2tpcC1jZXJ0LXZlcmlmeSI6IGZhbHNlLAogICAgInNuaSI6ICI1MS42OC4xMzkuMjIiCn0=
 vmess://ewogICAgImFkZCI6ICI1Ny4xMjguMjE2LjEyNSIsCiAgICAiYWlkIjogMCwKICAgICJob3N0IjogImthbXBvbmcub3JnIiwKICAgICJpZCI6ICIwM2ZjYzYxOC1iOTNkLTY3OTYtNmFlZC04YTM4Yzk3NWQ1ODEiLAogICAgIm5ldCI6ICJ3cyIsCiAgICAicGF0aCI6ICJsaW5rdndzIiwKICAgICJwb3J0IjogNDQzLAogICAgInBzIjogIvCfh7Xwn4exUEwtNTcuMTI4LjIxNi4xMjUtNjc4OCIsCiAgICAidGxzIjogInRscyIsCiAgICAidHlwZSI6ICJhdXRvIiwKICAgICJzZWN1cml0eSI6ICJhdXRvIiwKICAgICJza2lwLWNlcnQtdmVyaWZ5IjogZmFsc2UsCiAgICAic25pIjogImthbXBvbmcub3JnIgp9

@@ -1,6 +1,5 @@
 ss://0deb6f9d-9ad9-4b73-ac33-f3176e7ec1f2@91.242.241.45:8443?security=reality&fp=chrome&type=tcp&flow=xtls-rprx-vision&pbk=1-2fy8f8XeOHzmdFmCENHV1mr_tzJX1M9UXp42mUIiM&sni=google.com#VPNKEY-Singapore
-ss://17ebee4e-97ea-4cad-8737-cc228478ca9d@104.18.125.5:80?type=ws&host=lively-brook-c471.nedena3319.workers.dev&path=/?ed=2048#C%20-%20%F0%9F%87%B8%F0%9F%87%AC%20SG%2025%20TG%3A%20%40nodpai
-ss://6202b230-417c-4d8e-b624-0f71afa9c75d@89.116.46.50:8880?type=ws&host=vms.lifetime07.workers.dev&path=/?ed=2560#B%20-%20%F0%9F%87%B8%F0%9F%87%AC%20SG%2003%20TG%3A%20%40nodpai
+ss://15cbab96-197e-46a5-9042-073b3980c798@213.136.69.8:80?encryption=none&host=fsdns.ectunnelvpn.me&path=/vless&security=none&type=ws#👉🆔@v2ray_configs_pool📡🇸🇬®️Singapore©️Singapore🅿️ping:32.6ms
 ss://6f99505678024a1dbff761678e626c3fOg==@52.187.36.104:443#SG%F0%9F%87%B8%F0%9F%87%AC+%7C+52.187.36.104-443+%7C+230.61ms
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo0SHViMmY5SnloRUN5QXEyT3BtME5T@51.79.161.232:443#%F0%9F%87%B8%F0%9F%87%ACSG-51.79.161.232-7865
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpBUmd2R1p5d0ErZ2FjZ0dWMjZCdm11MDUrd1ptUlcvaitBZFUrWjhCdDQ0PQ==@38.89.142.56:990#%3E%3E%40v2ray_configs_pool%3A%3ASG
@@ -72,8 +71,6 @@ trojan://63db084a-e2ce-46db-9dd6-d4ed2c3d2663@sg01.freeflyingcloud.xyz:35702?sni
 trojan://6f0a9d0fa39d65fa@5.44.249.43:3389?security=tls#%F0%9F%87%B8%F0%9F%87%ACSG-5.44.249.43-5475
 trojan://71086710-33eb-11ed-adce-1239d0255272@sg1-trojan.bonds.id:443?security=tls#%F0%9F%87%B8%F0%9F%87%ACSG-103.253.24.212-5354
 trojan://750a29bf-0a40-437f-b120-38de74ae7eaf@168.138.189.17:28443?security=tls#%F0%9F%87%B8%F0%9F%87%ACSG-168.138.189.17-2155
-trojan://7ebc402f3383366fe4f554abd8625439@18.180.158.187:667?sni=www.nintendogames.net#%F0%9F%87%B8%F0%9F%87%ACSG%E6%96%B0%E5%8A%A0%E5%9D%A12
-trojan://7ebc402f3383366fe4f554abd8625439@35.74.68.72:3842?sni=www.nintendogames.net#%F0%9F%87%B8%F0%9F%87%ACSG%E6%96%B0%E5%8A%A0%E5%9D%A13
 trojan://8r%3C%5B9%27l6hAO%238ZQi@116.251.216.12:8443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B8%F0%9F%87%ACSG-116.251.216.12-1567
 trojan://8r%3C%5B9%27l6hAO%238ZQi@138.2.87.237:443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B8%F0%9F%87%ACSG-138.2.87.237-1558
 trojan://8r%3C%5B9%27l6hAO%238ZQi@139.99.124.165:443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B8%F0%9F%87%ACSG-139.99.124.165-1578
@@ -82,7 +79,6 @@ trojan://8r%3C%5B9%27l6hAO%238ZQi@159.223.79.119:443?security=tls&sni=Koma-YT.PA
 trojan://8r%3C%5B9%27l6hAO%238ZQi@159.65.143.223:443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B8%F0%9F%87%ACSG-159.65.143.223-1570
 trojan://8r%3C%5B9%27l6hAO%238ZQi@159.89.205.195:443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B8%F0%9F%87%ACSG-159.89.205.195-1574
 trojan://8r%3C%5B9%27l6hAO%238ZQi@159.89.207.154:443?security=tls&sni=Koma-YT.PAGeS.Dev&type=ws&path=%252FtrTelegram%25F0%259F%2587%25A8%25F0%259F%2587%25B3%2520%2540WangCai2&Host=Koma-YT.PAGeS.Dev#%F0%9F%87%B8%F0%9F%87%ACSG-159.89.207.154-0715
-trojan://8r%3C%5B9%27l6hAO%238ZQi@159.89.207.154:443?sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B8%F0%9F%87%ACSG%E6%96%B0%E5%8A%A0%E5%9D%A14
 trojan://8r%3C%5B9%27l6hAO%238ZQi@164.52.2.98:443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B8%F0%9F%87%ACSG-164.52.2.98-1576
 trojan://8r%3C%5B9%27l6hAO%238ZQi@165.22.104.36:443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B8%F0%9F%87%ACSG-165.22.104.36-1571
 trojan://8r%3C%5B9%27l6hAO%238ZQi@165.232.165.200:443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B8%F0%9F%87%ACSG-165.232.165.200-1566
@@ -90,6 +86,7 @@ trojan://8r%3C%5B9%27l6hAO%238ZQi@172.104.186.18:8443?security=tls&sni=Koma-YT.P
 trojan://8r%3C%5B9%27l6hAO%238ZQi@178.128.90.108:443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B8%F0%9F%87%ACSG-178.128.90.108-1572
 trojan://8r%3C%5B9%27l6hAO%238ZQi@178.128.97.53:443?allowInsecure=1&sni=Koma-YT.PAGeS.Dev&ws=1&wspath=%2FtrTelegram%F0%9F%87%A8%F0%9F%87%B3%20%40WangCai2#%F0%9F%87%B8%F0%9F%87%AC%20%E6%96%B0%E5%8A%A0%E5%9D%A1%20Digital%20Ocean%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83
 trojan://8r%3C%5B9%27l6hAO%238ZQi@178.128.97.53:443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B8%F0%9F%87%ACSG-178.128.97.53-1569
+trojan://8r%3C%5B9%27l6hAO%238ZQi@178.128.97.53:443?sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B8%F0%9F%87%ACSG%E6%96%B0%E5%8A%A0%E5%9D%A1
 trojan://8r%3C%5B9%27l6hAO%238ZQi@185.151.146.73:443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B8%F0%9F%87%ACSG-185.151.146.73-1563
 trojan://8r%3C%5B9%27l6hAO%238ZQi@188.239.21.47:8443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B8%F0%9F%87%ACSG-188.239.21.47-1560
 trojan://8r%3C%5B9%27l6hAO%238ZQi@194.87.10.77:443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B8%F0%9F%87%ACSG-194.87.10.77-1573
@@ -98,17 +95,20 @@ trojan://8r%3C%5B9%27l6hAO%238ZQi@43.160.207.175:443?security=tls&sni=Koma-YT.PA
 trojan://8r%3C%5B9%27l6hAO%238ZQi@47.236.119.109:443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B8%F0%9F%87%ACSG-47.236.119.109-1565
 trojan://8r%3C%5B9%27l6hAO%238ZQi@47.82.155.79:8443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B8%F0%9F%87%ACSG-47.82.155.79-1561
 trojan://8r%3C%5B9%27l6hAO%238ZQi@47.82.160.100:443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B8%F0%9F%87%ACSG-47.82.160.100-1577
+trojan://8r%3C%5B9%27l6hAO%238ZQi@47.82.160.100:443?sni=Koma-YT.PAGeS.Dev#B%20-%20%F0%9F%87%B8%F0%9F%87%AC%20SG%2023%20TG%3A%20%40nodpai
 trojan://8r%3C%5B9%27l6hAO%238ZQi@66.42.61.215:443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B8%F0%9F%87%ACSG-66.42.61.215-1557
 trojan://973ef350-f6a5-11ec-9274-1239d0255272@trojan2.udpgw.com:443?security=tls#%F0%9F%87%B8%F0%9F%87%ACSG-128.199.185.211-5351
-trojan://BxceQaOe@18.183.190.191:4203?sni=t.me%2Fripaojiedian#%F0%9F%87%B8%F0%9F%87%ACSG%E6%96%B0%E5%8A%A0%E5%9D%A1
 trojan://BxceQaOe@35.79.221.185:1275?allowInsecure=1&sni=t.me%252Fripaojiedian#%E6%96%B0%E5%8A%A0%E5%9D%A13%7C%40ripaojiedian
 trojan://BxceQaOe@35.79.221.185:1275?allowInsecure=1&sni=t.me%252Fripaojiedian#%F0%9F%87%B8%F0%9F%87%AC%20%E6%96%B0%E5%8A%A0%E5%9D%A13%7C%40ripaojiedian
+trojan://BxceQaOe@35.79.221.185:1275?sni=t.me%2Fripaojiedian#%F0%9F%87%B8%F0%9F%87%ACSG%E6%96%B0%E5%8A%A0%E5%9D%A13
 trojan://FLpONjB2Lb@139.162.45.139:443?security=tls#%F0%9F%87%B8%F0%9F%87%ACSG-139.162.45.139-2707
 trojan://IL37892054@engaged-ram.rooster465.autos:443?security=tls#%F0%9F%87%B8%F0%9F%87%ACSG-54.169.245.181-4376
 trojan://a922dfbe65cf53c7bc225fcfeb6cedbc@35.72.163.56:2511?allowInsecure=1&sni=www.nintendogames.net#%E6%96%B0%E5%8A%A0%E5%9D%A12%7C%40ripaojiedian
 trojan://a922dfbe65cf53c7bc225fcfeb6cedbc@35.72.163.56:2511?allowInsecure=1&sni=www.nintendogames.net#%F0%9F%87%B8%F0%9F%87%AC%20%E6%96%B0%E5%8A%A0%E5%9D%A12%7C%40ripaojiedian
+trojan://a922dfbe65cf53c7bc225fcfeb6cedbc@35.72.163.56:2511?sni=www.nintendogames.net#%F0%9F%87%B8%F0%9F%87%ACSG%E6%96%B0%E5%8A%A0%E5%9D%A12
 trojan://a922dfbe65cf53c7bc225fcfeb6cedbc@35.72.163.56:4840?allowInsecure=1&sni=www.nintendogames.net#%E6%96%B0%E5%8A%A0%E5%9D%A1%7C%40ripaojiedian
 trojan://a922dfbe65cf53c7bc225fcfeb6cedbc@35.72.163.56:4840?allowInsecure=1&sni=www.nintendogames.net#%F0%9F%87%B8%F0%9F%87%AC%20%E6%96%B0%E5%8A%A0%E5%9D%A1%7C%40ripaojiedian
+trojan://a922dfbe65cf53c7bc225fcfeb6cedbc@35.72.163.56:4840?sni=www.nintendogames.net#%F0%9F%87%B8%F0%9F%87%ACSG%E6%96%B0%E5%8A%A0%E5%9D%A14
 trojan://affae2e0-e84b-11ec-b09f-1239d0255272@trojan1.udpgw.com:443?security=tls#%F0%9F%87%B8%F0%9F%87%ACSG-172.104.51.247-5349
 trojan://cd39f62aed7b90f6@5.44.249.43:3389?security=tls#%F0%9F%87%B8%F0%9F%87%ACSG-5.44.249.43-5473
 trojan://iyinglong@13.213.69.245:443?security=tls#%F0%9F%87%B8%F0%9F%87%ACSG-13.213.69.245-5445
@@ -116,8 +116,7 @@ trojan://iyinglong@18.140.67.76:443?security=tls#%F0%9F%87%B8%F0%9F%87%ACSG-18.1
 trojan://iyinglong@18.141.8.87:443?security=tls#%F0%9F%87%B8%F0%9F%87%ACSG-18.141.8.87-5350
 trojan://pro@_LlpRWwEh4tRl4cSzc0TZDxM@starlink-sg2.mfa.cat:20000?security=tls#%F0%9F%87%B8%F0%9F%87%ACSG-54.254.42.84-4489
 vless://0deb6f9d-9ad9-4b73-ac33-f3176e7ec1f2@91.242.241.45:8443?security=reality&fp=chrome&type=tcp&flow=xtls-rprx-vision&pbk=1-2fy8f8XeOHzmdFmCENHV1mr_tzJX1M9UXp42mUIiM&sni=google.com#VPNKEY-Singapore
-vless://17ebee4e-97ea-4cad-8737-cc228478ca9d@104.18.125.5:80?type=ws&host=lively-brook-c471.nedena3319.workers.dev&path=/?ed=2048#C%20-%20%F0%9F%87%B8%F0%9F%87%AC%20SG%2025%20TG%3A%20%40nodpai
-vless://6202b230-417c-4d8e-b624-0f71afa9c75d@89.116.46.50:8880?type=ws&host=vms.lifetime07.workers.dev&path=/?ed=2560#B%20-%20%F0%9F%87%B8%F0%9F%87%AC%20SG%2003%20TG%3A%20%40nodpai
+vless://15cbab96-197e-46a5-9042-073b3980c798@213.136.69.8:80?encryption=none&host=fsdns.ectunnelvpn.me&path=/vless&security=none&type=ws#👉🆔@v2ray_configs_pool📡🇸🇬®️Singapore©️Singapore🅿️ping:32.6ms
 vless://bafacd98-136a-4530-838d-4e5c51838dac@139.59.107.148:443?encryption=none&security=tls&sni=juzi8186.qea.ccwu.cc&fp=firefox&insecure=0&allowInsecure=0&ech=encryptedsni.com%2Bhttps%3A%2F%2Fdns.alidns.com%2Fdns-query&type=ws&host=juzi8186.qea.ccwu.cc&path=%2Fad%2Fjuzibaipiao%3Fed%3D2560#%3E%3E%40v2ray_configs_pool%3A%3ASG
 vless://d6d7e024-0a49-483d-bcd7-048c4d30eca6@159.89.194.243:22539?sni=node1.nanonet.host&fp=chrome&security=tls#%3E%3E%40v2nodes%3A%3ASG
 vless://e85ce618-50cd-42e0-a8ba-5052e6be9498@91.242.241.45:8443?security=reality&fp=chrome&type=tcp&flow=xtls-rprx-vision&pbk=1-2fy8f8XeOHzmdFmCENHV1mr_tzJX1M9UXp42mUIiM&sni=google.com#VPNKEY-Singapore
