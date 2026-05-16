@@ -23,7 +23,6 @@ ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpkZXBqU2JqdjJVcWw2VzRWZ2U3c0Rm@185.39.204.189
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTppeGZYQnE2ZGZNUVFGaUV6NlBCY1R5@62.60.233.220:18685#TR%F0%9F%87%B9%F0%9F%87%B7+%7C+62.60.233.220-18685+%7C+203.6ms
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvR21nbVFvS0UzeHFTUUZoVTRJc3V3@62.133.63.169:37096#TR%F0%9F%87%B9%F0%9F%87%B7+%7C+62.133.63.169-37096+%7C+191.31ms
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpxWHNjNGt3TDRRRlBkMlB5bUtkMDZ3@62.60.233.220:18685#TR%F0%9F%87%B9%F0%9F%87%B7+%7C+62.60.233.220-18685+%7C+191.55ms
-ss://YWVzLTI1Ni1nY206Y2RCSURWNDJEQ3duZklO@38.180.113.194:8119#👉🆔@v2ray_configs_pool📡🇹🇷®️Turkey©️Istanbul🅿️ping:60.41ms
 ss://a44e0875-210f-4941-9062-89b6361a14c6@94.131.123.167:443?security=reality&encryption=none&pbk=i5a8i2AWUSMZ-rYA6hGBRCBBoe7W5ah33SCdF5JkMk4&headerType=none&type=tcp&flow=xtls-rprx-vision&sni=apple.com&sid=8bcfe256cf216fd8#REALITY|TR🇹🇷
 ss://b4fdc761-6ba9-4309-9bf0-41bd4c80936c@185.143.233.5:2087?path=/&security=tls&encryption=none&insecure=0&host=p1.sesrsa.com&fp=chrome&type=ws&allowInsecure=0&sni=sub.sesrsa.com#🇹🇷Türkiye,
 ss://c10999b4-7f93-5a50-3908-1467b1e52ae2@155.212.110.2:993?security=reality&encryption=none&pbk=GfTzhy59k9CXlAdF819OUVeBdrqIILaDIWa1bddjGnA&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=speed.cloudflare.com#REALITY|TR🇹🇷
