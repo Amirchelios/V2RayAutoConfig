@@ -5,7 +5,6 @@ ss://44b7a38821ca4af0a16b01e9e6ef04e1Og==@94.131.105.175:80#MD%F0%9F%87%B2%F0%9F
 ss://44b7a38821ca4af0a16b01e9e6ef04e1Og==@94.131.105.175:80#MD%F0%9F%87%B2%F0%9F%87%A9+%7C+94.131.105.175-80+%7C+94.53ms
 ss://44b7a38821ca4af0a16b01e9e6ef04e1Og==@94.131.105.175:80#MD%F0%9F%87%B2%F0%9F%87%A9+%7C+94.131.105.175-80+%7C+98.01ms
 ss://44b7a38821ca4af0a16b01e9e6ef04e1Og==@94.131.105.175:80#MD%F0%9F%87%B2%F0%9F%87%A9+%7C+94.131.105.175-80+%7C+98.21ms
-ss://6202b230-417c-4d8e-b624-0f71afa9c75d@185.193.29.138:2096?allowInsecure=1&encryption=none&host=sni.111000.indevs.in&security=tls&sni=sni.111000.indevs.in&type=ws#%E6%91%A9%E5%B0%94%E5%A4%9A%E7%93%A6+V2CROSS.COM
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTozNlpDSGVhYlVTZktqZlFFdko0SERW@185.242.86.156:54170#%F0%9F%87%B2%F0%9F%87%A9MD-185.242.86.156-0815
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpBUmd2R1p5d0ErZ2FjZ0dWMjZCdm11MDUrd1ptUlcvaitBZFUrWjhCdDQ0PQ@23.95.76.59:990#%3E%3E%40v2ray_configs_pool%3A%3AMD
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpBUmd2R1p5d0ErZ2FjZ0dWMjZCdm11MDUrd1ptUlcvaitBZFUrWjhCdDQ0PQ@45.154.204.7:990#%3E%3E%40configshub2%3A%3AMD
@@ -16,7 +15,6 @@ ss://e384913f-8863-47b4-8858-a84b68abb4a6@3.cdnconn.com:23335?security=reality&e
 ss://e384913f-8863-47b4-8858-a84b68abb4a6@4.cdnconn.com:23335?security=reality&encryption=none&pbk=7Gi8eiUU9TIVbGuvSU16gl5-Aqt7tcCSB9x6CSxyvik&headerType=none&fp=qq&type=tcp&flow=xtls-rprx-vision&sni=icloud.com&sid=67b1e94e4dd1ef90#REALITY|MD🇲🇩
 ss://e4824193-4f54-453b-d037-88368e85ef0e@104.21.86.253:443?mode=gun&security=tls&encryption=none&type=grpc&sni=pqh27v1.carwashipdir.shop#Moldova%20WorkTitans
 trojan://strong-secret-pass-777@103.231.73.181:4443?security=tls#%F0%9F%87%B2%F0%9F%87%A9MD-103.231.73.181-4436
-vless://6202b230-417c-4d8e-b624-0f71afa9c75d@185.193.29.138:2096?allowInsecure=1&encryption=none&host=sni.111000.indevs.in&security=tls&sni=sni.111000.indevs.in&type=ws#%E6%91%A9%E5%B0%94%E5%A4%9A%E7%93%A6+V2CROSS.COM
 vless://e384913f-8863-47b4-8858-a84b68abb4a6@3.cdnconn.com:23335?security=reality&encryption=none&pbk=7Gi8eiUU9TIVbGuvSU16gl5-Aqt7tcCSB9x6CSxyvik&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=icloud.com&sid=67b1e94e4dd1ef90#REALITY|MD🇲🇩
 vless://e384913f-8863-47b4-8858-a84b68abb4a6@4.cdnconn.com:23335?security=reality&encryption=none&pbk=7Gi8eiUU9TIVbGuvSU16gl5-Aqt7tcCSB9x6CSxyvik&headerType=none&fp=qq&type=tcp&flow=xtls-rprx-vision&sni=icloud.com&sid=67b1e94e4dd1ef90#REALITY|MD🇲🇩
 vless://e4824193-4f54-453b-d037-88368e85ef0e@104.21.86.253:443?mode=gun&security=tls&encryption=none&type=grpc&sni=pqh27v1.carwashipdir.shop#Moldova%20WorkTitans
