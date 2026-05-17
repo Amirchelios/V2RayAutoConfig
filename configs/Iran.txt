@@ -220,7 +220,6 @@ ss://92af1fcb-70e3-4d6a-b602-e9c6aebc331d@varzesh3.com:80?path=%2F&security=none
 ss://92b93f5d-af24-420e-95fb-0120f55b4481@men2.gafe-lorbad.ir:80?path=%2F&security=none&encryption=none&host=s2.fasrrapido.ir&type=ws#IR🇮🇷
 ss://92e36f34-11f1-4312-9fda-af253712d09a@snapp.ir:8080?path=%2F&security=&encryption=none&host=M2.snllshop.ir&type=ws#IR🇮🇷
 ss://937dde02-4ce6-4f0d-a3be-27aef7d3ef46@s4.tehranionliine.ir:80?path=/&%3Bencryption=none&%3Btype=ws#%F0%9F%87%AE%F0%9F%87%B7%20IR%20%7C%20VLESS%20%7C%20%40vpnfree85%20%231
-ss://937dde02-4ce6-4f0d-a3be-27aef7d3ef46@s4.tehranionliine.ir:80?path=/&%3Bencryption=none&%3Btype=ws#%F0%9F%87%AE%F0%9F%87%B7%20IR%20%7C%20VLESS%20%7C%20%40vpnfree85%20%232
 ss://93b9cfef-7e6c-41e4-bfcc-8b30e9f8652e@185.143.233.5:2086?encryption=none&host=cd2.sesrsa.com&path=%2F&security=none&type=ws#IR🇮🇷
 ss://93ea5e7b-9427-416a-b2c6-f650d0c23193@snapp.ir:80?path=%2F&security=none&encryption=none&host=iranfuture.musicritmic.ir&type=ws#IR🇮🇷
 ss://9431162b-b0ba-4304-a58a-b1332681e63b@snapp.ir:80?path=%2Fgraphql%3Fed%3D2560&security=none&encryption=none&host=ss1.limitless-cloud.ir&type=ws#IR🇮🇷
@@ -307,7 +306,6 @@ ss://c9a40b93-3975-4f98-ab34-57f8674a895f@snapp.ir:2082?path=%2F&security=none&e
 ss://cb3f7174-9528-41e6-b59f-f3b166eb69db@h2-red.docos.tech:443?security=tls&type=ws&headerType=&path=%2Fred%2F&host=h2-red.docos.tech&sni=h2-red.docos.tech&fp=chrome#IR🇮🇷
 ss://cc398e44-af81-43be-b844-f363fcf16eb9@a.long.rest-bist.ir:80?path=%2Fdl%3Fed%3D2048&security=none&encryption=none&type=ws#IR🇮🇷
 ss://cc5baaa4-d862-9ad4-687b-7d5c730752ba@sdl.ciliko.ir:80?security=none&type=ws&path=%2F&host=#IR🇮🇷
-ss://cd54d877-9eee-4a50-8776-93a582ef8b88@snapp.ir:8080?path=/dcapp.js&%3Bsecurity=none&%3Bencryption=none&%3Bhost=seller.shopcenter.limoomi.snapp.aparat.sites.streamplaylivevarzesh3.play.lumavision.ir&%3Btype=ws#%F0%9F%87%AE%F0%9F%87%B7%20IR%20%7C%20VLESS%20%7C%20%40vpnfree85%20%231
 ss://ce5ccdd9-a6f8-488f-aaa1-e5d66b9f9133@185.143.233.235:80?path=%2F&security=none&encryption=none&host=d.nsa03.com&type=ws#IR🇮🇷
 ss://ce5ccdd9-a6f8-488f-aaa1-e5d66b9f9133@185.143.233.235:80?path=/&%3Bsecurity=none&%3Bencryption=none&%3Bhost=d.nsa03.com&%3Btype=ws#%F0%9F%87%AE%F0%9F%87%B7%20IR%20%7C%20VLESS%20%7C%20%40prrofile_purple%20%231
 ss://ced89321-0fbd-4c55-9874-ec5f2ded420b@arvancloud.ir:80?security=none&allowInsecure=0&encryption=none&type=ws&host=samrexnet.ir&path=%2F#IR🇮🇷
@@ -346,7 +344,6 @@ ss://e668e2db-8d79-86ef-92f7-edbdf49c81a2@meli2.masterdadeh.ir:80?path=%2F&secur
 ss://e8a02e46-e769-4bfd-9177-82370dfde00b@snapp.ir:80?type=ws&encryption=none&path=%2F&host=clinet.negindadeh.ir&security=none#IR🇮🇷
 ss://e8fd3903-58e3-4305-86bf-3cfae76f45c0@185.143.233.166:2082?path=%2Fassets%2Fvarzesh3&security=none&encryption=none&host=hpavash1.digikalajets.ir&type=ws#IR🇮🇷
 ss://e9af5b5c-c20e-4328-8e32-0bac5e7f7b74@185.143.233.5:443?encryption=none&security=tls&type=ws&headerType=none&path=%2F%40alaedin%3Fed%3D128&host=alaedin8.8lack.ir&sni=alaedin8.8lack.ir&fp=firefox&alpn=h2%2Chttp%2F1.1#IR🇮🇷
-ss://e9c11f71-7fb6-4d4d-ab91-b1f9490d6f00@185.143.234.235:80?path=/&%3Bsecurity=none&%3Bencryption=none&%3Bhost=login.deltars.ir&%3Btype=ws#%F0%9F%87%AE%F0%9F%87%B7%20IR%20%7C%20VLESS%20%7C%20%40v2ray_free_conf%20%231
 ss://e9e437c2-1ee5-4f0d-ae09-4bfafc835e47@185.143.233.120:2086?path=/wp-admin%3Fed%3D2048&%3Bsecurity=none&%3Bencryption=none&%3Bhost=getasa.ir&%3Btype=ws#%F0%9F%87%AE%F0%9F%87%B7%20IR%20%7C%20VLESS%20%7C%20%40v2ray_iran88%20%231
 ss://ea22f5f3-f74b-427a-a45f-30165c730fa0@varzesh3.com:8880?path=/&%3Bsecurity=none&%3Bencryption=none&%3Bhost=mmdi.novatechsystem.ir&%3Btype=ws#%F0%9F%87%AE%F0%9F%87%B7%20IR%20%7C%20VLESS%20%7C%20%40v_2rayng0%20%231
 ss://eba119b1-2524-4a53-8dba-2cdfb473de68@www.varzesh3.com:2095?encryption=none&type=ws&path=%2Fchat%3Fed%3D128&host=dl2.mizbanertebatfarda.ir#IR🇮🇷
@@ -602,7 +599,6 @@ vless://92af1fcb-70e3-4d6a-b602-e9c6aebc331d@varzesh3.com:80?path=%2F&security=n
 vless://92b93f5d-af24-420e-95fb-0120f55b4481@men2.gafe-lorbad.ir:80?path=%2F&security=none&encryption=none&host=s2.fasrrapido.ir&type=ws#IR🇮🇷
 vless://92e36f34-11f1-4312-9fda-af253712d09a@snapp.ir:8080?path=%2F&security=&encryption=none&host=M2.snllshop.ir&type=ws#IR🇮🇷
 vless://937dde02-4ce6-4f0d-a3be-27aef7d3ef46@s4.tehranionliine.ir:80?path=/&%3Bencryption=none&%3Btype=ws#%F0%9F%87%AE%F0%9F%87%B7%20IR%20%7C%20VLESS%20%7C%20%40vpnfree85%20%231
-vless://937dde02-4ce6-4f0d-a3be-27aef7d3ef46@s4.tehranionliine.ir:80?path=/&%3Bencryption=none&%3Btype=ws#%F0%9F%87%AE%F0%9F%87%B7%20IR%20%7C%20VLESS%20%7C%20%40vpnfree85%20%232
 vless://93b9cfef-7e6c-41e4-bfcc-8b30e9f8652e@185.143.233.5:2086?encryption=none&host=cd2.sesrsa.com&path=%2F&security=none&type=ws#IR🇮🇷
 vless://93ea5e7b-9427-416a-b2c6-f650d0c23193@snapp.ir:80?path=%2F&security=none&encryption=none&host=iranfuture.musicritmic.ir&type=ws#IR🇮🇷
 vless://9431162b-b0ba-4304-a58a-b1332681e63b@snapp.ir:80?path=%2Fgraphql%3Fed%3D2560&security=none&encryption=none&host=ss1.limitless-cloud.ir&type=ws#IR🇮🇷
@@ -685,7 +681,6 @@ vless://c9a40b93-3975-4f98-ab34-57f8674a895f@snapp.ir:2082?path=%2F&security=non
 vless://cb3f7174-9528-41e6-b59f-f3b166eb69db@h2-red.docos.tech:443?security=tls&type=ws&headerType=&path=%2Fred%2F&host=h2-red.docos.tech&sni=h2-red.docos.tech&fp=chrome#IR🇮🇷
 vless://cc398e44-af81-43be-b844-f363fcf16eb9@a.long.rest-bist.ir:80?path=%2Fdl%3Fed%3D2048&security=none&encryption=none&type=ws#IR🇮🇷
 vless://cc5baaa4-d862-9ad4-687b-7d5c730752ba@sdl.ciliko.ir:80?security=none&type=ws&path=%2F&host=#IR🇮🇷
-vless://cd54d877-9eee-4a50-8776-93a582ef8b88@snapp.ir:8080?path=/dcapp.js&%3Bsecurity=none&%3Bencryption=none&%3Bhost=seller.shopcenter.limoomi.snapp.aparat.sites.streamplaylivevarzesh3.play.lumavision.ir&%3Btype=ws#%F0%9F%87%AE%F0%9F%87%B7%20IR%20%7C%20VLESS%20%7C%20%40vpnfree85%20%231
 vless://ce5ccdd9-a6f8-488f-aaa1-e5d66b9f9133@185.143.233.235:80?path=%2F&security=none&encryption=none&host=d.nsa03.com&type=ws#IR🇮🇷
 vless://ce5ccdd9-a6f8-488f-aaa1-e5d66b9f9133@185.143.233.235:80?path=/&%3Bsecurity=none&%3Bencryption=none&%3Bhost=d.nsa03.com&%3Btype=ws#%F0%9F%87%AE%F0%9F%87%B7%20IR%20%7C%20VLESS%20%7C%20%40prrofile_purple%20%231
 vless://ced89321-0fbd-4c55-9874-ec5f2ded420b@arvancloud.ir:80?security=none&allowInsecure=0&encryption=none&type=ws&host=samrexnet.ir&path=%2F#IR🇮🇷
@@ -724,7 +719,6 @@ vless://e668e2db-8d79-86ef-92f7-edbdf49c81a2@meli2.masterdadeh.ir:80?path=%2F&se
 vless://e8a02e46-e769-4bfd-9177-82370dfde00b@snapp.ir:80?type=ws&encryption=none&path=%2F&host=clinet.negindadeh.ir&security=none#IR🇮🇷
 vless://e8fd3903-58e3-4305-86bf-3cfae76f45c0@185.143.233.166:2082?path=%2Fassets%2Fvarzesh3&security=none&encryption=none&host=hpavash1.digikalajets.ir&type=ws#IR🇮🇷
 vless://e9af5b5c-c20e-4328-8e32-0bac5e7f7b74@185.143.233.5:443?encryption=none&security=tls&type=ws&headerType=none&path=%2F%40alaedin%3Fed%3D128&host=alaedin8.8lack.ir&sni=alaedin8.8lack.ir&fp=firefox&alpn=h2%2Chttp%2F1.1#IR🇮🇷
-vless://e9c11f71-7fb6-4d4d-ab91-b1f9490d6f00@185.143.234.235:80?path=/&%3Bsecurity=none&%3Bencryption=none&%3Bhost=login.deltars.ir&%3Btype=ws#%F0%9F%87%AE%F0%9F%87%B7%20IR%20%7C%20VLESS%20%7C%20%40v2ray_free_conf%20%231
 vless://e9e437c2-1ee5-4f0d-ae09-4bfafc835e47@185.143.233.120:2086?path=/wp-admin%3Fed%3D2048&%3Bsecurity=none&%3Bencryption=none&%3Bhost=getasa.ir&%3Btype=ws#%F0%9F%87%AE%F0%9F%87%B7%20IR%20%7C%20VLESS%20%7C%20%40v2ray_iran88%20%231
 vless://ea22f5f3-f74b-427a-a45f-30165c730fa0@varzesh3.com:8880?path=/&%3Bsecurity=none&%3Bencryption=none&%3Bhost=mmdi.novatechsystem.ir&%3Btype=ws#%F0%9F%87%AE%F0%9F%87%B7%20IR%20%7C%20VLESS%20%7C%20%40v_2rayng0%20%231
 vless://eba119b1-2524-4a53-8dba-2cdfb473de68@www.varzesh3.com:2095?encryption=none&type=ws&path=%2Fchat%3Fed%3D128&host=dl2.mizbanertebatfarda.ir#IR🇮🇷
