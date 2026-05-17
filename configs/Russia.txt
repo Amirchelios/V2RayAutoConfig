@@ -2,6 +2,7 @@ ss://1a9a250be0fc4838bf4a3be2df89c670@94.103.89.223:8443?encryption=none&type=xh
 ss://44b7a388-21ca-4af0-a16b-01e9e6ef04e1@94.131.105.175:443?allowInsecure=1&alpn=http%2F1.1&encryption=none&fp=chrome&host=api-maps.yandex.ru&path=%2FhSnh23IZNTQroLv&security=tls&sni=api-maps.yandex.ru&type=httpupgrade#RU🇷🇺
 ss://44b7a388-21ca-4af0-a16b-01e9e6ef04e1@94.131.105.175:443?allowInsecure=1&alpn=http%2F1.1&encryption=none&fp=chrome&host=external-api.mediabilling.kinopoisk.ru&path=%2FhSnh23IZa4CZTWQa78l9eM&security=tls&sni=external-api.mediabilling.kinopoisk.ru&type=ws#RU🇷🇺
 ss://44b7a388-21ca-4af0-a16b-01e9e6ef04e1@94.131.105.175:443?allowInsecure=1&alpn=http%2F1.1&encryption=none&fp=chrome&host=webmode.yota.ru&path=%2FhSnh23IZa4CZTWQa78l9eM&security=tls&sni=webmode.yota.ru&type=ws#RU🇷🇺
+ss://5b2fc182-a497-4fbe-aeb8-1841dae99022@72.56.247.198:443?security=reality&type=tcp&sni=eh.vk.com&fp=qq&flow=xtls-rprx-vision&pbk=FSq5DVYJ8UaKArP3FtCmlZKqOQ08dKkqB2fefjRkA0M&encryption=none#🇷🇺[openproxylist.com]vless-RU
 ss://741f2cb64d5b4fd7830ad731c9e1e859Og==@45.142.120.5:443#RU%F0%9F%87%B7%F0%9F%87%BA+%7C+45.142.120.5-443+%7C+1.66ms
 ss://741f2cb64d5b4fd7830ad731c9e1e859Og==@45.142.120.5:443#RU%F0%9F%87%B7%F0%9F%87%BA+%7C+45.142.120.5-443+%7C+2.79ms
 ss://75807638-6f19-0190-ae08-38492ee85c88@178.72.162.160:52006?encryption=none&flow=xtls-rprx-vision&security=tls&sni=cluster-other-1.firstvideocdn.ru&type=tcp#%3E%3E%40oneclickvpnkeys%3A%3ARU
@@ -59,10 +60,12 @@ trojan://8r%3C%5B9%27l6hAO%238ZQi@95.163.242.189:8443?security=tls&sni=Koma-YT.P
 trojan://8r%3C%5B9%27l6hAO%238ZQi@95.213.226.60:443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B7%F0%9F%87%BARU-95.213.226.60-0790
 trojan://a1b16d10-4f43-4dd9-8c4f-52065b2b0910@45.88.148.237:28443?security=tls&sni=sbank.ir#%F0%9F%87%B7%F0%9F%87%BARU-45.88.148.237-2272
 trojan://ba74833c-8c0f-4dcd-8cbc-13e3c32d3765@185.236.233.111:2053?sni=ftp.debian.org#%F0%9F%87%B7%F0%9F%87%BA_RU_%E4%BF%84%E7%BD%97%E6%96%AF%E8%81%94%E9%82%A6_3
+trojan://strong-secret-pass-777@45.12.146.179:4443?allowInsecure=1#%F0%9F%A5%8A47@oneclickvpnkeysvless://b6ce8a51-19b9-4979-91ba-b4298c26d5fc@se.keepsecured.net:8443?encryption=none&fp=&pbk=J07yFEBPsic7-hLTS2KSxVqI7v4gpfkG6_a2cGKNVFk&security=reality&serviceName=buysec.ru&sid=10f786a2491b2cd5&sni=cdn.kwork.com&type=grpc#%F0%9F%A5%8A48@oneclickvpnkeys
 vless://1a9a250be0fc4838bf4a3be2df89c670@94.103.89.223:8443?encryption=none&type=xhttp&path=%2Fx&security=reality&sni=ya.ru&pbk=9XS6MeMlQBh4qCT1dhavAwGPKsWQGSyrSH_xHwotw0k&sid=aabbccdd&fp=random#REALITY|RU🇷🇺
 vless://44b7a388-21ca-4af0-a16b-01e9e6ef04e1@94.131.105.175:443?allowInsecure=1&alpn=http%2F1.1&encryption=none&fp=chrome&host=api-maps.yandex.ru&path=%2FhSnh23IZNTQroLv&security=tls&sni=api-maps.yandex.ru&type=httpupgrade#RU🇷🇺
 vless://44b7a388-21ca-4af0-a16b-01e9e6ef04e1@94.131.105.175:443?allowInsecure=1&alpn=http%2F1.1&encryption=none&fp=chrome&host=external-api.mediabilling.kinopoisk.ru&path=%2FhSnh23IZa4CZTWQa78l9eM&security=tls&sni=external-api.mediabilling.kinopoisk.ru&type=ws#RU🇷🇺
 vless://44b7a388-21ca-4af0-a16b-01e9e6ef04e1@94.131.105.175:443?allowInsecure=1&alpn=http%2F1.1&encryption=none&fp=chrome&host=webmode.yota.ru&path=%2FhSnh23IZa4CZTWQa78l9eM&security=tls&sni=webmode.yota.ru&type=ws#RU🇷🇺
+vless://5b2fc182-a497-4fbe-aeb8-1841dae99022@72.56.247.198:443?security=reality&type=tcp&sni=eh.vk.com&fp=qq&flow=xtls-rprx-vision&pbk=FSq5DVYJ8UaKArP3FtCmlZKqOQ08dKkqB2fefjRkA0M&encryption=none#🇷🇺[openproxylist.com]vless-RU
 vless://75807638-6f19-0190-ae08-38492ee85c88@178.72.162.160:52006?encryption=none&flow=xtls-rprx-vision&security=tls&sni=cluster-other-1.firstvideocdn.ru&type=tcp#%3E%3E%40oneclickvpnkeys%3A%3ARU
 vless://75807638-6f19-07d0-ae08-38492ee85c88@178.72.181.40:52006?allowInsecure=1&encryption=none&flow=xtls-rprx-vision&security=tls&sni=cluster-russia-3.firstvideocdn.ru&type=tcp#%3E%3E%40oneclickvpnkeys%3A%3ARU
 vless://75807638-6f19-07d0-ae08-38492ee85c88@178.72.181.69:52006?allowInsecure=1&encryption=none&flow=xtls-rprx-vision&security=tls&sni=cluster-russia-1.firstvideocdn.ru&type=tcp#%3E%3E%40oneclickvpnkeys%3A%3ARU
