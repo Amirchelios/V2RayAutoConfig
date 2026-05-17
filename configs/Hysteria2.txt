@@ -58,7 +58,6 @@ hysteria2://b4bd0613-ff7c-4f2f-954d-185915e6ddad@77.90.41.197:35000?security=tls
 hysteria2://dongtaiwang.com@208.87.243.187:22222?security=tls&insecure=1&sni=www.bing.com
 hysteria2://dongtaiwang.com@62.210.124.146:22000/?insecure=1&sni=www.microsoft.com#%F0%9F%8D%A541@oneclickvpnkeys
 hysteria2://dongtaiwang.com@62.210.124.146:22000/?insecure=1&sni=www.microsoft.com#🌐سرور
-hysteria2://dongtaiwang.com@62.210.124.146:22000/?insecure=1&sni=www.microsoft.com#🍥41@oneclickvpnkeys
 hysteria2://dongtaiwang.com@62.210.124.146:22000?insecure=1&sni=www.microsoft.com#%F0%9F%8D%A541%40oneclickvpnkeys
 hysteria2://dongtaiwang.com@62.210.124.146:22000?insecure=1&sni=www.microsoft.com#🌐سرور
 hysteria2://efdf452e-0f4e-4f14-ae07-0da3b8cb623b@1.161.50.107:37550?insecure=1&sni=edge-di.yuetong.online&mport=20000-40000#%F0%9F%87%A8%F0%9F%87%B3%20%E6%9C%BA%E5%9C%BA%E6%8E%A8%E8%8D%90%3Adafei.de%20%E5%8F%B0%E6%B9%BE%2006
@@ -77,6 +76,7 @@ hysteria2://qQe1z5kU8kN6SlKnDt9Ru3Qp@13.206.218.221:443?insecure=1&sni=https://t
 hysteria2://qQe1z5kU8kN6SlKnDt9Ru3Qp@13.206.251.0:443?insecure=1&sni=https://t.me/WangCai2🇨🇳#%F0%9F%87%AE%F0%9F%87%B3IN_%40WangCai_8%20%234
 hysteria2://qQe1z5kU8kN6SlKnDt9Ru3Qp@13.229.112.192:443?insecure=1&sni=https://t.me/WangCai2🇨🇳#%F0%9F%87%B8%F0%9F%87%ACSG_%40WangCai_8
 hysteria2://qQe1z5kU8kN6SlKnDt9Ru3Qp@13.250.25.232:443?insecure=1&sni=https://t.me/WangCai2🇨🇳#%F0%9F%87%B8%F0%9F%87%ACSG_%40WangCai_8%20%231
+hysteria2://qQe1z5kU8kN6SlKnDt9Ru3Qp@13.250.25.232:443?insecure=1&sni=https://t.me/WangCai2🇨🇳#🌐سرور
 hysteria2://qQe1z5kU8kN6SlKnDt9Ru3Qp@13.250.60.252:443?insecure=1&sni=https://t.me/WangCai2🇨🇳#%F0%9F%87%B8%F0%9F%87%ACSG_%40WangCai_8%20%232
 hysteria2://qQe1z5kU8kN6SlKnDt9Ru3Qp@160.187.100.109:443?insecure=1&sni=https%3A%2F%2Ft.me%2FWangCai2%F0%9F%87%A8%F0%9F%87%B3#%F0%9F%87%A8%F0%9F%87%B3%20%E6%9C%BA%E5%9C%BA%E6%8E%A8%E8%8D%90%3Adafei.de%20%E5%8F%B0%E6%B9%BE%2001
 hysteria2://qQe1z5kU8kN6SlKnDt9Ru3Qp@160.187.100.109:443?insecure=1&sni=https://t.me/WangCai2🇨🇳#TW_4%7C2.4MB%2Fs

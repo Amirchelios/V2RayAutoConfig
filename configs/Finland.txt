@@ -5,6 +5,10 @@ ss://405f0726-89dc-6729-5bd6-a1464e61b6ea@www.vinatech.ir:8880?encryption=none&s
 ss://406e983f-22b9-4cb2-ab19-7b3968be0f07@starlink.tino2020.com:443?mode=auto&path=/&security=tls&alpn=h2,http/1.1&encryption=none&insecure=1&fp=chrome&type=xhttp&allowInsecure=1&sni=starlink.tino2020.com#🇫🇮Finland,
 ss://6202b230-417c-4d8e-b624-0f71afa9c75d@144.31.19.131:443?&security=tls&sni=sni.111000.v6.rocks&type=ws&headerType=none&host=sni.111000.v6.rocks&path=%2F%3Fed%3D2560%26https%3A%2F%2Ft.me%2FWangCai2%F0%9F%87%A8%F0%9F%87%B3#%3E%3E%40configshub2%3A%3AFI
 ss://6202b230-417c-4d8e-b624-0f71afa9c75d@45.144.52.69:443?&security=tls&sni=sni.111000.v6.rocks&type=ws&headerType=none&host=sni.111000.v6.rocks&path=%2F%3Fed%3D2560%26https%3A%2F%2Ft.me%2FWangCai2%F0%9F%87%A8%F0%9F%87%B3#%3E%3E%40configshub2%3A%3AFI
+ss://6207414d-7b7b-48a9-9e7a-7579f3c2ef01@Ikco.ir:2082?security=none&type=ws&headerType=&path=/cdn&host=dl5.movizdl.ir#Finland
+ss://6207414d-7b7b-48a9-9e7a-7579f3c2ef01@Tapsi.ir:2052?security=none&type=ws&headerType=&path=/cdn&host=dl5.movizdl.ir#Finland
+ss://6207414d-7b7b-48a9-9e7a-7579f3c2ef01@Tapsi.ir:80?security=none&type=ws&headerType=&path=/cdn&host=dl6.movizdl.ir#Finland
+ss://6207414d-7b7b-48a9-9e7a-7579f3c2ef01@snappfood.ir:2086?security=none&type=ws&headerType=&path=/cdn&host=dl5.movizdl.ir#Finland
 ss://91af3d98-fb3c-40f9-8a69-21ff12ccaec4@65.21.132.249:443?mode=gun&security=reality&encryption=none&pbk=SH8hAIyzkC6kEHlxKPTItVv0hqQevBvNm_cGbaHU3g4&fp=random&spx=%2F&type=grpc&serviceName=%40UnlimitedDev&sni=ftp.debian.org&sid=c7cf5bc1#REALITY|FI🇫🇮
 ss://9c42819a-67a6-4742-9c6d-64900ba62160@fl-2.bot-iphone.ru:8443?security=reality&encryption=none&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=www.samsung.com#REALITY|FI🇫🇮
 ss://Warpi-Free-Vpn-In-GooglePlay@95.217.233.18:443?type=tcp&encryption=none&flow=#FI🇫🇮
@@ -31,6 +35,10 @@ vless://405f0726-89dc-6729-5bd6-a1464e61b6ea@www.vinatech.ir:8880?encryption=non
 vless://406e983f-22b9-4cb2-ab19-7b3968be0f07@starlink.tino2020.com:443?mode=auto&path=/&security=tls&alpn=h2,http/1.1&encryption=none&insecure=1&fp=chrome&type=xhttp&allowInsecure=1&sni=starlink.tino2020.com#🇫🇮Finland,
 vless://6202b230-417c-4d8e-b624-0f71afa9c75d@144.31.19.131:443?&security=tls&sni=sni.111000.v6.rocks&type=ws&headerType=none&host=sni.111000.v6.rocks&path=%2F%3Fed%3D2560%26https%3A%2F%2Ft.me%2FWangCai2%F0%9F%87%A8%F0%9F%87%B3#%3E%3E%40configshub2%3A%3AFI
 vless://6202b230-417c-4d8e-b624-0f71afa9c75d@45.144.52.69:443?&security=tls&sni=sni.111000.v6.rocks&type=ws&headerType=none&host=sni.111000.v6.rocks&path=%2F%3Fed%3D2560%26https%3A%2F%2Ft.me%2FWangCai2%F0%9F%87%A8%F0%9F%87%B3#%3E%3E%40configshub2%3A%3AFI
+vless://6207414d-7b7b-48a9-9e7a-7579f3c2ef01@Ikco.ir:2082?security=none&type=ws&headerType=&path=/cdn&host=dl5.movizdl.ir#Finland
+vless://6207414d-7b7b-48a9-9e7a-7579f3c2ef01@Tapsi.ir:2052?security=none&type=ws&headerType=&path=/cdn&host=dl5.movizdl.ir#Finland
+vless://6207414d-7b7b-48a9-9e7a-7579f3c2ef01@Tapsi.ir:80?security=none&type=ws&headerType=&path=/cdn&host=dl6.movizdl.ir#Finland
+vless://6207414d-7b7b-48a9-9e7a-7579f3c2ef01@snappfood.ir:2086?security=none&type=ws&headerType=&path=/cdn&host=dl5.movizdl.ir#Finland
 vless://91af3d98-fb3c-40f9-8a69-21ff12ccaec4@65.21.132.249:443?mode=gun&security=reality&encryption=none&pbk=SH8hAIyzkC6kEHlxKPTItVv0hqQevBvNm_cGbaHU3g4&fp=random&spx=%2F&type=grpc&serviceName=%40UnlimitedDev&sni=ftp.debian.org&sid=c7cf5bc1#REALITY|FI🇫🇮
 vless://9c42819a-67a6-4742-9c6d-64900ba62160@fl-2.bot-iphone.ru:8443?security=reality&encryption=none&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=www.samsung.com#REALITY|FI🇫🇮
 vless://Warpi-Free-Vpn-In-GooglePlay@95.217.233.18:443?type=tcp&encryption=none&flow=#FI🇫🇮

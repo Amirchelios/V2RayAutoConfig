@@ -44,6 +44,7 @@ ss://YWVzLTI1Ni1nY206MzE1MDQ2NjU2OGVkYTg3Yg==@195.58.49.26:60129#%F0%9F%87%B7%F0
 ss://YWVzLTI1Ni1nY206ZjM0NTc5ZDAxNDhiMjU4MQ==@185.22.154.104:50129#%F0%9F%87%B7%F0%9F%87%BARU-185.22.154.104-0272
 ss://afcac633-0e1a-46c3-bef2-cc01cc0097c8@72.56.62.253:22231?encryption=none&flow=xtls-rprx-vision&fp=chrome&security=tls&sni=r1.mizulina.top&type=tcp#RU🇷🇺
 ss://afcac633-0e1a-46c3-bef2-cc01cc0097c8@r1.mizulina.top:22231?allowInsecure=0&sni=r1.mizulina.top&flow=xtls-rprx-vision-udp443&fp=edge&security=tls#RU🇷🇺
+ss://c3f112fc-1041-Fade-b85c-5ed478daeeb9@s28233.cdn.ngenix.net:443?security=tls&type=ws&path=%2F&host=s28233.cdn.ngenix.net&sni=s28233.cdn.ngenix.net&fp=chrome#%E4%BF%84%E7%BD%97%E6%96%AF+Samara+State+University
 ss://c8d1c6d3-388f-48fc-a8f0-ed90d955d096@193.151.108.76:443?encryption=none&flow=xtls-rprx-vision&fp=&pbk=nPcUKydxoRI66O3tT9O4QCZpLjOBvkGsiXG7pDX1BBw&security=reality&sid=6ba85179e30d4fc2&sni=www.google.com&type=tcp#REALITY|RU🇷🇺
 ss://cd4796c5-eb68-4ca7-8f0c-37709aaa0d4f@fi.vz-or.com:443?encryption=none&flow=xtls-rprx-vision&fp=&pbk=RJETAkoZ6lowmwc5f0HtPy00c3dfojqQuypriLExXRE&security=reality&sid=abbcd128&sni=sun9-36.userapi.com&type=tcp#REALITY|RU🇷🇺
 ss://e9888b9b-658b-4f51-94f3-b8ba80e4ef91@185.171.80.2:443?encryption=none&flow=xtls-rprx-vision&fp=&pbk=1HeKf_8KDjfzXfUi9P7WBaGStMvr96TKdUbofpkwBzQ&security=reality&sid=8bd29483ded126b4&sni=wikihow.com&type=tcp#REALITY|RU🇷🇺
@@ -56,6 +57,8 @@ trojan://8r%3C%5B9%27l6hAO%238ZQi@62.84.103.249:8443?allowInsecure=1&sni=Koma-YT
 trojan://8r%3C%5B9%27l6hAO%238ZQi@62.84.103.249:8443?sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B7%F0%9F%87%BARU%E4%BF%84%E7%BD%97%E6%96%AF2
 trojan://8r%3C%5B9%27l6hAO%238ZQi@79.141.73.189:8443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B7%F0%9F%87%BARU-79.141.73.189-0793
 trojan://8r%3C%5B9%27l6hAO%238ZQi@85.239.39.144:8443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B7%F0%9F%87%BARU-85.239.39.144-0792
+trojan://8r%3C%5B9%27l6hAO%238ZQi@94.103.80.218:8443?allowInsecure=1&sni=Koma-YT.PAGeS.Dev&ws=1&wspath=%252FtrTelegram%25F0%259F%2587%25A8%25F0%259F%2587%25B3%252B%2540WangCai2#%F0%9F%87%B7%F0%9F%87%BA%20%E4%BF%84%E7%BD%97%E6%96%AF%20CCZZUU.TOP
+trojan://8r%3C%5B9%27l6hAO%238ZQi@94.103.80.218:8443?sni=Koma-YT.PAGeS.Dev&type=ws&host=Koma-YT.PAGeS.Dev&path=/trTelegram🇨🇳+@WangCai2#%E4%BF%84%E7%BD%97%E6%96%AF+V2CROSS.COM
 trojan://8r%3C%5B9%27l6hAO%238ZQi@95.163.242.189:8443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B7%F0%9F%87%BARU-95.163.242.189-0779
 trojan://8r%3C%5B9%27l6hAO%238ZQi@95.213.226.60:443?security=tls&sni=Koma-YT.PAGeS.Dev#%F0%9F%87%B7%F0%9F%87%BARU-95.213.226.60-0790
 trojan://a1b16d10-4f43-4dd9-8c4f-52065b2b0910@45.88.148.237:28443?security=tls&sni=sbank.ir#%F0%9F%87%B7%F0%9F%87%BARU-45.88.148.237-2272
@@ -74,6 +77,7 @@ vless://7bd29cac-f692-48a3-88d1-505f7e55f0d0@georg.sbrf-cdn342.ru:443?encryption
 vless://8e6acce9-8b56-7190-d491-7d84f8189e26@5.181.171.2:443?security=reality&encryption=none&pbk=YNGotlyAx3ELUmi4lxOUjiEDmibqf1pPUTE9o3YYT2Y&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=speed.cloudflare.com#%F0%9F%87%B7%F0%9F%87%BA%20Russia%20X
 vless://afcac633-0e1a-46c3-bef2-cc01cc0097c8@72.56.62.253:22231?encryption=none&flow=xtls-rprx-vision&fp=chrome&security=tls&sni=r1.mizulina.top&type=tcp#RU🇷🇺
 vless://afcac633-0e1a-46c3-bef2-cc01cc0097c8@r1.mizulina.top:22231?allowInsecure=0&sni=r1.mizulina.top&flow=xtls-rprx-vision-udp443&fp=edge&security=tls#RU🇷🇺
+vless://c3f112fc-1041-Fade-b85c-5ed478daeeb9@s28233.cdn.ngenix.net:443?security=tls&type=ws&path=%2F&host=s28233.cdn.ngenix.net&sni=s28233.cdn.ngenix.net&fp=chrome#%E4%BF%84%E7%BD%97%E6%96%AF+Samara+State+University
 vless://c8d1c6d3-388f-48fc-a8f0-ed90d955d096@193.151.108.76:443?encryption=none&flow=xtls-rprx-vision&fp=&pbk=nPcUKydxoRI66O3tT9O4QCZpLjOBvkGsiXG7pDX1BBw&security=reality&sid=6ba85179e30d4fc2&sni=www.google.com&type=tcp#REALITY|RU🇷🇺
 vless://cd4796c5-eb68-4ca7-8f0c-37709aaa0d4f@fi.vz-or.com:443?encryption=none&flow=xtls-rprx-vision&fp=&pbk=RJETAkoZ6lowmwc5f0HtPy00c3dfojqQuypriLExXRE&security=reality&sid=abbcd128&sni=sun9-36.userapi.com&type=tcp#REALITY|RU🇷🇺
 vless://e9888b9b-658b-4f51-94f3-b8ba80e4ef91@185.171.80.2:443?encryption=none&flow=xtls-rprx-vision&fp=&pbk=1HeKf_8KDjfzXfUi9P7WBaGStMvr96TKdUbofpkwBzQ&security=reality&sid=8bd29483ded126b4&sni=wikihow.com&type=tcp#REALITY|RU🇷🇺
