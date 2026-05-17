@@ -17,6 +17,7 @@ hy2://qQe1z5kU8kN6SlKnDt9Ru3Qp@47.129.174.18:443/?insecure=1&sni=https://t.me/Wa
 hy2://qQe1z5kU8kN6SlKnDt9Ru3Qp@52.77.240.3:443/?insecure=1&sni=https://t.me/WangCai2🇨🇳#🇸🇬SG_@WangCai_8
 hy2://zhangyang@130.61.50.75:6443/
 hysteria2://10550754-cf62-3d3b-ba6a-50be27a275d7@195.133.53.33:443?sni=s516.okgfw.top#%F0%9F%87%B7%F0%9F%87%BA%20%E6%9C%BA%E5%9C%BA%E6%8E%A8%E8%8D%90%3Adafei.de%20%E4%BF%84%E7%BD%97%E6%96%AF%2001
+hysteria2://10550754-cf62-3d3b-ba6a-50be27a275d7@195.133.53.33:443?sni=s516.okgfw.top#🌐سرور
 hysteria2://60207953-ef79-4f8f-8062-63c281f34c6b@5gzdx.233235.xyz:8080?sni=5gzdx.233235.xyz#A%20-%20%F0%9F%87%B9%F0%9F%87%BC%20TW%2003%20TG%3A%20%40nodpai
 hysteria2://60207953-ef79-4f8f-8062-63c281f34c6b@hkmax03.476579.xyz:8080?sni=hkmax03.476579.xyz#A%20-%20%F0%9F%87%B8%F0%9F%87%AC%20SG%2003%20TG%3A%20%40nodpai
 hysteria2://60207953-ef79-4f8f-8062-63c281f34c6b@tw11.352343.cc:8080?sni=tw11.352343.cc#B%20-%20%F0%9F%87%B9%F0%9F%87%BC%20TW%2006%20TG%3A%20%40nodpai
@@ -80,7 +81,6 @@ hysteria2://fe24ff92-bdec-405a-b5a2-ae6b9eac90e5@tw3.757866.xyz:8080?sni=tw3.757
 hysteria2://fe24ff92-bdec-405a-b5a2-ae6b9eac90e5@us02.344233.cc:8080?sni=us02.344233.cc#B%20-%20%F0%9F%87%BA%F0%9F%87%B8%20US%2015%20TG%3A%20%40nodpai
 hysteria2://fe24ff92-bdec-405a-b5a2-ae6b9eac90e5@us03.344233.cc:20000?sni=us03.344233.cc&obfs=salamander&obfs-password=ZTBjNDA0YTVhNTFkMzFlOQ==#B%20-%20%F0%9F%87%BA%F0%9F%87%B8%20US%2002%20TG%3A%20%40nodpai
 hysteria2://linux.do@[2a01:4f9:4b:f378::1]:13599?security=tls&insecure=1&sni=www.bing.com#@V2rayNG3
-hysteria2://qQe1z5kU8kN6SlKnDt9Ru3Qp@116.206.92.109:443?insecure=1&sni=116.206.92.109#🌐سرور
 hysteria2://qQe1z5kU8kN6SlKnDt9Ru3Qp@160.187.100.109:443?insecure=1&sni=https%3A%2F%2Ft.me%2FWangCai2%F0%9F%87%A8%F0%9F%87%B3#%F0%9F%87%A8%F0%9F%87%B3%20%E6%9C%BA%E5%9C%BA%E6%8E%A8%E8%8D%90%3Adafei.de%20%E5%8F%B0%E6%B9%BE%2001
 hysteria2://qQe1z5kU8kN6SlKnDt9Ru3Qp@160.187.100.109:443?insecure=1&sni=https://t.me/WangCai2🇨🇳#%F0%9F%87%A8%F0%9F%87%B3TW_%40WangCai_8
 hysteria2://qQe1z5kU8kN6SlKnDt9Ru3Qp@160.187.100.109:443?insecure=1&sni=https://t.me/WangCai2🇨🇳#TW_4%7C2.4MB%2Fs
