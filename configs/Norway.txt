@@ -4,14 +4,12 @@ ss://39039c78-41a2-45f1-a64d-f6818efcae03@172.104.161.138:27420?&security=false&
 ss://3ddce082-7e03-429c-8af8-9a873d23f0ba@91.244.70.205:443?&security=false&fp=chrome&type=ws&headerType=none&path=%2F#%5B%F0%9F%87%A6%F0%9F%87%B9%5D%20%5Bvl-no-ws%5D%20%5B260517-231811.585%5D
 ss://478cc26d-16b3-4fdd-be64-60d5a58c1622@172.64.147.210:80?&security=false&fp=chrome&type=ws&headerType=none&host=tt.andishehparenting.com&path=%2F#%5B%F0%9F%87%A9%F0%9F%87%AA%5D%20%5Bvl-no-ws%5D%20%5B260517-231819.184%5D
 ss://5f1811a9-292a-4d7e-b59f-1a5ff9390647@45.12.132.183:80?&security=false&fp=chrome&type=ws&headerType=none&path=%2Fvless%2F#%5B%F0%9F%87%AD%F0%9F%87%BA%5D%20%5Bvl-no-ws%5D%20%5B260517-231836.504%5D
-ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@185.90.61.153:989#%F0%9F%87%B3%F0%9F%87%B4NO-185.90.61.153-8273
+ss://YWVzLTI1Ni1jZmI6ZjhmN2FDemNQS2JzRjhwMw==@185.90.61.153:989#%F0%9F%87%B3%F0%9F%87%B4NO-185.90.61.153-8200
 ss://dc8eccdb-ecfa-435f-9ac1-5dc4882e7b51@de.vpnbase.net:80?&security=false&fp=chrome&type=ws&headerType=none&host=de.vpnbase.net&path=%2Fhttp#%5B%F0%9F%87%A9%F0%9F%87%AA%5D%20%5Bvl-no-ws%5D%20%5B260517-232003.265%5D
 ss://e4fc4761-154f-490e-bbaa-b4fa193f1073@45.148.31.0:15855?&security=false&fp=chrome&type=ws&headerType=none&path=%2F#%5B%F0%9F%87%A9%F0%9F%87%B0%5D%20%5Bvl-no-ws%5D%20%5B260517-232007.905%5D
 ss://e550f63f-7975-455d-a5d8-e11a120a519d@s31588.asancall.cloud:8443?&security=false&fp=chrome&type=ws&headerType=none&host=s31588.asancall.cloud&path=%2Fws%2Fapps%2Fzoomit#%5B%F0%9F%87%A9%F0%9F%87%AA%5D%20%5Bvl-no-ws%5D%20%5B260517-232008.228%5D
 ss://f2a806c6-f36b-4cd9-8bb6-7addb218ad2d@91.244.70.205:443?&security=false&fp=chrome&type=ws&headerType=none&path=%2F#%5B%F0%9F%87%A6%F0%9F%87%B9%5D%20%5Bvl-no-ws%5D%20%5B260517-232017.352%5D
 ss://fac62eac-1eec-4260-a991-0cac2f8745a3@141.193.213.21:80?&security=false&fp=chrome&type=ws&headerType=none&host=free-server.techsonic.ggff.net&path=%2F%40Tech_Sonic#%5B%F0%9F%87%B8%F0%9F%87%AC%5D%20%5Bvl-no-ws%5D%20%5B260517-232022.596%5D
-trojan://8r%3C%5B9%27l6hAO%238ZQi@138.124.229.141:8443?sni=Koma-YT.PAGeS.Dev&type=ws&host=Koma-YT.PAGeS.Dev&path=/trTelegram🇨🇳+@WangCai2#%E6%8C%AA%E5%A8%81+V2CROSS.COM
-trojan://8r%3C%5B9%27l6hAO%238ZQi@138.124.89.189:8443?sni=Koma-YT.PAGeS.Dev&type=ws&host=Koma-YT.PAGeS.Dev&path=/trTelegram🇨🇳+@WangCai2#%E6%8C%AA%E5%A8%81+V2CROSS.COM
 vless://049e56d8-0ba0-49e3-b764-ee04122b9f00@57.131.32.191:80?&security=false&fp=chrome&type=ws&headerType=none&path=%2Fvless%2F#%5B%F0%9F%87%AE%F0%9F%87%B9%5D%20%5Bvl-no-ws%5D%20%5B260517-231730.115%5D
 vless://388a6c57-87e7-420b-afe2-b3eb670fd7da@162.159.36.5:80?&security=false&fp=chrome&type=ws&headerType=none&host=vip.yaml7.ggff.net&path=%2F#%5B%F0%9F%87%BA%F0%9F%87%B8%5D%20%5Bvl-no-ws%5D%20%5B260517-231807.738%5D
 vless://39039c78-41a2-45f1-a64d-f6818efcae03@172.104.161.138:27420?&security=false&fp=chrome&type=ws&headerType=none&host=m.zoom.us&path=%2FFREE%20By%20Tharuwa%20%280767597317%29#%5B%F0%9F%87%B8%F0%9F%87%AC%5D%20%5Bvl-no-ws%5D%20%5B260517-231807.962%5D
