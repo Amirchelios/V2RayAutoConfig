@@ -4,7 +4,6 @@ ss://152e80f4173b42668ab6a918ffcbaded@212.192.14.227:8443?encryption=none&type=x
 ss://1a9a250be0fc4838bf4a3be2df89c670@94.103.89.223:8443?encryption=none&type=xhttp&path=%2Fx&security=reality&sni=ya.ru&pbk=9XS6MeMlQBh4qCT1dhavAwGPKsWQGSyrSH_xHwotw0k&sid=aabbccdd&fp=random#REALITY|RU🇷🇺
 ss://44b7a388-21ca-4af0-a16b-01e9e6ef04e1@94.131.105.175:443?allowInsecure=1&alpn=http%2F1.1&encryption=none&fp=chrome&host=api-maps.yandex.ru&path=%2FhSnh23IZNTQroLv&security=tls&sni=api-maps.yandex.ru&type=httpupgrade#RU🇷🇺
 ss://5137b22bf02f4309a65bc06cf66a6b83@212.192.14.225:8443?encryption=none&type=xhttp&path=%2Fx&security=reality&sni=ya.ru&pbk=-ilN3RccV76Z1Sye-TAeBOkZmsE6ro6dYHfJYCb6kQM&sid=aabbccdd&fp=random#REALITY|RU🇷🇺
-ss://6202b230-417c-4d8e-b624-0f71afa9c75d@176.124.223.138:2096?allowInsecure=1&encryption=none&fp=chrome&host=sni.111000.indevs.in&path=%2F&security=tls&sni=sni.111000.indevs.in&type=ws#%E4%BF%84%E7%BD%97%E6%96%AF+V2CROSS.COM
 ss://741f2cb64d5b4fd7830ad731c9e1e859Og==@45.142.120.5:443#RU%F0%9F%87%B7%F0%9F%87%BA+%7C+45.142.120.5-443+%7C+1.8ms
 ss://741f2cb64d5b4fd7830ad731c9e1e859Og==@45.142.120.5:443#RU%F0%9F%87%B7%F0%9F%87%BA+%7C+45.142.120.5-443+%7C+2.64ms
 ss://75807638-6f19-0190-ae08-38492ee85c88@178.72.162.160:52006?encryption=none&flow=xtls-rprx-vision&security=tls&sni=cluster-other-1.firstvideocdn.ru&type=tcp#%3E%3E%40oneclickvpnkeys%3A%3ARU
@@ -68,7 +67,6 @@ vless://152e80f4173b42668ab6a918ffcbaded@212.192.14.227:8443?encryption=none&typ
 vless://1a9a250be0fc4838bf4a3be2df89c670@94.103.89.223:8443?encryption=none&type=xhttp&path=%2Fx&security=reality&sni=ya.ru&pbk=9XS6MeMlQBh4qCT1dhavAwGPKsWQGSyrSH_xHwotw0k&sid=aabbccdd&fp=random#REALITY|RU🇷🇺
 vless://44b7a388-21ca-4af0-a16b-01e9e6ef04e1@94.131.105.175:443?allowInsecure=1&alpn=http%2F1.1&encryption=none&fp=chrome&host=api-maps.yandex.ru&path=%2FhSnh23IZNTQroLv&security=tls&sni=api-maps.yandex.ru&type=httpupgrade#RU🇷🇺
 vless://5137b22bf02f4309a65bc06cf66a6b83@212.192.14.225:8443?encryption=none&type=xhttp&path=%2Fx&security=reality&sni=ya.ru&pbk=-ilN3RccV76Z1Sye-TAeBOkZmsE6ro6dYHfJYCb6kQM&sid=aabbccdd&fp=random#REALITY|RU🇷🇺
-vless://6202b230-417c-4d8e-b624-0f71afa9c75d@176.124.223.138:2096?allowInsecure=1&encryption=none&fp=chrome&host=sni.111000.indevs.in&path=%2F&security=tls&sni=sni.111000.indevs.in&type=ws#%E4%BF%84%E7%BD%97%E6%96%AF+V2CROSS.COM
 vless://75807638-6f19-0190-ae08-38492ee85c88@178.72.162.160:52006?encryption=none&flow=xtls-rprx-vision&security=tls&sni=cluster-other-1.firstvideocdn.ru&type=tcp#%3E%3E%40oneclickvpnkeys%3A%3ARU
 vless://75807638-6f19-07d0-ae08-38492ee85c88@178.72.181.40:52006?allowInsecure=1&encryption=none&flow=xtls-rprx-vision&security=tls&sni=cluster-russia-3.firstvideocdn.ru&type=tcp#%3E%3E%40oneclickvpnkeys%3A%3ARU
 vless://75807638-6f19-07d0-ae08-38492ee85c88@178.72.181.69:52006?allowInsecure=1&encryption=none&flow=xtls-rprx-vision&security=tls&sni=cluster-russia-1.firstvideocdn.ru&type=tcp#%3E%3E%40oneclickvpnkeys%3A%3ARU
