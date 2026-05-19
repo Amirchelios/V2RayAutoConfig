@@ -1,0 +1,2 @@
+ss://70800daf-1d64-476b-9875-2444e7f43275@77.110.106.1:443?encryption=none&fp=chrome&pbk=13qS12jjsHCQpQfL3tEL2nHltgoTp1i-8kVcJ6odrEQ&security=reality&sid=6635&sni=yahoo.com&type=tcp#%E6%B2%99%E7%89%B9%E9%98%BF%E6%8B%89%E4%BC%AF+V2CROSS.COM
+vless://70800daf-1d64-476b-9875-2444e7f43275@77.110.106.1:443?encryption=none&fp=chrome&pbk=13qS12jjsHCQpQfL3tEL2nHltgoTp1i-8kVcJ6odrEQ&security=reality&sid=6635&sni=yahoo.com&type=tcp#%E6%B2%99%E7%89%B9%E9%98%BF%E6%8B%89%E4%BC%AF+V2CROSS.COM
