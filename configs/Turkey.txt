@@ -29,7 +29,6 @@ ss://c10999b4-7f93-5a50-3908-1467b1e52ae2@155.212.110.2:993?security=reality&enc
 ss://c8d1c6d3-388f-48fc-a8f0-ed90d955d096@194.87.39.215:443?encryption=none&flow=xtls-rprx-vision&fp=&pbk=nPcUKydxoRI66O3tT9O4QCZpLjOBvkGsiXG7pDX1BBw&security=reality&sid=6ba85179e30d4fc2&sni=www.google.com&type=tcp#REALITY|TR🇹🇷
 ss://cea5a86c-bf57-4aba-9205-b9c7cfbe8f43@snapp.tech-notes.xyz:42293?mode=gun&security=tls&alpn=h2%2Chttp%2F1.1&encryption=none&insecure=0&fp=chrome&type=grpc&serviceName=aparat-stream&allowInsecure=0&sni=snapp.tech-notes.xyz#TR🇹🇷
 ss://ffc13868-bc71-490e-84db-5722873cf0f5@46.31.76.3:80?mode=auto&path=%2Fpwpw&security=reality&encryption=none&pbk=oTX6mQJYxkmmdF7Rq_stAKX_hYoOMXGaWmoblFl2zgo&host=bleep.global.ssl.fastly.net&fp=chrome&spx=%2F&type=xhttp&sni=journalofbigdata.springeropen.com&sid=5942e2#REALITY|TR🇹🇷
-trojan://tunnel-ljlcf@tr-1.stunnel.cc:8441?security=tls#%F0%9F%87%B9%F0%9F%87%B7TR-193.124.46.134-0151
 trojan://tunnel-ljlcf@tr-1.stunnel.cc:8441?security=tls#%F0%9F%87%B9%F0%9F%87%B7TR-193.124.46.134-0207
 vless://26a905ec-c32e-47b8-98eb-b3b8992759ce@185.231.181.30:56756?encryption=none&type=tcp&security=none#🇹🇷Türkiye
 vless://43c37883-2c0b-408c-814d-443d0686a9bb@89.32.251.77:34576?type=tcp&encryption=none&security=none#🇹🇷Türkiye,
