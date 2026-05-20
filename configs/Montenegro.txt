@@ -1,4 +1,3 @@
-hysteria2://qQe1z5kU8kN6SlKnDt9Ru3Qp@160.187.100.109:443?insecure=1&sni=https%3A%2F%2Ft.me%2FWangCai2%F0%9F%87%A8%F0%9F%87%B3#%F0%9F%87%B9%F0%9F%87%BCTW_1%7C1.6MB%2Fs%20%7C%20%E6%9B%B4%E5%A4%9A%E8%8A%82%E7%82%B9%3A%20https%3A%2F%2Ft.me%2Fbyxiaoxi
 hysteria2://qQe1z5kU8kN6SlKnDt9Ru3Qp@160.187.100.109:443?insecure=1&sni=https%3A%2F%2Ft.me%2FWangCai2%F0%9F%87%A8%F0%9F%87%B3#TW_1%7C1.6MB%2Fs%20%7C%20%E6%9B%B4%E5%A4%9A%E8%8A%82%E7%82%B9%3A%20https%3A%2F%2Ft.me%2Fbyxiaoxi
 ss://006e4730-9370-48fa-a7be-98e49833ca6e@185.143.234.235:80?encryption=none&type=ws&path=/&host=felorida4.newcallapphelper.online#t.me/ConfigFori
 ss://01fd39bc-311d-4edf-80d3-8c868afbb802@Ikco.ir:2082?security=none&type=ws&headerType=&path=%2Fcdn&host=dl5.movizdl.ir#%F0%9F%87%AE%F0%9F%87%B725979%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FSOSkeyNET
@@ -31,7 +30,6 @@ ss://3de46922-13c6-45be-a0e1-faa939ded75f@94.182.108.23:8443?encryption=none&typ
 ss://3f9256a9-ded6-be8e-a397-84546a266c06@snapp.ir:8080?security=none&type=ws&path=%2F&host=iran.arub.ir#%F0%9F%87%AE%F0%9F%87%B726072%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FSOSkeyNET
 ss://438fe684-5e3c-470d-8a04-529f00665674@blubank.sb24.ir:2096?type=ws&encryption=none&path=/graphql?ed=30&host=yeolightShop.nexnull.pro&security=tls&fp=chrome&alpn=h2,http/1.1&sni=yeolightShop.nexnull.pro#%F0%9F%87%AE%F0%9F%87%B726006%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FSOSkeyNET
 ss://45d95284-05ce-4e8b-ad84-a6bcdfebcb59@144.31.92.173:443/?type=tcp&encryption=none&flow=xtls-rprx-vision&security=reality&pbk=0A9nE6Scvg5oYRN8aRsLR-YqrvDNNX5s2UXa4yvyRkA&sid=#https%3A%2F%2Ft.me%2Fallproconf
-ss://48ff2b70-e180-582f-8866-d9a2edeed5f5@51.158.206.87:23576?security=reality&encryption=none&pbk=1y5h2FGWKXTJ9xLPCqPo6Mw7RxoZzh6fGkEQKNxpZ3s&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=fuck.rkn&sid=01#https://t.me/VIPV2rayNGNP
 ss://4b1e3e24-9d82-4a30-b603-4366b30c6c07@Snapp.ir:80?encryption=none&type=ws&host=mangel.phynanc.ir&path=/&security=none#%F0%9F%87%AE%F0%9F%87%B725958%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FSOSkeyNET
 ss://530f5772-bc3f-43d0-aeed-2613d0f99013@varzesh3.com:80?type=ws&encryption=none&path=%2Fws&host=nobody.fasterspeed.ir&security=none#%F0%9F%87%AE%F0%9F%87%B725955%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FSOSkeyNET
 ss://54c47dee-eaee-417c-9b3c-339c5e00eeb7@trex.docos.tech:443?path=/vless-ws&security=tls&encryption=none&insecure=0&host=trex.docos.tech&fp=chrome&type=ws&allowInsecure=0&sni=trex.docos.tech#t.me/FlashTunnelx❄💎
@@ -101,7 +99,10 @@ ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo2YzgxNWJiODRjNzgxZGE1@51.75.168.50:13030#htt
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpBUmd2R1p5d0ErZ2FjZ0dWMjZCdm11MDUrd1ptUlcvaitBZFUrWjhCdDQ0PQ@103.75.119.38:990#t.me/OutlineVpnOfficial
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpBUmd2R1p5d0ErZ2FjZ0dWMjZCdm11MDUrd1ptUlcvaitBZFUrWjhCdDQ0PQ@45.82.252.109:990#t.me/OutlineVpnOfficial
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpPUElHSFNlSVpWQlM3aERY@series1.samanehha.co:443#t.me/V2ray_Custom😉
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@193.29.139.235:8080#t.me/config_fre
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.122:8080#https%3A%2F%2Ft.me%2Fallproconf
+ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M@141.98.101.181:443#t.me/OutlineVpnOfficial
+ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M@149.22.87.241:443#t.me/OutlineVpnOfficial
 ss://a534320e-773e-4975-999c-28b3315df5ba@pg.nexorainnovationhub.ir:80?path=%2F&security=&encryption=none&host=a43fgh.restaurantnetwork.ir&type=ws#%F0%9F%87%AE%F0%9F%87%B726062%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FSOSkeyNET
 ss://a5b2428c-aa43-4d35-a092-174c4ce3574e@01team.no1plus.ir:2087?path=%2F&security=tls&encryption=none&insecure=0&host=01team.no1plus.ir&fp=chrome&type=ws&allowInsecure=0&sni=01team.no1plus.ir#%F0%9F%87%AE%F0%9F%87%B726070%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FSOSkeyNET
 ss://a79b22ca-db34-4ce3-b9aa-7ba4a16f2811@snapp.ir:80?path=%2F&security=none&encryption=none&host=derakhshan.molvliafor.ir&type=ws#%F0%9F%87%AE%F0%9F%87%B726013%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FSOSkeyNET
@@ -146,8 +147,6 @@ trojan://784d5c1f-69d8-4967-bc61-426983744ee5@t2.google.bforward2.uk:443?sni=t2.
 trojan://ccBIufLBGd@ge1.v2vml.ga:16548#t.me%2Fkutoproxy%F0%9F%87%A9%F0%9F%87%AA------------------------------------------必进：【TG全网导航】
 trojan://f1f8e5be-94a4-4c30-8c88-5cf72e09b800@ltt1.sshocean.net:443?sni=www.digitalocean.com#t.me%2Fkutoproxy%F0%9F%87%B1%F0%9F%87%B9trojan://788ab87c-224d-4e85-8575-470567934d47@idt1.sshocean.net:443?sni=www.digitalocean.com#t.me%2Fkutoproxy%F0%9F%87%AE%F0%9F%87%A9------------------------------------------必进：【TG全网导航】
 trojan://f1f8e5be-94a4-4c30-8c88-5cf72e09b800@ltt1.sshocean.net:443?sni=www.digitalocean.com#t.me%2Fkutoproxy%F0%9F%87%B1%F0%9F%87%B9trojan://788ab87c-224d-4e85-8575-470567934d47@idt1.sshocean.net:443?sni=www.digitalocean.com#t.me%2Fkutoproxy%F0%9F%87%AE%F0%9F%87%A9🍵trojan
-trojan://humanity@127.0.0.1:40443?security=tls&sni=www.creationlong.org&fp=chrome&insecure=0&allowInsecure=0&type=ws&host=www.creationlong.org&path=/assignment#https://t.me/Configir98
-trojan://humanity@127.0.0.1:40443?security=tls&sni=www.creationlong.org&fp=chrome&insecure=0&allowInsecure=0&type=ws&host=www.creationlong.org&path=/assignment#https://t.me/VIPV2rayNGNP
 trojan://humanity@172.64.155.209:443/?type=ws&host=www.gossipglove.com&path=%2Fassignment&security=tls&sni=www.gossipglove.com#https%3A%2F%2Ft.me%2Fallproconf
 trojan://telegram-id-privatevpns@13.36.26.137:22222?security=tls&alpn=http/1.1&headerType=none&type=tcp&sni=trojan.burgerip.co.uk#(S103)🇨🇵t.me/PrivateVPNs
 trojan://telegram-id-privatevpns@13.38.225.194:22222?security=tls&alpn=http/1.1&headerType=none&type=tcp&sni=trojan.burgerip.co.uk#(S103)🇨🇵t.me/PrivateVPNs
@@ -202,7 +201,6 @@ vless://3de46922-13c6-45be-a0e1-faa939ded75f@94.182.108.23:8443?encryption=none&
 vless://3f9256a9-ded6-be8e-a397-84546a266c06@snapp.ir:8080?security=none&type=ws&path=%2F&host=iran.arub.ir#%F0%9F%87%AE%F0%9F%87%B726072%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FSOSkeyNET
 vless://438fe684-5e3c-470d-8a04-529f00665674@blubank.sb24.ir:2096?type=ws&encryption=none&path=/graphql?ed=30&host=yeolightShop.nexnull.pro&security=tls&fp=chrome&alpn=h2,http/1.1&sni=yeolightShop.nexnull.pro#%F0%9F%87%AE%F0%9F%87%B726006%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FSOSkeyNET
 vless://45d95284-05ce-4e8b-ad84-a6bcdfebcb59@144.31.92.173:443/?type=tcp&encryption=none&flow=xtls-rprx-vision&security=reality&pbk=0A9nE6Scvg5oYRN8aRsLR-YqrvDNNX5s2UXa4yvyRkA&sid=#https%3A%2F%2Ft.me%2Fallproconf
-vless://48ff2b70-e180-582f-8866-d9a2edeed5f5@51.158.206.87:23576?security=reality&encryption=none&pbk=1y5h2FGWKXTJ9xLPCqPo6Mw7RxoZzh6fGkEQKNxpZ3s&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=fuck.rkn&sid=01#https://t.me/VIPV2rayNGNP
 vless://4b1e3e24-9d82-4a30-b603-4366b30c6c07@Snapp.ir:80?encryption=none&type=ws&host=mangel.phynanc.ir&path=/&security=none#%F0%9F%87%AE%F0%9F%87%B725958%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FSOSkeyNET
 vless://530f5772-bc3f-43d0-aeed-2613d0f99013@varzesh3.com:80?type=ws&encryption=none&path=%2Fws&host=nobody.fasterspeed.ir&security=none#%F0%9F%87%AE%F0%9F%87%B725955%20%7C%20%E2%9A%A1%EF%B8%8FTelegram%20%3D%20t.me%2FSOSkeyNET
 vless://54c47dee-eaee-417c-9b3c-339c5e00eeb7@trex.docos.tech:443?path=/vless-ws&security=tls&encryption=none&insecure=0&host=trex.docos.tech&fp=chrome&type=ws&allowInsecure=0&sni=trex.docos.tech#t.me/FlashTunnelx❄💎
