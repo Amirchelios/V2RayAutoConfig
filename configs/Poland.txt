@@ -1,3 +1,4 @@
+ss://11133f40-c6ff-451c-a6ec-68c0b72da1fc@185.143.233.5:443?encryption=none&security=tls&type=ws&headerType=none&path=/@alaedin?ed=128&host=alaedin8.8lack.ir&sni=alaedin8.8lack.ir&fp=chrome&alpn=h2,http/1.1#🇵🇱Poland,
 ss://195573b7-ea63-485e-b2a5-58dd7bbfc9f7@plb.tunnelguard.ru:443?mode=auto&path=%2F&security=tls&alpn=h2%2Chttp%2F1.1&encryption=none&type=xhttp&sni=plb.tunnelguard.ru#PL🇵🇱
 ss://29c62f52-9367-4dcd-8818-2adf2e1f3d5f@185.143.233.5:443?encryption=none&security=tls&type=ws&headerType=none&path=/@alaedin?ed=128&host=alaedin8.8lack.ir&sni=alaedin8.8lack.ir&fp=chrome&alpn=h2,http/1.1#🇵🇱Poland,
 ss://37a0bd7c-8b9f-4693-8916-bd1e2da0a817@bsex.serv00.net:50401?encryption=none&path=%2F&security=none&type=ws#PL🇵🇱
@@ -11,7 +12,6 @@ ss://YWVzLTI1Ni1jZmI6RVhOM1MzZVFwakU3RUp1OA==@217.30.10.68:9027#%F0%9F%87%B5%F0%
 ss://YWVzLTI1Ni1jZmI6RkFkVXZNSlVxNXZEZ0tFcQ==@217.30.10.68:9006#%F0%9F%87%B5%F0%9F%87%B1PL-217.30.10.68-8351
 ss://YWVzLTI1Ni1jZmI6RkFkVXZNSlVxNXZEZ0tFcQ==@217.30.10.70:9006#%F0%9F%87%B5%F0%9F%87%B1PL-217.30.10.70-5180
 ss://YWVzLTI1Ni1jZmI6S0JHalpZY3k0U3lSU2htQQ==@217.30.10.70:9044#%F0%9F%87%B5%F0%9F%87%B1PL-217.30.10.70-8328
-ss://YWVzLTI1Ni1jZmI6S0JHalpZY3k0U3lSU2htQQ==@217.30.10.70:9044#%F0%9F%87%B5%F0%9F%87%B1PL-217.30.10.70-8358
 ss://YWVzLTI1Ni1jZmI6S25KR2FkM0ZxVHZqcWJhWA==@217.30.10.68:9014#%F0%9F%87%B5%F0%9F%87%B1PL-217.30.10.68-8343
 ss://YWVzLTI1Ni1jZmI6SFNadXlKUWNXZThkeE5kRg==@217.30.10.68:9043#%F0%9F%87%B5%F0%9F%87%B1PL-217.30.10.68-8339
 ss://YWVzLTI1Ni1jZmI6THAyN3JxeUpxNzJiWnNxWA==@217.30.10.68:9045#%F0%9F%87%B5%F0%9F%87%B1PL-217.30.10.68-8335
@@ -75,6 +75,7 @@ trojan://humanity@104.16.147.104:443?host=www.creationlong.org&path=%2Fassignmen
 trojan://humanity@188.114.96.3:443?security=tls&sni=www.creationlong.org&allowInsecure=1&type=ws&host=www.creationlong.org&path=%2Fassignment#%3E%3E%40v2line%3A%3APL
 trojan://humanity@208.103.161.110:443?allowInsecure=1&host=www.creationlong.org&path=%2Fassignment&sni=www.creationlong.org&type=ws#%3E%3E%40oneclickvpnkeys%3A%3APL
 trojan://humanity@v1.dabache.top:443?allowInsecure=1&host=www.creationlong.org&path=%2Fassignment&sni=www.creationlong.org&type=ws#%3E%3E%40oneclickvpnkeys%3A%3APL
+vless://11133f40-c6ff-451c-a6ec-68c0b72da1fc@185.143.233.5:443?encryption=none&security=tls&type=ws&headerType=none&path=/@alaedin?ed=128&host=alaedin8.8lack.ir&sni=alaedin8.8lack.ir&fp=chrome&alpn=h2,http/1.1#🇵🇱Poland,
 vless://195573b7-ea63-485e-b2a5-58dd7bbfc9f7@plb.tunnelguard.ru:443?mode=auto&path=%2F&security=tls&alpn=h2%2Chttp%2F1.1&encryption=none&type=xhttp&sni=plb.tunnelguard.ru#PL🇵🇱
 vless://29c62f52-9367-4dcd-8818-2adf2e1f3d5f@185.143.233.5:443?encryption=none&security=tls&type=ws&headerType=none&path=/@alaedin?ed=128&host=alaedin8.8lack.ir&sni=alaedin8.8lack.ir&fp=chrome&alpn=h2,http/1.1#🇵🇱Poland,
 vless://37a0bd7c-8b9f-4693-8916-bd1e2da0a817@bsex.serv00.net:50401?encryption=none&path=%2F&security=none&type=ws#PL🇵🇱
