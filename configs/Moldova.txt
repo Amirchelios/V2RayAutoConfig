@@ -11,6 +11,7 @@ ss://e384913f-8863-47b4-8858-a84b68abb4a6@3.cdnconn.com:23335?security=reality&e
 ss://e384913f-8863-47b4-8858-a84b68abb4a6@4.cdnconn.com:23335?security=reality&%3Bencryption=none&%3Bpbk=7Gi8eiUU9TIVbGuvSU16gl5-Aqt7tcCSB9x6CSxyvik&%3BheaderType=none&%3Bfp=chrome&%3Btype=tcp&%3Bflow=xtls-rprx-vision&%3Bsni=icloud.com&%3Bsid=67b1e94e4dd1ef90#%F0%9F%87%B2%F0%9F%87%A9%20MD%20%7C%20VLESS%20%7C%20%40vpn_ioss%20%231
 ss://e4824193-4f54-453b-d037-88368e85ef0e@104.21.86.253:443?mode=gun&security=tls&encryption=none&type=grpc&sni=pqh27v1.carwashipdir.shop#Moldova%20WorkTitans
 ss://e60f8ade-411b-4ceb-b3bd-2439676b4695@91.225.217.27:443?encryption=none&fp=&pbk=66I_EZijZ-HoERv8Xzmv5KydHjz4dp81Grb8CJpIy38&security=reality&sid=cb89&sni=yahoo.com&type=tcp#REALITY|MD🇲🇩
+trojan://2399fe0a-b359-40a9-a3f0-b70c3c177a01@188.213.196.204:40443?security=tls&sni=aa.beijng.dpdns.org&insecure=0&allowInsecure=0&type=ws&host=aa.beijng.dpdns.org&path=/#🇲🇩Moldova
 trojan://strong-secret-pass-777@103.231.73.181:4443?security=tls#%F0%9F%87%B2%F0%9F%87%A9MD-103.231.73.181-4662
 vless://96fcf8cc-535d-46c4-b8f9-76058df48e3b@94.131.8.19:45448?encryption=none&fp=&pbk=MmEVCRy11fz67vYJQWyA2a_ZPMBzv2le2cus1XSSI0E&security=reality&sid=958639bf55e679&sni=yahoo.com&type=tcp#REALITY|MD🇲🇩
 vless://e16a35ea-6715-4e75-9845-d20358bd0876@94.232.247.168:41360?security=reality&encryption=none&pbk=TY6w1zP-qUFKVCAQdQT2ZEJsZBrPO4hZjZYBSS6h6DU&headerType=none&fp=chrome&type=tcp&sni=yahoo.com&sid=1aab45#REALITY|MD🇲🇩
