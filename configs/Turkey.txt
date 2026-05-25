@@ -6,7 +6,6 @@ ss://52a1f20b-e3e2-4280-a953-1c7e940408b6@103.231.75.17:443?path=%2Flfcinsws&sec
 ss://53353c51-ab85-4f1d-b81c-d855a0cdeeba@213.142.132.75:443?&security=false&fp=chrome&type=ws&headerType=none&path=%2F#%E5%9C%9F%E8%80%B3%E5%85%B6%20319
 ss://53353c51-ab85-4f1d-b81c-d855a0cdeeba@213.142.132.75:443?path=%2F&type=ws#TR%E3%80%90%E6%9C%BA%E5%9C%BA%E6%8E%A8%E8%8D%90%EF%BC%9Ahttps%3A//a9a.xyz%E3%80%9144
 ss://53353c51-ab85-4f1d-b81c-d855a0cdeeba@213.142.132.75:443?type=ws&path=/#🇹🇷[openproxylist.com]vless-TR
-ss://5b34187f-f811-58b1-7e68-3cc63df5df3b@meli.masterdadeh.ir:80?path=/&security=none&encryption=none&type=ws#🇹🇷Türkiye,
 ss://7986548b-c44c-4b65-9227-4b2cb504e7d5@varzesh3.com:80?path=/ws&security=none&encryption=none&host=nobody.fasterspeed.ir&type=ws#🇹🇷Türkiye,
 ss://9709f4d4-b3b9-15ea-b1f4-2ab4bfc3b91d@pari.masterdadeh.ir:80?path=%2F&security=none&encryption=none&type=ws&sni=185.226.94.204#TR🇹🇷
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo3SW9wblgwd3pFa3JjM1pjVlE5Nzh6@185.39.204.189:34085#TR%F0%9F%87%B9%F0%9F%87%B7+%7C+185.39.204.189-34085+%7C+122.11ms
@@ -42,7 +41,6 @@ vless://52a1f20b-e3e2-4280-a953-1c7e940408b6@103.231.75.17:443?path=%2Flfcinsws&
 vless://53353c51-ab85-4f1d-b81c-d855a0cdeeba@213.142.132.75:443?&security=false&fp=chrome&type=ws&headerType=none&path=%2F#%E5%9C%9F%E8%80%B3%E5%85%B6%20319
 vless://53353c51-ab85-4f1d-b81c-d855a0cdeeba@213.142.132.75:443?path=%2F&type=ws#TR%E3%80%90%E6%9C%BA%E5%9C%BA%E6%8E%A8%E8%8D%90%EF%BC%9Ahttps%3A//a9a.xyz%E3%80%9144
 vless://53353c51-ab85-4f1d-b81c-d855a0cdeeba@213.142.132.75:443?type=ws&path=/#🇹🇷[openproxylist.com]vless-TR
-vless://5b34187f-f811-58b1-7e68-3cc63df5df3b@meli.masterdadeh.ir:80?path=/&security=none&encryption=none&type=ws#🇹🇷Türkiye,
 vless://7986548b-c44c-4b65-9227-4b2cb504e7d5@varzesh3.com:80?path=/ws&security=none&encryption=none&host=nobody.fasterspeed.ir&type=ws#🇹🇷Türkiye,
 vless://9709f4d4-b3b9-15ea-b1f4-2ab4bfc3b91d@pari.masterdadeh.ir:80?path=%2F&security=none&encryption=none&type=ws&sni=185.226.94.204#TR🇹🇷
 vless://aa3e8bb7-d554-4a8d-bbb4-2b0948d3c8c6@portal.sane-new-eb.net:8080?encryption=none&security=none&type=grpc&headerType=none&mode=gun#👉🆔@v2ray_configs_pool📡🇹🇷®️Turkey©️Başakşehir🅿️ping:110.2ms
