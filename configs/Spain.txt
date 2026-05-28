@@ -1,4 +1,4 @@
-ss://1a79d43fb41c496ba241dcbeefa81f0eOg==@185.114.72.31:2053#ES%F0%9F%87%AA%F0%9F%87%B8+%7C+185.114.72.31-2053+%7C+118.55ms
+ss://1a79d43fb41c496ba241dcbeefa81f0eOg==@185.114.72.31:2053#ES%F0%9F%87%AA%F0%9F%87%B8+%7C+185.114.72.31-2053+%7C+119ms
 ss://40bf709c-4353-4552-ba26-406d2bf7821d@95.182.96.225:20567/?type=tcp&encryption=none&flow=xtls-rprx-vision&sni=cloudflare.com&fp=chrome&security=reality&pbk=1WOtQYIQ-3sJtbrhSA1LW6gAnO-wG0Z5aCnlL_zoiXQ&sid=b82d7208fe23#Spain
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpBUmd2R1p5d0ErZ2FjZ0dWMjZCdm11MDUrd1ptUlcvaitBZFUrWjhCdDQ0PQ==@188.214.157.30:990#%3E%3E%40v2ray_configs_pool%3A%3AES
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpBUmd2R1p5d0ErZ2FjZ0dWMjZCdm11MDUrd1ptUlcvaitBZFUrWjhCdDQ0PQ==@37.143.130.203:990#%3E%3E%40configshub2%3A%3AES
